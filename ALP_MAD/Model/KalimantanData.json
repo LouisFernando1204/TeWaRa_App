@@ -1,0 +1,48 @@
+{
+    "islandName": "Kalimantan",
+    "islandImage": "kalimantan",
+    "traditionalDance": {
+        "answer": "GONG",
+        "image": "gong",
+        "description": "Tari Gong adalah tari tradisional suku Dayak yang dimainkan oleh seorang gadis yang menari di atas gong dengan penuh keanggunan. Tari Gong kerap digunakan sebagai sarana hiburan untuk memeriahkan acara perkawinan. penyambutan tamu, menyambut bayi kepala suku.",
+        "provinceOrigin": "Kalimantan Timur",
+        "provinceOptions": [
+            "Kalimantan Utara", "Kalimantan Selatan",
+            "Kalimantan Barat", "Kalimantan Timur"
+        ],
+        "answerOptions": [
+            "U", "P", "Z", "K",
+            "I", "Y", "E", "O",
+            "G", "N", "W", "T"
+        ]
+    },
+    "traditionalLanguage": {
+        "answer": "BANJAR",
+        "image": "tungguSebentar",
+        "description": "'Hadangi aku satumat' merupakan bahasa Banjar dari kalimat 'Tunggu aku sebentar'. Bahasa Banjar dalam beberapa katanya memiliki kemiripan dengan bahasa Jawa, seperti kata 'larang' dalam bahasa Banjar dan bahasa Jawa yang sama-sama memiliki arti 'mahal'. ",
+        "sentences": "Hadangi aku satumat",
+        "provinceOrigin": "Kalimantan Selatan",
+        "provinceOptions": [
+            "Kalimantan Utara", "Kalimantan Selatan",
+            "Kalimantan Barat", "Kalimantan Timur"
+        ],
+        "clue": "Bahasa ini awalnya ditulis menggunakan aksara Arab karena adanya kedatangan Islam ke Indonesia pada abad ke-15."
+    },
+    "userList": [
+        {
+            "name": "Rafi",
+            "image": "person7",
+            "score": 210
+        },
+        {
+            "name": "Hayya",
+            "image": "person8",
+            "score": 180
+        },
+        {
+            "name": "Derend",
+            "image": "person9",
+            "score": 170
+        }
+    ]
+}

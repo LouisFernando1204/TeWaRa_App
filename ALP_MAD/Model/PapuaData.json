@@ -1,0 +1,48 @@
+{
+    "islandName": "Papua",
+    "islandImage": "papua",
+    "traditionalDance": {
+        "answer": "SAJOJO",
+        "image": "sajojo",
+        "description": "",
+        "provinceOrigin": "Papua Barat",
+        "provinceOptions": [
+            "Papua Barat", "Papua Nugini",
+            "Papua Tengah", "Papua Selatan"
+        ],
+        "answerOptions": [
+            "R", "S", "Z", "A",
+            "I", "J", "E", "O",
+            "G", "U", "X", "W"
+        ]
+    },
+    "traditionalLanguage": {
+        "answer": "ABUN",
+        "image": "pergiKemana",
+        "description": "'Ko ara di mana ?' merupakan bahasa Abun dari kalimat 'Kamu pergi kemana ? '. Bahasa Abun merupakan bahasa yang dituturkan oleh masyarakat Abun di sepanjang pantai utara Semenanjung Doberai di Distrik Sausapor, Kabupaten Tambrauw. Bahasa ini tidak memiliki hubungan kekerabatan yang dekat dengan bahasa lain.",
+        "sentences": "Ko ara di mana ? ",
+        "provinceOrigin": "Papua Barat",
+        "provinceOptions": [
+            "Papua Barat", "Papua Nugini",
+            "Papua Tengah", "Papua Selatan"
+        ],
+        "clue": "Memiliki 4 dialek berbeda, salah satunya adalah Abun Tat."
+    },
+    "userList": [
+        {
+            "name": "Kimi",
+            "image": "person13",
+            "score": 250
+        },
+        {
+            "name": "Michael",
+            "image": "person14",
+            "score": 240
+        },
+        {
+            "name": "Steven",
+            "image": "person15",
+            "score": 230
+        }
+    ]
+}
