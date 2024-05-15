@@ -11,23 +11,28 @@ import UIKit
 class TraditionalLanguageController : ObservableObject {
     
     @Published private var traditionalLanguage : TraditionalLanguage
-    @Published private var user : User
+//    @Published private var user : User
     
-    init(traditionalLanguage: TraditionalLanguage, user: User) {
+    init(traditionalLanguage: TraditionalLanguage) {
         self.traditionalLanguage = traditionalLanguage
-        self.user = user
+//        self.user = user
     }
     
-    func getUser() -> User {
-        return self.user
-    }
-    
+//    func getUser() -> User {
+//        return self.user
+//    }
+//    
     func wrongAnswer() {
         
     }
     
     func guessWord(word : String) {
-        
+        if (traditionalLanguage.answer == word.uppercased()) {
+            correctAnswer()
+        }
+        else {
+            wrongAnswer()
+        }
     }
     
     func correctAnswer() {
