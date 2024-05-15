@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		043E39792BF38D4C00FB74A6 /* AdditionalQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */; };
 		048DD7B42BF4C3FB0041FDE9 /* SumateraData.json in Resources */ = {isa = PBXBuildFile; fileRef = 048DD7B32BF4C3FB0041FDE9 /* SumateraData.json */; };
-		048DD7B62BF4C41F0041FDE9 /* Hike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD7B52BF4C41F0041FDE9 /* Hike.swift */; };
 		048DD7B82BF4C51C0041FDE9 /* BaliData.json in Resources */ = {isa = PBXBuildFile; fileRef = 048DD7B72BF4C51C0041FDE9 /* BaliData.json */; };
 		048DD7BA2BF4C5870041FDE9 /* JavaData.json in Resources */ = {isa = PBXBuildFile; fileRef = 048DD7B92BF4C5870041FDE9 /* JavaData.json */; };
 		048DD7BE2BF4C6AA0041FDE9 /* KalimantanData.json in Resources */ = {isa = PBXBuildFile; fileRef = 048DD7BD2BF4C6AA0041FDE9 /* KalimantanData.json */; };
@@ -62,7 +61,6 @@
 /* Begin PBXFileReference section */
 		043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalQuestionView.swift; sourceTree = "<group>"; };
 		048DD7B32BF4C3FB0041FDE9 /* SumateraData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SumateraData.json; sourceTree = "<group>"; };
-		048DD7B52BF4C41F0041FDE9 /* Hike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hike.swift; sourceTree = "<group>"; };
 		048DD7B72BF4C51C0041FDE9 /* BaliData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BaliData.json; sourceTree = "<group>"; };
 		048DD7B92BF4C5870041FDE9 /* JavaData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = JavaData.json; sourceTree = "<group>"; };
 		048DD7BD2BF4C6AA0041FDE9 /* KalimantanData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KalimantanData.json; sourceTree = "<group>"; };
@@ -123,7 +121,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		043DDFD02BF4B55400404F36 /* Object */ = {
+		048DD7E62BF4CC550041FDE9 /* Object */ = {
 			isa = PBXGroup;
 			children = (
 				04A1A3032BF0642700C7E982 /* Island.swift */,
@@ -133,9 +131,21 @@
 				04A1A3012BF0639000C7E982 /* Home.swift */,
 				04A1A2FB2BF0635F00C7E982 /* TraditionalDance.swift */,
 				04A1A2FD2BF0637000C7E982 /* TraditionalLanguage.swift */,
-				048DD7B52BF4C41F0041FDE9 /* Hike.swift */,
 			);
-			name = Object;
+			path = Object;
+			sourceTree = "<group>";
+		};
+		048DD7E72BF4CC7C0041FDE9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				048DD7B32BF4C3FB0041FDE9 /* SumateraData.json */,
+				048DD7B72BF4C51C0041FDE9 /* BaliData.json */,
+				048DD7B92BF4C5870041FDE9 /* JavaData.json */,
+				048DD7BD2BF4C6AA0041FDE9 /* KalimantanData.json */,
+				048DD7BF2BF4C6C50041FDE9 /* PapuaData.json */,
+				048DD7C12BF4C6F90041FDE9 /* SulawesiData.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		04A1A2C02BF062C000C7E982 = {
@@ -200,8 +210,8 @@
 		04A1A2F82BF0632100C7E982 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				043DDFD02BF4B55400404F36 /* Object */,
-				04A1A30E2BF0651400C7E982 /* Data */,
+				048DD7E72BF4CC7C0041FDE9 /* Data */,
+				048DD7E62BF4CC550041FDE9 /* Object */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -230,19 +240,6 @@
 				04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		04A1A30E2BF0651400C7E982 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				048DD7B32BF4C3FB0041FDE9 /* SumateraData.json */,
-				048DD7B72BF4C51C0041FDE9 /* BaliData.json */,
-				048DD7B92BF4C5870041FDE9 /* JavaData.json */,
-				048DD7BD2BF4C6AA0041FDE9 /* KalimantanData.json */,
-				048DD7BF2BF4C6C50041FDE9 /* PapuaData.json */,
-				048DD7C12BF4C6F90041FDE9 /* SulawesiData.json */,
-			);
-			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,7 +386,6 @@
 				04C658362BF4922100ECECD2 /* ModelData.swift in Sources */,
 				04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */,
 				04A1A3122BF0654F00C7E982 /* LeaderboardView.swift in Sources */,
-				048DD7B62BF4C41F0041FDE9 /* Hike.swift in Sources */,
 				04A1A31C2BF065CF00C7E982 /* AnswerDescriptionView.swift in Sources */,
 				04A1A3182BF0659A00C7E982 /* TraditionalLanguageView.swift in Sources */,
 				04A1A3102BF0652C00C7E982 /* HomeView.swift in Sources */,
