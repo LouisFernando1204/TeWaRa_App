@@ -43,4 +43,10 @@ class IslandController : ObservableObject {
     func navigateToPlayJavaGame() {
         
     }
+    
+    func checkTheAnswer(word: String) {
+        
+    }
+    
+    
 }
