@@ -15,6 +15,41 @@ class ModelData {
     var kalimantan: Island = load("KalimantanData.json")
     var papua: Island = load("PapuaData.json")
     var sulawesi: Island = load("SulawesiData.json")
+    var currentUser: User
+    var currentIsland : Island
+    static let shared = ModelData()
+    
+    private init() {
+        self.currentUser = User(name: "Radhita Lope", image: "radhita", score: 0)
+        self.currentIsland = Island(
+            islandName: "",
+            islandImage: "",
+            traditionalDance: TraditionalDance(
+                answer: "",
+                image: "",
+                description: "",
+                provinceOrigin: "",
+                provinceOptions: [""],
+                answerOptions: [""]
+            ),
+            traditionalLanguage: TraditionalLanguage(
+                answer: "",
+                image: "",
+                description: "",
+                provinceOrigin: "",
+                provinceOptions: [""],
+                clue: "",
+                sentences: ""
+            ),
+            userList: [
+                User(
+                    name: "",
+                    image: "",
+                    score: 0
+                )
+            ]
+        )
+    }
 }
 
 // Memuat data dari JSON
