@@ -26,16 +26,16 @@ class TraditionalLanguageController : ObservableObject {
         
     }
     
-    func guessWord(word : String) {
+    func guessWord(word : String, remainingTime: Int) {
         if (traditionalLanguage.answer == word.uppercased()) {
-            correctAnswer()
+            correctAnswer(remainingTime: remainingTime)
         }
         else {
             wrongAnswer()
         }
     }
     
-    func correctAnswer() {
+    func correctAnswer(remainingTime: Int) {
         
     }
     

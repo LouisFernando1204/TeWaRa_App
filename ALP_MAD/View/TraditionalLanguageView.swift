@@ -12,7 +12,7 @@ struct TraditionalLanguageView: View {
     @State private var textFieldValue: String = ""
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
-    private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @StateObject private var traditionalLanguageController = TraditionalLanguageController(traditionalLanguage: ModelData.shared.bali.traditionalLanguage)
     
     var body: some View {
@@ -25,6 +25,9 @@ struct TraditionalLanguageView: View {
             
         })
         .padding(.horizontal, 20)
+        .onAppear {
+            timerRunning = true
+        }
         
     }
     
@@ -34,8 +37,7 @@ struct TraditionalLanguageView: View {
                 destination: Text("Destination")) {
                     HStack(spacing: 4, content: {
                         Image("backIcon")
-                            
-                            
+    
                         Text("Pulau")
                             .fontWeight(.regular)
                             .foregroundColor(.red)
@@ -179,7 +181,9 @@ struct TraditionalLanguageView: View {
     }
     
     private func buttonCheckAnswer() -> some View {
-        Button(action: {}) {
+        Button(action: {
+            traditionalLanguageController.guessWord(word: textFieldValue, remainingTime: countdownTimer)
+        }) {
             Text("Cek Jawaban")
                 .fontWeight(.bold)
                 .padding(.horizontal, 120)
