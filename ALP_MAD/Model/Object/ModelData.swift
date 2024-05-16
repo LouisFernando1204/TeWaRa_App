@@ -30,7 +30,18 @@ class ModelData {
                 description: "",
                 provinceOrigin: "",
                 provinceOptions: [""],
-                answerOptions: [""]
+                throwableAnswer: [
+                    Alphabet(
+                        alphabet: "",
+                        isClicked: false
+                    )
+                ],
+                availableWords: [
+                    Alphabet(
+                        alphabet: "",
+                        isClicked: false
+                    )
+                ]
             ),
             traditionalLanguage: TraditionalLanguage(
                 answer: "",
