@@ -34,7 +34,7 @@ struct TraditionalLanguageView: View {
     private func topNavigationBar() -> some View {
         HStack(content: {
             NavigationLink(
-                destination: Text("Destination")) {
+                destination: IslandView()) {
                     HStack(spacing: 4, content: {
                         Image("backIcon")
     
