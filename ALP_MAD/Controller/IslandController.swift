@@ -21,7 +21,7 @@ class IslandController : ObservableObject {
     }
     
     func navigateToPlaySumateraGame() {
-        
+
     }
     
     func navigateToPlayKalimantanGame() {
@@ -44,9 +44,14 @@ class IslandController : ObservableObject {
         
     }
     
-    func checkTheAnswer(word: String) {
-        
+    func checkTheAnswer(word: String, currentGame: String) {
+//        if currentGame == "Traditional Dance" {
+//            if word == self.island.traditionalDance.provinceOrigin {
+//                
+//            }
+//        }
+//        else{
+//            
+//        }
     }
-    
-    
 }

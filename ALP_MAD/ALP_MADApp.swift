@@ -12,7 +12,7 @@ struct ALP_MADApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AdditionalQuestionView()
+            ContentView()
         }
     }
 }

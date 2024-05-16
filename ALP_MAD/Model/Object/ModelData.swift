@@ -16,7 +16,8 @@ class ModelData {
     var papua: Island = load("PapuaData.json")
     var sulawesi: Island = load("SulawesiData.json")
     
-    private var currentIsland: Island
+    var currentIsland: Island
+    var currentGame: String = "Traditional Dance"
     
     static let shared = ModelData()
     
