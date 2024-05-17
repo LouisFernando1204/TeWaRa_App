@@ -21,13 +21,15 @@ struct ContentView: View {
             
             HomeView()
                 .tabItem {
-                    Label("Home", image: "person1")
+                    Text("Home")
+//                    Label("Home", image: "person1")
                 }
                 .tag(Tab.home)
             
             LeaderboardView()
                 .tabItem {
-                    Label("Leaderboard", image: "person2")
+                    Text("Leaderboard")
+//                    Label("Leaderboard", image: "person2")
                 }
                 .tag(Tab.leaderboard)
             
