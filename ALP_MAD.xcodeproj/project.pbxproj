@@ -64,6 +64,7 @@
 		04A1A3242BF0664E00C7E982 /* TraditionalDanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */; };
 		04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */; };
 		04C658362BF4922100ECECD2 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C658352BF4922100ECECD2 /* ModelData.swift */; };
+		649ACAFB2BF7B66200E2A938 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,7 @@
 		04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceController.swift; sourceTree = "<group>"; };
 		04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageController.swift; sourceTree = "<group>"; };
 		04C658352BF4922100ECECD2 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +342,7 @@
 				04A1A3152BF0658700C7E982 /* TraditionalDanceView.swift */,
 				04A1A31B2BF065CF00C7E982 /* AnswerDescriptionView.swift */,
 				043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */,
+				649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				04A1A2CD2BF062C000C7E982 /* ALP_MADApp.swift in Sources */,
 				04A1A2F72BF062F100C7E982 /* User.swift in Sources */,
 				04A1A3202BF0662400C7E982 /* LeaderboardController.swift in Sources */,
+				649ACAFB2BF7B66200E2A938 /* SplashScreenView.swift in Sources */,
 				04A1A31E2BF0660C00C7E982 /* HomeController.swift in Sources */,
 				04A1A3222BF0663E00C7E982 /* IslandController.swift in Sources */,
 				043E39792BF38D4C00FB74A6 /* AdditionalQuestionView.swift in Sources */,

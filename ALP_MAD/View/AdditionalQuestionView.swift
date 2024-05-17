@@ -12,6 +12,7 @@ struct AdditionalQuestionView: View {
     @StateObject private var islandController = IslandController(island: ModelData.shared.currentIslandObject)
     @State private var answer : String = ""
     @State private var showAlert = false
+    @State private var showTimeoutAlert = false
     @State private var navToIslandView = false
     @State private var navToHomeView = false
     @State var countDownTimer = 30
@@ -31,7 +32,7 @@ struct AdditionalQuestionView: View {
         ScrollView {
             VStack(alignment: .center) {
                 self.navigationTitle()
-                self.timer(countDownTimer: $countDownTimer, timerRunning: $timerRunning)
+                self.timer(countDownTimer: $countDownTimer, timerRunning: $timerRunning, showTimeoutAlert: $showTimeoutAlert)
                 self.question()
                 self.answerOptions(islandController: islandController, navToIslandView: $navToIslandView, navToHomeView: $navToHomeView)
                 self.poinStatus()
@@ -81,7 +82,7 @@ struct AdditionalQuestionView: View {
         .padding(.bottom, 20)
     }
     
-    private func timer(countDownTimer: Binding<Int>, timerRunning: Binding<Bool>) -> some View {
+    private func timer(countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, showTimeoutAlert: Binding<Bool>) -> some View {
         ZStack(alignment: .center, content: {
             Image("backgroundTimer")
                 .resizable()
@@ -103,13 +104,14 @@ struct AdditionalQuestionView: View {
                 .frame(width: 334, height: 168)
                 .cornerRadius(6)
             
-            Text("00:00:\(countDownTimer.wrappedValue)")
+            Text("00:00:\(String(format: "%02d", countDownTimer.wrappedValue))")
                 .onReceive(timer) { _ in
                     if countDownTimer.wrappedValue > 0 && timerRunning.wrappedValue {
                         countDownTimer.wrappedValue -= 1
                     }
                     else {
                         timerRunning.wrappedValue = false
+                        showTimeoutAlert.wrappedValue = true
                     }
                 }
                 .font(.system(size: 44, weight: .black))
@@ -156,7 +158,7 @@ struct AdditionalQuestionView: View {
                         Alert(
                             title: Text("Selamat!!!"),
                             message:
-                                Text("Kamu mendapatkan \(islandController.getNewScore()) poin"),
+                                Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
                             primaryButton: .default(Text("Beranda")) {
                                 navToHomeView.wrappedValue = true
                             },
@@ -165,6 +167,18 @@ struct AdditionalQuestionView: View {
                             }
                         )
                     })
+                    .alert(isPresented: $showTimeoutAlert) {
+                        Alert(
+                            title: Text("Waktu Habis!"),
+                            message: Text("Kamu tidak menjawab dalam waktu yang ditentukan."),
+                            primaryButton: .default(Text("Beranda")) {
+                                navToHomeView.wrappedValue = true
+                            },
+                            secondaryButton: .default(Text("Main lagi")) {
+                                navToIslandView.wrappedValue = true
+                            }
+                        )
+                    }
                     .fullScreenCover(isPresented: $navToIslandView, content: {
                         IslandView()
                     })
@@ -201,7 +215,7 @@ struct AdditionalQuestionView: View {
                         Alert(
                             title: Text("Selamat!!!"),
                             message:
-                                Text("Kamu mendapatkan \(islandController.getNewScore()) poin"),
+                                Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
                             primaryButton: .default(Text("Beranda")) {
                                 navToHomeView.wrappedValue = true
                             },
@@ -210,6 +224,18 @@ struct AdditionalQuestionView: View {
                             }
                         )
                     })
+                    .alert(isPresented: $showTimeoutAlert) {
+                        Alert(
+                            title: Text("Waktu Habis!"),
+                            message: Text("Kamu tidak menjawab dalam waktu yang ditentukan."),
+                            primaryButton: .default(Text("Beranda")) {
+                                navToHomeView.wrappedValue = true
+                            },
+                            secondaryButton: .default(Text("Main lagi")) {
+                                navToIslandView.wrappedValue = true
+                            }
+                        )
+                    }
                     .fullScreenCover(isPresented: $navToIslandView, content: {
                         IslandView()
                     })
