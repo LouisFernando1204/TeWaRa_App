@@ -16,10 +16,10 @@ struct TraditionalDanceView: View {
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @StateObject private var traditionalLanguageController = TraditionalLanguageController(traditionalLanguage: ModelData.shared.bali.traditionalLanguage)
     private let fixedColumn = [
-        GridItem(.fixed(120)),
-        GridItem(.fixed(120)),
-        GridItem(.fixed(120)),
-        GridItem(.fixed(120))
+        GridItem(.fixed(70)),
+        GridItem(.fixed(70)),
+        GridItem(.fixed(70)),
+        GridItem(.fixed(70))
     ]
     
     var body: some View {
@@ -42,10 +42,10 @@ struct TraditionalDanceView: View {
     private func topNavigationBar() -> some View {
         HStack(content: {
             NavigationLink(
-                destination: Text("Destination")) {
+                destination: IslandView()) {
                     HStack(spacing: 4, content: {
                         Image("backIcon")
-    
+                        
                         Text("Pulau")
                             .fontWeight(.regular)
                             .foregroundColor(.red)
@@ -84,30 +84,134 @@ struct TraditionalDanceView: View {
             
             Image(ModelData.shared.bali.traditionalDance.image)
                 .resizable()
-                .frame(width: 350, height: 220)
+                .frame(width: 350, height: 200)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .shadow(radius:5)
-                .padding(.bottom, 20)
-
+                .padding(.bottom, 12)
+            
         })
     }
     
     private func showChanceAndAnswerBox() -> some View {
         VStack(content: {
-            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
+            Rectangle()
+                .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                                     startPoint: .leading,
+                                     endPoint: .trailing))
+                .clipShape(RoundedRectangle(cornerRadius: 25.0))
+                .frame(width: 280, height: 44)
+                .overlay {
+                    Text("Kesempatan kamu kurang 3x")
+                        .fontWeight(.medium)
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                }
+            
+            HStack(content: {
+                // buat if kalau ndak null countnya/panjangnya
+                ForEach(ModelData.shared.sumatera.traditionalDance.throwableAnswer.indices, id: \.self) { index in
+                    let alphabet = ModelData.shared.sumatera.traditionalDance.throwableAnswer[index].alphabet
+                    if(!ModelData.shared.sumatera.traditionalDance.throwableAnswer[index].isClicked) {
+                        Rectangle()
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(.secondary)
+                            .opacity(0.2)
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(
+                                        LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                                                       startPoint: .leading,
+                                                       endPoint: .trailing),
+                                        lineWidth: 2
+                                    )
+                            )
+                            .padding(.horizontal, 1)
+                            .padding(.vertical)
+                    }
+                    else {
+                        Rectangle()
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(.secondary)
+                            .opacity(0.2)
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(
+                                        LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                                                       startPoint: .leading,
+                                                       endPoint: .trailing),
+                                        lineWidth: 2
+                                    )
+                            )
+                            .padding(.horizontal, 1)
+                            .padding(.vertical)
+                    }
+                }
+            })
         })
     }
     
     private func showWordOptions() -> some View {
         VStack(content: {
-            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
+            LazyVGrid(columns: fixedColumn, spacing: 20) {
+                ForEach(ModelData.shared.bali.traditionalDance.availableWords.indices, id:\.self) { index in
+                    let item = ModelData.shared.bali.traditionalDance.availableWords[index]
+                    if (!ModelData.shared.bali.traditionalDance.availableWords[index].isClicked) {
+                        Rectangle()
+                            .frame(width: 55, height: 55)
+                            .overlay {
+                                LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 118/255, green: 20/255, blue: 20/255)]),
+                                               startPoint: .leading,
+                                               endPoint: .trailing
+                                )
+                            }
+                            .overlay(
+                                Text(item.alphabet)
+                                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                            )
+                            .cornerRadius(10)
+                            .padding(.horizontal, 3)
+                            .onTapGesture(perform: {
+                                
+                            })
+                    }
+                    else {
+                        Rectangle()
+                            .frame(width: 55, height: 55)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .padding(.horizontal, 3)
+                    }
+                }
+            }
         })
+        .padding(.bottom)
     }
     
     private func showTimer() -> some View {
-        VStack(content: {
-            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
-        })
+        Rectangle()
+            .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                                 startPoint: .leading,
+                                 endPoint: .trailing))
+            .clipShape(RoundedRectangle(cornerRadius: 14.0))
+            .frame(width: 120, height: 46)
+            .overlay {
+                Text("00:00:\(countdownTimer)")
+                    .onReceive(timer, perform: { _ in
+                        if (countdownTimer > 0 && timerRunning) {
+                            countdownTimer -= 1
+                        }
+                        else {
+                            timerRunning = false
+                        }
+                    })
+                    .fontWeight(.regular)
+                    .font(.title3)
+                    .foregroundColor(Color.white)
+            }
     }
 }
 

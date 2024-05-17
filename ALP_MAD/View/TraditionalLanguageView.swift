@@ -161,7 +161,7 @@ struct TraditionalLanguageView: View {
                     .frame(width: 120, height: 46)
                     .offset(y: 94)
                     .overlay {
-                        Text("\(countdownTimer) detik")
+                        Text("00:00:\(countdownTimer)")
                             .onReceive(timer, perform: { _ in
                                 if (countdownTimer > 0 && timerRunning) {
                                     countdownTimer -= 1
@@ -171,7 +171,8 @@ struct TraditionalLanguageView: View {
                                 }
                             })
                             .offset(y: 94)
-                            .fontWeight(.bold)
+                            .fontWeight(.regular)
+                            .font(.title3)
                             .foregroundColor(Color.white)
                     }
             }
