@@ -16,40 +16,69 @@ class ModelData {
     var papua: Island = load("PapuaData.json")
     var sulawesi: Island = load("SulawesiData.json")
     
-    var currentIsland: Island
-    var currentGame: String = "Traditional Dance"
+    var currentIslandObject: Island
+    var currentIsland: String
+    var currentUser: User
+    var currentGame: String
     
     static let shared = ModelData()
     
     private init(){
-        self.currentIsland = Island(
-            islandName: "",
-            islandImage: "",
+        self.currentIslandObject = Island(
+            islandName: "Sulawesi",
+            islandImage: "sulawesi",
             traditionalDance: TraditionalDance(
-                answer: "",
-                image: "",
-                description: "",
-                provinceOrigin: "",
-                provinceOptions: [""],
-                answerOptions: [""]
+                answer: "PAJOGE",
+                image: "pajoge",
+                description: "Tari Pajoge adalah tari tradisional yang berasal dari Bone, Sulawesi Selatan. Tarian ini konon awalnya merupakan hiburan bagi kalangan istana atau juga kediaman para ningrat. Para penarinya adalah gadis yang berlatar belakang kalangan rakyat biasa.",
+                provinceOrigin: "Sulawesi Selatan",
+                provinceOptions: [
+                    "Sulawesi Utara", "Sulawesi Selatan",
+                    "Sulawesi Barat", "Sulawesi Timur"
+                ],
+                answerOptions: [
+                    "A", "P", "Z", "S",
+                    "I", "J", "E", "O",
+                    "G", "I", "N", "Y"
+                ]
             ),
             traditionalLanguage: TraditionalLanguage(
-                answer: "",
-                image: "",
-                description: "",
-                provinceOrigin: "",
-                provinceOptions: [""],
-                clue: "",
-                sentences: ""
+                answer: "BUGIS",
+                image: "rumahBersih",
+                description: "'Bolana macakka' merupakan bahasa Bugis dari kalimat 'Rumah ini bersih'. Bahasa Bugis merupakan bahasa yang sudah digunakan sejak zaman Kerajaan Bugis di abad ke-14. Bahasa ini juga digunakan sebagai bahasa perdagangan yang meluas hingga ke luar Sulawesi Selatan. ",
+                sentences: "Bolana macakka",
+                provinceOrigin: "Sulawesi Selatan",
+                provinceOptions: [
+                    "Sulawesi Utara", "Sulawesi Selatan",
+                    "Sulawesi Barat", "Sulawesi Timur"
+                ],
+                clue: "Terdapat 27 dialek dari bahasa ini, salah satunya yaitu dialek Bone."
             ),
             userList: [
                 User(
-                    name: "",
-                    image: "",
-                    score: 0
+                    name: "Hiroshi",
+                    image: "person10",
+                    score: 270
+                ),
+                User(
+                    name: "Nicho",
+                    image: "person11",
+                    score: 210
+                ),
+                User(
+                    name: "Patrick",
+                    image: "person12",
+                    score: 200
                 )
             ]
         )
+        self.currentIsland = "Sulawesi"
+        self.currentUser = User(
+            name: "Hiroshi",
+            image: "person10",
+            score: 270
+        )
+        self.currentGame = "TraditionalDance"
     }
 }
 

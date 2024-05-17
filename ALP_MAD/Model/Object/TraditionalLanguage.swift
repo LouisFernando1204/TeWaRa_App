@@ -11,8 +11,9 @@ struct TraditionalLanguage : Codable {
     var answer : String
     var image : String
     var description : String
+    var sentences: String
     var provinceOrigin : String
     var provinceOptions : [String]
     var clue : String
-    var sentences: String
+   
 }
