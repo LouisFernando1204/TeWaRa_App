@@ -38,7 +38,6 @@ struct AdditionalQuestionView: View {
                 self.poinStatus()
                 self.knowledgeInformation()
             }
-            
             .onAppear{
                 timerRunning.wrappedValue = true
             }

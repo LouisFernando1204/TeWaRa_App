@@ -64,6 +64,7 @@
 		04A1A3242BF0664E00C7E982 /* TraditionalDanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */; };
 		04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */; };
 		04C658362BF4922100ECECD2 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C658352BF4922100ECECD2 /* ModelData.swift */; };
+		646B2C7A2BF8814700B04E4B /* PreAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646B2C792BF8814700B04E4B /* PreAlertView.swift */; };
 		649ACAFB2BF7B66200E2A938 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +146,7 @@
 		04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceController.swift; sourceTree = "<group>"; };
 		04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageController.swift; sourceTree = "<group>"; };
 		04C658352BF4922100ECECD2 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		646B2C792BF8814700B04E4B /* PreAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertView.swift; sourceTree = "<group>"; };
 		649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -343,6 +345,7 @@
 				04A1A31B2BF065CF00C7E982 /* AnswerDescriptionView.swift */,
 				043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */,
 				649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */,
+				646B2C792BF8814700B04E4B /* PreAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				04A1A3242BF0664E00C7E982 /* TraditionalDanceController.swift in Sources */,
 				04A1A2FC2BF0635F00C7E982 /* TraditionalDance.swift in Sources */,
 				04A1A2CF2BF062C000C7E982 /* ContentView.swift in Sources */,
+				646B2C7A2BF8814700B04E4B /* PreAlertView.swift in Sources */,
 				04A1A3042BF0642700C7E982 /* Island.swift in Sources */,
 				04A1A3162BF0658700C7E982 /* TraditionalDanceView.swift in Sources */,
 				04C658362BF4922100ECECD2 /* ModelData.swift in Sources */,
