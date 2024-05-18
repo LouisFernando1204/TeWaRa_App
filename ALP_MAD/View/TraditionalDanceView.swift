@@ -14,7 +14,7 @@ struct TraditionalDanceView: View {
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @StateObject private var traditionalLanguageController = TraditionalLanguageController(traditionalLanguage: ModelData.shared.bali.traditionalLanguage)
+    @StateObject private var traditionalDanceController = TraditionalDanceController(traditionalDance: ModelData.shared.bali.traditionalDance)
     private let fixedColumn = [
         GridItem(.fixed(70)),
         GridItem(.fixed(70)),
@@ -23,52 +23,78 @@ struct TraditionalDanceView: View {
     ]
     
     var body: some View {
-        VStack(content: {
-            
-            self.topNavigationBar()
-            self.showQuestion()
-            self.showChanceAndAnswerBox()
-            self.showWordOptions()
-            self.showTimer()
-            
-        })
-        .padding(.horizontal, 20)
-        .onAppear {
-            timerRunning = true
-        }
         
+        ScrollView {
+            VStack(content: {
+                
+                self.topNavigationBar()
+                
+                VStack(content: {
+                    self.showQuestion()
+                    self.showChanceAndAnswerBox()
+                    self.showWordOptions()
+                    self.showTimer()
+                })
+                .padding(.horizontal, 20)
+            })
+            .onAppear {
+                timerRunning = true
+            }
+        }
+        .safeAreaInset(edge: .top) {
+            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                           startPoint: .leading,
+                           endPoint: .trailing
+            )
+            .frame(height: 70)
+            .edgesIgnoringSafeArea(.top)
+            .padding(.bottom, -70)
+        }
     }
     
     private func topNavigationBar() -> some View {
         HStack(content: {
+            
+            Spacer()
+                .frame(width: 20)
+            
             NavigationLink(
                 destination: IslandView()) {
                     HStack(spacing: 4, content: {
-                        Image("backIcon")
+                        Image("backIconWhite")
                         
                         Text("Pulau")
                             .fontWeight(.regular)
-                            .foregroundColor(.red)
+                            .foregroundColor(.white)
                             .font(.headline)
                     })
                 }
             
             Spacer()
+                .frame(width: 56)
             
             Text("Tebak Tarian")
                 .fontWeight(.semibold)
-                .foregroundColor(.black)
+                .foregroundColor(.white)
                 .font(.headline)
             
             Spacer()
             
-            Rectangle()
-                .fill(.white)
-                .frame(width: 10, height: 36)
-            
-            Spacer()
+            //            Rectangle()
+            //                .background(.orange)
+            //                .opacity(0)
+            //                .frame(height: 36)
+            //
+            //            Spacer()
         })
         .padding(.bottom, 10)
+        .background(
+            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                           startPoint: .leading,
+                           endPoint: .trailing
+                          )
+            .frame(width: .infinity)
+        )
     }
     
     private func showQuestion() -> some View {
@@ -90,6 +116,7 @@ struct TraditionalDanceView: View {
                 .padding(.bottom, 12)
             
         })
+        .padding(.top, 10)
     }
     
     private func showChanceAndAnswerBox() -> some View {
@@ -175,7 +202,7 @@ struct TraditionalDanceView: View {
                             .cornerRadius(10)
                             .padding(.horizontal, 3)
                             .onTapGesture(perform: {
-                                
+                                traditionalDanceController.guessWord(word: item, remainingTime: countdownTimer)
                             })
                     }
                     else {

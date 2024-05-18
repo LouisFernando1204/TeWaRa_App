@@ -11,22 +11,22 @@ class TraditionalDanceController : ObservableObject {
     
     @Published private var chance : Int
     @Published private var traditionalDance : TraditionalDance
-    @Published private var user : User
+//    @Published private var user : User
     @Published private var currentGameIsWrong: Bool = false
     
-    init(traditionalDance: TraditionalDance, user: User) {
+    init(traditionalDance: TraditionalDance) {
         self.traditionalDance = traditionalDance
         self.chance = 3
-        self.user = user
+//        self.user = user
     }
     
     func getCurrentGameIsWrong() -> Bool {
         return self.currentGameIsWrong
     }
     
-    func getUser() -> User {
-        return self.user
-    }
+//    func getUser() -> User {
+//        return self.user
+//    }
     
     func getChance() -> Int {
         return self.chance
@@ -37,7 +37,7 @@ class TraditionalDanceController : ObservableObject {
     }
     
     
-    func guessWord(word : Alphabet) {
+    func guessWord(word : Alphabet, remainingTime: Int) {
         var checker: Bool = false
         for index in ModelData.shared.bali.traditionalDance.throwableAnswer.indices {
             if index >= 0 && index < ModelData.shared.bali.traditionalDance.throwableAnswer.count {
@@ -45,6 +45,7 @@ class TraditionalDanceController : ObservableObject {
                     checker = true
                     setThrowableAnswerStatus(alphabet: word)
                     setAvailableWordsStatus(alphabet: word)
+                    checkCurrentGameAlreadyDone(remainingTime: remainingTime)
                     
                 }
             }
@@ -74,7 +75,7 @@ class TraditionalDanceController : ObservableObject {
         }
     }
     
-    private func checkCurrentGameAlreadyDone() {
+    private func checkCurrentGameAlreadyDone(remainingTime: Int) {
         var trueCounter: Int = 0
         for index in ModelData.shared.bali.traditionalDance.throwableAnswer.indices {
             if (ModelData.shared.bali.traditionalDance.throwableAnswer[index].isClicked) {
@@ -82,7 +83,7 @@ class TraditionalDanceController : ObservableObject {
             }
         }
         if (trueCounter == ModelData.shared.bali.traditionalDance.throwableAnswer.count) {
-            correctAnswer()
+            correctAnswer(remainingTime: remainingTime)
         }
     }
     
@@ -92,7 +93,7 @@ class TraditionalDanceController : ObservableObject {
         }
     }
     
-    private func correctAnswer() {
+    private func correctAnswer(remainingTime: Int) {
         
     }
     

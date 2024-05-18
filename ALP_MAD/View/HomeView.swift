@@ -12,10 +12,24 @@ struct HomeView: View {
     var body: some View {
         ZStack(content: {
             
-//            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-//                           startPoint: .leading,
-//                           endPoint: .trailing
-//            )
+            //            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+            //                           startPoint: .leading,
+            //                           endPoint: .trailing
+            //            )
+            
+//            VStack {
+//                HStack {
+//                    Image("Wave_1")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 786.01, height: 380.76)
+//                        .rotationEffect(.degrees(145.74))
+//                        .offset(x: 0, y: -170)
+//                    Spacer()
+//                }
+//                Spacer()
+//            }
+//            .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             VStack(content: {
                 self.showUserDetail()
@@ -65,7 +79,7 @@ struct HomeView: View {
                         
                         Spacer()
                     })
-
+                    
                     
                     HStack(content: {
                         HStack(spacing: 0, content: {
@@ -198,7 +212,7 @@ struct HomeView: View {
                             .italic()
                             .font(.system(size: 12))
                     })
-
+                    
                     Spacer()
                 })
             })
@@ -254,7 +268,7 @@ struct HomeView: View {
                             .italic()
                             .font(.system(size: 12))
                     })
-
+                    
                     Spacer()
                 })
             })
@@ -309,7 +323,7 @@ struct HomeView: View {
                             .italic()
                             .font(.system(size: 12))
                     })
-
+                    
                     Spacer()
                 })
             })
@@ -364,7 +378,7 @@ struct HomeView: View {
                             .italic()
                             .font(.system(size: 12))
                     })
-
+                    
                     Spacer()
                 })
             })
@@ -419,7 +433,7 @@ struct HomeView: View {
                             .italic()
                             .font(.system(size: 12))
                     })
-
+                    
                     Spacer()
                 })
             })
@@ -474,7 +488,7 @@ struct HomeView: View {
                             .italic()
                             .font(.system(size: 12))
                     })
-
+                    
                     Spacer()
                 })
             })

@@ -16,51 +16,77 @@ struct TraditionalLanguageView: View {
     @StateObject private var traditionalLanguageController = TraditionalLanguageController(traditionalLanguage: ModelData.shared.bali.traditionalLanguage)
     
     var body: some View {
-        VStack(content: {
+        ScrollView {
+            VStack(content: {
+                
+                self.topNavigationBar()
+                
+                VStack(content: {
+                    self.questionAndTextfield()
+                    self.showClueAndTimer()
+                    self.buttonCheckAnswer()
+                })
+                .padding(.horizontal, 20)
+            })
             
-            self.topNavigationBar()
-            self.questionAndTextfield()
-            self.showClueAndTimer()
-            self.buttonCheckAnswer()
-            
-        })
-        .padding(.horizontal, 20)
-        .onAppear {
-            timerRunning = true
+            .onAppear {
+                timerRunning = true
+            }
         }
-        
+        .safeAreaInset(edge: .top) {
+            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                           startPoint: .leading,
+                           endPoint: .trailing
+            )
+            .frame(height: 70)
+            .edgesIgnoringSafeArea(.top)
+            .padding(.bottom, -70)
+        }
     }
     
     private func topNavigationBar() -> some View {
         HStack(content: {
+            
+            Spacer()
+                .frame(width: 20)
+            
             NavigationLink(
                 destination: IslandView()) {
                     HStack(spacing: 4, content: {
-                        Image("backIcon")
-    
+                        Image("backIconWhite")
+                        
                         Text("Pulau")
                             .fontWeight(.regular)
-                            .foregroundColor(.red)
+                            .foregroundColor(.white)
                             .font(.headline)
                     })
                 }
             
             Spacer()
+                .frame(width: 56)
             
             Text("Tebak Bahasa")
                 .fontWeight(.semibold)
-                .foregroundColor(.black)
+                .foregroundColor(.white)
                 .font(.headline)
             
             Spacer()
             
-            Rectangle()
-                .fill(.white)
-                .frame(width: 10, height: 36)
-            
-            Spacer()
+//            Rectangle()
+//                .background(.orange)
+//                .opacity(0)
+//                .frame(height: 36)
+//            
+//            Spacer()
         })
         .padding(.bottom, 10)
+        .background(
+            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                           startPoint: .leading,
+                           endPoint: .trailing
+            )
+            .frame(width: .infinity)
+        )
     }
     
     private func questionAndTextfield() -> some View {
@@ -95,6 +121,7 @@ struct TraditionalLanguageView: View {
             
             Spacer().frame(height: 20)
         })
+        .padding(.top, 10)
         
     }
     
