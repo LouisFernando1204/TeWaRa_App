@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0420D5242BF9043400696430 /* TraditionalLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420D5232BF9043400696430 /* TraditionalLanguageView.swift */; };
+		0420D5262BF9044100696430 /* TraditionalDanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420D5252BF9044100696430 /* TraditionalDanceView.swift */; };
+		0420D5272BF9051300696430 /* Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044215822BF60BF60064666A /* Alphabet.swift */; };
+		0420D5282BF9069100696430 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A1A2D02BF062C100C7E982 /* Assets.xcassets */; };
 		043E39792BF38D4C00FB74A6 /* AdditionalQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */; };
 		044215832BF60BF60064666A /* Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044215822BF60BF60064666A /* Alphabet.swift */; };
 		045D9A272BF4D5D7002C523E /* MAC_ALP_MADApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D9A262BF4D5D7002C523E /* MAC_ALP_MADApp.swift */; };
@@ -95,6 +99,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0420D5232BF9043400696430 /* TraditionalLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageView.swift; sourceTree = "<group>"; };
+		0420D5252BF9044100696430 /* TraditionalDanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceView.swift; sourceTree = "<group>"; };
 		043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalQuestionView.swift; sourceTree = "<group>"; };
 		044215822BF60BF60064666A /* Alphabet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alphabet.swift; sourceTree = "<group>"; };
 		045D9A242BF4D5D7002C523E /* MAC_ALP_MAD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MAC_ALP_MAD.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,9 +194,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0420D5222BF903F700696430 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0420D5232BF9043400696430 /* TraditionalLanguageView.swift */,
+				0420D5252BF9044100696430 /* TraditionalDanceView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		045D9A252BF4D5D7002C523E /* MAC_ALP_MAD */ = {
 			isa = PBXGroup;
 			children = (
+				0420D5222BF903F700696430 /* View */,
 				045D9A262BF4D5D7002C523E /* MAC_ALP_MADApp.swift */,
 				045D9A282BF4D5D7002C523E /* ContentView.swift */,
 				045D9A2A2BF4D5D9002C523E /* Assets.xcassets */,
@@ -529,6 +545,7 @@
 				045D9A652BF4D62B002C523E /* PapuaData.json in Resources */,
 				045D9A662BF4D62B002C523E /* SumateraData.json in Resources */,
 				045D9A2E2BF4D5D9002C523E /* Preview Assets.xcassets in Resources */,
+				0420D5282BF9069100696430 /* Assets.xcassets in Resources */,
 				045D9A2B2BF4D5D9002C523E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,8 +604,11 @@
 				045D9A272BF4D5D7002C523E /* MAC_ALP_MADApp.swift in Sources */,
 				045D9A672BF4D62B002C523E /* TraditionalDance.swift in Sources */,
 				045D9A682BF4D62B002C523E /* IslandController.swift in Sources */,
+				0420D5262BF9044100696430 /* TraditionalDanceView.swift in Sources */,
 				045D9A692BF4D62B002C523E /* TraditionalLanguageController.swift in Sources */,
+				0420D5272BF9051300696430 /* Alphabet.swift in Sources */,
 				045D9A6A2BF4D62B002C523E /* LeaderboardController.swift in Sources */,
+				0420D5242BF9043400696430 /* TraditionalLanguageView.swift in Sources */,
 				045D9A6B2BF4D62B002C523E /* Island.swift in Sources */,
 				045D9A6E2BF4D62B002C523E /* TraditionalDanceController.swift in Sources */,
 				045D9A6F2BF4D62B002C523E /* ModelData.swift in Sources */,
