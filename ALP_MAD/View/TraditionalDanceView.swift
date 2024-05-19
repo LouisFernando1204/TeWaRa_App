@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVKit
+import UIKit
 
 struct TraditionalDanceView: View {
     
@@ -15,15 +16,26 @@ struct TraditionalDanceView: View {
     @State private var timerRunning: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @StateObject private var traditionalDanceController = TraditionalDanceController(traditionalDance: ModelData.shared.bali.traditionalDance)
-    private let fixedColumn = [
-        GridItem(.fixed(70)),
-        GridItem(.fixed(70)),
-        GridItem(.fixed(70)),
-        GridItem(.fixed(70))
-    ]
+    
+    private var fixedColumn: [GridItem] {
+        let screenWidth = UIScreen.main.bounds.width
+        return screenWidth > 600 ? [
+            GridItem(.fixed(120)),
+            GridItem(.fixed(120)),
+            GridItem(.fixed(120)),
+            GridItem(.fixed(120)),
+        ] : [
+            GridItem(.fixed(60)),
+            GridItem(.fixed(60)),
+            GridItem(.fixed(60)),
+            GridItem(.fixed(60))
+        ]
+    }
+    private let screenWidth = UIScreen.main.bounds.width
+    private let screenHeight = UIScreen.main.bounds.height
     
     var body: some View {
-        
+
         ScrollView {
             VStack(content: {
                 
@@ -35,7 +47,9 @@ struct TraditionalDanceView: View {
                     self.showWordOptions()
                     self.showTimer()
                 })
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 
+                         self.screenWidth > 600 ? 90 : 20)
+                .padding(.vertical, self.screenWidth > 600 ? 16 : 6)
             })
             .onAppear {
                 timerRunning = true
@@ -46,17 +60,18 @@ struct TraditionalDanceView: View {
                            startPoint: .leading,
                            endPoint: .trailing
             )
-            .frame(height: 70)
+            .frame(height: self.screenWidth > 600 ? 32: 70)
             .edgesIgnoringSafeArea(.top)
-            .padding(.bottom, -70)
+            .padding(.bottom, self.screenWidth > 600 ? -40 : -70)
+
         }
     }
     
     private func topNavigationBar() -> some View {
+        
         HStack(content: {
             
             Spacer()
-                .frame(width: 20)
             
             NavigationLink(
                 destination: IslandView()) {
@@ -66,34 +81,60 @@ struct TraditionalDanceView: View {
                         Text("Pulau")
                             .fontWeight(.regular)
                             .foregroundColor(.white)
-                            .font(.headline)
+                            .font(self.screenWidth > 600 ? .title : .headline)
                     })
                 }
             
             Spacer()
-                .frame(width: 56)
             
             Text("Tebak Tarian")
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
-                .font(.headline)
+                .font(self.screenWidth > 600 ? .title : .system(size: 6))
+                .opacity(0)
+            
+            Spacer()
+//                .frame(width: 56)
+            
+            Text("Tebak Tarian")
+                .fontWeight(.semibold)
+                .foregroundColor(.white)
+                .font(self.screenWidth > 600 ? .title : .headline)
             
             Spacer()
             
-            //            Rectangle()
-            //                .background(.orange)
-            //                .opacity(0)
-            //                .frame(height: 36)
-            //
-            //            Spacer()
+            Text("Tebak Tarian")
+                .fontWeight(.semibold)
+                .foregroundColor(.white)
+                .font(self.screenWidth > 600 ? .title : .system(size: 6))
+                .opacity(0)
+            
+            Spacer()
+
+            NavigationLink(
+                destination: {}) {
+                    HStack(spacing: 4, content: {
+                        Image("backIconWhite")
+                            .opacity(0)
+                        
+                        Text("Pulau")
+                            .fontWeight(.regular)
+                            .foregroundColor(.white)
+                            .font(self.screenWidth > 600 ? .title : .headline)
+                            .opacity(0)
+                    })
+                }
+            
+            Spacer()
+            
         })
-        .padding(.bottom, 10)
+        .padding(.bottom, self.screenWidth > 600 ? 20 : 10)
         .background(
             LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
                            startPoint: .leading,
                            endPoint: .trailing
                           )
-            .frame(width: .infinity)
+            .frame(width: self.screenWidth)
         )
     }
     
@@ -101,36 +142,44 @@ struct TraditionalDanceView: View {
         VStack(content: {
             HStack(content: {
                 Text("Tari tradisional dari Pulau \(ModelData.shared.bali.islandName) yaitu...")
-                    .font(.title2)
+                    .font(self.screenWidth > 600 ? .system(size: 38) : .title2)
                     .fontWeight(.bold)
-                    .multilineTextAlignment(.leading)
-                
                 Spacer()
+                
             })
-            
+                        
             Image(ModelData.shared.bali.traditionalDance.image)
                 .resizable()
-                .frame(width: 350, height: 200)
+                .frame(
+                    width: self.screenWidth > 600 ? self.screenWidth / 1.3 : self.screenWidth / 1.1,
+                    height: self.screenWidth > 600 ? screenHeight / 3 : screenHeight / 4
+                )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .shadow(radius:5)
-                .padding(.bottom, 12)
+                .padding(.bottom, self.screenWidth > 600 ? 8 : 12)
             
         })
-        .padding(.top, 10)
+        .padding(.top, self.screenWidth > 600 ? 0 : 10)
     }
     
     private func showChanceAndAnswerBox() -> some View {
+
         VStack(content: {
             Rectangle()
                 .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
                                      startPoint: .leading,
                                      endPoint: .trailing))
-                .clipShape(RoundedRectangle(cornerRadius: 25.0))
-                .frame(width: 280, height: 44)
+                .clipShape(
+                    self.screenWidth > 600 ? RoundedRectangle(cornerRadius: 35) : RoundedRectangle(cornerRadius: 25.0)
+                )
+                .frame(
+                    width: self.screenWidth > 600 ? self.screenWidth / 1.8 : self.screenWidth / 1.14,
+                    height: self.screenHeight / 18
+                )
                 .overlay {
                     Text("Kesempatan kamu kurang 3x")
                         .fontWeight(.medium)
-                        .font(.headline)
+                        .font(self.screenWidth > 600 ? .title : .headline)
                         .foregroundColor(Color.white)
                 }
             
@@ -140,7 +189,10 @@ struct TraditionalDanceView: View {
                     let alphabet = ModelData.shared.sumatera.traditionalDance.throwableAnswer[index].alphabet
                     if(!ModelData.shared.sumatera.traditionalDance.throwableAnswer[index].isClicked) {
                         Rectangle()
-                            .frame(width: 50, height: 50)
+                            .frame(
+                                width: self.screenWidth > 600 ? self.screenWidth / 10 : self.screenWidth / 8,
+                                height: self.screenWidth > 600 ? self.screenWidth / 10 : self.screenWidth / 8
+                            )
                             .foregroundColor(.secondary)
                             .opacity(0.2)
                             .cornerRadius(10)
@@ -153,12 +205,15 @@ struct TraditionalDanceView: View {
                                         lineWidth: 2
                                     )
                             )
-                            .padding(.horizontal, 1)
+                            .padding(.horizontal, self.screenWidth > 600 ? 10 : 1)
                             .padding(.vertical)
                     }
                     else {
                         Rectangle()
-                            .frame(width: 50, height: 50)
+                            .frame(
+                                width: self.screenWidth > 600 ? self.screenWidth / 10 : self.screenWidth / 8,
+                                height: self.screenWidth > 600 ? self.screenWidth / 10 : self.screenWidth / 8
+                            )
                             .foregroundColor(.secondary)
                             .opacity(0.2)
                             .cornerRadius(10)
@@ -171,7 +226,7 @@ struct TraditionalDanceView: View {
                                         lineWidth: 2
                                     )
                             )
-                            .padding(.horizontal, 1)
+                            .padding(.horizontal, self.screenWidth > 600 ? 10 : 1)
                             .padding(.vertical)
                     }
                 }
@@ -186,7 +241,10 @@ struct TraditionalDanceView: View {
                     let item = ModelData.shared.bali.traditionalDance.availableWords[index]
                     if (!ModelData.shared.bali.traditionalDance.availableWords[index].isClicked) {
                         Rectangle()
-                            .frame(width: 55, height: 55)
+                            .frame(
+                                width: self.screenWidth > 600 ? self.screenWidth / 9 : self.screenWidth / 8,
+                                height: self.screenWidth > 600 ? self.screenWidth / 9 : self.screenWidth / 8
+                            )
                             .overlay {
                                 LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 118/255, green: 20/255, blue: 20/255)]),
                                                startPoint: .leading,
@@ -207,7 +265,10 @@ struct TraditionalDanceView: View {
                     }
                     else {
                         Rectangle()
-                            .frame(width: 55, height: 55)
+                            .frame(
+                                width: self.screenWidth > 600 ? self.screenWidth / 9 : self.screenWidth / 8,
+                                height: self.screenWidth > 600 ? self.screenWidth / 9 : self.screenWidth / 8
+                            )
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .padding(.horizontal, 3)
@@ -224,7 +285,10 @@ struct TraditionalDanceView: View {
                                  startPoint: .leading,
                                  endPoint: .trailing))
             .clipShape(RoundedRectangle(cornerRadius: 14.0))
-            .frame(width: 120, height: 46)
+            .frame(
+                width: self.screenWidth > 600 ? self.screenWidth / 5 : self.screenWidth / 3,
+                height: self.screenWidth > 600 ? self.screenWidth / 18 : self.screenWidth / 10
+            )
             .overlay {
                 Text("00:00:\(countdownTimer)")
                     .onReceive(timer, perform: { _ in
@@ -236,7 +300,7 @@ struct TraditionalDanceView: View {
                         }
                     })
                     .fontWeight(.regular)
-                    .font(.title3)
+                    .font(self.screenWidth > 600 ? .title : .title2)
                     .foregroundColor(Color.white)
             }
     }
