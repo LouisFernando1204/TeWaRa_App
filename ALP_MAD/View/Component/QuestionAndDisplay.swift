@@ -24,7 +24,7 @@ struct QuestionAndDisplay: View {
         
     }
     
-    func showTraditionalDanceQuestionDetail() -> some View {
+    private func showTraditionalDanceQuestionDetail() -> some View {
         VStack(content: {
             HStack(content: {
                 Text("Tari tradisional dari Pulau \(currentIsland.islandName) yaitu...")
@@ -45,7 +45,7 @@ struct QuestionAndDisplay: View {
         .padding(.top, ScreenSize.screenWidth > 600 ? 0 : 10)
     }
     
-    func showTraditionalLanguageQuestionDetail() -> some View {
+    private func showTraditionalLanguageQuestionDetail() -> some View {
         VStack(content: {
             HStack(content: {
                 Text("\(currentIsland.traditionalLanguage.sentences) merupakan bahasa daerah...")
@@ -68,7 +68,7 @@ struct QuestionAndDisplay: View {
         
     }
     
-    func showErrorDetail() -> some View {
+    private func showErrorDetail() -> some View {
         VStack(content: {
             Text("404 Error!")
         })

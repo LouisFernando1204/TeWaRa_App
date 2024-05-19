@@ -59,7 +59,7 @@ struct TraditionalLanguageView: View {
                                     timerRunning = false
                                 }
                             })
-                            .offset(y: ScreenSize.screenWidth > 600 ? 150 : 94)
+                            .offset(y: ScreenSize.screenWidth > 600 ? 150 : 100)
                             .fontWeight(.regular)
                             .font(ScreenSize.screenWidth > 600 ? .title : .title2)
                             .foregroundColor(Color.white)

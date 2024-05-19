@@ -15,7 +15,7 @@ struct ButtonCheck: View {
         Button(action: action) {
             Text("Cek Jawaban")
                 .fontWeight(.bold)
-                .font(ScreenSize.screenWidth > 600 ? .title : .title3)
+                .font(ScreenSize.screenWidth > 600 ? .title : .headline)
                 .padding(.horizontal, ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 3.6 : 120)
                 .padding(.vertical, 20)
                 .foregroundColor(.white)

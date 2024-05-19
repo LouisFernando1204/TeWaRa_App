@@ -19,6 +19,6 @@ struct TimerComponent: View {
                 width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 5 :  ScreenSize.screenWidth / 3,
                 height:  ScreenSize.screenWidth > 600 ?  ScreenSize.screenWidth / 18 :  ScreenSize.screenWidth / 10
             )
-            .offset(y: (type == "Bahasa" && ScreenSize.screenWidth > 600) ? 150 : (type == "Bahasa" && ScreenSize.screenWidth < 600 ? 94 : 0))
+            .offset(y: (type == "Bahasa" && ScreenSize.screenWidth > 600) ? 150 : (type == "Bahasa" && ScreenSize.screenWidth < 600 ? 100 : 0))
     }
 }
