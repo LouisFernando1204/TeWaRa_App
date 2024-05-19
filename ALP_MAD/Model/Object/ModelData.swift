@@ -29,7 +29,7 @@ class ModelData {
             islandImage: "sulawesi",
             traditionalDance: TraditionalDance(
                 answer: "PAJOGE",
-                image: "pajoge",
+                image: "TariPajoge-SulawesiSelatan",
                 description: "Tari Pajoge adalah tari tradisional yang berasal dari Bone, Sulawesi Selatan. Tarian ini konon awalnya merupakan hiburan bagi kalangan istana atau juga kediaman para ningrat. Para penarinya adalah gadis yang berlatar belakang kalangan rakyat biasa.",
                 provinceOrigin: "Sulawesi Selatan",
                 provinceOptions: [

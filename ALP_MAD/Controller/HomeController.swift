@@ -10,10 +10,10 @@ import UIKit
 
 class HomeController : ObservableObject {
     
-    @Published private var home : Home
+    //    @Published private var home : Home
     
-    init(home: Home) {
-        self.home = home
+    init() {
+        
     }
     
     func navigateToLeaderboardView() {
@@ -24,7 +24,11 @@ class HomeController : ObservableObject {
         
     }
     
-    func getHome() -> Home {
-        return self.home
+    //    func getHome() -> Home {
+    //        return self.home
+    //    }
+    
+    func registerAccount(user: User) {
+        ModelData.shared.currentUser = user
     }
 }

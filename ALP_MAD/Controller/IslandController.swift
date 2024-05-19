@@ -58,6 +58,7 @@ class IslandController : ObservableObject {
                 if let index = self.island.userList.firstIndex(where: { $0.name == ModelData.shared.currentUser.name }) {
                     self.island.userList[index].score += self.newScore
                     ModelData.shared.currentUser.score += self.newScore
+                    ModelData.shared.currentIslandObject.userList[index].score += self.newScore
                     if currentIsland == "Sumatera" {
                         ModelData.shared.sumatera.userList[index].score += self.newScore
                     }
@@ -89,6 +90,7 @@ class IslandController : ObservableObject {
                 if let index = self.island.userList.firstIndex(where: { $0.name == ModelData.shared.currentUser.name }) {
                     self.island.userList[index].score += self.newScore
                     ModelData.shared.currentUser.score += self.newScore
+                    ModelData.shared.currentIslandObject.userList[index].score += self.newScore
                     if currentIsland == "Sumatera" {
                         ModelData.shared.sumatera.userList[index].score += self.newScore
                     }
@@ -114,5 +116,13 @@ class IslandController : ObservableObject {
                 }
             }
         }
+    }
+    
+    func showTraditionalDanceDescription() -> TraditionalDance {
+        return self.island.traditionalDance
+    }
+    
+    func showTraditionalLanguageDescription() -> TraditionalLanguage {
+        return self.island.traditionalLanguage
     }
 }

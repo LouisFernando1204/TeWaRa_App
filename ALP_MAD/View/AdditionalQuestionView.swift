@@ -12,11 +12,9 @@ struct AdditionalQuestionView: View {
     @StateObject private var islandController = IslandController(island: ModelData.shared.currentIslandObject)
     @State private var answer : String = ""
     @State private var showAlert = false
-    @State private var showTimeoutAlert = false
-    @State private var navToIslandView = false
-    @State private var navToHomeView = false
-    @State var countDownTimer = 30
-    @State var timerRunning = false
+    @State private var navToAnswerDescriptionView = false
+    @State private var countDownTimer = 30
+    @State private var timerRunning = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let columns: [GridItem] = [
@@ -25,16 +23,16 @@ struct AdditionalQuestionView: View {
     ]
     
     var body: some View {
-        self.setUpAdditionalQuestionView(islandController: islandController, timerRunning: $timerRunning)
+        self.setUpAdditionalQuestionView(islandController: islandController, answer: $answer, showAlert: $showAlert, navToAnswerDescriptionView: $navToAnswerDescriptionView, countDownTimer: $countDownTimer, timerRunning: $timerRunning)
     }
     
-    private func setUpAdditionalQuestionView(islandController: IslandController, timerRunning: Binding<Bool>) -> some View {
+    private func setUpAdditionalQuestionView(islandController: IslandController, answer: Binding<String>, showAlert: Binding<Bool>, navToAnswerDescriptionView: Binding<Bool>, countDownTimer: Binding<Int>, timerRunning: Binding<Bool>) -> some View {
         ScrollView {
             VStack(alignment: .center) {
-                self.navigationTitle()
-                self.timer(countDownTimer: $countDownTimer, timerRunning: $timerRunning, showTimeoutAlert: $showTimeoutAlert)
+                self.navigationBar()
+                self.timer(countDownTimer: countDownTimer, timerRunning: timerRunning, showAlert: showAlert)
                 self.question()
-                self.answerOptions(islandController: islandController, navToIslandView: $navToIslandView, navToHomeView: $navToHomeView)
+                self.answerOptions(islandController: islandController, navToAnswerDescriptionView: navToAnswerDescriptionView, answer: answer, showAlert: showAlert, timerRunning: timerRunning, countDownTimer: countDownTimer)
                 self.poinStatus()
                 self.knowledgeInformation()
             }
@@ -57,7 +55,7 @@ struct AdditionalQuestionView: View {
         }
     }
     
-    private func navigationTitle() -> some View {
+    private func navigationBar() -> some View {
         HStack(alignment: .center, content: {
             Spacer()
             Text("Bonus")
@@ -81,7 +79,7 @@ struct AdditionalQuestionView: View {
         .padding(.bottom, 20)
     }
     
-    private func timer(countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, showTimeoutAlert: Binding<Bool>) -> some View {
+    private func timer(countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, showAlert: Binding<Bool>) -> some View {
         ZStack(alignment: .center, content: {
             Image("backgroundTimer")
                 .resizable()
@@ -108,9 +106,9 @@ struct AdditionalQuestionView: View {
                     if countDownTimer.wrappedValue > 0 && timerRunning.wrappedValue {
                         countDownTimer.wrappedValue -= 1
                     }
-                    else {
+                    else if countDownTimer.wrappedValue == 0 {
                         timerRunning.wrappedValue = false
-                        showTimeoutAlert.wrappedValue = true
+                        showAlert.wrappedValue = true
                     }
                 }
                 .font(.system(size: 44, weight: .black))
@@ -127,16 +125,16 @@ struct AdditionalQuestionView: View {
         .padding(.bottom, 17)
     }
     
-    private func answerOptions(islandController: IslandController, navToIslandView: Binding<Bool>, navToHomeView: Binding<Bool>) -> some View {
+    private func answerOptions(islandController: IslandController, navToAnswerDescriptionView: Binding<Bool>, answer: Binding<String>, showAlert: Binding<Bool>, timerRunning: Binding<Bool>, countDownTimer: Binding<Int>) -> some View {
         LazyVGrid(columns: columns, spacing: 10) {
             if ModelData.shared.currentGame == "TraditionalDance" {
                 ForEach(islandController.getIsland().traditionalDance.provinceOptions,  id: \.self) { provinceOption in
                     Button(
                         action: {
-                            self.answer = provinceOption
-                            islandController.checkTheAnswer(word: answer, currentIsland: ModelData.shared.currentIsland, currentGame: ModelData.shared.currentGame, timer: countDownTimer)
-                            self.showAlert = true
-                            self.timerRunning = false
+                            answer.wrappedValue = provinceOption
+                            showAlert.wrappedValue = true
+                            islandController.checkTheAnswer(word: answer.wrappedValue, currentIsland: ModelData.shared.currentIsland, currentGame: ModelData.shared.currentGame, timer: countDownTimer.wrappedValue)
+                            timerRunning.wrappedValue = false
                         },
                         label: {
                             Text(provinceOption)
@@ -153,36 +151,29 @@ struct AdditionalQuestionView: View {
                         )
                     )
                     .cornerRadius(10)
-                    .alert(isPresented: $showAlert, content: {
-                        Alert(
-                            title: Text("Selamat!!!"),
-                            message:
-                                Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
-                            primaryButton: .default(Text("Beranda")) {
-                                navToHomeView.wrappedValue = true
-                            },
-                            secondaryButton: .default(Text("Lanjut")) {
-                                navToIslandView.wrappedValue = true
-                            }
-                        )
+                    .alert(isPresented: showAlert, content: {
+                        if countDownTimer.wrappedValue != 0 {
+                            Alert(
+                                title: Text("Selamat!!!"),
+                                message:
+                                    Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
+                                dismissButton: .default(Text("Lihat penjelasan")) {
+                                    navToAnswerDescriptionView.wrappedValue = true
+                                }
+                            )
+                        }
+                        else{
+                            Alert(
+                                title: Text("Waktu Habis!"),
+                                message: Text("Kamu tidak menjawab dalam waktu yang ditentukan."),
+                                dismissButton: .default(Text("Lihat penjelasan")) {
+                                    navToAnswerDescriptionView.wrappedValue = true
+                                }
+                            )
+                        }
                     })
-                    .alert(isPresented: $showTimeoutAlert) {
-                        Alert(
-                            title: Text("Waktu Habis!"),
-                            message: Text("Kamu tidak menjawab dalam waktu yang ditentukan."),
-                            primaryButton: .default(Text("Beranda")) {
-                                navToHomeView.wrappedValue = true
-                            },
-                            secondaryButton: .default(Text("Main lagi")) {
-                                navToIslandView.wrappedValue = true
-                            }
-                        )
-                    }
-                    .fullScreenCover(isPresented: $navToIslandView, content: {
-                        IslandView()
-                    })
-                    .fullScreenCover(isPresented: $navToHomeView, content: {
-                        HomeView()
+                    .fullScreenCover(isPresented: navToAnswerDescriptionView, content: {
+                        AnswerDescriptionView()
                     })
                 }
             }
@@ -190,10 +181,10 @@ struct AdditionalQuestionView: View {
                 ForEach(islandController.getIsland().traditionalLanguage.provinceOptions,  id: \.self) { provinceOption in
                     Button(
                         action: {
-                            self.answer = provinceOption
-                            islandController.checkTheAnswer(word: answer, currentIsland: ModelData.shared.currentIsland, currentGame: ModelData.shared.currentGame, timer: countDownTimer)
-                            self.showAlert = true
-                            self.timerRunning = false
+                            answer.wrappedValue = provinceOption
+                            islandController.checkTheAnswer(word: answer.wrappedValue, currentIsland: ModelData.shared.currentIsland, currentGame: ModelData.shared.currentGame, timer: countDownTimer.wrappedValue)
+                            showAlert.wrappedValue = true
+                            timerRunning.wrappedValue = false
                         },
                         label: {
                             Text(provinceOption)
@@ -211,35 +202,28 @@ struct AdditionalQuestionView: View {
                     )
                     .cornerRadius(10)
                     .alert(isPresented: $showAlert, content: {
-                        Alert(
-                            title: Text("Selamat!!!"),
-                            message:
-                                Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
-                            primaryButton: .default(Text("Beranda")) {
-                                navToHomeView.wrappedValue = true
-                            },
-                            secondaryButton: .default(Text("Lanjut")) {
-                                navToIslandView.wrappedValue = true
-                            }
-                        )
+                        if countDownTimer.wrappedValue != 0 {
+                            Alert(
+                                title: Text("Selamat!!!"),
+                                message:
+                                    Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
+                                dismissButton: .default(Text("Lihat penjelasan")) {
+                                    navToAnswerDescriptionView.wrappedValue = true
+                                }
+                            )
+                        }
+                        else{
+                            Alert(
+                                title: Text("Waktu Habis!"),
+                                message: Text("Kamu tidak menjawab dalam waktu yang ditentukan."),
+                                dismissButton: .default(Text("Lihat penjelasan")) {
+                                    navToAnswerDescriptionView.wrappedValue = true
+                                }
+                            )
+                        }
                     })
-                    .alert(isPresented: $showTimeoutAlert) {
-                        Alert(
-                            title: Text("Waktu Habis!"),
-                            message: Text("Kamu tidak menjawab dalam waktu yang ditentukan."),
-                            primaryButton: .default(Text("Beranda")) {
-                                navToHomeView.wrappedValue = true
-                            },
-                            secondaryButton: .default(Text("Main lagi")) {
-                                navToIslandView.wrappedValue = true
-                            }
-                        )
-                    }
-                    .fullScreenCover(isPresented: $navToIslandView, content: {
-                        IslandView()
-                    })
-                    .fullScreenCover(isPresented: $navToHomeView, content: {
-                        HomeView()
+                    .fullScreenCover(isPresented: navToAnswerDescriptionView, content: {
+                        AnswerDescriptionView()
                     })
                 }
             }

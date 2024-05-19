@@ -64,7 +64,9 @@
 		04A1A3242BF0664E00C7E982 /* TraditionalDanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */; };
 		04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */; };
 		04C658362BF4922100ECECD2 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C658352BF4922100ECECD2 /* ModelData.swift */; };
+		6447B67D2BFA20F700AFD5D1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6447B67C2BFA20F700AFD5D1 /* RegisterView.swift */; };
 		646B2C7A2BF8814700B04E4B /* PreAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646B2C792BF8814700B04E4B /* PreAlertView.swift */; };
+		646B2C7C2BF8AD2B00B04E4B /* TariPajoge-SulawesiSelatan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 646B2C7B2BF8AD2B00B04E4B /* TariPajoge-SulawesiSelatan.mp4 */; };
 		649ACAFB2BF7B66200E2A938 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,7 +148,9 @@
 		04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceController.swift; sourceTree = "<group>"; };
 		04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageController.swift; sourceTree = "<group>"; };
 		04C658352BF4922100ECECD2 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		6447B67C2BFA20F700AFD5D1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		646B2C792BF8814700B04E4B /* PreAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertView.swift; sourceTree = "<group>"; };
+		646B2C7B2BF8AD2B00B04E4B /* TariPajoge-SulawesiSelatan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TariPajoge-SulawesiSelatan.mp4"; sourceTree = "<group>"; };
 		649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,6 +260,7 @@
 				048DD7BD2BF4C6AA0041FDE9 /* KalimantanData.json */,
 				048DD7BF2BF4C6C50041FDE9 /* PapuaData.json */,
 				048DD7C12BF4C6F90041FDE9 /* SulawesiData.json */,
+				6447B67B2BFA1AAE00AFD5D1 /* Video */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */,
 				649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */,
 				646B2C792BF8814700B04E4B /* PreAlertView.swift */,
+				6447B67C2BFA20F700AFD5D1 /* RegisterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -360,6 +366,14 @@
 				04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		6447B67B2BFA1AAE00AFD5D1 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				646B2C7B2BF8AD2B00B04E4B /* TariPajoge-SulawesiSelatan.mp4 */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -563,6 +577,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				048DD7C22BF4C6FA0041FDE9 /* SulawesiData.json in Resources */,
+				646B2C7C2BF8AD2B00B04E4B /* TariPajoge-SulawesiSelatan.mp4 in Resources */,
 				048DD7B82BF4C51C0041FDE9 /* BaliData.json in Resources */,
 				04A1A2D42BF062C100C7E982 /* Preview Assets.xcassets in Resources */,
 				048DD7B42BF4C3FB0041FDE9 /* SumateraData.json in Resources */,
@@ -653,6 +668,7 @@
 				04A1A3222BF0663E00C7E982 /* IslandController.swift in Sources */,
 				043E39792BF38D4C00FB74A6 /* AdditionalQuestionView.swift in Sources */,
 				04A1A3022BF0639000C7E982 /* Home.swift in Sources */,
+				6447B67D2BFA20F700AFD5D1 /* RegisterView.swift in Sources */,
 				04A1A2FE2BF0637000C7E982 /* TraditionalLanguage.swift in Sources */,
 				04A1A3142BF0657600C7E982 /* IslandView.swift in Sources */,
 			);

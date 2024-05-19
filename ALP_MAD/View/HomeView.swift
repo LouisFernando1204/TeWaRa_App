@@ -8,10 +8,21 @@
 import SwiftUI
 
 struct HomeView: View {
-    
     var body: some View {
-        ForEach(ModelData.shared.sulawesi.userList, id: \.self){ user in
-            Text("\(user.score)")
+        VStack {
+            Text("Hello, World!")
+            //            if let uiImage = UIImage(data: ModelData.shared.currentUser.image) {
+            //                Image(uiImage: uiImage)
+            //                    .resizable()
+            //                    .aspectRatio(contentMode: .fill)
+            //                    .frame(width: 500, height: 200)
+            //                    .clipped()
+            //            } else {
+            //                Rectangle()
+            //                    .fill(Color.gray)
+            //                    .frame(width: 500, height: 200)
+            //            }
+            //        }
         }
     }
 }
