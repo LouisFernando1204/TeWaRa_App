@@ -39,10 +39,10 @@ struct TraditionalDanceView: View {
         ScrollView {
             VStack(content: {
                 
-                self.topNavigationBar()
+                TopNavigationBar(destination: AnyView(IslandView()), name: "Tebak Tarian")
                 
                 VStack(content: {
-                    self.showQuestion()
+                    QuestionAndDisplay(type: "Tarian", currentIsland: ModelData.shared.bali)
                     self.showChanceAndAnswerBox()
                     self.showWordOptions()
                     self.showTimer()
@@ -56,10 +56,7 @@ struct TraditionalDanceView: View {
             }
         }
         .safeAreaInset(edge: .top) {
-            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                           startPoint: .leading,
-                           endPoint: .trailing
-            )
+            CustomGradient.redOrangeGradient
             .frame(height: self.screenWidth > 600 ? 32: 70)
             .edgesIgnoringSafeArea(.top)
             .padding(.bottom, self.screenWidth > 600 ? -40 : -70)
@@ -67,108 +64,11 @@ struct TraditionalDanceView: View {
         }
     }
     
-    private func topNavigationBar() -> some View {
-        
-        HStack(content: {
-            
-            Spacer()
-            
-            NavigationLink(
-                destination: IslandView()) {
-                    HStack(spacing: 4, content: {
-                        Image("backIconWhite")
-                        
-                        Text("Pulau")
-                            .fontWeight(.regular)
-                            .foregroundColor(.white)
-                            .font(self.screenWidth > 600 ? .title : .headline)
-                    })
-                }
-            
-            Spacer()
-            
-            Text("Tebak Tarian")
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
-                .font(self.screenWidth > 600 ? .title : .system(size: 6))
-                .opacity(0)
-            
-            Spacer()
-//                .frame(width: 56)
-            
-            Text("Tebak Tarian")
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
-                .font(self.screenWidth > 600 ? .title : .headline)
-            
-            Spacer()
-            
-            Text("Tebak Tarian")
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
-                .font(self.screenWidth > 600 ? .title : .system(size: 6))
-                .opacity(0)
-            
-            Spacer()
-
-            NavigationLink(
-                destination: {}) {
-                    HStack(spacing: 4, content: {
-                        Image("backIconWhite")
-                            .opacity(0)
-                        
-                        Text("Pulau")
-                            .fontWeight(.regular)
-                            .foregroundColor(.white)
-                            .font(self.screenWidth > 600 ? .title : .headline)
-                            .opacity(0)
-                    })
-                }
-            
-            Spacer()
-            
-        })
-        .padding(.bottom, self.screenWidth > 600 ? 20 : 10)
-        .background(
-            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                           startPoint: .leading,
-                           endPoint: .trailing
-                          )
-            .frame(width: self.screenWidth)
-        )
-    }
-    
-    private func showQuestion() -> some View {
-        VStack(content: {
-            HStack(content: {
-                Text("Tari tradisional dari Pulau \(ModelData.shared.bali.islandName) yaitu...")
-                    .font(self.screenWidth > 600 ? .system(size: 38) : .title2)
-                    .fontWeight(.bold)
-                Spacer()
-                
-            })
-                        
-            Image(ModelData.shared.bali.traditionalDance.image)
-                .resizable()
-                .frame(
-                    width: self.screenWidth > 600 ? self.screenWidth / 1.3 : self.screenWidth / 1.1,
-                    height: self.screenWidth > 600 ? screenHeight / 3 : screenHeight / 4
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .shadow(radius:5)
-                .padding(.bottom, self.screenWidth > 600 ? 8 : 12)
-            
-        })
-        .padding(.top, self.screenWidth > 600 ? 0 : 10)
-    }
-    
     private func showChanceAndAnswerBox() -> some View {
 
         VStack(content: {
             Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                     startPoint: .leading,
-                                     endPoint: .trailing))
+                .fill(CustomGradient.redOrangeGradient)
                 .clipShape(
                     self.screenWidth > 600 ? RoundedRectangle(cornerRadius: 35) : RoundedRectangle(cornerRadius: 25.0)
                 )
@@ -199,9 +99,7 @@ struct TraditionalDanceView: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(
-                                        LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                                       startPoint: .leading,
-                                                       endPoint: .trailing),
+                                        CustomGradient.redOrangeGradient,
                                         lineWidth: 2
                                     )
                             )
@@ -220,9 +118,7 @@ struct TraditionalDanceView: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(
-                                        LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                                       startPoint: .leading,
-                                                       endPoint: .trailing),
+                                        CustomGradient.redOrangeGradient,
                                         lineWidth: 2
                                     )
                             )

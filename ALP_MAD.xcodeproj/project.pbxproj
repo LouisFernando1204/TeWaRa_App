@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041B26932BFA08B3000B23BB /* TopNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26922BFA08B3000B23BB /* TopNavigationBar.swift */; };
+		041B26972BFA0907000B23BB /* QuestionAndDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26962BFA0907000B23BB /* QuestionAndDisplay.swift */; };
+		041B26992BFA09E9000B23BB /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26982BFA09E9000B23BB /* ScreenSize.swift */; };
+		041B269B2BFA0A8F000B23BB /* AchievementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B269A2BFA0A8F000B23BB /* AchievementRow.swift */; };
+		041B26A62BFA1D94000B23BB /* CustomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26A52BFA1D94000B23BB /* CustomGradient.swift */; };
+		041B26A92BFA206A000B23BB /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26A82BFA206A000B23BB /* TextFieldComponent.swift */; };
+		041B26AC2BFA2263000B23BB /* TimerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26AB2BFA2263000B23BB /* TimerComponent.swift */; };
+		041B26AE2BFA250A000B23BB /* ClueBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26AD2BFA250A000B23BB /* ClueBox.swift */; };
+		041B26B02BFA2A11000B23BB /* AnswerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26AF2BFA2A11000B23BB /* AnswerBox.swift */; };
+		041B26B22BFA2A21000B23BB /* WordOptionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26B12BFA2A21000B23BB /* WordOptionBox.swift */; };
+		041B26B42BFA368E000B23BB /* ButtonCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26B32BFA368E000B23BB /* ButtonCheck.swift */; };
 		0420D5242BF9043400696430 /* TraditionalLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420D5232BF9043400696430 /* TraditionalLanguageView.swift */; };
 		0420D5262BF9044100696430 /* TraditionalDanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420D5252BF9044100696430 /* TraditionalDanceView.swift */; };
 		0420D5272BF9051300696430 /* Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044215822BF60BF60064666A /* Alphabet.swift */; };
@@ -99,6 +110,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		041B26922BFA08B3000B23BB /* TopNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationBar.swift; sourceTree = "<group>"; };
+		041B26962BFA0907000B23BB /* QuestionAndDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndDisplay.swift; sourceTree = "<group>"; };
+		041B26982BFA09E9000B23BB /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		041B269A2BFA0A8F000B23BB /* AchievementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementRow.swift; sourceTree = "<group>"; };
+		041B26A52BFA1D94000B23BB /* CustomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGradient.swift; sourceTree = "<group>"; };
+		041B26A82BFA206A000B23BB /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
+		041B26AB2BFA2263000B23BB /* TimerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerComponent.swift; sourceTree = "<group>"; };
+		041B26AD2BFA250A000B23BB /* ClueBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClueBox.swift; sourceTree = "<group>"; };
+		041B26AF2BFA2A11000B23BB /* AnswerBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerBox.swift; sourceTree = "<group>"; };
+		041B26B12BFA2A21000B23BB /* WordOptionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordOptionBox.swift; sourceTree = "<group>"; };
+		041B26B32BFA368E000B23BB /* ButtonCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCheck.swift; sourceTree = "<group>"; };
 		0420D5232BF9043400696430 /* TraditionalLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageView.swift; sourceTree = "<group>"; };
 		0420D5252BF9044100696430 /* TraditionalDanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceView.swift; sourceTree = "<group>"; };
 		043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalQuestionView.swift; sourceTree = "<group>"; };
@@ -194,6 +216,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		041B26902BFA088F000B23BB /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				041B26922BFA08B3000B23BB /* TopNavigationBar.swift */,
+				041B26962BFA0907000B23BB /* QuestionAndDisplay.swift */,
+				041B269A2BFA0A8F000B23BB /* AchievementRow.swift */,
+				041B26A82BFA206A000B23BB /* TextFieldComponent.swift */,
+				041B26AB2BFA2263000B23BB /* TimerComponent.swift */,
+				041B26AD2BFA250A000B23BB /* ClueBox.swift */,
+				041B26AF2BFA2A11000B23BB /* AnswerBox.swift */,
+				041B26B12BFA2A21000B23BB /* WordOptionBox.swift */,
+				041B26B32BFA368E000B23BB /* ButtonCheck.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		041B26912BFA0897000B23BB /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				04A1A30F2BF0652C00C7E982 /* HomeView.swift */,
+				04A1A3172BF0659A00C7E982 /* TraditionalLanguageView.swift */,
+				04A1A3112BF0654F00C7E982 /* LeaderboardView.swift */,
+				04A1A3132BF0657600C7E982 /* IslandView.swift */,
+				04A1A3152BF0658700C7E982 /* TraditionalDanceView.swift */,
+				04A1A31B2BF065CF00C7E982 /* AnswerDescriptionView.swift */,
+				043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		041B26A02BFA1D0E000B23BB /* CustomColor */ = {
+			isa = PBXGroup;
+			children = (
+				041B26A52BFA1D94000B23BB /* CustomGradient.swift */,
+			);
+			path = CustomColor;
+			sourceTree = "<group>";
+		};
+		041B26A72BFA1F9A000B23BB /* SizeSettings */ = {
+			isa = PBXGroup;
+			children = (
+				041B26982BFA09E9000B23BB /* ScreenSize.swift */,
+			);
+			path = SizeSettings;
+			sourceTree = "<group>";
+		};
 		0420D5222BF903F700696430 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,13 +413,10 @@
 		04A1A30B2BF064BA00C7E982 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04A1A30F2BF0652C00C7E982 /* HomeView.swift */,
-				04A1A3172BF0659A00C7E982 /* TraditionalLanguageView.swift */,
-				04A1A3112BF0654F00C7E982 /* LeaderboardView.swift */,
-				04A1A3132BF0657600C7E982 /* IslandView.swift */,
-				04A1A3152BF0658700C7E982 /* TraditionalDanceView.swift */,
-				04A1A31B2BF065CF00C7E982 /* AnswerDescriptionView.swift */,
-				043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */,
+				041B26A72BFA1F9A000B23BB /* SizeSettings */,
+				041B26A02BFA1D0E000B23BB /* CustomColor */,
+				041B26902BFA088F000B23BB /* Component */,
+				041B26912BFA0897000B23BB /* Page */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -642,20 +707,31 @@
 				04A1A3242BF0664E00C7E982 /* TraditionalDanceController.swift in Sources */,
 				04A1A2FC2BF0635F00C7E982 /* TraditionalDance.swift in Sources */,
 				04A1A2CF2BF062C000C7E982 /* ContentView.swift in Sources */,
+				041B26B02BFA2A11000B23BB /* AnswerBox.swift in Sources */,
 				04A1A3042BF0642700C7E982 /* Island.swift in Sources */,
 				04A1A3162BF0658700C7E982 /* TraditionalDanceView.swift in Sources */,
+				041B26B42BFA368E000B23BB /* ButtonCheck.swift in Sources */,
+				041B26A92BFA206A000B23BB /* TextFieldComponent.swift in Sources */,
+				041B26992BFA09E9000B23BB /* ScreenSize.swift in Sources */,
+				041B26AC2BFA2263000B23BB /* TimerComponent.swift in Sources */,
 				04C658362BF4922100ECECD2 /* ModelData.swift in Sources */,
 				044215832BF60BF60064666A /* Alphabet.swift in Sources */,
 				04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */,
+				041B269B2BFA0A8F000B23BB /* AchievementRow.swift in Sources */,
 				04A1A3122BF0654F00C7E982 /* LeaderboardView.swift in Sources */,
 				04A1A31C2BF065CF00C7E982 /* AnswerDescriptionView.swift in Sources */,
+				041B26AE2BFA250A000B23BB /* ClueBox.swift in Sources */,
+				041B26932BFA08B3000B23BB /* TopNavigationBar.swift in Sources */,
 				04A1A3182BF0659A00C7E982 /* TraditionalLanguageView.swift in Sources */,
 				04A1A3102BF0652C00C7E982 /* HomeView.swift in Sources */,
 				04A1A2FA2BF0634B00C7E982 /* Leaderboard.swift in Sources */,
+				041B26972BFA0907000B23BB /* QuestionAndDisplay.swift in Sources */,
 				04A1A2CD2BF062C000C7E982 /* ALP_MADApp.swift in Sources */,
 				04A1A2F72BF062F100C7E982 /* User.swift in Sources */,
 				04A1A3202BF0662400C7E982 /* LeaderboardController.swift in Sources */,
 				04A1A3222BF0663E00C7E982 /* IslandController.swift in Sources */,
+				041B26A62BFA1D94000B23BB /* CustomGradient.swift in Sources */,
+				041B26B22BFA2A21000B23BB /* WordOptionBox.swift in Sources */,
 				043E39792BF38D4C00FB74A6 /* AdditionalQuestionView.swift in Sources */,
 				04A1A2FE2BF0637000C7E982 /* TraditionalLanguage.swift in Sources */,
 				04A1A3142BF0657600C7E982 /* IslandView.swift in Sources */,
