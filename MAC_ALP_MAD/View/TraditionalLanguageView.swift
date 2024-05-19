@@ -16,44 +16,43 @@ struct TraditionalLanguageView: View {
     @StateObject private var traditionalLanguageController = TraditionalLanguageController(traditionalLanguage: ModelData.shared.bali.traditionalLanguage)
     
     var body: some View {
-        ScrollView {
+        
+        VStack(content: {
+            
+            self.topNavigationBar()
+            
             VStack(content: {
+                self.showQuestion()
                 
-                self.topNavigationBar()
-                
-                VStack(content: {
-                    self.showQuestion()
-                    
-                    HStack(content: {
-                        VStack(content: {
-                            self.imageAndTextfield()
-                        })
-                        
-                        VStack(content: {
-                            self.showClueAndTimer()
-                            self.buttonCheckAnswer()
-                        })
+                HStack(content: {
+                    VStack(content: {
+                        self.imageAndTextfield()
                     })
                     
+                    VStack(content: {
+                        self.showClueAndTimer()
+                        self.buttonCheckAnswer()
+                    })
                 })
-                .padding(.horizontal, 20)
-                
                 
             })
+            .padding()
             
-            .onAppear {
-                timerRunning = true
-            }
+            
+        })
+        .onAppear {
+            timerRunning = true
         }
-//        .safeAreaInset(edge: .top) {
-//            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-//                           startPoint: .leading,
-//                           endPoint: .trailing
-//            )
-//            .frame(height: 70)
-//            .edgesIgnoringSafeArea(.top)
-//            .padding(.bottom, -70)
-//        }
+        .safeAreaInset(edge: .top) {
+            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                           startPoint: .leading,
+                           endPoint: .trailing
+            )
+            .frame(height: 32)
+            .edgesIgnoringSafeArea(.top)
+            .padding(.bottom, -10)
+        }
+        
     }
     
     private func topNavigationBar() -> some View {
@@ -75,14 +74,20 @@ struct TraditionalLanguageView: View {
                 }
             
             Spacer()
-                .frame(width: 56)
             
             Text("Tebak Bahasa")
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
-                .font(.headline)
+                .font(.title2)
             
             Spacer()
+            
+            Text("Tebak Bahasa")
+                .fontWeight(.semibold)
+                .opacity(0)
+                .foregroundColor(.white)
+                .font(.headline)
+            
             
 //            Rectangle()
 //                .background(.orange)
@@ -91,14 +96,13 @@ struct TraditionalLanguageView: View {
 //
 //            Spacer()
         })
-        .padding(.bottom, 10)
-//        .background(
-//            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-//                           startPoint: .leading,
-//                           endPoint: .trailing
-//            )
-//            .frame(width: .infinity)
-//        )
+        .padding(.bottom)
+        .background(
+            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
+                           startPoint: .leading,
+                           endPoint: .trailing
+            )
+        )
     }
     
     private func showQuestion() -> some View {
@@ -224,20 +228,20 @@ struct TraditionalLanguageView: View {
     }
     
     private func buttonCheckAnswer() -> some View {
-        Button(action: {
-            traditionalLanguageController.guessWord(word: textFieldValue, remainingTime: countdownTimer)
-        }) {
-            Text("Cek Jawaban")
-                .fontWeight(.bold)
-//                .padding(.horizontal, 40)
-//                .padding(.vertical, 10)
-                .background(
-                    RoundedRectangle(cornerRadius: 35)
-                        .fill(Color.red)
-                )
-                .foregroundColor(.white)
-        }
-        .shadow(color: .red, radius: 2, y: 2)
+        
+        Rectangle()
+            .fill(.red)
+            .cornerRadius(10)
+            .frame(height: 40)
+            .overlay {
+                Text("CEK JAWABAN")
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+            }
+            .padding(.vertical, 10)
+            .onTapGesture {
+                traditionalLanguageController.guessWord(word: textFieldValue, remainingTime: countdownTimer)
+            }
         
     }
 }
