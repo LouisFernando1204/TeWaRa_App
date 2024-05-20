@@ -9,17 +9,18 @@ import SwiftUI
 
 struct ButtonCheck: View {
     
-    var action: () -> Void
+    let action: () -> Void
+    let message: String
     
     var body: some View {
         Button(action: action) {
-            Text("Cek Jawaban")
+            Text(message)
                 .fontWeight(.bold)
                 .font(ScreenSize.screenWidth > 600 ? .title : .headline)
-                .padding(.horizontal, ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 3.6 : 120)
+                .padding(.horizontal, ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 3.6 : 100)
                 .padding(.vertical, 20)
                 .foregroundColor(.white)
-                .background(.red)
+                .background(ButtonColor.redButton)
                 .cornerRadius(ScreenSize.screenWidth > 600 ? 30 : 35)
         }
         .controlSize(.extraLarge)

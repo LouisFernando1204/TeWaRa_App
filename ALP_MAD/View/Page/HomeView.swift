@@ -9,122 +9,52 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @State private var isClicked: Bool = false
+    
     var body: some View {
+        
         ZStack(content: {
+
+            VStack {
+                HStack {
+                    Image("gradientWave(TeWaRa)")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth * 3: 786.01, height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 2 : 380.76)
+                        .rotationEffect(.degrees(145.74))
+                        .offset(x: ScreenSize.screenWidth > 600 ? -100 : 0, y: ScreenSize.screenWidth > 600 ? -180 : -170)
+                    Spacer()
+                }
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             
-            //            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-            //                           startPoint: .leading,
-            //                           endPoint: .trailing
-            //            )
-            
-//            VStack {
-//                HStack {
-//                    Image("Wave_1")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: 786.01, height: 380.76)
-//                        .rotationEffect(.degrees(145.74))
-//                        .offset(x: 0, y: -170)
-//                    Spacer()
-//                }
-//                Spacer()
-//            }
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Image("gradientWave(TeWaRa)")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth * 3: 786.01, height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 2 : 380.76)
+                        .rotationEffect(.degrees(-42.94))
+                        .offset(x: ScreenSize.screenWidth > 600 ? 140 : 10, y: ScreenSize.screenWidth > 600 ? 160 :  90)
+                }
+            }
+            .frame(maxWidth: ScreenSize.screenWidth * 2 , maxHeight: ScreenSize.screenHeight)
             
             VStack(content: {
-                self.showUserDetail()
+                ProfileComponent(currentUser: ModelData.shared.currentUser)
                 Spacer()
                     .frame(height: 40)
                 self.showAchievement()
                 Spacer()
                     .frame(height: 40)
-                self.showButtonStartGame()
+                ButtonCheck(action: {self.isClicked = true}, message: "MULAI GAME")
                 
             })
-            .frame(maxWidth: .infinity)
+            .frame(width: ScreenSize.screenWidth * 0.9)
             .padding(.horizontal, 20)
-        })
-        
-    }
-    
-    private func showUserDetail() -> some View {
-        
-        VStack(content: {
-            HStack(content: {
-                
-                Spacer()
-                
-                Image("person1")
-                    .resizable()
-                    .frame(width: 80, height: 80)
-                    .clipShape(Circle())
-                
-                VStack(content: {
-                    
-                    HStack(content: {
-                        Text("Hi, \(ModelData.shared.currentUser.name)! ")
-                            .fontWeight(.bold)
-                            .font(.title2)
-                            .overlay {
-                                LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 118/255, green: 20/255, blue: 20/255)]),
-                                               startPoint: .leading,
-                                               endPoint: .trailing
-                                )
-                            }
-                            .mask(
-                                Text("Hi, \(ModelData.shared.currentUser.name)! ")
-                                    .fontWeight(.bold)
-                                    .font(.title2)
-                            )
-                        
-                        Spacer()
-                    })
-                    
-                    
-                    HStack(content: {
-                        HStack(spacing: 0, content: {
-                            Text("Welcome back to ")
-                                .font(.system(size: 18))
-                            
-                            Text("TeWaRa")
-                                .font(.system(size: 18))
-                                .fontWeight(.bold)
-                                .overlay {
-                                    LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                                   startPoint: .leading,
-                                                   endPoint: .trailing
-                                    )
-                                    .mask(
-                                        Text("TeWaRa")
-                                            .font(.system(size: 18))
-                                            .fontWeight(.bold)
-                                    )
-                                }
-                            
-                            
-                            Text("!")
-                                .font(.system(size: 18))
-                        })
-                        .padding(.bottom, 2)
-                        
-                        Spacer()
-                        
-                    })
-                    
-                    HStack(content: {
-                        Text("Total poin: \(ModelData.shared.currentUser.score)")
-                            .font(.system(size: 18))
-                        
-                        Spacer()
-                    })
-                })
-                
-            })
-            
-            .frame(maxWidth: .infinity, maxHeight: 130)
-            .padding(.horizontal)
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
-            
         })
         
     }
@@ -135,384 +65,55 @@ struct HomeView: View {
                 VStack(content: {
                     Text("Pencapaian")
                         .bold()
-                        .font(.title3)
+                        .font(ScreenSize.screenWidth > 600 ? .largeTitle : .title3)
                     
-                    self.showSumateraAchievement()
+                    AchievementRow(currentIsland: ModelData.shared.sumatera)
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
                     Divider()
                         .background(Color.black)
-                    self.showKalimantanAchievement()
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+                    AchievementRow(currentIsland: ModelData.shared.kalimantan)
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
                     Divider()
                         .background(Color.black)
-                    self.showSulawesiAchievement()
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+                    AchievementRow(currentIsland: ModelData.shared.sulawesi)
                     Divider()
                         .background(Color.black)
-                    self.showBaliAchievement()
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+                    AchievementRow(currentIsland: ModelData.shared.bali)
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
                     Divider()
                         .background(Color.black)
-                    self.showJavaAchievement()
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+                    AchievementRow(currentIsland: ModelData.shared.java)
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
                     Divider()
                         .background(Color.black)
-                    self.showPapuaAchievement()
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+                    AchievementRow(currentIsland: ModelData.shared.papua)
+                    Spacer()
+                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
                 })
                 .padding(.horizontal)
             }
-            .frame(maxHeight: 350)
+            .frame(maxHeight: ScreenSize.screenWidth > 600 ? 600 : 350)
             .padding(.vertical)
         })
-        .frame(maxWidth: .infinity)
+        .frame(width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.3 : ScreenSize.screenWidth * 0.86)
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
         
         
     }
-    
-    private func showSumateraAchievement() -> some View {
-        HStack(content: {
-            Spacer()
-            Image(ModelData.shared.sumatera.islandImage)
-                .resizable()
-                .frame(width: 90, height: 90)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            VStack(content: {
-                HStack(content: {
-                    Text("Pulau Sumatera")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .overlay {
-                            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                           startPoint: .leading,
-                                           endPoint: .trailing
-                            )
-                            .mask(
-                                Text("Pulau Sumatera")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                            )
-                        }
-                    Spacer()
-                })
-                HStack(content: {
-                    Text("100 poin")
-                    
-                    Spacer()
-                })
-                .padding(.bottom, 3)
-                HStack(spacing: 0, content: {
-                    HStack(content: {
-                        Text("-20 poin")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.gray)
-                            .italic()
-                            .opacity(0.8)
-                            .font(.system(size: 12))
-                    })
-                    HStack(content: {
-                        Text(" untuk masuk peringkat")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .font(.system(size: 12))
-                    })
-                    
-                    Spacer()
-                })
-            })
-            
-        })
-        
-    }
-    
-    private func showKalimantanAchievement() -> some View {
-        HStack(content: {
-            Spacer()
-            Image(ModelData.shared.kalimantan.islandImage)
-                .resizable()
-                .frame(width: 90, height: 90)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            VStack(content: {
-                HStack(content: {
-                    Text("Pulau Kalimantan")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .overlay {
-                            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                           startPoint: .leading,
-                                           endPoint: .trailing
-                            )
-                            .mask(
-                                Text("Pulau Kalimantan")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                            )
-                        }
-                    Spacer()
-                })
-                HStack(content: {
-                    Text("100 poin")
-                    
-                    Spacer()
-                })
-                .padding(.bottom, 3)
-                HStack(spacing: 0, content: {
-                    HStack(content: {
-                        Text("-20 poin")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.gray)
-                            .italic()
-                            .opacity(0.8)
-                            .font(.system(size: 12))
-                    })
-                    HStack(content: {
-                        Text(" untuk masuk peringkat")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .font(.system(size: 12))
-                    })
-                    
-                    Spacer()
-                })
-            })
-            
-        })
-    }
-    
-    private func showSulawesiAchievement() -> some View {
-        HStack(content: {
-            Spacer()
-            Image(ModelData.shared.sulawesi.islandImage)
-                .resizable()
-                .frame(width: 90, height: 90)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            VStack(content: {
-                HStack(content: {
-                    Text("Pulau Sulawesi")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .overlay {
-                            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                           startPoint: .leading,
-                                           endPoint: .trailing
-                            )
-                            .mask(
-                                Text("Pulau Sulawesi")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                            )
-                        }
-                    Spacer()
-                })
-                HStack(content: {
-                    Text("100 poin")
-                    
-                    Spacer()
-                })
-                .padding(.bottom, 3)
-                HStack(spacing: 0, content: {
-                    HStack(content: {
-                        Text("-20 poin")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.gray)
-                            .italic()
-                            .opacity(0.8)
-                            .font(.system(size: 12))
-                    })
-                    HStack(content: {
-                        Text(" untuk masuk peringkat")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .font(.system(size: 12))
-                    })
-                    
-                    Spacer()
-                })
-            })
-            
-        })
-    }
-    
-    private func showBaliAchievement() -> some View {
-        HStack(content: {
-            Spacer()
-            Image(ModelData.shared.bali.islandImage)
-                .resizable()
-                .frame(width: 90, height: 90)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            VStack(content: {
-                HStack(content: {
-                    Text("Pulau Bali")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .overlay {
-                            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                           startPoint: .leading,
-                                           endPoint: .trailing
-                            )
-                            .mask(
-                                Text("Pulau Bali")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                            )
-                        }
-                    Spacer()
-                })
-                HStack(content: {
-                    Text("100 poin")
-                    
-                    Spacer()
-                })
-                .padding(.bottom, 3)
-                HStack(spacing: 0, content: {
-                    HStack(content: {
-                        Text("-20 poin")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.gray)
-                            .italic()
-                            .opacity(0.8)
-                            .font(.system(size: 12))
-                    })
-                    HStack(content: {
-                        Text(" untuk masuk peringkat")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .font(.system(size: 12))
-                    })
-                    
-                    Spacer()
-                })
-            })
-            
-        })
-    }
-    
-    private func showJavaAchievement() -> some View {
-        HStack(content: {
-            Spacer()
-            Image(ModelData.shared.java.islandImage)
-                .resizable()
-                .frame(width: 90, height: 90)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            VStack(content: {
-                HStack(content: {
-                    Text("Pulau Jawa")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .overlay {
-                            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                           startPoint: .leading,
-                                           endPoint: .trailing
-                            )
-                            .mask(
-                                Text("Pulau Jawa")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                            )
-                        }
-                    Spacer()
-                })
-                HStack(content: {
-                    Text("100 poin")
-                    
-                    Spacer()
-                })
-                .padding(.bottom, 3)
-                HStack(spacing: 0, content: {
-                    HStack(content: {
-                        Text("-20 poin")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.gray)
-                            .italic()
-                            .opacity(0.8)
-                            .font(.system(size: 12))
-                    })
-                    HStack(content: {
-                        Text(" untuk masuk peringkat")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .font(.system(size: 12))
-                    })
-                    
-                    Spacer()
-                })
-            })
-            
-        })
-    }
-    
-    private func showPapuaAchievement() -> some View {
-        HStack(content: {
-            Spacer()
-            Image(ModelData.shared.papua.islandImage)
-                .resizable()
-                .frame(width: 90, height: 90)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            VStack(content: {
-                HStack(content: {
-                    Text("Pulau Papua")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .overlay {
-                            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                           startPoint: .leading,
-                                           endPoint: .trailing
-                            )
-                            .mask(
-                                Text("Pulau Papua")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                            )
-                        }
-                    Spacer()
-                })
-                HStack(content: {
-                    Text("100 poin")
-                    
-                    Spacer()
-                })
-                .padding(.bottom, 3)
-                HStack(spacing: 0, content: {
-                    HStack(content: {
-                        Text("-20 poin")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.gray)
-                            .italic()
-                            .opacity(0.8)
-                            .font(.system(size: 12))
-                    })
-                    HStack(content: {
-                        Text(" untuk masuk peringkat")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .font(.system(size: 12))
-                    })
-                    
-                    Spacer()
-                })
-            })
-            
-        })
-    }
-    
-    private func showButtonStartGame() -> some View {
-        Button(action: {
-            
-        }) {
-            Text("MULAI PERMAINAN ")
-                .fontWeight(.black)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 20)
-                .foregroundColor(.white)
-                .background(Color(red: 220/255, green: 38/255, blue: 38/255))
-                .cornerRadius(16)
-                .font(.headline)
-        }
-        .controlSize(.extraLarge)
-        .shadow(color: .red, radius: 2, y: 2)
-    }
-    
     
 }
 

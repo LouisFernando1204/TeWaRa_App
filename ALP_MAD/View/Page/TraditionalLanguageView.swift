@@ -25,7 +25,7 @@ struct TraditionalLanguageView: View {
                     self.showClueAndTimer()
                     ButtonCheck(action: {
                         traditionalLanguageController.guessWord(word: textFieldValue, remainingTime: countdownTimer)
-                    })
+                    }, message: "CEK JAWABAN")
                     
                 })
                 .padding(.horizontal,

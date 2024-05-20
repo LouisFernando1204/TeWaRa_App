@@ -17,23 +17,28 @@ struct ContentView: View {
     }
     
     var body: some View {
+        
         TabView(selection: $selection) {
             
             HomeView()
                 .tabItem {
+                    Image(systemName: "house")
                     Text("Home")
-//                    Label("Home", image: "person1")
+                    // Label("Home", image: "person1")
                 }
                 .tag(Tab.home)
             
+            
             LeaderboardView()
                 .tabItem {
+                    Image(systemName: "rank")
                     Text("Leaderboard")
-//                    Label("Leaderboard", image: "person2")
+                    // Label("Leaderboard", image: "person2")
                 }
                 .tag(Tab.leaderboard)
             
         }
+        
     }
 }
 

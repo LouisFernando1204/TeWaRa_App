@@ -8,7 +8,7 @@
 import SwiftUI
 import AVKit
 
-struct TraditionalDanceView: View {
+struct TraditionalDanceViewMac: View {
     
     @State private var avPlayer = AVPlayer()
     @State private var countdownTimer: Int = 30
@@ -67,7 +67,7 @@ struct TraditionalDanceView: View {
                 .frame(width: 20)
             
             NavigationLink(
-                destination: TraditionalLanguageView()) {
+                destination: TraditionalLanguageViewMac()) {
                     HStack(spacing: 4, content: {
                         Image("backIconWhite")
                         
@@ -235,5 +235,5 @@ struct TraditionalDanceView: View {
 }
 
 #Preview {
-    TraditionalDanceView()
+    TraditionalDanceViewMac()
 }

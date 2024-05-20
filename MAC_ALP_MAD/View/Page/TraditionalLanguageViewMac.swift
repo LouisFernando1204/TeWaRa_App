@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TraditionalLanguageView: View {
+struct TraditionalLanguageViewMac: View {
     
     @State private var textFieldValue: String = ""
     @State private var countdownTimer: Int = 30
@@ -62,7 +62,7 @@ struct TraditionalLanguageView: View {
                 .frame(width: 20)
             
             NavigationLink(
-                destination: TraditionalLanguageView()) {
+                destination: TraditionalLanguageViewMac()) {
                     HStack(spacing: 4, content: {
                         Image("backIconWhite")
                         
@@ -249,5 +249,5 @@ struct TraditionalLanguageView: View {
 
 
 #Preview {
-    TraditionalLanguageView()
+    TraditionalLanguageViewMac()
 }
