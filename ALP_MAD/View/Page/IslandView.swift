@@ -32,7 +32,7 @@ struct IslandView: View {
             VStack(spacing: 0) {
                 TopNavigationBar(destination: AnyView(Text("Destination")), name: "Pulau")
                 
-                Spacer().frame(height: 20) 
+                Spacer().frame(height: 70)
                 
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
