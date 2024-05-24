@@ -29,8 +29,53 @@ struct IslandView: View {
         
         if ScreenSize.screenWidth > 600 {
             
-        }
-        else {
+            VStack(spacing: 0) {
+                TopNavigationBar(destination: AnyView(Text("Destination")), name: "Pulau")
+                
+                Spacer().frame(height: 20) 
+                
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(islands) { islandModel in
+                            NavigationLink(destination: IslandDetailView(island: islandModel)) {
+                                ZStack(alignment: .bottom) {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    Color(red: 220/255, green: 38/255, blue: 38/255), // #DC2626
+                                                    Color(red: 118/255, green: 20/255, blue: 20/255)  // #761414
+                                                ]),
+                                                startPoint: .top,
+                                                endPoint: .bottom
+                                            )
+                                        )
+                                        .frame(height: 250)
+                                    
+                                    VStack {
+                                        Image(islandModel.imageName)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(height: 150)
+                                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                                            .padding([.leading, .trailing], 10)
+                                            .padding(.bottom, 40)
+                                        Text(islandModel.name)
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding(.bottom, 20)
+                                    }
+                                }
+                                .padding()
+                            }
+                        }
+                    }
+                    .padding()
+                }
+                
+                BottomBar()
+            }
+        } else {
             NavigationView {
                 VStack(spacing: 0) {
                     TopNavigationBar(destination: AnyView(Text("Destination")), name: "Pulau")
