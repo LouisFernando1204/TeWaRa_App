@@ -41,14 +41,15 @@ struct PreAlertView: View {
     private func header() -> some View {
         Text("Izinkan pengumpulan data seperti nama dan foto profil memungkinkan kami menyediakan fitur seperti:")
             .font(.title)
-            .fontWeight(.black)
+            .fontWeight(.semibold)
             .foregroundColor(.white)
             .padding(.bottom, 130)
+            .padding(.horizontal, 14)
     }
     
     private func features() -> some View {
         VStack(alignment: .leading, spacing: 40) {
-            HStack(spacing: 20) {
+            HStack(alignment: .center, spacing: 20) {
                 Image("profilePictureIcon")
                     .resizable()
                     .frame(width: 50, height: 50)
@@ -58,7 +59,7 @@ struct PreAlertView: View {
                     .foregroundColor(.white)
                     .padding(.bottom, 10)
             }
-            HStack(spacing: 20) {
+            HStack(alignment: .center, spacing: 20) {
                 Image("leaderboardIcon")
                     .resizable()
                     .frame(width: 50, height: 50)
@@ -69,6 +70,7 @@ struct PreAlertView: View {
                     .padding(.bottom, 10)
             }
         }
+        .padding(.horizontal, 10)
         .padding(.bottom, 130)
     }
     
@@ -78,7 +80,7 @@ struct PreAlertView: View {
                 navToRegisterView.wrappedValue = true
             },
             label: {
-                Text("Continue")
+                Text("Selanjutnya")
                     .font(.system(size: 20, weight: .heavy))
                     .foregroundColor(Color("redColor(TeWaRa)"))
                     .multilineTextAlignment(.center)
@@ -89,6 +91,7 @@ struct PreAlertView: View {
         )
         .cornerRadius(20)
         .frame(width: 100, height: 50)
+        .shadow(radius: 10, y: 4)
         .fullScreenCover(isPresented: navToRegisterView, content: {
             RegisterView()
         })

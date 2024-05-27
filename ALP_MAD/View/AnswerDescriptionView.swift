@@ -66,6 +66,7 @@ struct AnswerDescriptionView: View {
                         .clipShape(
                             RoundedCorner(cornerRadius: 40, corners: [.bottomLeft, .bottomRight])
                         )
+                        .shadow(radius: 10, y: 4)
                         .padding(.top, -8)
                         .padding(.bottom, 7)
                 }
@@ -78,6 +79,7 @@ struct AnswerDescriptionView: View {
                         .clipShape(
                             RoundedCorner(cornerRadius: 40, corners: [.bottomLeft, .bottomRight])
                         )
+                        .shadow(radius: 10, y: 4)
                         .padding(.top, -8)
                         .padding(.bottom, 7)
                 }

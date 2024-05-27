@@ -68,6 +68,7 @@
 		646B2C7A2BF8814700B04E4B /* PreAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646B2C792BF8814700B04E4B /* PreAlertView.swift */; };
 		646B2C7C2BF8AD2B00B04E4B /* TariPajoge-SulawesiSelatan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 646B2C7B2BF8AD2B00B04E4B /* TariPajoge-SulawesiSelatan.mp4 */; };
 		649ACAFB2BF7B66200E2A938 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */; };
+		64DC47A52C04E54C00C28104 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DC47A42C04E54C00C28104 /* ScreenSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		646B2C792BF8814700B04E4B /* PreAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertView.swift; sourceTree = "<group>"; };
 		646B2C7B2BF8AD2B00B04E4B /* TariPajoge-SulawesiSelatan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TariPajoge-SulawesiSelatan.mp4"; sourceTree = "<group>"; };
 		649ACAFA2BF7B66200E2A938 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		64DC47A42C04E54C00C28104 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +249,7 @@
 				04A1A3012BF0639000C7E982 /* Home.swift */,
 				04A1A2FB2BF0635F00C7E982 /* TraditionalDance.swift */,
 				04A1A2FD2BF0637000C7E982 /* TraditionalLanguage.swift */,
+				64DC47A42C04E54C00C28104 /* ScreenSize.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				04A1A31E2BF0660C00C7E982 /* HomeController.swift in Sources */,
 				04A1A3222BF0663E00C7E982 /* IslandController.swift in Sources */,
 				043E39792BF38D4C00FB74A6 /* AdditionalQuestionView.swift in Sources */,
+				64DC47A52C04E54C00C28104 /* ScreenSize.swift in Sources */,
 				04A1A3022BF0639000C7E982 /* Home.swift in Sources */,
 				6447B67D2BFA20F700AFD5D1 /* RegisterView.swift in Sources */,
 				04A1A2FE2BF0637000C7E982 /* TraditionalLanguage.swift in Sources */,

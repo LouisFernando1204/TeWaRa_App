@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct RegisterView: View {
     
     @StateObject private var homeController = HomeController()
@@ -16,6 +14,7 @@ struct RegisterView: View {
     @State private var selectedImage: Data?
     @State private var isImagePickerPresented = false
     @State private var navToHomeView = false
+    @State private var showAlert = false
     
     struct ImagePicker: UIViewControllerRepresentable {
         
@@ -62,6 +61,13 @@ struct RegisterView: View {
             .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Oops..."),
+                message: Text("Anda lupa memasukkan foto profil."),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
     
     private func setUpRegisterView() -> some View {
@@ -72,15 +78,15 @@ struct RegisterView: View {
             self.showSelectedImageOrPlaceholder()
             self.showRegisterButton()
         }
+        .padding(.vertical, 20)
     }
     
     private func logo() -> some View {
         Image("logo(TeWaRa)")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 235, height: 214)
+            .frame(width: 150)
             .padding(.bottom, 10)
-            .padding(.top, 5)
     }
     
     private func greetings() -> some View {
@@ -109,12 +115,49 @@ struct RegisterView: View {
     }
     
     private func showTextInputField() -> some View {
-        VStack(alignment: .leading) {
-            Text("Nama")
-                .font(.headline)
-                .fontWeight(.semibold)
-                .foregroundColor(.black)
-                .multilineTextAlignment(.leading)
+        VStack(alignment: .center) {
+            // Display the selected image or placeholder
+            if let imageData = selectedImage, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle().strokeBorder(
+                            LinearGradient(
+                                gradient: Gradient(stops: [
+                                    .init(color: Color("redColor(TeWaRa)"), location: 0.5),
+                                    .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 4
+                        )
+                    )
+                    .padding(.top, 4)
+                    .padding(.bottom, 25)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            } else {
+                Image("profilePictureIcon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+                    .colorMultiply(Color.gray)
+                    .clipShape(Circle())
+                    .padding(.top, 4)
+                    .padding(.bottom, 25)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+            HStack{
+                Text("Nama")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.leading)
+                Spacer().frame(width: 275)
+            }
             TextField("Tuliskan nama mu...", text: $textInput)
                 .multilineTextAlignment(.leading)
                 .padding(.leading, 16)
@@ -133,17 +176,20 @@ struct RegisterView: View {
                             lineWidth: 2
                         )
                 )
-                .padding(.bottom, 4)
         }
+        .padding(.bottom, 10)
+        .frame(maxWidth: .infinity)
     }
     
     private func showSelectedImageOrPlaceholder() -> some View {
-        VStack(alignment: .leading) {
-            Text("Foto profil")
-                .font(.headline)
-                .fontWeight(.semibold)
-                .foregroundColor(.black)
-                .multilineTextAlignment(.leading)
+        VStack(alignment: .center) {
+            HStack{
+                Text("Foto profil")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.black)
+                Spacer().frame(width: 240)
+            }
             Button(action: {
                 isImagePickerPresented.toggle()
             }) {
@@ -165,58 +211,22 @@ struct RegisterView: View {
             .sheet(isPresented: $isImagePickerPresented) {
                 ImagePicker(selectedImage: $selectedImage)
             }
-            // Tampilkan gambar yang dipilih atau placeholder
-            if let imageData = selectedImage, let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .border(
-                        LinearGradient(
-                            gradient: Gradient(stops: [
-                                .init(color: Color("redColor(TeWaRa)"), location: 0.5),
-                                .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
-                            ]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        width: 5
-                    )
-                    .cornerRadius(10)
-                    .frame(width: 320, height: 150)
-                    .padding(.top, 4)
-                    .padding(.bottom, 10)
-            } else {
-                Rectangle()
-                    .fill(Color.gray)
-                    .frame(width: 320, height: 150)
-                    .cornerRadius(10)
-                    .overlay(
-                        HStack{
-                            Spacer()
-                            Text("Foto profilmu akan tampil di sini...")
-                                .font(.system(size: 16, weight: .medium))
-                                .italic()
-                                .foregroundColor(.white)
-                                .multilineTextAlignment(.center)
-                            Spacer()
-                        }
-                    )
-                    .padding(.top, 4)
-                    .padding(.bottom, 10)
-            }
+            .frame(maxWidth: .infinity, alignment: .center)
         }
+        .padding(.bottom, 40)
+        .frame(maxWidth: .infinity, alignment: .center)
     }
     
     private func showRegisterButton() -> some View {
         Button(
             action: {
-//                if let selectedImage = selectedImage {
-//                    let user = User(name: textInput, image: selectedImage, score: 0)
-//                    homeController.registerAccount(user: user)
-//                }
-                self.navToHomeView = true
+                homeController.registerAccount(textInput: self.textInput, selectedImage: self.selectedImage, showAlert: $showAlert)
+                if !showAlert {
+                    self.navToHomeView = true
+                }
             },
             label: {
-                Text("Continue")
+                Text("Selanjutnya")
                     .font(.system(size: 20, weight: .heavy))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
@@ -227,6 +237,7 @@ struct RegisterView: View {
         )
         .cornerRadius(20)
         .frame(width: 100, height: 50)
+        .shadow(radius: 10, y: 4)
         .fullScreenCover(isPresented: $navToHomeView, content: {
             HomeView()
         })
@@ -236,4 +247,3 @@ struct RegisterView: View {
 #Preview {
     RegisterView()
 }
-

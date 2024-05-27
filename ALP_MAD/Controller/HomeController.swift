@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class HomeController : ObservableObject {
     
@@ -28,7 +29,29 @@ class HomeController : ObservableObject {
     //        return self.home
     //    }
     
-    func registerAccount(user: User) {
-        ModelData.shared.currentUser = user
+    func registerAccount(textInput: String, selectedImage: Data?, showAlert: Binding<Bool>) {
+        guard let selectedImage = selectedImage else {
+            // Handle case where no image is selected
+            showAlert.wrappedValue = true
+            return
+        }
+        
+        let imageName = UUID().uuidString
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        
+        do {
+            try selectedImage.write(to: imagePath)
+            
+            let user = User(name: textInput, image: imageName, score: 0)
+            ModelData.shared.currentUser = user
+        } catch {
+            // Handle error
+            print("Error saving image: \(error.localizedDescription)")
+        }
+    }
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 }
