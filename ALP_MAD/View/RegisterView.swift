@@ -78,20 +78,20 @@ struct RegisterView: View {
             self.showSelectedImageOrPlaceholder()
             self.showRegisterButton()
         }
-        .padding(.vertical, 20)
+        .padding(.vertical, UIDevice.current.userInterfaceIdiom == .phone ? 20 : 30)
     }
     
     private func logo() -> some View {
         Image("logo(TeWaRa)")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 150)
+            .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 150 : 250)
             .padding(.bottom, 10)
     }
     
     private func greetings() -> some View {
         Text("Halo, Sobat TeWaRa!")
-            .font(.title)
+            .font(UIDevice.current.userInterfaceIdiom == .phone ? .title : .largeTitle)
             .fontWeight(.bold)
             .foregroundColor(.clear)
             .multilineTextAlignment(.center)
@@ -106,12 +106,12 @@ struct RegisterView: View {
                 )
                 .mask(
                     Text("Halo, Sobat TeWaRa!")
-                        .font(.title)
+                        .font(UIDevice.current.userInterfaceIdiom == .phone ? .title : .largeTitle)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                 )
             )
-            .padding(.bottom, 40)
+            .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 40 : 80)
     }
     
     private func showTextInputField() -> some View {
@@ -121,7 +121,7 @@ struct RegisterView: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 120, height: 120)
+                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 120 : 140, height: UIDevice.current.userInterfaceIdiom == .phone ? 120 : 140)
                     .clipShape(Circle())
                     .overlay(
                         Circle().strokeBorder(
@@ -137,31 +137,33 @@ struct RegisterView: View {
                         )
                     )
                     .padding(.top, 4)
-                    .padding(.bottom, 25)
+                    .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 25 : 40)
                     .frame(maxWidth: .infinity, alignment: .center)
             } else {
                 Image("profilePictureIcon")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 120, height: 120)
+                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 120 : 140, height: UIDevice.current.userInterfaceIdiom == .phone ? 120 : 140)
                     .colorMultiply(Color.gray)
                     .clipShape(Circle())
                     .padding(.top, 4)
-                    .padding(.bottom, 25)
+                    .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 25 : 40)
                     .frame(maxWidth: .infinity, alignment: .center)
             }
             HStack{
                 Text("Nama")
-                    .font(.headline)
+                    .font(UIDevice.current.userInterfaceIdiom == .phone ? .headline : .title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.leading)
-                Spacer().frame(width: 275)
+                Spacer().frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 275 : 685)
             }
             TextField("Tuliskan nama mu...", text: $textInput)
+                .font(UIDevice.current.userInterfaceIdiom == .phone ? .subheadline
+                      : .title3)
                 .multilineTextAlignment(.leading)
                 .padding(.leading, 16)
-                .frame(width: 320, height: 60)
+                .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 320 : .infinity, height: 60)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(
@@ -176,8 +178,9 @@ struct RegisterView: View {
                             lineWidth: 2
                         )
                 )
+                .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .phone ? 0 : 20)
         }
-        .padding(.bottom, 10)
+        .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 10 : 40)
         .frame(maxWidth: .infinity)
     }
     
@@ -185,16 +188,18 @@ struct RegisterView: View {
         VStack(alignment: .center) {
             HStack{
                 Text("Foto profil")
-                    .font(.headline)
+                    .font(UIDevice.current.userInterfaceIdiom == .phone ? .headline : .title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
-                Spacer().frame(width: 240)
+                Spacer().frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 240 : 640)
             }
             Button(action: {
                 isImagePickerPresented.toggle()
             }) {
                 Text("Pilih foto profil mu")
-                    .frame(width: 320, height: 60)
+                    .font(UIDevice.current.userInterfaceIdiom == .phone ? .subheadline
+                          : .title3)
+                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 320 : 740, height: 60)
                     .foregroundColor(.white)
                     .background(
                         LinearGradient(
@@ -211,9 +216,8 @@ struct RegisterView: View {
             .sheet(isPresented: $isImagePickerPresented) {
                 ImagePicker(selectedImage: $selectedImage)
             }
-            .frame(maxWidth: .infinity, alignment: .center)
         }
-        .padding(.bottom, 40)
+        .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 40 : 150)
         .frame(maxWidth: .infinity, alignment: .center)
     }
     
@@ -227,15 +231,15 @@ struct RegisterView: View {
             },
             label: {
                 Text("Selanjutnya")
-                    .font(.system(size: 20, weight: .heavy))
+                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .phone ? 20 : 24, weight: .heavy))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
-                    .frame(width: 325, height: 44)
+                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 325 : 780, height: UIDevice.current.userInterfaceIdiom == .phone ? 44 : 55)
             })
         .background(
             Color("redColor(TeWaRa)")
         )
-        .cornerRadius(20)
+        .cornerRadius(UIDevice.current.userInterfaceIdiom == .phone ? 20 : 30)
         .frame(width: 100, height: 50)
         .shadow(radius: 10, y: 4)
         .fullScreenCover(isPresented: $navToHomeView, content: {
