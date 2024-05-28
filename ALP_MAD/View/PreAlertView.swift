@@ -40,38 +40,38 @@ struct PreAlertView: View {
     
     private func header() -> some View {
         Text("Izinkan pengumpulan data seperti nama dan foto profil memungkinkan kami menyediakan fitur seperti:")
-            .font(.title)
+            .font(UIDevice.current.userInterfaceIdiom == .phone ? .title : .largeTitle)
             .fontWeight(.semibold)
             .foregroundColor(.white)
-            .padding(.bottom, 130)
-            .padding(.horizontal, 14)
+            .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 130 : 300)
+            .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .phone ? 14 : 0)
     }
     
     private func features() -> some View {
-        VStack(alignment: .leading, spacing: 40) {
-            HStack(alignment: .center, spacing: 20) {
+        VStack(alignment: .leading, spacing: UIDevice.current.userInterfaceIdiom == .phone ? 40 : 70) {
+            HStack(alignment: .center, spacing: UIDevice.current.userInterfaceIdiom == .phone ? 20 : 30) {
                 Image("profilePictureIcon")
                     .resizable()
-                    .frame(width: 50, height: 50)
+                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 50 : 80, height: UIDevice.current.userInterfaceIdiom == .phone ? 50 : 80)
                 Text("Personalisasi pengalaman pengguna")
-                    .font(.system(size: 20))
+                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .phone ? 20  : 30))
                     .fontWeight(.regular)
                     .foregroundColor(.white)
                     .padding(.bottom, 10)
             }
-            HStack(alignment: .center, spacing: 20) {
+            HStack(alignment: .center, spacing: UIDevice.current.userInterfaceIdiom == .phone ? 20 : 30) {
                 Image("leaderboardIcon")
                     .resizable()
-                    .frame(width: 50, height: 50)
+                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 50 : 80, height: UIDevice.current.userInterfaceIdiom == .phone ? 50 : 80)
                 Text("Profil pengguna dipajang pada papan peringkat")
-                    .font(.system(size: 20))
+                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .phone ? 20  : 30))
                     .fontWeight(.regular)
                     .foregroundColor(.white)
                     .padding(.bottom, 10)
             }
         }
-        .padding(.horizontal, 10)
-        .padding(.bottom, 130)
+        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .phone ? 10 : 0)
+        .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 130 : 300)
     }
     
     private func continueButton(navToRegisterView: Binding<Bool>) -> some View {
@@ -81,15 +81,15 @@ struct PreAlertView: View {
             },
             label: {
                 Text("Selanjutnya")
-                    .font(.system(size: 20, weight: .heavy))
+                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .phone ? 20 : 24, weight: .heavy))
                     .foregroundColor(Color("redColor(TeWaRa)"))
                     .multilineTextAlignment(.center)
-                    .frame(width: 325, height: 44)
+                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 325 : 720, height: UIDevice.current.userInterfaceIdiom == .phone ? 44 : 55)
             })
         .background(
             Color.white
         )
-        .cornerRadius(20)
+        .cornerRadius(UIDevice.current.userInterfaceIdiom == .phone ? 20 : 30)
         .frame(width: 100, height: 50)
         .shadow(radius: 10, y: 4)
         .fullScreenCover(isPresented: navToRegisterView, content: {
