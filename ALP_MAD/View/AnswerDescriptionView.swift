@@ -59,6 +59,21 @@ struct AnswerDescriptionView: View {
             .edgesIgnoringSafeArea(.top)
             .padding(.bottom, isIpad ? -40 : -70)
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+            }
+        }
+        .onDisappear {
+            MusicPlayer.shared.stopBackgroundMusic()
+        }
+        .onChange(of: self.navToIslandView) { newValue in
+            if newValue {
+                MusicPlayer.shared.stopBackgroundMusic()
+            } else {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+            }
+        }
     }
     
     private func setUpAnswerDescriptionView(islandController: IslandController, navToIslandView: Binding<Bool>, traditionalDanceDescription: TraditionalDance, traditionalLanguageDescription: TraditionalLanguage, isIpad: Bool) -> some View {

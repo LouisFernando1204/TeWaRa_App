@@ -58,6 +58,21 @@ struct AdditionalQuestionView: View {
             .edgesIgnoringSafeArea(.top)
             .padding(.bottom, isIpad ? -40 : -70)
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+            }
+        }
+        .onDisappear {
+            MusicPlayer.shared.stopBackgroundMusic()
+        }
+        .onChange(of: self.showAlert) { newValue in
+            if newValue {
+                MusicPlayer.shared.stopBackgroundMusic()
+            } else {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+            }
+        }
     }
     
     private func navigationBar(isIpad: Bool) -> some View {
@@ -160,14 +175,26 @@ struct AdditionalQuestionView: View {
                     .cornerRadius(10)
                     .alert(isPresented: showAlert, content: {
                         if countDownTimer.wrappedValue != 0 {
-                            Alert(
-                                title: Text("Selamat!!!"),
-                                message:
-                                    Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
-                                dismissButton: .default(Text("Lihat penjelasan")) {
-                                    navToAnswerDescriptionView.wrappedValue = true
-                                }
-                            )
+                            if answer.wrappedValue == islandController.getIsland().traditionalDance.provinceOrigin {
+                                Alert(
+                                    title: Text("Selamat!!!"),
+                                    message:
+                                        Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
+                                    dismissButton: .default(Text("Lihat penjelasan")) {
+                                        navToAnswerDescriptionView.wrappedValue = true
+                                    }
+                                )
+                            }
+                            else {
+                                Alert(
+                                    title: Text("Oops..."),
+                                    message:
+                                        Text("Kamu masih kurang beruntung."),
+                                    dismissButton: .default(Text("Lihat penjelasan")) {
+                                        navToAnswerDescriptionView.wrappedValue = true
+                                    }
+                                )
+                            }
                         }
                         else{
                             Alert(
@@ -210,14 +237,26 @@ struct AdditionalQuestionView: View {
                     .cornerRadius(10)
                     .alert(isPresented: $showAlert, content: {
                         if countDownTimer.wrappedValue != 0 {
-                            Alert(
-                                title: Text("Selamat!!!"),
-                                message:
-                                    Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
-                                dismissButton: .default(Text("Lihat penjelasan")) {
-                                    navToAnswerDescriptionView.wrappedValue = true
-                                }
-                            )
+                            if answer.wrappedValue == islandController.getIsland().traditionalLanguage.provinceOrigin {
+                                Alert(
+                                    title: Text("Selamat!!!"),
+                                    message:
+                                        Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
+                                    dismissButton: .default(Text("Lihat penjelasan")) {
+                                        navToAnswerDescriptionView.wrappedValue = true
+                                    }
+                                )
+                            }
+                            else {
+                                Alert(
+                                    title: Text("Oops..."),
+                                    message:
+                                        Text("Kamu masih kurang beruntung."),
+                                    dismissButton: .default(Text("Lihat penjelasan")) {
+                                        navToAnswerDescriptionView.wrappedValue = true
+                                    }
+                                )
+                            }
                         }
                         else{
                             Alert(
