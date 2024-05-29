@@ -16,6 +16,8 @@ struct AdditionalQuestionView: View {
     @State private var countDownTimer = 30
     @State private var timerRunning = false
     
+    private var screenSize = ScreenSize()
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -23,18 +25,21 @@ struct AdditionalQuestionView: View {
     ]
     
     var body: some View {
-        self.setUpAdditionalQuestionView(islandController: islandController, answer: $answer, showAlert: $showAlert, navToAnswerDescriptionView: $navToAnswerDescriptionView, countDownTimer: $countDownTimer, timerRunning: $timerRunning)
+        
+        let isIpad = self.screenSize.screenWidth > 600
+        
+        self.setUpAdditionalQuestionView(islandController: islandController, answer: $answer, showAlert: $showAlert, navToAnswerDescriptionView: $navToAnswerDescriptionView, countDownTimer: $countDownTimer, timerRunning: $timerRunning, isIpad: isIpad)
     }
     
-    private func setUpAdditionalQuestionView(islandController: IslandController, answer: Binding<String>, showAlert: Binding<Bool>, navToAnswerDescriptionView: Binding<Bool>, countDownTimer: Binding<Int>, timerRunning: Binding<Bool>) -> some View {
+    private func setUpAdditionalQuestionView(islandController: IslandController, answer: Binding<String>, showAlert: Binding<Bool>, navToAnswerDescriptionView: Binding<Bool>, countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, isIpad: Bool) -> some View {
         ScrollView {
             VStack(alignment: .center) {
-                self.navigationBar()
-                self.timer(countDownTimer: countDownTimer, timerRunning: timerRunning, showAlert: showAlert)
-                self.question()
-                self.answerOptions(islandController: islandController, navToAnswerDescriptionView: navToAnswerDescriptionView, answer: answer, showAlert: showAlert, timerRunning: timerRunning, countDownTimer: countDownTimer)
-                self.poinStatus()
-                self.knowledgeInformation()
+                self.navigationBar(isIpad: isIpad)
+                self.timer(countDownTimer: countDownTimer, timerRunning: timerRunning, showAlert: showAlert, isIpad: isIpad)
+                self.question(isIpad: isIpad)
+                self.answerOptions(islandController: islandController, navToAnswerDescriptionView: navToAnswerDescriptionView, answer: answer, showAlert: showAlert, timerRunning: timerRunning, countDownTimer: countDownTimer, isIpad: isIpad)
+                self.poinStatus(isIpad: isIpad)
+                self.knowledgeInformation(isIpad: isIpad)
             }
             .onAppear{
                 timerRunning.wrappedValue = true
@@ -49,22 +54,23 @@ struct AdditionalQuestionView: View {
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
-            .frame(height: 70)
+            .frame(height: isIpad ? self.screenSize.screenHeight/35 : self.screenSize.screenHeight/12)
             .edgesIgnoringSafeArea(.top)
-            .padding(.bottom, -70)
+            .padding(.bottom, isIpad ? -40 : -70)
         }
     }
     
-    private func navigationBar() -> some View {
+    private func navigationBar(isIpad: Bool) -> some View {
         HStack(alignment: .center, content: {
             Spacer()
             Text("Bonus")
                 .fontWeight(.semibold)
                 .foregroundColor(Color.white)
-                .font(.headline)
+                .font(isIpad ?  .title2 : .headline)
+                .padding(.bottom, isIpad ? 15 : 0)
             Spacer()
         })
-        .frame(height: 40)
+        .frame(height: isIpad ? self.screenSize.screenHeight/30 : self.screenSize.screenHeight/20)
         .background(
             LinearGradient(
                 gradient: Gradient(stops: [
@@ -76,14 +82,14 @@ struct AdditionalQuestionView: View {
                 endPoint: .bottomTrailing
             )
         )
-        .padding(.bottom, 20)
+        .padding(.bottom, isIpad ? self.screenSize.screenHeight/40 : self.screenSize.screenHeight/40)
     }
     
-    private func timer(countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, showAlert: Binding<Bool>) -> some View {
+    private func timer(countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, showAlert: Binding<Bool>, isIpad: Bool) -> some View {
         ZStack(alignment: .center, content: {
             Image("backgroundTimer")
                 .resizable()
-                .frame(width:342, height: 175)
+                .frame(width: isIpad ? self.screenSize.screenWidth/1.1 : self.screenSize.screenWidth/1.15, height: isIpad ? self.screenSize.screenHeight/3 : self.screenSize.screenHeight/4.85)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .strokeBorder(
@@ -92,15 +98,14 @@ struct AdditionalQuestionView: View {
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
-                            lineWidth: 4
+                            lineWidth: isIpad ? 8 : 4
                         )
                 )
                 .cornerRadius(10)
             Rectangle()
                 .fill(Color.white.opacity(0.5))
-                .frame(width: 334, height: 168)
-                .cornerRadius(6)
-            
+                .frame(width: isIpad ? self.screenSize.screenWidth/1.125 : self.screenSize.screenWidth/1.175, height: isIpad ? self.screenSize.screenHeight/3.12 : self.screenSize.screenHeight/5.1)
+                .cornerRadius(isIpad ? 0 : 6)
             Text("00:00:\(String(format: "%02d", countDownTimer.wrappedValue))")
                 .onReceive(timer) { _ in
                     if countDownTimer.wrappedValue > 0 && timerRunning.wrappedValue {
@@ -111,22 +116,24 @@ struct AdditionalQuestionView: View {
                         showAlert.wrappedValue = true
                     }
                 }
-                .font(.system(size: 44, weight: .black))
+                .font(.system(size: isIpad ? 60 : 44))
+                .fontWeight(.black)
         })
-        .padding(.bottom, 10)
+        .padding(.bottom, isIpad ? self.screenSize.screenHeight/80 : self.screenSize.screenHeight/55)
     }
     
-    private func question() -> some View {
+    private func question(isIpad: Bool) -> some View {
         HStack(alignment: .center){
             Text("Budaya tersebut berasal dari provinsi...")
-                .font(.system(size: 18, weight: .bold))
+                .font(.system(size: isIpad ? 35 : 18))
+                .fontWeight(.bold)
                 .multilineTextAlignment(.center)
         }
-        .padding(.bottom, 17)
+        .padding(.bottom, isIpad ? self.screenSize.screenHeight/50 : self.screenSize.screenHeight/50)
     }
     
-    private func answerOptions(islandController: IslandController, navToAnswerDescriptionView: Binding<Bool>, answer: Binding<String>, showAlert: Binding<Bool>, timerRunning: Binding<Bool>, countDownTimer: Binding<Int>) -> some View {
-        LazyVGrid(columns: columns, spacing: 10) {
+    private func answerOptions(islandController: IslandController, navToAnswerDescriptionView: Binding<Bool>, answer: Binding<String>, showAlert: Binding<Bool>, timerRunning: Binding<Bool>, countDownTimer: Binding<Int>, isIpad: Bool) -> some View {
+        LazyVGrid(columns: columns, spacing: isIpad ? self.screenSize.screenWidth/50 : self.screenSize.screenWidth/35) {
             if ModelData.shared.currentGame == "TraditionalDance" {
                 ForEach(islandController.getIsland().traditionalDance.provinceOptions,  id: \.self) { provinceOption in
                     Button(
@@ -138,10 +145,10 @@ struct AdditionalQuestionView: View {
                         },
                         label: {
                             Text(provinceOption)
-                                .font(.system(size: 24, weight: .heavy))
+                                .font(.system(size: isIpad ? 30 : 24, weight: .heavy))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
-                                .frame(width: 164, height: 87)
+                                .frame(width: isIpad ? self.screenSize.screenWidth/2.25 : self.screenSize.screenWidth/2.38, height: isIpad ? self.screenSize.screenHeight/10 : self.screenSize.screenHeight/10)
                         })
                     .background(
                         LinearGradient(
@@ -188,10 +195,10 @@ struct AdditionalQuestionView: View {
                         },
                         label: {
                             Text(provinceOption)
-                                .font(.system(size: 24, weight: .heavy))
+                                .font(.system(size: isIpad ? 30 : 24, weight: .heavy))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
-                                .frame(width: 164, height: 87)
+                                .frame(width: isIpad ? self.screenSize.screenWidth/2.4 : self.screenSize.screenWidth/2.38, height: isIpad ? self.screenSize.screenHeight/10 : self.screenSize.screenHeight/10)
                         })
                     .background(
                         LinearGradient(
@@ -228,11 +235,11 @@ struct AdditionalQuestionView: View {
                 }
             }
         }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 15)
+        .padding(.horizontal, isIpad ? self.screenSize.screenWidth/25 : 24)
+        .padding(.bottom, isIpad ? self.screenSize.screenHeight/50 : 15)
     }
     
-    private func poinStatus() -> some View {
+    private func poinStatus(isIpad: Bool) -> some View {
         Rectangle()
             .fill(
                 LinearGradient(
@@ -245,30 +252,30 @@ struct AdditionalQuestionView: View {
                     endPoint: .bottomTrailing
                 )
             )
-            .frame(width: 340, height: 140)
+            .frame(width: isIpad ? self.screenSize.screenWidth/1.1 : self.screenSize.screenWidth/1.15, height: isIpad ? self.screenSize.screenHeight/9 : self.screenSize.screenHeight/6)
             .cornerRadius(10)
             .overlay(
                 HStack{
                     Spacer()
                     Text("Poin mu sekarang adalah \(ModelData.shared.currentUser.score)")
-                        .font(.system(size: 20, weight: .regular))
+                        .font(.system(size: isIpad ? 25 : 20, weight: .regular))
                         .foregroundColor(.white)
                     Spacer()
                 }
             )
-            .padding(.bottom, 5)
+            .padding(.bottom, isIpad ? self.screenSize.screenHeight/120 : self.screenSize.screenHeight/100)
     }
     
-    private func knowledgeInformation() -> some View {
+    private func knowledgeInformation(isIpad: Bool) -> some View {
         Rectangle()
             .fill(Color.gray)
-            .frame(width: 340, height: 60)
+            .frame(width: isIpad ? self.screenSize.screenWidth/1.1 : self.screenSize.screenWidth/1.15, height: isIpad ? self.screenSize.screenHeight/20 : self.screenSize.screenHeight/15)
             .cornerRadius(10)
             .overlay(
                 HStack{
                     Spacer()
                     Text("Semakin cepat kamu menjawab, poin mu akan lebih besar lho...")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.system(size: isIpad ? 20 : 16, weight: .medium))
                         .italic()
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)

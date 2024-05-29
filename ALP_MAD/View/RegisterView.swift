@@ -15,6 +15,10 @@ struct RegisterView: View {
     @State private var isImagePickerPresented = false
     @State private var navToHomeView = false
     @State private var showAlert = false
+    @State private var showWarningMessage = false
+    @State private var alertMessage = ""
+    
+    private var screenSize = ScreenSize()
     
     struct ImagePicker: UIViewControllerRepresentable {
         
@@ -54,44 +58,47 @@ struct RegisterView: View {
     }
     
     var body: some View {
+        
+        let isIpad = self.screenSize.screenWidth > 600
+        
         ScrollView{
             VStack(alignment: .center){
-                setUpRegisterView()
+                setUpRegisterView(isIpad: isIpad)
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, isIpad ? self.screenSize.screenWidth/20 : self.screenSize.screenWidth/15)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Oops..."),
-                message: Text("Anda lupa memasukkan foto profil."),
+                message: Text(alertMessage),
                 dismissButton: .default(Text("OK"))
             )
         }
     }
     
-    private func setUpRegisterView() -> some View {
-        VStack {
-            self.logo()
-            self.greetings()
-            self.showTextInputField()
-            self.showSelectedImageOrPlaceholder()
-            self.showRegisterButton()
+    private func setUpRegisterView(isIpad: Bool) -> some View {
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/) {
+            self.logo(isIpad: isIpad)
+            self.greetings(isIpad: isIpad)
+            self.showTextInputField(isIpad: isIpad)
+            self.showSelectedImageOrPlaceholder(isIpad: isIpad)
+            self.showRegisterButton(isIpad: isIpad)
         }
-        .padding(.vertical, UIDevice.current.userInterfaceIdiom == .phone ? 20 : 30)
+        .padding(.vertical, isIpad ? self.screenSize.screenHeight/17 : self.screenSize.screenHeight/70)
     }
     
-    private func logo() -> some View {
+    private func logo(isIpad: Bool) -> some View {
         Image("logo(TeWaRa)")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 150 : 250)
+            .frame(width: isIpad ? self.screenSize.screenWidth/3.5 : self.screenSize.screenHeight/5.8)
             .padding(.bottom, 10)
     }
     
-    private func greetings() -> some View {
+    private func greetings(isIpad: Bool) -> some View {
         Text("Halo, Sobat TeWaRa!")
-            .font(UIDevice.current.userInterfaceIdiom == .phone ? .title : .largeTitle)
+            .font(isIpad ? .largeTitle : .title)
             .fontWeight(.bold)
             .foregroundColor(.clear)
             .multilineTextAlignment(.center)
@@ -106,22 +113,22 @@ struct RegisterView: View {
                 )
                 .mask(
                     Text("Halo, Sobat TeWaRa!")
-                        .font(UIDevice.current.userInterfaceIdiom == .phone ? .title : .largeTitle)
+                        .font(isIpad ? .largeTitle : .title)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                 )
             )
-            .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 40 : 80)
+            .padding(.bottom, isIpad ? self.screenSize.screenHeight/25 : self.screenSize.screenHeight/35)
     }
     
-    private func showTextInputField() -> some View {
+    private func showTextInputField(isIpad: Bool) -> some View {
         VStack(alignment: .center) {
             // Display the selected image or placeholder
             if let imageData = selectedImage, let uiImage = UIImage(data: imageData) {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 120 : 140, height: UIDevice.current.userInterfaceIdiom == .phone ? 120 : 140)
+                    .frame(width: isIpad ?  self.screenSize.screenWidth/6 : self.screenSize.screenWidth/3.3, height: isIpad ?  self.screenSize.screenWidth/6 : self.screenSize.screenWidth/3.3)
                     .clipShape(Circle())
                     .overlay(
                         Circle().strokeBorder(
@@ -137,33 +144,34 @@ struct RegisterView: View {
                         )
                     )
                     .padding(.top, 4)
-                    .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 25 : 40)
+                    .padding(isIpad ? self.screenSize.screenWidth/20 : self.screenSize.screenWidth/16)
                     .frame(maxWidth: .infinity, alignment: .center)
             } else {
                 Image("profilePictureIcon")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 120 : 140, height: UIDevice.current.userInterfaceIdiom == .phone ? 120 : 140)
+                    .frame(width: isIpad ?  self.screenSize.screenWidth/6 : self.screenSize.screenWidth/3.3, height: isIpad ?  self.screenSize.screenWidth/6 : self.screenSize.screenWidth/3.3)
                     .colorMultiply(Color.gray)
                     .clipShape(Circle())
                     .padding(.top, 4)
-                    .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 25 : 40)
+                    .padding(isIpad ? self.screenSize.screenWidth/20 : self.screenSize.screenWidth/16)
                     .frame(maxWidth: .infinity, alignment: .center)
             }
             HStack{
                 Text("Nama")
-                    .font(UIDevice.current.userInterfaceIdiom == .phone ? .headline : .title2)
+                    .font(isIpad ? .title2 : .headline)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.leading)
-                Spacer().frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 275 : 685)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             TextField("Tuliskan nama mu...", text: $textInput)
-                .font(UIDevice.current.userInterfaceIdiom == .phone ? .subheadline
-                      : .title3)
+                .font(isIpad ? .title3
+                      : .subheadline)
                 .multilineTextAlignment(.leading)
                 .padding(.leading, 16)
-                .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 320 : .infinity, height: 60)
+                .padding(.vertical, isIpad ? self.screenSize.screenHeight/60 : self.screenSize.screenHeight/45)
+                .frame(maxWidth: .infinity)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(
@@ -178,28 +186,29 @@ struct RegisterView: View {
                             lineWidth: 2
                         )
                 )
-                .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .phone ? 0 : 20)
         }
-        .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 10 : 40)
+        .padding(.bottom, isIpad ? self.screenSize.screenHeight/50 : self.screenSize.screenHeight/80)
         .frame(maxWidth: .infinity)
     }
     
-    private func showSelectedImageOrPlaceholder() -> some View {
+    private func showSelectedImageOrPlaceholder(isIpad: Bool) -> some View {
         VStack(alignment: .center) {
             HStack{
                 Text("Foto profil")
-                    .font(UIDevice.current.userInterfaceIdiom == .phone ? .headline : .title2)
+                    .font(isIpad ? .title2 : .headline)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
-                Spacer().frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 240 : 640)
+                    .multilineTextAlignment(.leading)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             Button(action: {
                 isImagePickerPresented.toggle()
             }) {
                 Text("Pilih foto profil mu")
-                    .font(UIDevice.current.userInterfaceIdiom == .phone ? .subheadline
-                          : .title3)
-                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 320 : 740, height: 60)
+                    .font(isIpad ? .title3
+                          : .subheadline)
+                    .padding(.vertical, isIpad ? self.screenSize.screenHeight/55 : self.screenSize.screenHeight/40)
+                    .frame(maxWidth: .infinity)
                     .foregroundColor(.white)
                     .background(
                         LinearGradient(
@@ -217,30 +226,36 @@ struct RegisterView: View {
                 ImagePicker(selectedImage: $selectedImage)
             }
         }
-        .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 40 : 150)
-        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(.bottom, isIpad ? self.screenSize.screenHeight/15 : self.screenSize.screenHeight/17)
+        .frame(maxWidth: .infinity)
     }
     
-    private func showRegisterButton() -> some View {
+    private func showRegisterButton(isIpad: Bool) -> some View {
         Button(
             action: {
-                homeController.registerAccount(textInput: self.textInput, selectedImage: self.selectedImage, showAlert: $showAlert)
+                homeController.registerAccount(
+                    textInput: self.textInput,
+                    selectedImage: self.selectedImage,
+                    showAlert: $showAlert,
+                    alertMessage: $alertMessage
+                )
                 if !showAlert {
                     self.navToHomeView = true
                 }
             },
             label: {
                 Text("Selanjutnya")
-                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .phone ? 20 : 24, weight: .heavy))
+                    .font(isIpad ? .title2 : .headline)
+                    .fontWeight(.heavy)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
-                    .frame(width: UIDevice.current.userInterfaceIdiom == .phone ? 325 : 780, height: UIDevice.current.userInterfaceIdiom == .phone ? 44 : 55)
+                    .padding(.vertical, isIpad ? self.screenSize.screenHeight/70 : self.screenSize.screenHeight/60)
+                    .frame(maxWidth: .infinity)
             })
         .background(
             Color("redColor(TeWaRa)")
         )
-        .cornerRadius(UIDevice.current.userInterfaceIdiom == .phone ? 20 : 30)
-        .frame(width: 100, height: 50)
+        .cornerRadius(isIpad ? 30 : 25)
         .shadow(radius: 10, y: 4)
         .fullScreenCover(isPresented: $navToHomeView, content: {
             HomeView()

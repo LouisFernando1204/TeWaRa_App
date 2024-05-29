@@ -29,9 +29,21 @@ class HomeController : ObservableObject {
     //        return self.home
     //    }
     
-    func registerAccount(textInput: String, selectedImage: Data?, showAlert: Binding<Bool>) {
-        guard let selectedImage = selectedImage else {
-            // Handle case where no image is selected
+    func registerAccount(textInput: String, selectedImage: Data?, showAlert: Binding<Bool>, alertMessage: Binding<String>) {
+        let trimmedTextInput = textInput.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if trimmedTextInput.isEmpty && selectedImage == nil {
+            alertMessage.wrappedValue = "Anda lupa memasukkan nama dan foto profil."
+            showAlert.wrappedValue = true
+            return
+        }
+        else if trimmedTextInput.isEmpty {
+            alertMessage.wrappedValue = "Anda lupa memasukkan nama."
+            showAlert.wrappedValue = true
+            return
+        }
+        else if selectedImage == nil {
+            alertMessage.wrappedValue = "Anda lupa memasukkan foto profil."
             showAlert.wrappedValue = true
             return
         }
@@ -40,12 +52,11 @@ class HomeController : ObservableObject {
         let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
         
         do {
-            try selectedImage.write(to: imagePath)
+            try selectedImage?.write(to: imagePath)
             
             let user = User(name: textInput, image: imageName, score: 0)
             ModelData.shared.currentUser = user
         } catch {
-            // Handle error
             print("Error saving image: \(error.localizedDescription)")
         }
     }

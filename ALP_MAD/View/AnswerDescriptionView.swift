@@ -15,6 +15,8 @@ struct AnswerDescriptionView: View {
     @State private var traditionalDanceDescription: TraditionalDance? = nil
     @State private var traditionalLanguageDescription: TraditionalLanguage? = nil
     
+    private var screenSize = ScreenSize()
+    
     struct RoundedCorner: Shape {
         var cornerRadius: CGFloat
         var corners: UIRectCorner
@@ -30,10 +32,13 @@ struct AnswerDescriptionView: View {
     }
     
     var body: some View {
+        
+        let isIpad = self.screenSize.screenWidth > 600
+        
         ScrollView {
             VStack {
                 if let danceDescription = traditionalDanceDescription, let languageDescription = traditionalLanguageDescription {
-                    self.setUpAnswerDescriptionView(islandController: islandController, navToIslandView: $navToIslandView, traditionalDanceDescription: danceDescription, traditionalLanguageDescription: languageDescription)
+                    self.setUpAnswerDescriptionView(islandController: islandController, navToIslandView: $navToIslandView, traditionalDanceDescription: danceDescription, traditionalLanguageDescription: languageDescription, isIpad: isIpad)
                 }
             }
             .onAppear {
@@ -50,27 +55,27 @@ struct AnswerDescriptionView: View {
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
-            .frame(height: 70)
+            .frame(height: isIpad ? self.screenSize.screenHeight/35 : self.screenSize.screenHeight/12)
             .edgesIgnoringSafeArea(.top)
-            .padding(.bottom, -70)
+            .padding(.bottom, isIpad ? -40 : -70)
         }
     }
     
-    private func setUpAnswerDescriptionView(islandController: IslandController, navToIslandView: Binding<Bool>, traditionalDanceDescription: TraditionalDance, traditionalLanguageDescription: TraditionalLanguage) -> some View {
+    private func setUpAnswerDescriptionView(islandController: IslandController, navToIslandView: Binding<Bool>, traditionalDanceDescription: TraditionalDance, traditionalLanguageDescription: TraditionalLanguage, isIpad: Bool) -> some View {
         VStack {
-            self.navigationBar(navToIslandView: navToIslandView)
+            self.navigationBar(navToIslandView: navToIslandView, isIpad: isIpad)
             if ModelData.shared.currentGame == "TraditionalDance" {
                 if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "MOV") {
                     VideoPlayer(player: AVPlayer(url: videoURL))
-                        .frame(height: 221)
+                        .frame(height: isIpad ? self.screenSize.screenHeight/2.555 : self.screenSize.screenHeight/3.85)
                         .clipShape(
                             RoundedCorner(cornerRadius: 40, corners: [.bottomLeft, .bottomRight])
                         )
                         .shadow(radius: 10, y: 4)
                         .padding(.top, -8)
-                        .padding(.bottom, 7)
+                        .padding(.bottom, isIpad ? self.screenSize.screenHeight/40 : self.screenSize.screenHeight/80)
                 }
-                self.description(description: traditionalDanceDescription.description, answer: traditionalDanceDescription.answer, provinceOrigin: traditionalDanceDescription.provinceOrigin, title: "TARI")
+                self.description(description: traditionalDanceDescription.description, answer: traditionalDanceDescription.answer, provinceOrigin: traditionalDanceDescription.provinceOrigin, title: "TARI", isIpad: isIpad)
             } else {
                 if let image = traditionalLanguageDescription.image {
                     Image(image)
@@ -81,43 +86,60 @@ struct AnswerDescriptionView: View {
                         )
                         .shadow(radius: 10, y: 4)
                         .padding(.top, -8)
-                        .padding(.bottom, 7)
+                        .padding(.bottom, isIpad ? self.screenSize.screenHeight/40 : self.screenSize.screenHeight/80)
                 }
-                description(description: traditionalLanguageDescription.description, answer: traditionalLanguageDescription.answer, provinceOrigin: traditionalLanguageDescription.provinceOrigin, title: "BAHASA")
+                description(description: traditionalLanguageDescription.description, answer: traditionalLanguageDescription.answer, provinceOrigin: traditionalLanguageDescription.provinceOrigin, title: "BAHASA", isIpad: isIpad)
             }
-            self.poinStatus()
+            self.poinStatus(isIpad: isIpad)
         }
     }
     
-    private func navigationBar(navToIslandView: Binding<Bool>) -> some View {
+    private func navigationBar(navToIslandView: Binding<Bool>, isIpad: Bool) -> some View {
         HStack(alignment: .center) {
             Text("                             ")
             Spacer()
+            if isIpad {
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+            }
             Text("Penjelasan")
                 .fontWeight(.semibold)
                 .foregroundColor(Color.white)
-                .font(.headline)
+                .font(isIpad ? .title2 : .headline)
             Spacer()
             Spacer()
+            if isIpad {
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+            }
             Button(
                 action: {
                     navToIslandView.wrappedValue = true
                 },
                 label: {
                     Text("Selesai")
-                        .font(.headline)
+                        .font(isIpad ? .title2 : .headline)
                         .fontWeight(.regular)
                         .foregroundColor(.white)
                 }
             )
             .cornerRadius(10)
-            .padding(.leading, 20)
+            .padding(.leading, isIpad ? self.screenSize.screenWidth/7.5 : self.screenSize.screenWidth/20)
             .fullScreenCover(isPresented: navToIslandView, content: {
                 IslandView()
             })
             Spacer()
         }
-        .frame(height: 40)
+        .padding(.bottom, isIpad ? self.screenSize.screenHeight/100 : 0)
+        .frame(height: isIpad ? self.screenSize.screenHeight/30 : self.screenSize.screenHeight/20)
         .background(
             LinearGradient(
                 gradient: Gradient(stops: [
@@ -130,7 +152,7 @@ struct AnswerDescriptionView: View {
         )
     }
     
-    private func description(description: String, answer: String, provinceOrigin: String, title: String) -> some View {
+    private func description(description: String, answer: String, provinceOrigin: String, title: String, isIpad: Bool) -> some View {
         VStack {
             Rectangle()
                 .fill(
@@ -143,33 +165,33 @@ struct AnswerDescriptionView: View {
                         endPoint: .bottomTrailing
                     )
                 )
-                .frame(width: 270, height: 70)
+                .frame(width: isIpad ? self.screenSize.screenWidth/2.5 : self.screenSize.screenWidth/1.4, height: isIpad ? self.screenSize.screenHeight/17 : self.screenSize.screenHeight/12)
                 .padding(.top, -8)
                 .cornerRadius(32)
                 .overlay(
                     Text("\(title) \(answer)")
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.system(size: isIpad ? 36 : 32, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                 )
-                .padding(.bottom, 10)
+                .padding(.bottom, isIpad ? self.screenSize.screenHeight/80 : self.screenSize.screenHeight/80)
             Text("Asal: \(provinceOrigin)")
-                .font(.system(size: 16, weight: .bold))
+                .font(.system(size: isIpad ? 20 : 16, weight: .bold))
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
                 .italic()
-                .padding(.bottom, 10)
+                .padding(.bottom, isIpad ? self.screenSize.screenHeight/40 : self.screenSize.screenHeight/65)
             Text(description)
-                .font(.system(size: 20, weight: .regular))
+                .font(.system(size: isIpad ? 24 : 20, weight: .regular))
                 .foregroundColor(.black)
                 .multilineTextAlignment(.leading)
-                .padding(.horizontal, 20)
-                .padding(.bottom, 10)
+                .padding(.horizontal, isIpad ? self.screenSize.screenWidth/25 : self.screenSize.screenWidth/15)
+                .padding(.bottom, isIpad ? self.screenSize.screenHeight/30 : self.screenSize.screenHeight/80)
                 .lineSpacing(10)
         }
     }
     
-    private func poinStatus() -> some View {
+    private func poinStatus(isIpad: Bool) -> some View {
         Rectangle()
             .fill(
                 LinearGradient(
@@ -181,13 +203,13 @@ struct AnswerDescriptionView: View {
                     endPoint: .bottomTrailing
                 )
             )
-            .frame(width: 340, height: 100)
+            .frame(width: isIpad ? self.screenSize.screenWidth/1.0855 : self.screenSize.screenWidth/1.16, height: isIpad ? self.screenSize.screenHeight/10 : self.screenSize.screenHeight/8.5)
             .cornerRadius(10)
             .overlay(
                 HStack {
                     Spacer()
                     Text("Poin mu sekarang adalah \(ModelData.shared.currentUser.score)")
-                        .font(.system(size: 20, weight: .regular))
+                        .font(.system(size: isIpad ? 25 : 20, weight: .regular))
                         .foregroundColor(.white)
                     Spacer()
                 }
