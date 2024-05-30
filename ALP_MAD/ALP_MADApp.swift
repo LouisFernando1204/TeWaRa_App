@@ -9,12 +9,9 @@ import SwiftUI
 
 @main
 struct ALP_MADApp: App {
-    
-    @State private var modelData = ModelData()
-    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TraditionalLanguageView()
         }
     }
 }

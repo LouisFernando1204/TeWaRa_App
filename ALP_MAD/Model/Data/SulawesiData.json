@@ -10,10 +10,81 @@
             "Sulawesi Utara", "Sulawesi Selatan",
             "Sulawesi Barat", "Sulawesi Timur"
         ],
-        "answerOptions": [
-            "A", "P", "Z", "S",
-            "I", "J", "E", "O",
-            "G", "I", "N", "Y"
+        "throwableAnswer": [
+            {
+                "alphabet": "P",
+                "isClicked": false
+            },
+            {
+                "alphabet": "A",
+                "isClicked": false
+            },
+            {
+                "alphabet": "J",
+                "isClicked": false
+            },
+            {
+                "alphabet": "O",
+                "isClicked": false
+            },
+            {
+                "alphabet": "G",
+                "isClicked": false
+            },
+            {
+                "alphabet": "E",
+                "isClicked": false
+            }
+        ],
+        "availableWords": [
+            {
+                "alphabet": "P",
+                "isClicked": false
+            },
+            {
+                "alphabet": "A",
+                "isClicked": false
+            },
+            {
+                "alphabet": "S",
+                "isClicked": false
+            },
+            {
+                "alphabet": "Z",
+                "isClicked": false
+            },
+            {
+                "alphabet": "J",
+                "isClicked": false
+            },
+            {
+                "alphabet": "I",
+                "isClicked": false
+            },
+            {
+                "alphabet": "O",
+                "isClicked": false
+            },
+            {
+                "alphabet": "E",
+                "isClicked": false
+            },
+            {
+                "alphabet": "G",
+                "isClicked": false
+            },
+            {
+                "alphabet": "I",
+                "isClicked": false
+            },
+            {
+                "alphabet": "N",
+                "isClicked": false
+            },
+            {
+                "alphabet": "Y",
+                "isClicked": false
+            }
         ]
     },
     "traditionalLanguage": {

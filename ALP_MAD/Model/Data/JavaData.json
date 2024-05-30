@@ -10,10 +10,73 @@
             "Jawa Timur", "DKI Jakarta",
             "Jawa Barat", "Jawa Tengah"
         ],
-        "answerOptions": [
-            "R", "M", "Z", "K",
-            "J", "P", "O", "E",
-            "G", "N", "H", "V"
+        "throwableAnswer": [
+            {
+                "alphabet": "R",
+                "isClicked": false
+            },
+            {
+                "alphabet": "E",
+                "isClicked": false
+            },
+            {
+                "alphabet": "M",
+                "isClicked": false
+            },
+            {
+                "alphabet": "O",
+                "isClicked": false
+            }
+        ],
+        "availableWords": [
+            {
+                "alphabet": "R",
+                "isClicked": false
+            },
+            {
+                "alphabet": "M",
+                "isClicked": false
+            },
+            {
+                "alphabet": "Z",
+                "isClicked": false
+            },
+            {
+                "alphabet": "K",
+                "isClicked": false
+            },
+            {
+                "alphabet": "J",
+                "isClicked": false
+            },
+            {
+                "alphabet": "P",
+                "isClicked": false
+            },
+            {
+                "alphabet": "O",
+                "isClicked": false
+            },
+            {
+                "alphabet": "E",
+                "isClicked": false
+            },
+            {
+                "alphabet": "G",
+                "isClicked": false
+            },
+            {
+                "alphabet": "N",
+                "isClicked": false
+            },
+            {
+                "alphabet": "H",
+                "isClicked": false
+            },
+            {
+                "alphabet": "V",
+                "isClicked": false
+            }
         ]
     },
     "traditionalLanguage": {
