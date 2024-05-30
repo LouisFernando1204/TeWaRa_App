@@ -67,7 +67,7 @@ struct AnswerDescriptionView: View {
         .onDisappear {
             MusicPlayer.shared.stopBackgroundMusic()
         }
-        .onChange(of: self.navToIslandView) { newValue in
+        .onChange(of: self.navToIslandView) { oldValue, newValue in
             if newValue {
                 MusicPlayer.shared.stopBackgroundMusic()
             } else {
@@ -80,7 +80,7 @@ struct AnswerDescriptionView: View {
         VStack {
             self.navigationBar(navToIslandView: navToIslandView, isIpad: isIpad)
             if ModelData.shared.currentGame == "TraditionalDance" {
-                if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "MOV") {
+                if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "mp4") {
                     VideoPlayer(player: AVPlayer(url: videoURL))
                         .frame(height: isIpad ? self.screenSize.screenHeight/2.555 : self.screenSize.screenHeight/3.85)
                         .clipShape(
@@ -96,6 +96,7 @@ struct AnswerDescriptionView: View {
                     Image(image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
+                        .frame(height: isIpad ? self.screenSize.screenHeight/2.2 : self.screenSize.screenHeight/4.5)
                         .clipShape(
                             RoundedCorner(cornerRadius: 40, corners: [.bottomLeft, .bottomRight])
                         )

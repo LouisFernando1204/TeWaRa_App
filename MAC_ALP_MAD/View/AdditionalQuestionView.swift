@@ -1,22 +1,19 @@
 //
-//  AnswerDescriptionView.swift
-//  ALP_MAD
+//  AdditionalQuestionView.swift
+//  MAC_ALP_MAD
 //
-//  Created by MacBook Pro on 12/05/24.
+//  Created by Louis Fernando on 30/05/24.
 //
-
 import SwiftUI
 
 struct AdditionalQuestionView: View {
     
     @StateObject private var islandController = IslandController(island: ModelData.shared.currentIslandObject)
-    @State private var answer : String = ""
+    @State private var answer: String = ""
     @State private var showAlert = false
     @State private var navToAnswerDescriptionView = false
     @State private var countDownTimer = 30
     @State private var timerRunning = false
-    
-    private var screenSize = ScreenSize()
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let columns: [GridItem] = [
@@ -25,38 +22,38 @@ struct AdditionalQuestionView: View {
     ]
     
     var body: some View {
-        
-        let isIpad = self.screenSize.screenWidth > 600
-        
-        self.setUpAdditionalQuestionView(islandController: islandController, answer: $answer, showAlert: $showAlert, navToAnswerDescriptionView: $navToAnswerDescriptionView, countDownTimer: $countDownTimer, timerRunning: $timerRunning, isIpad: isIpad)
+        NavigationStack{
+            GeometryReader { geometry in
+                self.setUpAdditionalQuestionView(
+                    islandController: islandController,
+                    answer: $answer,
+                    showAlert: $showAlert,
+                    navToAnswerDescriptionView: $navToAnswerDescriptionView,
+                    countDownTimer: $countDownTimer,
+                    timerRunning: $timerRunning,
+                    screenSize: geometry.size
+                )
+            }
+        }
     }
     
-    private func setUpAdditionalQuestionView(islandController: IslandController, answer: Binding<String>, showAlert: Binding<Bool>, navToAnswerDescriptionView: Binding<Bool>, countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, isIpad: Bool) -> some View {
+    private func setUpAdditionalQuestionView(islandController: IslandController, answer: Binding<String>, showAlert: Binding<Bool>, navToAnswerDescriptionView: Binding<Bool>, countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, screenSize: CGSize) -> some View {
         ScrollView {
             VStack(alignment: .center) {
-                self.navigationBar(isIpad: isIpad)
-                self.timer(countDownTimer: countDownTimer, timerRunning: timerRunning, showAlert: showAlert, isIpad: isIpad)
-                self.question(isIpad: isIpad)
-                self.answerOptions(islandController: islandController, navToAnswerDescriptionView: navToAnswerDescriptionView, answer: answer, showAlert: showAlert, timerRunning: timerRunning, countDownTimer: countDownTimer, isIpad: isIpad)
-                self.poinStatus(isIpad: isIpad)
-                self.knowledgeInformation(isIpad: isIpad)
+                self.navigationBar(screenSize: screenSize)
+                self.timer(countDownTimer: countDownTimer, timerRunning: timerRunning, showAlert: showAlert, screenSize: screenSize)
+                self.question(screenSize: screenSize)
+                self.answerOptions(islandController: islandController, navToAnswerDescriptionView: navToAnswerDescriptionView, answer: answer, showAlert: showAlert, timerRunning: timerRunning, countDownTimer: countDownTimer, screenSize: screenSize)
+                self.poinStatus(screenSize: screenSize)
+                self.knowledgeInformation(screenSize: screenSize)
             }
             .onAppear{
                 timerRunning.wrappedValue = true
             }
-        }.safeAreaInset(edge: .top) {
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(color: Color("redColor(TeWaRa)"), location: 0.5),
-                    .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
-                    
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .frame(height: isIpad ? self.screenSize.screenHeight/35 : self.screenSize.screenHeight/12)
-            .edgesIgnoringSafeArea(.top)
-            .padding(.bottom, isIpad ? -40 : -70)
+        }
+        .background(Color.white)
+        .navigationDestination(isPresented: $navToAnswerDescriptionView) {
+            AnswerDescriptionView()
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
@@ -75,36 +72,34 @@ struct AdditionalQuestionView: View {
         }
     }
     
-    private func navigationBar(isIpad: Bool) -> some View {
-        HStack(alignment: .center, content: {
+    private func navigationBar(screenSize: CGSize) -> some View {
+        HStack(alignment: .center) {
             Spacer()
             Text("Bonus")
                 .fontWeight(.semibold)
                 .foregroundColor(Color.white)
-                .font(isIpad ?  .title2 : .headline)
-                .padding(.bottom, isIpad ? 15 : 0)
+                .font(.title)
             Spacer()
-        })
-        .frame(height: isIpad ? self.screenSize.screenHeight/30 : self.screenSize.screenHeight/20)
+        }
+        .frame(height: screenSize.height/10)
         .background(
             LinearGradient(
                 gradient: Gradient(stops: [
                     .init(color: Color("redColor(TeWaRa)"), location: 0.5),
                     .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
-                    
                 ]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
         )
-        .padding(.bottom, isIpad ? self.screenSize.screenHeight/40 : self.screenSize.screenHeight/40)
+        .padding(.bottom, screenSize.height/35)
     }
     
-    private func timer(countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, showAlert: Binding<Bool>, isIpad: Bool) -> some View {
-        ZStack(alignment: .center, content: {
+    private func timer(countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, showAlert: Binding<Bool>, screenSize: CGSize) -> some View {
+        ZStack(alignment: .center) {
             Image("backgroundTimer")
                 .resizable()
-                .frame(width: isIpad ? self.screenSize.screenWidth/1.1 : self.screenSize.screenWidth/1.15, height: isIpad ? self.screenSize.screenHeight/3 : self.screenSize.screenHeight/4.85)
+                .frame(width: screenSize.width/1.07, height: screenSize.height/1.5)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .strokeBorder(
@@ -113,14 +108,14 @@ struct AdditionalQuestionView: View {
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
-                            lineWidth: isIpad ? 8 : 4
+                            lineWidth: 6
                         )
                 )
                 .cornerRadius(10)
             Rectangle()
                 .fill(Color.white.opacity(0.5))
-                .frame(width: isIpad ? self.screenSize.screenWidth/1.125 : self.screenSize.screenWidth/1.175, height: isIpad ? self.screenSize.screenHeight/3.12 : self.screenSize.screenHeight/5.1)
-                .cornerRadius(isIpad ? 0 : 6)
+                .frame(width: screenSize.width/1.08, height: screenSize.height/1.53)
+                .cornerRadius(6)
             Text("00:00:\(String(format: "%02d", countDownTimer.wrappedValue))")
                 .onReceive(timer) { _ in
                     if countDownTimer.wrappedValue > 0 && timerRunning.wrappedValue {
@@ -131,26 +126,28 @@ struct AdditionalQuestionView: View {
                         showAlert.wrappedValue = true
                     }
                 }
-                .font(.system(size: isIpad ? 60 : 44))
+                .foregroundColor(.black)
+                .font(.system(size: screenSize.width/12))
                 .fontWeight(.black)
-        })
-        .padding(.bottom, isIpad ? self.screenSize.screenHeight/80 : self.screenSize.screenHeight/55)
+        }
+        .padding(.bottom, screenSize.height/40)
     }
     
-    private func question(isIpad: Bool) -> some View {
-        HStack(alignment: .center){
+    private func question(screenSize: CGSize) -> some View {
+        HStack(alignment: .center) {
             Text("Budaya tersebut berasal dari provinsi...")
-                .font(.system(size: isIpad ? 35 : 18))
+                .font(.system(size: screenSize.width/25))
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
+                .foregroundColor(.black)
         }
-        .padding(.bottom, isIpad ? self.screenSize.screenHeight/50 : self.screenSize.screenHeight/50)
+        .padding(.bottom, screenSize.height/40)
     }
     
-    private func answerOptions(islandController: IslandController, navToAnswerDescriptionView: Binding<Bool>, answer: Binding<String>, showAlert: Binding<Bool>, timerRunning: Binding<Bool>, countDownTimer: Binding<Int>, isIpad: Bool) -> some View {
-        LazyVGrid(columns: columns, spacing: isIpad ? self.screenSize.screenWidth/50 : self.screenSize.screenWidth/35) {
+    private func answerOptions(islandController: IslandController, navToAnswerDescriptionView: Binding<Bool>, answer: Binding<String>, showAlert: Binding<Bool>, timerRunning: Binding<Bool>, countDownTimer: Binding<Int>, screenSize: CGSize) -> some View {
+        LazyVGrid(columns: columns, spacing: screenSize.height/30) {
             if ModelData.shared.currentGame == "TraditionalDance" {
-                ForEach(islandController.getIsland().traditionalDance.provinceOptions,  id: \.self) { provinceOption in
+                ForEach(islandController.getIsland().traditionalDance.provinceOptions, id: \.self) { provinceOption in
                     Button(
                         action: {
                             answer.wrappedValue = provinceOption
@@ -160,11 +157,12 @@ struct AdditionalQuestionView: View {
                         },
                         label: {
                             Text(provinceOption)
-                                .font(.system(size: isIpad ? 30 : 24, weight: .heavy))
+                                .font(.system(size: screenSize.width/20, weight: .heavy))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
-                                .frame(width: isIpad ? self.screenSize.screenWidth/2.25 : self.screenSize.screenWidth/2.38, height: isIpad ? self.screenSize.screenHeight/10 : self.screenSize.screenHeight/10)
+                                .frame(width: screenSize.width/2.25, height: screenSize.height/3)
                         })
+                    .buttonStyle(PlainButtonStyle())
                     .background(
                         LinearGradient(
                             gradient: Gradient(colors: [Color("redColor(TeWaRa)"), Color("darkredColor(TeWaRa)")]),
@@ -176,28 +174,24 @@ struct AdditionalQuestionView: View {
                     .alert(isPresented: showAlert, content: {
                         if countDownTimer.wrappedValue != 0 {
                             if answer.wrappedValue == islandController.getIsland().traditionalDance.provinceOrigin {
-                                Alert(
+                                return Alert(
                                     title: Text("Selamat!!!"),
-                                    message:
-                                        Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
+                                    message: Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
                                     dismissButton: .default(Text("Lihat penjelasan")) {
                                         navToAnswerDescriptionView.wrappedValue = true
                                     }
                                 )
-                            }
-                            else {
-                                Alert(
+                            } else {
+                                return Alert(
                                     title: Text("Oops..."),
-                                    message:
-                                        Text("Kamu masih kurang beruntung."),
+                                    message: Text("Kamu masih kurang beruntung."),
                                     dismissButton: .default(Text("Lihat penjelasan")) {
                                         navToAnswerDescriptionView.wrappedValue = true
                                     }
                                 )
                             }
-                        }
-                        else{
-                            Alert(
+                        } else {
+                            return Alert(
                                 title: Text("Waktu Habis!"),
                                 message: Text("Kamu tidak menjawab dalam waktu yang ditentukan."),
                                 dismissButton: .default(Text("Lihat penjelasan")) {
@@ -206,13 +200,9 @@ struct AdditionalQuestionView: View {
                             )
                         }
                     })
-                    .fullScreenCover(isPresented: navToAnswerDescriptionView, content: {
-                        AnswerDescriptionView()
-                    })
                 }
-            }
-            else {
-                ForEach(islandController.getIsland().traditionalLanguage.provinceOptions,  id: \.self) { provinceOption in
+            } else {
+                ForEach(islandController.getIsland().traditionalLanguage.provinceOptions, id: \.self) { provinceOption in
                     Button(
                         action: {
                             answer.wrappedValue = provinceOption
@@ -222,10 +212,10 @@ struct AdditionalQuestionView: View {
                         },
                         label: {
                             Text(provinceOption)
-                                .font(.system(size: isIpad ? 30 : 24, weight: .heavy))
+                                .font(.system(size: screenSize.width/20, weight: .heavy))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
-                                .frame(width: isIpad ? self.screenSize.screenWidth/2.4 : self.screenSize.screenWidth/2.38, height: isIpad ? self.screenSize.screenHeight/10 : self.screenSize.screenHeight/10)
+                                .frame(width: screenSize.width/2.25, height: screenSize.height/3)
                         })
                     .background(
                         LinearGradient(
@@ -238,28 +228,24 @@ struct AdditionalQuestionView: View {
                     .alert(isPresented: $showAlert, content: {
                         if countDownTimer.wrappedValue != 0 {
                             if answer.wrappedValue == islandController.getIsland().traditionalLanguage.provinceOrigin {
-                                Alert(
+                                return Alert(
                                     title: Text("Selamat!!!"),
-                                    message:
-                                        Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
+                                    message: Text("Kamu mendapatkan \(islandController.getNewScore()) poin."),
                                     dismissButton: .default(Text("Lihat penjelasan")) {
                                         navToAnswerDescriptionView.wrappedValue = true
                                     }
                                 )
-                            }
-                            else {
-                                Alert(
+                            } else {
+                                return Alert(
                                     title: Text("Oops..."),
-                                    message:
-                                        Text("Kamu masih kurang beruntung."),
+                                    message: Text("Kamu masih kurang beruntung."),
                                     dismissButton: .default(Text("Lihat penjelasan")) {
                                         navToAnswerDescriptionView.wrappedValue = true
                                     }
                                 )
                             }
-                        }
-                        else{
-                            Alert(
+                        } else {
+                            return Alert(
                                 title: Text("Waktu Habis!"),
                                 message: Text("Kamu tidak menjawab dalam waktu yang ditentukan."),
                                 dismissButton: .default(Text("Lihat penjelasan")) {
@@ -268,59 +254,56 @@ struct AdditionalQuestionView: View {
                             )
                         }
                     })
-                    .fullScreenCover(isPresented: navToAnswerDescriptionView, content: {
-                        AnswerDescriptionView()
-                    })
                 }
             }
         }
-        .padding(.horizontal, isIpad ? self.screenSize.screenWidth/25 : 24)
-        .padding(.bottom, isIpad ? self.screenSize.screenHeight/50 : 15)
+        .padding(.horizontal, screenSize.width/25)
+        .padding(.bottom, screenSize.height/20)
     }
     
-    private func poinStatus(isIpad: Bool) -> some View {
+    private func poinStatus(screenSize: CGSize) -> some View {
         Rectangle()
             .fill(
                 LinearGradient(
                     gradient: Gradient(stops: [
                         .init(color: Color("redColor(TeWaRa)"), location: 0.5),
                         .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
-                        
                     ]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
             )
-            .frame(width: isIpad ? self.screenSize.screenWidth/1.1 : self.screenSize.screenWidth/1.15, height: isIpad ? self.screenSize.screenHeight/9 : self.screenSize.screenHeight/6)
+            .frame(width: screenSize.width/1.1, height: screenSize.height/2)
             .cornerRadius(10)
             .overlay(
-                HStack{
+                HStack {
                     Spacer()
                     Text("Poin mu sekarang adalah \(ModelData.shared.currentUser.score)")
-                        .font(.system(size: isIpad ? 25 : 20, weight: .regular))
+                        .font(.system(size: screenSize.width/20, weight: .regular))
                         .foregroundColor(.white)
                     Spacer()
                 }
             )
-            .padding(.bottom, isIpad ? self.screenSize.screenHeight/120 : self.screenSize.screenHeight/100)
+            .padding(.bottom, screenSize.height/30)
     }
     
-    private func knowledgeInformation(isIpad: Bool) -> some View {
+    private func knowledgeInformation(screenSize: CGSize) -> some View {
         Rectangle()
             .fill(Color.gray)
-            .frame(width: isIpad ? self.screenSize.screenWidth/1.1 : self.screenSize.screenWidth/1.15, height: isIpad ? self.screenSize.screenHeight/20 : self.screenSize.screenHeight/15)
+            .frame(width: screenSize.width/1.1, height: screenSize.height/4)
             .cornerRadius(10)
             .overlay(
-                HStack{
+                HStack {
                     Spacer()
                     Text("Semakin cepat kamu menjawab, poin mu akan lebih besar lho...")
-                        .font(.system(size: isIpad ? 20 : 16, weight: .medium))
+                        .font(.system(size: screenSize.width/25, weight: .medium))
                         .italic()
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
             )
+            .padding(.bottom, screenSize.height/7)
     }
 }
 

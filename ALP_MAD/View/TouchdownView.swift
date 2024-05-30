@@ -50,10 +50,9 @@ struct TouchdownView: View {
         .onDisappear {
             MusicPlayer.shared.stopBackgroundMusic()
         }
-        .onChange(of: self.navToAdditionalQuestionView) { newValue in
-            if newValue {
-                MusicPlayer.shared.stopBackgroundMusic()
-            } else {
+        .onChange(of: navToAdditionalQuestionView) { oldValue, newValue in
+            MusicPlayer.shared.stopBackgroundMusic()
+            if !newValue {
                 MusicPlayer.shared.startBackgroundMusic(musicTitle: "touchdownMusic", volume: 1)
             }
         }

@@ -1,20 +1,19 @@
 //
 //  HomeView.swift
-//  ALP_MAD
+//  MAC_ALP_MAD
 //
-//  Created by MacBook Pro on 12/05/24.
+//  Created by Louis Fernando on 30/05/24.
 //
 
 import SwiftUI
 
 struct HomeView: View {
     
-    //Testing image
     var body: some View {
         ScrollView {
             VStack {
                 if let userImage = loadImage(named: ModelData.shared.currentUser.image) {
-                    Image(uiImage: userImage)
+                    Image(nsImage: userImage)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 120, height: 120)
@@ -44,10 +43,9 @@ struct HomeView: View {
                         .fontWeight(.bold)
                         .padding()
                     
-                    
                     ForEach(ModelData.shared.currentIslandObject.userList,  id: \.self) { user in
-                        if let userImage = loadImage(named: user.image){
-                            Image(uiImage: userImage)
+                        if let userImage = loadImage(named: user.image) {
+                            Image(nsImage: userImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 120, height: 120)
@@ -69,8 +67,7 @@ struct HomeView: View {
                                 .padding(.bottom, 25)
                                 .frame(maxWidth: .infinity, alignment: .center)
                             Text(user.name)
-                        }
-                        else{
+                        } else {
                             Image(user.image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -101,9 +98,9 @@ struct HomeView: View {
     }
 }
 
-private func loadImage(named imageName: String) -> UIImage? {
+private func loadImage(named imageName: String) -> NSImage? {
     let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
-    return UIImage(contentsOfFile: imagePath.path)
+    return NSImage(contentsOfFile: imagePath.path)
 }
 
 private func getDocumentsDirectory() -> URL {
