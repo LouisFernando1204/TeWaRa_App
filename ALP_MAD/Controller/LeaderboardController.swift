@@ -51,4 +51,5 @@ class LeaderboardController : ObservableObject {
     func accumulateBaliRanking() {
         
     }
+    
 }
