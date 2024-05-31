@@ -5,7 +5,11 @@
 //  Created by MacBook Pro on 12/05/24.
 //
 
+<<<<<<< HEAD
 import Foundation   
+=======
+import Foundation
+>>>>>>> Louis
 
 class TraditionalDanceController : ObservableObject {
     

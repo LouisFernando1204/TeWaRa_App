@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct ALP_MADApp: App {
+<<<<<<< HEAD
+=======
+    
+>>>>>>> Louis
     var body: some Scene {
         WindowGroup {
             TraditionalLanguageView()
