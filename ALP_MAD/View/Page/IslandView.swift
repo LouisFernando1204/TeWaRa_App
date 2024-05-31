@@ -82,6 +82,7 @@ struct IslandView: View {
                             .onTapGesture {
                                 self.selectedIsland = islands[index].islandName
                                 if self.selectedIsland == "Sumatera" {
+                                    ModelData.shared.currentIslandObject = ModelData.shared.sumatera
                                     if islandController.getChosenGameByRandom() {
                                         self.selectSumateraAndGetDance = true
                                     }
@@ -90,6 +91,7 @@ struct IslandView: View {
                                     }
                                 }
                                 else if self.selectedIsland == "Sulawesi" {
+                                    ModelData.shared.currentIslandObject = ModelData.shared.sulawesi
                                     if islandController.getChosenGameByRandom() {
                                         self.selectSulawesiAndGetDance = true
                                     }
@@ -98,6 +100,7 @@ struct IslandView: View {
                                     }
                                 }
                                 else if self.selectedIsland == "Kalimantan" {
+                                    ModelData.shared.currentIslandObject = ModelData.shared.kalimantan
                                     if islandController.getChosenGameByRandom() {
                                         self.selectKalimantanAndGetDance = true
                                     }
@@ -106,6 +109,7 @@ struct IslandView: View {
                                     }
                                 }
                                 else if self.selectedIsland == "Papua" {
+                                    ModelData.shared.currentIslandObject = ModelData.shared.papua
                                     if islandController.getChosenGameByRandom() {
                                         self.selectPapuaAndGetDance = true
                                     }
@@ -114,6 +118,7 @@ struct IslandView: View {
                                     }
                                 }
                                 else if self.selectedIsland == "Bali" {
+                                    ModelData.shared.currentIslandObject = ModelData.shared.bali
                                     if islandController.getChosenGameByRandom() {
                                         self.selectBaliAndGetDance = true
                                     }
@@ -122,6 +127,7 @@ struct IslandView: View {
                                     }
                                 }
                                 else if self.selectedIsland == "Jawa" {
+                                    ModelData.shared.currentIslandObject = ModelData.shared.java
                                     if islandController.getChosenGameByRandom() {
                                         self.selectJavaAndGetDance = true
                                     }
@@ -227,14 +233,17 @@ struct IslandView: View {
                                 .onTapGesture {
                                     self.selectedIsland = islands[index].islandName
                                     if self.selectedIsland == "Sumatera" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.sumatera
                                         if islandController.getChosenGameByRandom() {
                                             self.selectSumateraAndGetDance = true
+
                                         }
                                         else {
                                             self.selectSumateraAndGetLanguage = true
                                         }
                                     }
                                     else if self.selectedIsland == "Sulawesi" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.sulawesi
                                         if islandController.getChosenGameByRandom() {
                                             self.selectSulawesiAndGetDance = true
                                         }
@@ -243,6 +252,7 @@ struct IslandView: View {
                                         }
                                     }
                                     else if self.selectedIsland == "Kalimantan" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.kalimantan
                                         if islandController.getChosenGameByRandom() {
                                             self.selectKalimantanAndGetDance = true
                                         }
@@ -251,6 +261,7 @@ struct IslandView: View {
                                         }
                                     }
                                     else if self.selectedIsland == "Papua" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.papua
                                         if islandController.getChosenGameByRandom() {
                                             self.selectPapuaAndGetDance = true
                                         }
@@ -259,6 +270,7 @@ struct IslandView: View {
                                         }
                                     }
                                     else if self.selectedIsland == "Bali" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.bali
                                         if islandController.getChosenGameByRandom() {
                                             self.selectBaliAndGetDance = true
                                         }
@@ -267,6 +279,7 @@ struct IslandView: View {
                                         }
                                     }
                                     else if self.selectedIsland == "Jawa" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.java
                                         if islandController.getChosenGameByRandom() {
                                             self.selectJavaAndGetDance = true
                                         }

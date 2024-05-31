@@ -22,7 +22,7 @@ struct ChanceBox: View {
                 height: ScreenSize.screenHeight / 18
             )
             .overlay {
-                Text("Kesempatan kamu kurang 3x")
+                Text(message)
                     .fontWeight(.medium)
                     .font(ScreenSize.screenWidth > 600 ? .title : .headline)
                     .foregroundColor(Color.white)

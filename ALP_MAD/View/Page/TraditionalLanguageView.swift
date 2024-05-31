@@ -15,14 +15,16 @@ struct TraditionalLanguageView: View {
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @StateObject private var traditionalLanguageController = TraditionalLanguageController(traditionalLanguage: ModelData.shared.bali.traditionalLanguage)
+    @StateObject private var traditionalLanguageController = TraditionalLanguageController()
     
     var body: some View {
-        ScrollView {
-            VStack(content: {
-                TopNavigationBar(name: "Tebak Bahasa", message: "Pulau")
+        
+        VStack(content: {
+            TopNavigationBar(name: "Tebak Bahasa", message: "Pulau")
+            
+            ScrollView {
                 VStack(content: {
-                    QuestionAndDisplay(type: "Bahasa", currentIsland: self.selectedIsland)
+                    QuestionAndDisplay(type: "Bahasa", currentIsland: ModelData.shared.currentIslandObject)
                     TextFieldComponent(value: textFieldValue)
                     self.showClueAndTimer()
                     ButtonCheck(action: {
@@ -33,23 +35,25 @@ struct TraditionalLanguageView: View {
                 .padding(.horizontal,
                          ScreenSize.screenWidth > 600 ? 90 : 20)
                 .padding(.vertical, ScreenSize.screenWidth > 600 ? 16 : 6)
-            })
-            .onAppear {
-                timerRunning = true
             }
+        })
+        .onAppear {
+            timerRunning = true
+            traditionalLanguageController.changeLanguage(language: ModelData.shared.currentIslandObject.traditionalLanguage)
         }
+        
         .safeAreaInset(edge: .top) {
             CustomGradient.redOrangeGradient
-            .frame(height: ScreenSize.screenWidth > 600 ? 32: 70)
-            .edgesIgnoringSafeArea(.top)
-            .padding(.bottom, ScreenSize.screenWidth > 600 ? -40 : -70)
+                .frame(height: ScreenSize.screenWidth > 600 ? 32: 70)
+                .edgesIgnoringSafeArea(.top)
+                .padding(.bottom, ScreenSize.screenWidth > 600 ? -40 : -70)
         }
     }
     
     private func showClueAndTimer() -> some View {
         VStack(content: {
             ZStack {
-                ClueBox(currentIsland: ModelData.shared.bali)
+                ClueBox(currentIsland: ModelData.shared.currentIslandObject)
                 TimerComponent(type: "Bahasa")
                     .overlay {
                         Text("00:00:\(countdownTimer)")

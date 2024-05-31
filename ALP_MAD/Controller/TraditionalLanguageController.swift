@@ -9,20 +9,22 @@ import Foundation
 
 class TraditionalLanguageController : ObservableObject {
     
-    @Published private var traditionalLanguage : TraditionalLanguage
-//    @Published private var user : User
-    
-    init(traditionalLanguage: TraditionalLanguage) {
-        self.traditionalLanguage = traditionalLanguage
-//        self.user = user
-    }
-    
-//    func getUser() -> User {
-//        return self.user
-//    }
-//    
+    @Published private var traditionalLanguage: TraditionalLanguage = TraditionalLanguage(
+        answer: "",
+        image: "",
+        description: "",
+        provinceOrigin: "",
+        provinceOptions: [""],
+        clue: "",
+        sentences: ""
+    )
+
     func wrongAnswer() {
         
+    }
+    
+    func changeLanguage(language: TraditionalLanguage) {
+        self.traditionalLanguage = language
     }
     
     func guessWord(word : String, remainingTime: Int) {

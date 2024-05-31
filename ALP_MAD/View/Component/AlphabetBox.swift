@@ -12,7 +12,6 @@ struct AlphabetBox: View {
     let type: String
     let alphabet: String
     let isClicked: Bool
-    var action: (() -> Void)?
     
     var body: some View {
         
@@ -80,9 +79,6 @@ struct AlphabetBox: View {
             }
             .cornerRadius(10)
             .padding(.horizontal, 3)
-            .onTapGesture(perform: {
-                action?()
-            })
     }
     
     private func showErrorDetail() -> some View {

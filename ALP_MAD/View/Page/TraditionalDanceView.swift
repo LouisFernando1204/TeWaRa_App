@@ -17,7 +17,6 @@ struct TraditionalDanceView: View {
     @State private var timerRunning: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    
     private var fixedColumn: [GridItem] {
         let screenWidth = UIScreen.main.bounds.width
         return screenWidth > 600 ? [
@@ -33,11 +32,10 @@ struct TraditionalDanceView: View {
         ]
     }
     
-    @StateObject private var traditionalDanceController: TraditionalDanceController = TraditionalDanceController(traditionalDance: ModelData.shared.bali.traditionalDance)
+    @StateObject private var traditionalDanceController: TraditionalDanceController = TraditionalDanceController()
     
     init(selectedIsland: Island) {
         self.selectedIsland = selectedIsland
-        self.traditionalDanceController.changeDance(dance: selectedIsland.traditionalDance)
     }
     
     var body: some View {
@@ -48,7 +46,7 @@ struct TraditionalDanceView: View {
             ScrollView {
                 VStack(content: {
                     QuestionAndDisplay(type: "Tarian", currentIsland: self.selectedIsland)
-                    ChanceBox(message: "Kesempatan kamu kurang \(self.traditionalDanceController.getChance())x")
+                    ChanceBox(message: "Kesempatan kamu kurang \(traditionalDanceController.getChance())x")
                     self.showAnswerBox()
                     self.showWordOptions()
                     self.showTimer()
@@ -61,6 +59,7 @@ struct TraditionalDanceView: View {
         })
         .onAppear {
             timerRunning = true
+            self.traditionalDanceController.changeDance(dance: ModelData.shared.currentIslandObject.traditionalDance)
         }
         .safeAreaInset(edge: .top) {
             CustomGradient.redOrangeGradient
@@ -74,10 +73,10 @@ struct TraditionalDanceView: View {
     private func showAnswerBox() -> some View {
         HStack(content: {
             // buat if kalau ndak null countnya/panjangnya
-            ForEach(self.selectedIsland.traditionalDance.throwableAnswer.indices, id: \.self) { index in
-                let alphabet = self.selectedIsland.traditionalDance.throwableAnswer[index].alphabet
+            ForEach(ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.indices, id: \.self) { index in
+                let alphabet = ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].alphabet
                 
-                AlphabetBox(type: "Answer", alphabet: alphabet, isClicked: self.selectedIsland.traditionalDance.throwableAnswer[index].isClicked, action: nil)
+                AlphabetBox(type: "Answer", alphabet: alphabet, isClicked: ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].isClicked)
             }
         })
     }
@@ -85,12 +84,13 @@ struct TraditionalDanceView: View {
     private func showWordOptions() -> some View {
         VStack(content: {
             LazyVGrid(columns: fixedColumn, spacing: 20) {
-                ForEach(self.selectedIsland.traditionalDance.availableWords.indices, id:\.self) { index in
-                    let item = self.selectedIsland.traditionalDance.availableWords[index]
+                ForEach(ModelData.shared.currentIslandObject.traditionalDance.availableWords.indices, id:\.self) { index in
+                    let item = ModelData.shared.currentIslandObject.traditionalDance.availableWords[index]
                     
-                    AlphabetBox(type: "Option", alphabet: item.alphabet, isClicked: item.isClicked, action: {
-                        traditionalDanceController.guessWord(word: item, remainingTime: countdownTimer)
-                    } )
+                    AlphabetBox(type: "Option", alphabet: item.alphabet, isClicked: item.isClicked)
+                        .onTapGesture {
+                            traditionalDanceController.guessWord(word: item, remainingTime: countdownTimer)
+                        }
                 }
             }
         })

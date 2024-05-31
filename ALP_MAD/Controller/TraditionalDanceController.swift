@@ -9,24 +9,34 @@ import Foundation
 
 class TraditionalDanceController : ObservableObject {
     
-    @Published private var chance : Int
-    @Published private var traditionalDance : TraditionalDance
+    @Published private var chance : Int = 3
+    @Published private var traditionalDance: TraditionalDance = TraditionalDance(
+        answer: "",
+        image: "",
+        description: "",
+        provinceOrigin: "",
+        provinceOptions: [""],
+        throwableAnswer: [
+            Alphabet(
+                alphabet: "",
+                isClicked: false
+            )
+        ],
+        availableWords: [
+            Alphabet(
+                alphabet: "",
+                isClicked: false
+            )
+        ]
+    )
 //    @Published private var user : User
     @Published private var currentGameIsWrong: Bool = false
+    @Published private var isInit: Bool = false
     
-    init(traditionalDance: TraditionalDance) {
-        self.traditionalDance = traditionalDance
-        self.chance = 3
-//        self.user = user
-    }
     
     func getCurrentGameIsWrong() -> Bool {
         return self.currentGameIsWrong
     }
-    
-//    func getUser() -> User {
-//        return self.user
-//    }
     
     func changeDance(dance: TraditionalDance) {
         self.traditionalDance = dance
@@ -42,9 +52,10 @@ class TraditionalDanceController : ObservableObject {
     
     func guessWord(word : Alphabet, remainingTime: Int) {
         var checker: Bool = false
-        for index in traditionalDance.throwableAnswer.indices {
-            if index >= 0 && index < traditionalDance.throwableAnswer.count {
-                if word.alphabet == traditionalDance.throwableAnswer[index].alphabet {
+        for index in ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.indices {
+            if index >= 0 && index < ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.count {
+                if word.alphabet == ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].alphabet {
+                    print("HOHOHO")
                     checker = true
                     setThrowableAnswerStatus(alphabet: word)
                     setAvailableWordsStatus(alphabet: word)
@@ -55,37 +66,40 @@ class TraditionalDanceController : ObservableObject {
         }
         if !checker {
             wrongAnswer()
+            print("EEAA")
             setAvailableWordsStatus(alphabet: word)
             checkChance()
         }
     }
     
     private func setThrowableAnswerStatus(alphabet: Alphabet) {
-        for index in traditionalDance.throwableAnswer.indices {
-            let whichAlphabet = traditionalDance.throwableAnswer[index].alphabet
+        for index in ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.indices {
+            let whichAlphabet = ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].alphabet
             if (whichAlphabet.isEqual(alphabet.alphabet)) {
-                traditionalDance.throwableAnswer[index].isClicked = true
+                ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].isClicked = true
+                print("KIW")
             }
         }
     }
     
     private func setAvailableWordsStatus(alphabet: Alphabet) {
-        for index in traditionalDance.availableWords.indices {
-            let whichAlphabet = traditionalDance.availableWords[index].alphabet
+        for index in ModelData.shared.currentIslandObject.traditionalDance.availableWords.indices {
+            let whichAlphabet = ModelData.shared.currentIslandObject.traditionalDance.availableWords[index].alphabet
             if (whichAlphabet.isEqual(alphabet.alphabet)) {
-                traditionalDance.availableWords[index].isClicked = true
+                ModelData.shared.currentIslandObject.traditionalDance.availableWords[index].isClicked = true
+                print("Ke=EW")
             }
         }
     }
     
     private func checkCurrentGameAlreadyDone(remainingTime: Int) {
         var trueCounter: Int = 0
-        for index in traditionalDance.throwableAnswer.indices {
-            if (traditionalDance.throwableAnswer[index].isClicked) {
+        for index in ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.indices {
+            if (ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].isClicked) {
                 trueCounter += 1
             }
         }
-        if (trueCounter == traditionalDance.throwableAnswer.count) {
+        if (trueCounter == ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.count) {
             correctAnswer(remainingTime: remainingTime)
         }
     }
