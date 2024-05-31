@@ -28,23 +28,12 @@ struct AnswerDescriptionView: View {
                         traditionalLanguageDescription = islandController.showTraditionalLanguageDescription()
                     }
                 }
-                .safeAreaInset(edge: .top) {
-                    LinearGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: Color("redColor(TeWaRa)"), location: 0.5),
-                            .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
-                        ]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                    .frame(height: 12)
-                    .edgesIgnoringSafeArea(.top)
-                    .padding(.bottom, -70)
-                }
+                .background(Color.white)
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
-                    }
+                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                    //                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                    //                    }
+                    MusicPlayer.shared.stopBackgroundMusic()
                 }
                 .onDisappear {
                     MusicPlayer.shared.stopBackgroundMusic()
@@ -53,7 +42,8 @@ struct AnswerDescriptionView: View {
                     if newValue {
                         MusicPlayer.shared.stopBackgroundMusic()
                     } else {
-                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                        //                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                        MusicPlayer.shared.stopBackgroundMusic()
                     }
                 }
                 .navigationDestination(isPresented: $navToIslandView) {
@@ -65,136 +55,143 @@ struct AnswerDescriptionView: View {
     
     private func setUpAnswerDescriptionView(screenSize: CGSize, islandController: IslandController, navToIslandView: Binding<Bool>, traditionalDanceDescription: TraditionalDance, traditionalLanguageDescription: TraditionalLanguage) -> some View {
         VStack {
-            navigationBar(navToIslandView: navToIslandView)
-            if ModelData.shared.currentGame == "TraditionalDance" {
-                if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "mp4") {
-                    VideoPlayer(player: AVPlayer(url: videoURL))
-                        .frame(width: screenSize.width, height: screenSize.height * 0.3)
-                        .shadow(radius: 10, y: 4)
-                        .padding(.top, -8)
-                        .padding(.bottom, 20)
+            navigationBar(navToIslandView: navToIslandView, screenSize: screenSize)
+            HStack{
+                if ModelData.shared.currentGame == "TraditionalDance" {
+                    if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "mp4") {
+                        VideoPlayer(player: AVPlayer(url: videoURL))
+                            .frame(width: screenSize.width/3, height: screenSize.height/3.3)
+                            .shadow(radius: 10, y: 4)
+                    } else {
+                        Text("Video tidak ditemukan.")
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+                    description(description: traditionalDanceDescription.description, answer: traditionalDanceDescription.answer, provinceOrigin: traditionalDanceDescription.provinceOrigin, title: "TARI", screenSize: screenSize)
                 } else {
-                    Text("Video tidak ditemukan.")
-                        .foregroundColor(.red)
-                        .padding()
+                    if let image = traditionalLanguageDescription.image {
+                        Image(image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: screenSize.width, height: screenSize.height * 0.3)
+                            .shadow(radius: 10, y: 4)
+                            .padding(.top, -8)
+                            .padding(.bottom, 20)
+                    }
+                    description(description: traditionalLanguageDescription.description, answer: traditionalLanguageDescription.answer, provinceOrigin: traditionalLanguageDescription.provinceOrigin, title: "BAHASA", screenSize: screenSize)
                 }
-                description(description: traditionalDanceDescription.description, answer: traditionalDanceDescription.answer, provinceOrigin: traditionalDanceDescription.provinceOrigin, title: "TARI")
-            } else {
-                if let image = traditionalLanguageDescription.image {
-                    Image(image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: screenSize.width, height: screenSize.height * 0.3)
-                        .shadow(radius: 10, y: 4)
-                        .padding(.top, -8)
-                        .padding(.bottom, 20)
-                }
-                description(description: traditionalLanguageDescription.description, answer: traditionalLanguageDescription.answer, provinceOrigin: traditionalLanguageDescription.provinceOrigin, title: "BAHASA")
             }
-            poinStatus()
+            .padding(.horizontal, screenSize.width/20)
+            poinStatus(screenSize: screenSize)
         }
     }
-    
-    private func navigationBar(navToIslandView: Binding<Bool>) -> some View {
-        HStack(alignment: .center) {
-            Spacer()
-            Text("Penjelasan")
-                .fontWeight(.semibold)
-                .foregroundColor(Color.white)
-                .font(.title2)
-            Spacer()
-            Button(
-                action: {
-                    navToIslandView.wrappedValue = true
-                },
-                label: {
-                    Text("Selesai")
-                        .font(.title2)
-                        .fontWeight(.regular)
-                        .foregroundColor(.white)
-                }
-            )
-            .cornerRadius(10)
-            .padding(.leading, 20)
-        }
-        .padding(.bottom, 10)
-        .frame(height: 50)
-        .background(
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(color: Color("redColor(TeWaRa)"), location: 0.5),
-                    .init(color: Color("orangeColor(TeWaRa)"), location: 1.0)
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+}
+
+private func navigationBar(navToIslandView: Binding<Bool>, screenSize: CGSize) -> some View {
+    HStack(alignment: .center) {
+        Text("Penjelasan")
+            .fontWeight(.semibold)
+            .foregroundColor(Color.white)
+            .font(.title)
+            .padding(.leading, screenSize.width/2.15)
+        Spacer()
+        Button(
+            action: {
+                navToIslandView.wrappedValue = true
+            },
+            label: {
+                Text("Selesai")
+                    .font(.title2)
+                    .fontWeight(.regular)
+                    .foregroundColor(.white)
+            }
         )
+        .padding(.trailing, screenSize.width/25)
+        .buttonStyle(PlainButtonStyle())
+        .cornerRadius(10)
     }
-    
-    private func description(description: String, answer: String, provinceOrigin: String, title: String) -> some View {
-        VStack {
-            Rectangle()
-                .fill(
-                    LinearGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: Color("redColor(TeWaRa)"), location: 0.7),
-                            .init(color: Color("darkredColor(TeWaRa)"), location: 1.0)
-                        ]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(height: 50)
-                .padding(.top, -8)
-                .cornerRadius(32)
-                .overlay(
-                    Text("\(title) \(answer)")
-                        .font(.system(size: 32, weight: .bold))
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                )
-                .padding(.bottom, 20)
-            Text("Asal: \(provinceOrigin)")
-                .font(.system(size: 16, weight: .bold))
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.center)
-                .italic()
-                .padding(.bottom, 20)
-            Text(description)
-                .font(.system(size: 20, weight: .regular))
-                .foregroundColor(.black)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, 15)
-                .padding(.bottom, 20)
-                .lineSpacing(10)
-        }
-    }
-    
-    private func poinStatus() -> some View {
+    .frame(height: screenSize.height/10)
+    .background(
+        LinearGradient(
+            gradient: Gradient(stops: [
+                .init(color: Color("redColor(TeWaRa)"), location: 0.5),
+                .init(color: Color("orangeColor(TeWaRa)"), location: 1.0)
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    )
+    .padding(.bottom, screenSize.height/20)
+}
+
+private func description(description: String, answer: String, provinceOrigin: String, title: String, screenSize: CGSize) -> some View {
+    VStack {
         Rectangle()
             .fill(
                 LinearGradient(
                     gradient: Gradient(stops: [
-                        .init(color: Color("redColor(TeWaRa)"), location: 0.5),
-                        .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
+                        .init(color: Color("redColor(TeWaRa)"), location: 0.7),
+                        .init(color: Color("darkredColor(TeWaRa)"), location: 1.0)
                     ]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
             )
-            .frame(height: 100)
-            .cornerRadius(10)
+            .frame(width: screenSize.width/7, height: screenSize.height/20)
+            .cornerRadius(32)
             .overlay(
-                HStack {
-                    Spacer()
-                    Text("Poin mu sekarang adalah \(ModelData.shared.currentUser.score)")
-                        .font(.system(size: 20, weight: .regular))
-                        .foregroundColor(.white)
-                    Spacer()
-                }
+                Text("\(title) \(answer)")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
             )
+            .padding(.bottom, screenSize.height/80)
+        Text("Asal: \(provinceOrigin)")
+            .font(.title2)
+            .fontWeight(.bold)
+            .foregroundColor(.gray)
+            .multilineTextAlignment(.center)
+            .italic()
+            .padding(.bottom, screenSize.height/60)
+        Text(description)
+            .font(.title)
+            .fontWeight(.regular)
+            .foregroundColor(.black)
+            .multilineTextAlignment(.leading)
+            .padding(.horizontal, screenSize.width/26)
+            .padding(.bottom, screenSize.height/50)
+            .lineSpacing(10)
     }
 }
+
+private func poinStatus(screenSize: CGSize) -> some View {
+    Rectangle()
+        .fill(
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(color: Color("redColor(TeWaRa)"), location: 0.5),
+                    .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        .frame(width: screenSize.width/1.1, height: screenSize.height/5)
+        .cornerRadius(10)
+        .overlay(
+            HStack {
+                Spacer()
+                Text("Poin mu sekarang adalah \(ModelData.shared.currentUser.score)")
+                    .font(.title)
+                    .fontWeight(.regular)
+                    .foregroundColor(.white)
+                Spacer()
+            }
+        )
+        .padding(.bottom, screenSize.height/7)
+}
+
 
 #Preview {
     AnswerDescriptionView()

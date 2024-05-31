@@ -56,9 +56,10 @@ struct AdditionalQuestionView: View {
             AnswerDescriptionView()
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+//                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+//            }
+            MusicPlayer.shared.stopBackgroundMusic()
         }
         .onDisappear {
             MusicPlayer.shared.stopBackgroundMusic()
