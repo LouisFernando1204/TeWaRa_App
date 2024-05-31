@@ -5,34 +5,95 @@
 //  Created by MacBook Pro on 12/05/24.
 //
 
-import Foundation
-import UIKit
+import Foundation   
 
 class TraditionalDanceController : ObservableObject {
     
     @Published private var chance : Int
     @Published private var traditionalDance : TraditionalDance
-    @Published private var user : User
+//    @Published private var user : User
+    @Published private var currentGameIsWrong: Bool = false
     
-    init(traditionalDance: TraditionalDance, chance: Int, user: User) {
+    init(traditionalDance: TraditionalDance) {
         self.traditionalDance = traditionalDance
-        self.chance = chance
-        self.user = user
+        self.chance = 3
+//        self.user = user
     }
     
-    func getUser() -> User {
-        return self.user
+    func getCurrentGameIsWrong() -> Bool {
+        return self.currentGameIsWrong
     }
     
-    func wrongAnswer() {
-        
+//    func getUser() -> User {
+//        return self.user
+//    }
+    
+    func getChance() -> Int {
+        return self.chance
     }
     
-    func guessWord(word : String) {
-        
+    private func wrongAnswer() {
+        self.chance -= 1
     }
     
-    func correctAnswer() {
+    
+    func guessWord(word : Alphabet, remainingTime: Int) {
+        var checker: Bool = false
+        for index in ModelData.shared.bali.traditionalDance.throwableAnswer.indices {
+            if index >= 0 && index < ModelData.shared.bali.traditionalDance.throwableAnswer.count {
+                if word.alphabet == ModelData.shared.bali.traditionalDance.throwableAnswer[index].alphabet {
+                    checker = true
+                    setThrowableAnswerStatus(alphabet: word)
+                    setAvailableWordsStatus(alphabet: word)
+                    checkCurrentGameAlreadyDone(remainingTime: remainingTime)
+                    
+                }
+            }
+        }
+        if !checker {
+            wrongAnswer()
+            setAvailableWordsStatus(alphabet: word)
+            checkChance()
+        }
+    }
+    
+    private func setThrowableAnswerStatus(alphabet: Alphabet) {
+        for index in ModelData.shared.bali.traditionalDance.throwableAnswer.indices {
+            let whichAlphabet = ModelData.shared.bali.traditionalDance.throwableAnswer[index].alphabet
+            if (whichAlphabet.isEqual(alphabet.alphabet)) {
+                ModelData.shared.bali.traditionalDance.throwableAnswer[index].isClicked = true
+            }
+        }
+    }
+    
+    private func setAvailableWordsStatus(alphabet: Alphabet) {
+        for index in ModelData.shared.bali.traditionalDance.availableWords.indices {
+            let whichAlphabet = ModelData.shared.bali.traditionalDance.availableWords[index].alphabet
+            if (whichAlphabet.isEqual(alphabet.alphabet)) {
+                ModelData.shared.bali.traditionalDance.availableWords[index].isClicked = true
+            }
+        }
+    }
+    
+    private func checkCurrentGameAlreadyDone(remainingTime: Int) {
+        var trueCounter: Int = 0
+        for index in ModelData.shared.bali.traditionalDance.throwableAnswer.indices {
+            if (ModelData.shared.bali.traditionalDance.throwableAnswer[index].isClicked) {
+                trueCounter += 1
+            }
+        }
+        if (trueCounter == ModelData.shared.bali.traditionalDance.throwableAnswer.count) {
+            correctAnswer(remainingTime: remainingTime)
+        }
+    }
+    
+    private func checkChance() {
+        if (self.chance == 0) {
+            self.currentGameIsWrong = true
+        }
+    }
+    
+    private func correctAnswer(remainingTime: Int) {
         
     }
     
@@ -42,10 +103,6 @@ class TraditionalDanceController : ObservableObject {
     
     func getTraditionalDance() -> TraditionalDance {
         return self.traditionalDance
-    }
-    
-    func getChance() -> Int {
-        return self.chance
     }
     
     func navigateToAdditionalQuestionView() {

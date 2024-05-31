@@ -10,10 +10,77 @@
             "Bali", "NTB",
             "NTT", "Denpasar"
         ],
-        "answerOptions": [
-            "K", "W", "Y", "A",
-            "C", "I", "E", "U",
-            "G", "T", "H", "R"
+        "throwableAnswer": [
+            {
+                "alphabet": "K",
+                "isClicked": false
+            },
+            {
+                "alphabet": "E",
+                "isClicked": false
+            },
+            {
+                "alphabet": "C",
+                "isClicked": false
+            },
+            {
+                "alphabet": "A",
+                "isClicked": false
+            },
+            {
+                "alphabet": "K",
+                "isClicked": false
+            }
+        ],
+        "availableWords": [
+            {
+                "alphabet": "K",
+                "isClicked": false
+            },
+            {
+                "alphabet": "W",
+                "isClicked": false
+            },
+            {
+                "alphabet": "Y",
+                "isClicked": false
+            },
+            {
+                "alphabet": "A",
+                "isClicked": false
+            },
+            {
+                "alphabet": "C",
+                "isClicked": false
+            },
+            {
+                "alphabet": "I",
+                "isClicked": false
+            },
+            {
+                "alphabet": "E",
+                "isClicked": false
+            },
+            {
+                "alphabet": "U",
+                "isClicked": false
+            },
+            {
+                "alphabet": "G",
+                "isClicked": false
+            },
+            {
+                "alphabet": "T",
+                "isClicked": false
+            },
+            {
+                "alphabet": "H",
+                "isClicked": false
+            },
+            {
+                "alphabet": "R",
+                "isClicked": false
+            }
         ]
     },
     "traditionalLanguage": {

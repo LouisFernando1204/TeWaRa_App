@@ -11,7 +11,7 @@ import SwiftUI
 struct MAC_ALP_MADApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            IslandViewMac()
         }
     }
 }
