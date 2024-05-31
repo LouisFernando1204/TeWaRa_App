@@ -13,5 +13,6 @@ struct TraditionalDance : Codable {
     var description : String
     var provinceOrigin : String
     var provinceOptions : [String]
-    var answerOptions : [String]
+    var throwableAnswer: [Alphabet]
+    var availableWords: [Alphabet]
 }

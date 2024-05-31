@@ -10,10 +10,81 @@
             "Papua Barat", "Papua Nugini",
             "Papua Tengah", "Papua Selatan"
         ],
-        "answerOptions": [
-            "R", "S", "Z", "A",
-            "I", "J", "E", "O",
-            "G", "U", "X", "W"
+        "throwableAnswer": [
+            {
+                "alphabet": "S",
+                "isClicked": false
+            },
+            {
+                "alphabet": "A",
+                "isClicked": false
+            },
+            {
+                "alphabet": "J",
+                "isClicked": false
+            },
+            {
+                "alphabet": "O",
+                "isClicked": false
+            },
+            {
+                "alphabet": "J",
+                "isClicked": false
+            },
+            {
+                "alphabet": "O",
+                "isClicked": false
+            }
+        ],
+        "availableWords": [
+            {
+                "alphabet": "R",
+                "isClicked": false
+            },
+            {
+                "alphabet": "S",
+                "isClicked": false
+            },
+            {
+                "alphabet": "Z",
+                "isClicked": false
+            },
+            {
+                "alphabet": "A",
+                "isClicked": false
+            },
+            {
+                "alphabet": "I",
+                "isClicked": false
+            },
+            {
+                "alphabet": "J",
+                "isClicked": false
+            },
+            {
+                "alphabet": "E",
+                "isClicked": false
+            },
+            {
+                "alphabet": "O",
+                "isClicked": false
+            },
+            {
+                "alphabet": "G",
+                "isClicked": false
+            },
+            {
+                "alphabet": "U",
+                "isClicked": false
+            },
+            {
+                "alphabet": "X",
+                "isClicked": false
+            },
+            {
+                "alphabet": "W",
+                "isClicked": false
+            }
         ]
     },
     "traditionalLanguage": {

@@ -9,24 +9,36 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var isAccess = false
+    @State private var selection: Tab = .home
+    
+    enum Tab {
+        case home
+        case leaderboard
+    }
     
     var body: some View {
-        Group {
-            if self.isAccess {
-                PreAlertView()
-                    .transition(.opacity)
-            } else {
-                SplashScreenView()
-            }
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                withAnimation(.easeInOut(duration: 1.0)) {
-                    self.isAccess = true
+        
+        TabView(selection: $selection) {
+            
+            HomeView()
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
+                    // Label("Home", image: "person1")
                 }
-            }
+                .tag(Tab.home)
+            
+            
+            LeaderboardView()
+                .tabItem {
+                    Image(systemName: "rank")
+                    Text("Leaderboard")
+                    // Label("Leaderboard", image: "person2")
+                }
+                .tag(Tab.leaderboard)
+            
         }
+        
     }
 }
 
