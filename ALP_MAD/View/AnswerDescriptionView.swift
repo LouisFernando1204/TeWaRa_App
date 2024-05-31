@@ -61,7 +61,7 @@ struct AnswerDescriptionView: View {
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 0.3)
             }
         }
         .onDisappear {
@@ -71,7 +71,7 @@ struct AnswerDescriptionView: View {
             if newValue {
                 MusicPlayer.shared.stopBackgroundMusic()
             } else {
-                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 0.3)
             }
         }
     }

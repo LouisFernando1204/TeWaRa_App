@@ -15,10 +15,10 @@ struct AnswerDescriptionView: View {
     @State private var traditionalLanguageDescription: TraditionalLanguage? = nil
     
     var body: some View {
-        NavigationStack {
+        NavigationStack() {
             GeometryReader { geometry in
                 ScrollView {
-                    VStack {
+                    VStack(){
                         if let danceDescription = traditionalDanceDescription, let languageDescription = traditionalLanguageDescription {
                             setUpAnswerDescriptionView(screenSize: geometry.size, islandController: islandController, navToIslandView: $navToIslandView, traditionalDanceDescription: danceDescription, traditionalLanguageDescription: languageDescription)
                         }
@@ -30,10 +30,9 @@ struct AnswerDescriptionView: View {
                 }
                 .background(Color.white)
                 .onAppear {
-                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                    //                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
-                    //                    }
-                    MusicPlayer.shared.stopBackgroundMusic()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                    }
                 }
                 .onDisappear {
                     MusicPlayer.shared.stopBackgroundMusic()
@@ -42,7 +41,7 @@ struct AnswerDescriptionView: View {
                     if newValue {
                         MusicPlayer.shared.stopBackgroundMusic()
                     } else {
-                        //                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
                         MusicPlayer.shared.stopBackgroundMusic()
                     }
                 }
@@ -54,35 +53,39 @@ struct AnswerDescriptionView: View {
     }
     
     private func setUpAnswerDescriptionView(screenSize: CGSize, islandController: IslandController, navToIslandView: Binding<Bool>, traditionalDanceDescription: TraditionalDance, traditionalLanguageDescription: TraditionalLanguage) -> some View {
-        VStack {
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/){
             navigationBar(navToIslandView: navToIslandView, screenSize: screenSize)
-            HStack{
-                if ModelData.shared.currentGame == "TraditionalDance" {
-                    if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "mp4") {
-                        VideoPlayer(player: AVPlayer(url: videoURL))
-                            .frame(width: screenSize.width/3, height: screenSize.height/3.3)
-                            .shadow(radius: 10, y: 4)
+            VStack{
+                HStack (spacing: screenSize.width/40){
+                    if ModelData.shared.currentGame == "TraditionalDance" {
+                        if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "mp4") {
+                            VideoPlayer(player: AVPlayer(url: videoURL))
+                                .frame(width: screenSize.width/2.5, height: screenSize.height/2.78)
+                                .cornerRadius(10)
+                                .shadow(radius: 10, y: 4)
+                        } else {
+                            Text("Video tidak ditemukan.")
+                                .foregroundColor(.red)
+                                .padding()
+                        }
+                        description(description: traditionalDanceDescription.description, answer: traditionalDanceDescription.answer, provinceOrigin: traditionalDanceDescription.provinceOrigin, title: "TARI", screenSize: screenSize)
                     } else {
-                        Text("Video tidak ditemukan.")
-                            .foregroundColor(.red)
-                            .padding()
+                        if let image = traditionalLanguageDescription.image {
+                            Image(image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: screenSize.width/2.5, height: screenSize.height/2.78)
+                                .cornerRadius(10)
+                                .shadow(radius: 10, y: 4)
+                        }
+                        description(description: traditionalLanguageDescription.description, answer: traditionalLanguageDescription.answer, provinceOrigin: traditionalLanguageDescription.provinceOrigin, title: "BAHASA", screenSize: screenSize)
                     }
-                    description(description: traditionalDanceDescription.description, answer: traditionalDanceDescription.answer, provinceOrigin: traditionalDanceDescription.provinceOrigin, title: "TARI", screenSize: screenSize)
-                } else {
-                    if let image = traditionalLanguageDescription.image {
-                        Image(image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: screenSize.width, height: screenSize.height * 0.3)
-                            .shadow(radius: 10, y: 4)
-                            .padding(.top, -8)
-                            .padding(.bottom, 20)
-                    }
-                    description(description: traditionalLanguageDescription.description, answer: traditionalLanguageDescription.answer, provinceOrigin: traditionalLanguageDescription.provinceOrigin, title: "BAHASA", screenSize: screenSize)
                 }
+                .padding(.horizontal, screenSize.width/23.95)
+                .padding(.bottom, screenSize.height/20)
+                poinStatus(screenSize: screenSize)
             }
-            .padding(.horizontal, screenSize.width/20)
-            poinStatus(screenSize: screenSize)
+            .padding(.vertical, screenSize.height/12)
         }
     }
 }
@@ -125,7 +128,7 @@ private func navigationBar(navToIslandView: Binding<Bool>, screenSize: CGSize) -
 }
 
 private func description(description: String, answer: String, provinceOrigin: String, title: String, screenSize: CGSize) -> some View {
-    VStack {
+    VStack(alignment: .leading) {
         Rectangle()
             .fill(
                 LinearGradient(
@@ -144,14 +147,14 @@ private func description(description: String, answer: String, provinceOrigin: St
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
             )
             .padding(.bottom, screenSize.height/80)
         Text("Asal: \(provinceOrigin)")
             .font(.title2)
             .fontWeight(.bold)
             .foregroundColor(.gray)
-            .multilineTextAlignment(.center)
+            .multilineTextAlignment(.leading)
             .italic()
             .padding(.bottom, screenSize.height/60)
         Text(description)
@@ -159,7 +162,6 @@ private func description(description: String, answer: String, provinceOrigin: St
             .fontWeight(.regular)
             .foregroundColor(.black)
             .multilineTextAlignment(.leading)
-            .padding(.horizontal, screenSize.width/26)
             .padding(.bottom, screenSize.height/50)
             .lineSpacing(10)
     }
@@ -189,9 +191,7 @@ private func poinStatus(screenSize: CGSize) -> some View {
                 Spacer()
             }
         )
-        .padding(.bottom, screenSize.height/7)
 }
-
 
 #Preview {
     AnswerDescriptionView()

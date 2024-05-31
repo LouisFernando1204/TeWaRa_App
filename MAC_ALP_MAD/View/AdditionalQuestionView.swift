@@ -41,11 +41,21 @@ struct AdditionalQuestionView: View {
         ScrollView {
             VStack(alignment: .center) {
                 self.navigationBar(screenSize: screenSize)
-                self.timer(countDownTimer: countDownTimer, timerRunning: timerRunning, showAlert: showAlert, screenSize: screenSize)
-                self.question(screenSize: screenSize)
-                self.answerOptions(islandController: islandController, navToAnswerDescriptionView: navToAnswerDescriptionView, answer: answer, showAlert: showAlert, timerRunning: timerRunning, countDownTimer: countDownTimer, screenSize: screenSize)
-                self.poinStatus(screenSize: screenSize)
-                self.knowledgeInformation(screenSize: screenSize)
+                VStack{
+                    self.question(screenSize: screenSize)
+                    HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: screenSize.width/50){
+                        VStack{
+                            self.timer(countDownTimer: countDownTimer, timerRunning: timerRunning, showAlert: showAlert, screenSize: screenSize)
+                            self.poinStatus(screenSize: screenSize)
+                        }
+                        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/){
+                            self.answerOptions(islandController: islandController, navToAnswerDescriptionView: navToAnswerDescriptionView, answer: answer, showAlert: showAlert, timerRunning: timerRunning, countDownTimer: countDownTimer, screenSize: screenSize)
+                            self.knowledgeInformation(screenSize: screenSize)
+                        }
+                    }
+                    .padding(.horizontal, screenSize.width/23.95)
+                }
+                .padding(.vertical, screenSize.width/40)
             }
             .onAppear{
                 timerRunning.wrappedValue = true
@@ -56,10 +66,9 @@ struct AdditionalQuestionView: View {
             AnswerDescriptionView()
         }
         .onAppear {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-//                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
-//            }
-            MusicPlayer.shared.stopBackgroundMusic()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 0.3)
+            }
         }
         .onDisappear {
             MusicPlayer.shared.stopBackgroundMusic()
@@ -68,7 +77,7 @@ struct AdditionalQuestionView: View {
             if newValue {
                 MusicPlayer.shared.stopBackgroundMusic()
             } else {
-                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 0.3)
             }
         }
     }
@@ -93,14 +102,14 @@ struct AdditionalQuestionView: View {
                 endPoint: .bottomTrailing
             )
         )
-        .padding(.bottom, screenSize.height/35)
+        .padding(.bottom, screenSize.height/30)
     }
     
     private func timer(countDownTimer: Binding<Int>, timerRunning: Binding<Bool>, showAlert: Binding<Bool>, screenSize: CGSize) -> some View {
         ZStack(alignment: .center) {
             Image("backgroundTimer")
                 .resizable()
-                .frame(width: screenSize.width/1.07, height: screenSize.height/1.5)
+                .frame(width: screenSize.width/2, height: screenSize.height/2.5)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .strokeBorder(
@@ -115,7 +124,7 @@ struct AdditionalQuestionView: View {
                 .cornerRadius(10)
             Rectangle()
                 .fill(Color.white.opacity(0.5))
-                .frame(width: screenSize.width/1.08, height: screenSize.height/1.53)
+                .frame(width: screenSize.width/2.08, height: screenSize.height/2.7)
                 .cornerRadius(6)
             Text("00:00:\(String(format: "%02d", countDownTimer.wrappedValue))")
                 .onReceive(timer) { _ in
@@ -128,25 +137,25 @@ struct AdditionalQuestionView: View {
                     }
                 }
                 .foregroundColor(.black)
-                .font(.system(size: screenSize.width/12))
+                .font(.system(size: screenSize.width/20))
                 .fontWeight(.black)
         }
-        .padding(.bottom, screenSize.height/40)
+        .padding(.bottom, screenSize.height/25)
     }
     
     private func question(screenSize: CGSize) -> some View {
         HStack(alignment: .center) {
             Text("Budaya tersebut berasal dari provinsi...")
-                .font(.system(size: screenSize.width/25))
+                .font(.system(size: screenSize.width/50))
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
         }
-        .padding(.bottom, screenSize.height/40)
+        .padding(.bottom, screenSize.height/60)
     }
     
     private func answerOptions(islandController: IslandController, navToAnswerDescriptionView: Binding<Bool>, answer: Binding<String>, showAlert: Binding<Bool>, timerRunning: Binding<Bool>, countDownTimer: Binding<Int>, screenSize: CGSize) -> some View {
-        LazyVGrid(columns: columns, spacing: screenSize.height/30) {
+        LazyVGrid(columns: columns, spacing: screenSize.height/80) {
             if ModelData.shared.currentGame == "TraditionalDance" {
                 ForEach(islandController.getIsland().traditionalDance.provinceOptions, id: \.self) { provinceOption in
                     Button(
@@ -158,10 +167,10 @@ struct AdditionalQuestionView: View {
                         },
                         label: {
                             Text(provinceOption)
-                                .font(.system(size: screenSize.width/20, weight: .heavy))
+                                .font(.system(size: screenSize.width/40, weight: .heavy))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
-                                .frame(width: screenSize.width/2.25, height: screenSize.height/3)
+                                .frame(width: screenSize.width/5, height: screenSize.height/5.2)
                         })
                     .buttonStyle(PlainButtonStyle())
                     .background(
@@ -213,11 +222,12 @@ struct AdditionalQuestionView: View {
                         },
                         label: {
                             Text(provinceOption)
-                                .font(.system(size: screenSize.width/20, weight: .heavy))
+                                .font(.system(size: screenSize.width/40, weight: .heavy))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
-                                .frame(width: screenSize.width/2.25, height: screenSize.height/3)
+                                .frame(width: screenSize.width/5, height: screenSize.height/5.2)
                         })
+                    .buttonStyle(PlainButtonStyle())
                     .background(
                         LinearGradient(
                             gradient: Gradient(colors: [Color("redColor(TeWaRa)"), Color("darkredColor(TeWaRa)")]),
@@ -258,8 +268,7 @@ struct AdditionalQuestionView: View {
                 }
             }
         }
-        .padding(.horizontal, screenSize.width/25)
-        .padding(.bottom, screenSize.height/20)
+        .padding(.bottom, screenSize.height/25)
     }
     
     private func poinStatus(screenSize: CGSize) -> some View {
@@ -274,37 +283,36 @@ struct AdditionalQuestionView: View {
                     endPoint: .bottomTrailing
                 )
             )
-            .frame(width: screenSize.width/1.1, height: screenSize.height/2)
+            .frame(width: screenSize.width/2, height: screenSize.height/7)
             .cornerRadius(10)
             .overlay(
                 HStack {
                     Spacer()
                     Text("Poin mu sekarang adalah \(ModelData.shared.currentUser.score)")
-                        .font(.system(size: screenSize.width/20, weight: .regular))
+                        .font(.system(size: screenSize.width/50, weight: .regular))
                         .foregroundColor(.white)
                     Spacer()
                 }
             )
-            .padding(.bottom, screenSize.height/30)
     }
     
     private func knowledgeInformation(screenSize: CGSize) -> some View {
         Rectangle()
             .fill(Color.gray)
-            .frame(width: screenSize.width/1.1, height: screenSize.height/4)
+            .frame(width: screenSize.width/2.455, height: screenSize.height/10)
             .cornerRadius(10)
             .overlay(
                 HStack {
                     Spacer()
                     Text("Semakin cepat kamu menjawab, poin mu akan lebih besar lho...")
-                        .font(.system(size: screenSize.width/25, weight: .medium))
+                        .font(.system(size: screenSize.width/50, weight: .medium))
                         .italic()
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
             )
-            .padding(.bottom, screenSize.height/7)
+            .padding(.bottom, screenSize.height/20)
     }
 }
 

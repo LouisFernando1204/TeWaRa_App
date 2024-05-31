@@ -56,6 +56,7 @@
 		04A1A3242BF0664E00C7E982 /* TraditionalDanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */; };
 		04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */; };
 		04C658362BF4922100ECECD2 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C658352BF4922100ECECD2 /* ModelData.swift */; };
+		641B07172C09FD0B00D02DB0 /* TouchdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641B07162C09FD0B00D02DB0 /* TouchdownView.swift */; };
 		6447B67D2BFA20F700AFD5D1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6447B67C2BFA20F700AFD5D1 /* RegisterView.swift */; };
 		646445C32C07700F00B623C3 /* TraditionalDanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */; };
 		646445C42C07700F00B623C3 /* IslandController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3212BF0663E00C7E982 /* IslandController.swift */; };
@@ -146,6 +147,7 @@
 		04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceController.swift; sourceTree = "<group>"; };
 		04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageController.swift; sourceTree = "<group>"; };
 		04C658352BF4922100ECECD2 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		641B07162C09FD0B00D02DB0 /* TouchdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchdownView.swift; sourceTree = "<group>"; };
 		6447B67C2BFA20F700AFD5D1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		646445C72C078EBD00B623C3 /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		646445CA2C078FA500B623C3 /* mainMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mainMusic.mp3; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				6491C8212C088DDF0034F107 /* AdditionalQuestionView.swift */,
 				6491C8232C088FB90034F107 /* AnswerDescriptionView.swift */,
 				6491C8272C08A7990034F107 /* IslandView.swift */,
+				641B07162C09FD0B00D02DB0 /* TouchdownView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				6491C8162C0807DD0034F107 /* PreAlertView.swift in Sources */,
 				646445C32C07700F00B623C3 /* TraditionalDanceController.swift in Sources */,
 				646445C42C07700F00B623C3 /* IslandController.swift in Sources */,
+				641B07172C09FD0B00D02DB0 /* TouchdownView.swift in Sources */,
 				646445C52C07700F00B623C3 /* TraditionalLanguageController.swift in Sources */,
 				6491C8222C088DDF0034F107 /* AdditionalQuestionView.swift in Sources */,
 				6491C8202C0853030034F107 /* MusicPlayer.swift in Sources */,

@@ -11,22 +11,24 @@ struct ContentView: View {
     @State private var isAccess = false
     
     var body: some View {
-//        Group {
-//            if self.isAccess {
-//                PreAlertView()
-//                    .transition(.opacity)
-//            } else {
-//                SplashScreenView()
-//            }
-//        }
-//        .onAppear {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-//                withAnimation(.easeInOut(duration: 1.0)) {
-//                    self.isAccess = true
-//                }
-//            }
-//        }
-        AnswerDescriptionView()
+        Group {
+            if self.isAccess {
+                PreAlertView()
+                    .transition(.opacity)
+            } else {
+                SplashScreenView()
+            }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                withAnimation(.easeInOut(duration: 1.0)) {
+                    self.isAccess = true
+                }
+            }
+        }
+        //
+        //        kalau dari AdditionalQuestionView() trs di run, mau ke halaman AnswerDescriptionView()
+        // gatau knapa...
     }
 }
 
