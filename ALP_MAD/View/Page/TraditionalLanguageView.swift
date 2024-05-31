@@ -11,6 +11,8 @@ struct TraditionalLanguageView: View {
     
     let selectedIsland: Island
     
+    @State private var backToIslandMenu: Bool = false
+    @State private var navToAdditionalQuestion: Bool = false
     @State private var textFieldValue: String = ""
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
@@ -25,7 +27,17 @@ struct TraditionalLanguageView: View {
             ScrollView {
                 VStack(content: {
                     QuestionAndDisplay(type: "Bahasa", currentIsland: ModelData.shared.currentIslandObject)
-                    TextFieldComponent(value: textFieldValue)
+                    TextField("Masukkan jawabanmu...", text: $textFieldValue)
+                        .padding()
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(
+                                    CustomGradient.redOrangeGradient,
+                                    lineWidth: 2
+                                )
+                        )
+                    Spacer()
+                        .frame(height: 20)
                     self.showClueAndTimer()
                     ButtonCheck(action: {
                         traditionalLanguageController.guessWord(word: textFieldValue, remainingTime: countdownTimer)
@@ -41,12 +53,35 @@ struct TraditionalLanguageView: View {
             timerRunning = true
             traditionalLanguageController.changeLanguage(language: ModelData.shared.currentIslandObject.traditionalLanguage)
         }
-        
         .safeAreaInset(edge: .top) {
             CustomGradient.redOrangeGradient
                 .frame(height: ScreenSize.screenWidth > 600 ? 32: 70)
                 .edgesIgnoringSafeArea(.top)
                 .padding(.bottom, ScreenSize.screenWidth > 600 ? -40 : -70)
+        }
+        .alert(isPresented: $traditionalLanguageController.isWrong) {
+            Alert(
+                title: Text("Oops.. jawabanmu masih salah"),
+                message: Text("Tetap semangat dan belajar lagii.."),
+                dismissButton: .default(Text("Kembali ke Pilih Pulau")) {
+                    self.backToIslandMenu = true
+                }
+            )
+        }
+        .alert(isPresented: $traditionalLanguageController.isCorrect) {
+            Alert(
+                title: Text("Congrats! Jawabanmu benarr"),
+                message: Text("Oopss jangan happy dulu, karena masih ada tantangan baru!"),
+                dismissButton: .default(Text("Telusuri tantangan")) {
+                    self.navToAdditionalQuestion = true
+                }
+            )
+        }
+        .fullScreenCover(isPresented: $backToIslandMenu) {
+            IslandView()
+        }
+        .fullScreenCover(isPresented: $navToAdditionalQuestion) {
+            AdditionalQuestionView()
         }
     }
     
