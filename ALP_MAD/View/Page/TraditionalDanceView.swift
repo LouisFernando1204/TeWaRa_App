@@ -11,11 +11,12 @@ import UIKit
 
 struct TraditionalDanceView: View {
     
+    @State private var selectedIsland: Island
     @State private var avPlayer = AVPlayer()
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @StateObject private var traditionalDanceController = TraditionalDanceController(traditionalDance: ModelData.shared.bali.traditionalDance)
+    
     
     private var fixedColumn: [GridItem] {
         let screenWidth = UIScreen.main.bounds.width
@@ -32,16 +33,22 @@ struct TraditionalDanceView: View {
         ]
     }
     
+    @StateObject private var traditionalDanceController: TraditionalDanceController = TraditionalDanceController(traditionalDance: ModelData.shared.bali.traditionalDance)
+    
+    init(selectedIsland: Island) {
+        self.selectedIsland = selectedIsland
+        self.traditionalDanceController.changeDance(dance: selectedIsland.traditionalDance)
+    }
+    
     var body: some View {
         
-        ScrollView {
-            VStack(content: {
-                
-                TopNavigationBar(destination: AnyView(IslandView()), name: "Tebak Tarian")
-                
+        VStack(content: {
+            
+            TopNavigationBar(name: "Tebak Tarian", message: "Pulau")
+            ScrollView {
                 VStack(content: {
-                    QuestionAndDisplay(type: "Tarian", currentIsland: ModelData.shared.bali)
-                    ChanceBox(message: "Kesempatan kamu kurang 3x")
+                    QuestionAndDisplay(type: "Tarian", currentIsland: self.selectedIsland)
+                    ChanceBox(message: "Kesempatan kamu kurang \(self.traditionalDanceController.getChance())x")
                     self.showAnswerBox()
                     self.showWordOptions()
                     self.showTimer()
@@ -49,10 +56,11 @@ struct TraditionalDanceView: View {
                 .padding(.horizontal,
                          ScreenSize.screenWidth > 600 ? 90 : 20)
                 .padding(.vertical, ScreenSize.screenWidth > 600 ? 16 : 6)
-            })
-            .onAppear {
-                timerRunning = true
             }
+            
+        })
+        .onAppear {
+            timerRunning = true
         }
         .safeAreaInset(edge: .top) {
             CustomGradient.redOrangeGradient
@@ -66,10 +74,10 @@ struct TraditionalDanceView: View {
     private func showAnswerBox() -> some View {
         HStack(content: {
             // buat if kalau ndak null countnya/panjangnya
-            ForEach(ModelData.shared.sumatera.traditionalDance.throwableAnswer.indices, id: \.self) { index in
-                let alphabet = ModelData.shared.sumatera.traditionalDance.throwableAnswer[index].alphabet
+            ForEach(self.selectedIsland.traditionalDance.throwableAnswer.indices, id: \.self) { index in
+                let alphabet = self.selectedIsland.traditionalDance.throwableAnswer[index].alphabet
                 
-                AlphabetBox(type: "Answer", alphabet: alphabet, isClicked: ModelData.shared.sumatera.traditionalDance.throwableAnswer[index].isClicked, action: nil)
+                AlphabetBox(type: "Answer", alphabet: alphabet, isClicked: self.selectedIsland.traditionalDance.throwableAnswer[index].isClicked, action: nil)
             }
         })
     }
@@ -77,8 +85,8 @@ struct TraditionalDanceView: View {
     private func showWordOptions() -> some View {
         VStack(content: {
             LazyVGrid(columns: fixedColumn, spacing: 20) {
-                ForEach(ModelData.shared.bali.traditionalDance.availableWords.indices, id:\.self) { index in
-                    let item = ModelData.shared.bali.traditionalDance.availableWords[index]
+                ForEach(self.selectedIsland.traditionalDance.availableWords.indices, id:\.self) { index in
+                    let item = self.selectedIsland.traditionalDance.availableWords[index]
                     
                     AlphabetBox(type: "Option", alphabet: item.alphabet, isClicked: item.isClicked, action: {
                         traditionalDanceController.guessWord(word: item, remainingTime: countdownTimer)
@@ -109,5 +117,5 @@ struct TraditionalDanceView: View {
 }
 
 #Preview {
-    TraditionalDanceView()
+    TraditionalDanceView(selectedIsland: ModelData.shared.bali)
 }

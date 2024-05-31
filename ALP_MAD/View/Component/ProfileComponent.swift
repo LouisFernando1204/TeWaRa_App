@@ -17,7 +17,7 @@ struct ProfileComponent: View {
                 
                 Spacer()
                 
-                Image("person1")
+                Image(currentUser.image)
                     .resizable()
                     .frame(width: ScreenSize.screenWidth > 600 ? 120 : 80, height: ScreenSize.screenWidth > 600 ? 120 : 80)
                     .clipShape(Circle())

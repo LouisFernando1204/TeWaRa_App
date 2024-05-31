@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TraditionalLanguageView: View {
     
+    let selectedIsland: Island
+    
     @State private var textFieldValue: String = ""
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
@@ -18,9 +20,9 @@ struct TraditionalLanguageView: View {
     var body: some View {
         ScrollView {
             VStack(content: {
-                TopNavigationBar(destination: AnyView(IslandView()), name: "Tebak Bahasa")
+                TopNavigationBar(name: "Tebak Bahasa", message: "Pulau")
                 VStack(content: {
-                    QuestionAndDisplay(type: "Bahasa", currentIsland: ModelData.shared.bali)
+                    QuestionAndDisplay(type: "Bahasa", currentIsland: self.selectedIsland)
                     TextFieldComponent(value: textFieldValue)
                     self.showClueAndTimer()
                     ButtonCheck(action: {
@@ -71,5 +73,5 @@ struct TraditionalLanguageView: View {
 }
 
 #Preview {
-    TraditionalLanguageView()
+    TraditionalLanguageView(selectedIsland: ModelData.shared.bali)
 }

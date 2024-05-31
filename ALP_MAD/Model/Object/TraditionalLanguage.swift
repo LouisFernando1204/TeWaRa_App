@@ -9,7 +9,7 @@ import Foundation
 
 struct TraditionalLanguage : Codable {
     var answer : String
-    var image : String
+    var image : String?
     var description : String
     var provinceOrigin : String
     var provinceOptions : [String]

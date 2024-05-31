@@ -17,10 +17,26 @@
 		041B26AE2BFA250A000B23BB /* ClueBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26AD2BFA250A000B23BB /* ClueBox.swift */; };
 		041B26B02BFA2A11000B23BB /* AlphabetBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26AF2BFA2A11000B23BB /* AlphabetBox.swift */; };
 		041B26B42BFA368E000B23BB /* ButtonCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26B32BFA368E000B23BB /* ButtonCheck.swift */; };
+		041E54432C099FC800A15EAE /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E54422C099FC800A15EAE /* HomeController.swift */; };
+		041E54442C099FD300A15EAE /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E54422C099FC800A15EAE /* HomeController.swift */; };
+		041E54492C09A09300A15EAE /* mainMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54452C09A09300A15EAE /* mainMusic.mp3 */; };
+		041E544A2C09A09300A15EAE /* mainMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54452C09A09300A15EAE /* mainMusic.mp3 */; };
+		041E544B2C09A09300A15EAE /* quizMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54462C09A09300A15EAE /* quizMusic.mp3 */; };
+		041E544C2C09A09300A15EAE /* quizMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54462C09A09300A15EAE /* quizMusic.mp3 */; };
+		041E544D2C09A09300A15EAE /* touchdownMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54472C09A09300A15EAE /* touchdownMusic.mp3 */; };
+		041E544E2C09A09300A15EAE /* touchdownMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54472C09A09300A15EAE /* touchdownMusic.mp3 */; };
+		041E54512C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 041E544F2C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 */; };
+		041E54522C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 041E544F2C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 */; };
+		041E54552C09A15A00A15EAE /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E54542C09A15A00A15EAE /* MusicPlayer.swift */; };
+		041E54562C09A15A00A15EAE /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E54542C09A15A00A15EAE /* MusicPlayer.swift */; };
 		0420D5242BF9043400696430 /* TraditionalLanguageViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420D5232BF9043400696430 /* TraditionalLanguageViewMac.swift */; };
 		0420D5262BF9044100696430 /* TraditionalDanceViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420D5252BF9044100696430 /* TraditionalDanceViewMac.swift */; };
 		0420D5272BF9051300696430 /* Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044215822BF60BF60064666A /* Alphabet.swift */; };
 		0420D5282BF9069100696430 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A1A2D02BF062C100C7E982 /* Assets.xcassets */; };
+		0422AD3A2C09A495003A33BC /* PreAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422AD392C09A495003A33BC /* PreAlertView.swift */; };
+		0422AD3C2C09A52F003A33BC /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422AD3B2C09A52F003A33BC /* RegisterView.swift */; };
+		0422AD3E2C09A553003A33BC /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422AD3D2C09A553003A33BC /* SplashScreenView.swift */; };
+		0422AD402C09A56A003A33BC /* TouchdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422AD3F2C09A569003A33BC /* TouchdownView.swift */; };
 		043845A82BFB939C00F94411 /* HomeViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043845A72BFB939C00F94411 /* HomeViewMac.swift */; };
 		043AC9762BFB5B6A0065EB0B /* ProfileComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043AC9752BFB5B6A0065EB0B /* ProfileComponent.swift */; };
 		043AC9782BFB5C5B0065EB0B /* ButtonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043AC9772BFB5C5B0065EB0B /* ButtonColor.swift */; };
@@ -126,8 +142,18 @@
 		041B26AD2BFA250A000B23BB /* ClueBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClueBox.swift; sourceTree = "<group>"; };
 		041B26AF2BFA2A11000B23BB /* AlphabetBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabetBox.swift; sourceTree = "<group>"; };
 		041B26B32BFA368E000B23BB /* ButtonCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCheck.swift; sourceTree = "<group>"; };
+		041E54422C099FC800A15EAE /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		041E54452C09A09300A15EAE /* mainMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mainMusic.mp3; sourceTree = "<group>"; };
+		041E54462C09A09300A15EAE /* quizMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = quizMusic.mp3; sourceTree = "<group>"; };
+		041E54472C09A09300A15EAE /* touchdownMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = touchdownMusic.mp3; sourceTree = "<group>"; };
+		041E544F2C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TariPajoge-SulawesiSelatan.mp4"; sourceTree = "<group>"; };
+		041E54542C09A15A00A15EAE /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		0420D5232BF9043400696430 /* TraditionalLanguageViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageViewMac.swift; sourceTree = "<group>"; };
 		0420D5252BF9044100696430 /* TraditionalDanceViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceViewMac.swift; sourceTree = "<group>"; };
+		0422AD392C09A495003A33BC /* PreAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertView.swift; sourceTree = "<group>"; };
+		0422AD3B2C09A52F003A33BC /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		0422AD3D2C09A553003A33BC /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		0422AD3F2C09A569003A33BC /* TouchdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchdownView.swift; sourceTree = "<group>"; };
 		043845A72BFB939C00F94411 /* HomeViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMac.swift; sourceTree = "<group>"; };
 		043AC9752BFB5B6A0065EB0B /* ProfileComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComponent.swift; sourceTree = "<group>"; };
 		043AC9772BFB5C5B0065EB0B /* ButtonColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonColor.swift; sourceTree = "<group>"; };
@@ -253,6 +279,10 @@
 				04A1A3152BF0658700C7E982 /* TraditionalDanceView.swift */,
 				04A1A31B2BF065CF00C7E982 /* AnswerDescriptionView.swift */,
 				043E39782BF38D4C00FB74A6 /* AdditionalQuestionView.swift */,
+				0422AD392C09A495003A33BC /* PreAlertView.swift */,
+				0422AD3B2C09A52F003A33BC /* RegisterView.swift */,
+				0422AD3D2C09A553003A33BC /* SplashScreenView.swift */,
+				0422AD3F2C09A569003A33BC /* TouchdownView.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -272,6 +302,38 @@
 				041B26982BFA09E9000B23BB /* ScreenSize.swift */,
 			);
 			path = SizeSettings;
+			sourceTree = "<group>";
+		};
+		041E54482C09A09300A15EAE /* BackgroundMusic */ = {
+			isa = PBXGroup;
+			children = (
+				041E54452C09A09300A15EAE /* mainMusic.mp3 */,
+				041E54462C09A09300A15EAE /* quizMusic.mp3 */,
+				041E54472C09A09300A15EAE /* touchdownMusic.mp3 */,
+			);
+			path = BackgroundMusic;
+			sourceTree = "<group>";
+		};
+		041E54502C09A0A200A15EAE /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				041E544F2C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 */,
+			);
+			name = Video;
+			path = "../../../../../../Downloads/TeWaRa-Louis/ALP_MAD/Model/Data/Video";
+			sourceTree = "<group>";
+		};
+		041E54532C09A0B500A15EAE /* IslandData */ = {
+			isa = PBXGroup;
+			children = (
+				048DD7B32BF4C3FB0041FDE9 /* SumateraData.json */,
+				048DD7B72BF4C51C0041FDE9 /* BaliData.json */,
+				048DD7B92BF4C5870041FDE9 /* JavaData.json */,
+				048DD7BD2BF4C6AA0041FDE9 /* KalimantanData.json */,
+				048DD7BF2BF4C6C50041FDE9 /* PapuaData.json */,
+				048DD7C12BF4C6F90041FDE9 /* SulawesiData.json */,
+			);
+			path = IslandData;
 			sourceTree = "<group>";
 		};
 		0420D5222BF903F700696430 /* View */ = {
@@ -349,6 +411,7 @@
 				04A1A2FB2BF0635F00C7E982 /* TraditionalDance.swift */,
 				04A1A2FD2BF0637000C7E982 /* TraditionalLanguage.swift */,
 				044215822BF60BF60064666A /* Alphabet.swift */,
+				041E54542C09A15A00A15EAE /* MusicPlayer.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -356,12 +419,9 @@
 		048DD7E72BF4CC7C0041FDE9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				048DD7B32BF4C3FB0041FDE9 /* SumateraData.json */,
-				048DD7B72BF4C51C0041FDE9 /* BaliData.json */,
-				048DD7B92BF4C5870041FDE9 /* JavaData.json */,
-				048DD7BD2BF4C6AA0041FDE9 /* KalimantanData.json */,
-				048DD7BF2BF4C6C50041FDE9 /* PapuaData.json */,
-				048DD7C12BF4C6F90041FDE9 /* SulawesiData.json */,
+				041E54502C09A0A200A15EAE /* Video */,
+				041E54482C09A09300A15EAE /* BackgroundMusic */,
+				041E54532C09A0B500A15EAE /* IslandData */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -458,6 +518,7 @@
 				04A1A3212BF0663E00C7E982 /* IslandController.swift */,
 				04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */,
 				04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */,
+				041E54422C099FC800A15EAE /* HomeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -635,13 +696,17 @@
 			files = (
 				045D9A612BF4D62B002C523E /* SulawesiData.json in Resources */,
 				045D9A622BF4D62B002C523E /* KalimantanData.json in Resources */,
+				041E544C2C09A09300A15EAE /* quizMusic.mp3 in Resources */,
 				045D9A632BF4D62B002C523E /* JavaData.json in Resources */,
+				041E544E2C09A09300A15EAE /* touchdownMusic.mp3 in Resources */,
+				041E54522C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 in Resources */,
 				045D9A642BF4D62B002C523E /* BaliData.json in Resources */,
 				045D9A652BF4D62B002C523E /* PapuaData.json in Resources */,
 				045D9A662BF4D62B002C523E /* SumateraData.json in Resources */,
 				045D9A2E2BF4D5D9002C523E /* Preview Assets.xcassets in Resources */,
 				0420D5282BF9069100696430 /* Assets.xcassets in Resources */,
 				045D9A2B2BF4D5D9002C523E /* Assets.xcassets in Resources */,
+				041E544A2C09A09300A15EAE /* mainMusic.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,13 +729,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				048DD7C22BF4C6FA0041FDE9 /* SulawesiData.json in Resources */,
+				041E54512C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 in Resources */,
 				048DD7B82BF4C51C0041FDE9 /* BaliData.json in Resources */,
 				04A1A2D42BF062C100C7E982 /* Preview Assets.xcassets in Resources */,
 				048DD7B42BF4C3FB0041FDE9 /* SumateraData.json in Resources */,
+				041E544D2C09A09300A15EAE /* touchdownMusic.mp3 in Resources */,
 				04A1A2D12BF062C100C7E982 /* Assets.xcassets in Resources */,
 				048DD7BE2BF4C6AA0041FDE9 /* KalimantanData.json in Resources */,
 				048DD7C02BF4C6C50041FDE9 /* PapuaData.json in Resources */,
 				048DD7BA2BF4C5870041FDE9 /* JavaData.json in Resources */,
+				041E54492C09A09300A15EAE /* mainMusic.mp3 in Resources */,
+				041E544B2C09A09300A15EAE /* quizMusic.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,12 +768,14 @@
 				048F72622BFBA2ED00698D20 /* ButtonColor.swift in Sources */,
 				045D9A272BF4D5D7002C523E /* MAC_ALP_MADApp.swift in Sources */,
 				045D9A672BF4D62B002C523E /* TraditionalDance.swift in Sources */,
+				041E54442C099FD300A15EAE /* HomeController.swift in Sources */,
 				04C8AEE72BFFA71700A3B7DC /* IslandViewMac.swift in Sources */,
 				045D9A682BF4D62B002C523E /* IslandController.swift in Sources */,
 				0420D5262BF9044100696430 /* TraditionalDanceViewMac.swift in Sources */,
 				043845A82BFB939C00F94411 /* HomeViewMac.swift in Sources */,
 				045D9A692BF4D62B002C523E /* TraditionalLanguageController.swift in Sources */,
 				0420D5272BF9051300696430 /* Alphabet.swift in Sources */,
+				041E54562C09A15A00A15EAE /* MusicPlayer.swift in Sources */,
 				045D9A6A2BF4D62B002C523E /* LeaderboardController.swift in Sources */,
 				047BE7902BFA500B00947484 /* CustomGradient.swift in Sources */,
 				0420D5242BF9043400696430 /* TraditionalLanguageViewMac.swift in Sources */,
@@ -746,15 +817,19 @@
 				04A1A3162BF0658700C7E982 /* TraditionalDanceView.swift in Sources */,
 				041B26B42BFA368E000B23BB /* ButtonCheck.swift in Sources */,
 				041B26A92BFA206A000B23BB /* TextFieldComponent.swift in Sources */,
+				041E54432C099FC800A15EAE /* HomeController.swift in Sources */,
 				041B26992BFA09E9000B23BB /* ScreenSize.swift in Sources */,
 				041B26AC2BFA2263000B23BB /* TimerComponent.swift in Sources */,
+				0422AD3E2C09A553003A33BC /* SplashScreenView.swift in Sources */,
 				04C658362BF4922100ECECD2 /* ModelData.swift in Sources */,
 				044215832BF60BF60064666A /* Alphabet.swift in Sources */,
+				0422AD3C2C09A52F003A33BC /* RegisterView.swift in Sources */,
 				04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */,
 				041B269B2BFA0A8F000B23BB /* AchievementRow.swift in Sources */,
 				04A1A3122BF0654F00C7E982 /* LeaderboardView.swift in Sources */,
 				04A1A31C2BF065CF00C7E982 /* AnswerDescriptionView.swift in Sources */,
 				041B26AE2BFA250A000B23BB /* ClueBox.swift in Sources */,
+				041E54552C09A15A00A15EAE /* MusicPlayer.swift in Sources */,
 				041B26932BFA08B3000B23BB /* TopNavigationBar.swift in Sources */,
 				04A1A3182BF0659A00C7E982 /* TraditionalLanguageView.swift in Sources */,
 				04A1A3102BF0652C00C7E982 /* HomeView.swift in Sources */,
@@ -763,7 +838,9 @@
 				043AC9782BFB5C5B0065EB0B /* ButtonColor.swift in Sources */,
 				041B26972BFA0907000B23BB /* QuestionAndDisplay.swift in Sources */,
 				04A1A2CD2BF062C000C7E982 /* ALP_MADApp.swift in Sources */,
+				0422AD3A2C09A495003A33BC /* PreAlertView.swift in Sources */,
 				04A1A2F72BF062F100C7E982 /* User.swift in Sources */,
+				0422AD402C09A56A003A33BC /* TouchdownView.swift in Sources */,
 				04A1A3202BF0662400C7E982 /* LeaderboardController.swift in Sources */,
 				04C8AEE52BFFA5A500A3B7DC /* IslandView.swift in Sources */,
 				04A1A3222BF0663E00C7E982 /* IslandController.swift in Sources */,

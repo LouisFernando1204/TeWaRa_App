@@ -51,10 +51,12 @@ struct HomeView: View {
                 Spacer()
                     .frame(height: 40)
                 ButtonCheck(action: {self.isClicked = true}, message: "MULAI GAME")
-                
             })
             .frame(width: ScreenSize.screenWidth * 0.9)
             .padding(.horizontal, 20)
+            .fullScreenCover(isPresented: $isClicked) {
+                IslandView()
+            }
         })
         
     }

@@ -28,6 +28,10 @@ class TraditionalDanceController : ObservableObject {
 //        return self.user
 //    }
     
+    func changeDance(dance: TraditionalDance) {
+        self.traditionalDance = dance
+    }
+    
     func getChance() -> Int {
         return self.chance
     }
@@ -36,12 +40,11 @@ class TraditionalDanceController : ObservableObject {
         self.chance -= 1
     }
     
-    
     func guessWord(word : Alphabet, remainingTime: Int) {
         var checker: Bool = false
-        for index in ModelData.shared.bali.traditionalDance.throwableAnswer.indices {
-            if index >= 0 && index < ModelData.shared.bali.traditionalDance.throwableAnswer.count {
-                if word.alphabet == ModelData.shared.bali.traditionalDance.throwableAnswer[index].alphabet {
+        for index in traditionalDance.throwableAnswer.indices {
+            if index >= 0 && index < traditionalDance.throwableAnswer.count {
+                if word.alphabet == traditionalDance.throwableAnswer[index].alphabet {
                     checker = true
                     setThrowableAnswerStatus(alphabet: word)
                     setAvailableWordsStatus(alphabet: word)
@@ -58,31 +61,31 @@ class TraditionalDanceController : ObservableObject {
     }
     
     private func setThrowableAnswerStatus(alphabet: Alphabet) {
-        for index in ModelData.shared.bali.traditionalDance.throwableAnswer.indices {
-            let whichAlphabet = ModelData.shared.bali.traditionalDance.throwableAnswer[index].alphabet
+        for index in traditionalDance.throwableAnswer.indices {
+            let whichAlphabet = traditionalDance.throwableAnswer[index].alphabet
             if (whichAlphabet.isEqual(alphabet.alphabet)) {
-                ModelData.shared.bali.traditionalDance.throwableAnswer[index].isClicked = true
+                traditionalDance.throwableAnswer[index].isClicked = true
             }
         }
     }
     
     private func setAvailableWordsStatus(alphabet: Alphabet) {
-        for index in ModelData.shared.bali.traditionalDance.availableWords.indices {
-            let whichAlphabet = ModelData.shared.bali.traditionalDance.availableWords[index].alphabet
+        for index in traditionalDance.availableWords.indices {
+            let whichAlphabet = traditionalDance.availableWords[index].alphabet
             if (whichAlphabet.isEqual(alphabet.alphabet)) {
-                ModelData.shared.bali.traditionalDance.availableWords[index].isClicked = true
+                traditionalDance.availableWords[index].isClicked = true
             }
         }
     }
     
     private func checkCurrentGameAlreadyDone(remainingTime: Int) {
         var trueCounter: Int = 0
-        for index in ModelData.shared.bali.traditionalDance.throwableAnswer.indices {
-            if (ModelData.shared.bali.traditionalDance.throwableAnswer[index].isClicked) {
+        for index in traditionalDance.throwableAnswer.indices {
+            if (traditionalDance.throwableAnswer[index].isClicked) {
                 trueCounter += 1
             }
         }
-        if (trueCounter == ModelData.shared.bali.traditionalDance.throwableAnswer.count) {
+        if (trueCounter == traditionalDance.throwableAnswer.count) {
             correctAnswer(remainingTime: remainingTime)
         }
     }

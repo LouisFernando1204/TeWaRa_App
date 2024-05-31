@@ -7,22 +7,32 @@
 
 import SwiftUI
 
-struct TopNavigationBar: View {
+struct TopNavigationBar : View {
     
-    let destination: AnyView
     let name: String
+    let message: String
+    
+    @State private var navigate: Bool = false
     
     var body: some View {
         HStack {
-            NavigationLink(
-                destination: destination) {
-                HStack(spacing: 4) {
-                    Image("backIconWhite")
-                    
-                    Text("Pulau")
-                        .fontWeight(.regular)
-                        .foregroundColor(.white)
-                        .font(ScreenSize.screenWidth > 600 ? .title : .headline)
+            HStack(spacing: 4) {
+                Image("backIconWhite")
+                
+                Text(message)
+                    .fontWeight(.regular)
+                    .foregroundColor(.white)
+                    .font(ScreenSize.screenWidth > 600 ? .title : .headline)
+            }
+            .onTapGesture {
+                self.navigate = true
+            }
+            .fullScreenCover(isPresented: $navigate) {
+                if message == "Home" {
+                    HomeView()
+                }
+                else if message == "Pulau" {
+                    IslandView()
                 }
             }
             

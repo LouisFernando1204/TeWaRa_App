@@ -30,16 +30,20 @@ struct QuestionAndDisplay: View {
                 Text("Tari tradisional dari Pulau \(currentIsland.islandName) yaitu...")
                     .font(ScreenSize.screenWidth > 600 ? .system(size: 38) : .title2)
                     .fontWeight(.bold)
-                Spacer()            })
-            Image(currentIsland.traditionalDance.image)
-                .resizable()
-                .frame(
-                    width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.3 : ScreenSize.screenWidth / 1.1,
-                    height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 3 : ScreenSize.screenHeight / 4
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .shadow(radius:5)
-                .padding(.bottom, ScreenSize.screenWidth > 600 ? 8 : 12)
+                Spacer()
+            })
+            if let image = currentIsland.traditionalDance.image {
+                Image(image)
+                    .resizable()
+                    .frame(
+                        width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.3 : ScreenSize.screenWidth / 1.1,
+                        height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 3 : ScreenSize.screenHeight / 4
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .shadow(radius:5)
+                    .padding(.bottom, ScreenSize.screenWidth > 600 ? 8 : 12)
+            }
+            
             
         })
         .padding(.top, ScreenSize.screenWidth > 600 ? 0 : 10)
@@ -53,15 +57,17 @@ struct QuestionAndDisplay: View {
                     .fontWeight(.bold)
                 Spacer()
             })
-            Image(currentIsland.traditionalLanguage.image)
-                .resizable()
-                .frame(
-                    width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.3 : ScreenSize.screenWidth / 1.1,
-                    height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 3 : ScreenSize.screenHeight / 4
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .shadow(radius:5)
-                .padding(.bottom, ScreenSize.screenWidth > 600 ? 8 : 12)
+            if let image = currentIsland.traditionalLanguage.image {
+                Image(image)
+                    .resizable()
+                    .frame(
+                        width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.3 : ScreenSize.screenWidth / 1.1,
+                        height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 3 : ScreenSize.screenHeight / 4
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .shadow(radius:5)
+                    .padding(.bottom, ScreenSize.screenWidth > 600 ? 8 : 12)
+            }
             
         })
         .padding(.top, ScreenSize.screenWidth > 600 ? 0 : 10)
