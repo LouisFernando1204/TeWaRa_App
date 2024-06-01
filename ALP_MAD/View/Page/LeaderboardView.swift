@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LeaderboardView: View {
+    @StateObject private var controller = LeaderboardController()
     @State private var leaderboard: Leaderboard?
-    private let controller = LeaderboardController()
     
     var body: some View {
         NavigationView {
@@ -27,6 +27,7 @@ struct LeaderboardView: View {
                     
                     ForEach(islands, id: \.islandName) { island in
                         LeaderboardCard(island: island)
+                            .frame(maxWidth: .infinity)
                     }
                 }
                 .padding()
@@ -34,23 +35,25 @@ struct LeaderboardView: View {
             .navigationTitle("Peringkat")
         }
         .onAppear {
-            leaderboard = controller.loadLeaderboardData()
+            leaderboard = controller.getLeaderboard()
         }
     }
     
     private var islands: [Island] {
-        [
-            leaderboard?.sumatera,
-            leaderboard?.kalimantan,
-            leaderboard?.papua,
-            leaderboard?.java,
-            leaderboard?.bali,
-            leaderboard?.sulawesi
-        ].compactMap { $0 }
+        guard let leaderboard = leaderboard else { return [] }
+        return [
+            leaderboard.sumatera,
+            leaderboard.kalimantan,
+            leaderboard.papua,
+            leaderboard.java,
+            leaderboard.bali,
+            leaderboard.sulawesi
+        ]
     }
     
     private var topIsland: Island? {
-        islands.max(by: { $0.totalScore < $1.totalScore })
+        // Implement logic to determine the top island
+        return nil
     }
 }
 
@@ -58,16 +61,17 @@ struct LeaderboardCard: View {
     let island: Island
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             Text(island.islandName)
                 .font(.headline)
                 .padding(.bottom, 8)
             
-            ForEach(island.userList) { user in
+            ForEach(island.userList, id: \.name) { user in
                 LeaderboardRow(user: user)
             }
         }
         .padding()
+        .frame(maxWidth: .infinity)
         .background(Color.white)
         .cornerRadius(10)
         .shadow(radius: 5)
@@ -83,16 +87,18 @@ struct LeaderboardRow: View {
                 .resizable()
                 .frame(width: 40, height: 40)
                 .clipShape(Circle())
-                .padding(.trailing, 8)
+                .padding(.trailing, 16)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(user.name)
                     .font(.headline)
                 Text("\(user.score) poin")
                     .font(.subheadline)
+                    .foregroundColor(.secondary)
             }
+            Spacer()
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 8)
     }
 }
 
