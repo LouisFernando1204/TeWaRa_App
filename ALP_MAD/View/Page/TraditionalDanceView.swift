@@ -59,6 +59,9 @@ struct TraditionalDanceView: View {
         })
         .onAppear {
             timerRunning = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+            }
             self.traditionalDanceController.changeDance(dance: ModelData.shared.currentIslandObject.traditionalDance)
         }
         .safeAreaInset(edge: .top) {

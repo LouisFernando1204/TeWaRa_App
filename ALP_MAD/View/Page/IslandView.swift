@@ -80,6 +80,7 @@ struct IslandView: View {
                             }
                             .padding()
                             .onTapGesture {
+                                islandController.addUserToArray(islandName: islands[index].islandName)
                                 self.selectedIsland = islands[index].islandName
                                 if self.selectedIsland == "Sumatera" {
                                     ModelData.shared.currentIslandObject = ModelData.shared.sumatera
@@ -136,8 +137,6 @@ struct IslandView: View {
                                     }
                                 }
                                 
-                                print(self.selectedIsland)
-                                print(islandController.getChosenGameByRandom())
                             }
                             .fullScreenCover(isPresented: $selectSumateraAndGetDance) {
                                 TraditionalDanceView(selectedIsland: ModelData.shared.sumatera)
@@ -231,6 +230,7 @@ struct IslandView: View {
                                 }
                                 .padding()
                                 .onTapGesture {
+                                    islandController.addUserToArray(islandName: islands[index].islandName)
                                     self.selectedIsland = islands[index].islandName
                                     if self.selectedIsland == "Sumatera" {
                                         ModelData.shared.currentIslandObject = ModelData.shared.sumatera
@@ -288,8 +288,6 @@ struct IslandView: View {
                                         }
                                     }
                                     
-                                    print(self.selectedIsland)
-                                    print(islandController.getChosenGameByRandom())
                                 }
                                 .fullScreenCover(isPresented: $selectSumateraAndGetDance) {
                                     TraditionalDanceView(selectedIsland: ModelData.shared.sumatera)

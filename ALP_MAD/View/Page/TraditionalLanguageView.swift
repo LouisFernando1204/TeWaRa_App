@@ -16,8 +16,14 @@ struct TraditionalLanguageView: View {
     @State private var textFieldValue: String = ""
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @State private var alertAction: (() -> Void)?
+    @State private var buttonText: String = ""
+    @State private var showAlert: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @StateObject private var traditionalLanguageController = TraditionalLanguageController()
+    @StateObject private var islandController = IslandController(island: ModelData.shared.currentIslandObject)
     
     var body: some View {
         
@@ -41,6 +47,8 @@ struct TraditionalLanguageView: View {
                     self.showClueAndTimer()
                     ButtonCheck(action: {
                         traditionalLanguageController.guessWord(word: textFieldValue, remainingTime: countdownTimer)
+                        self.timerRunning = false
+                        self.checkAnswer()
                     }, message: "CEK JAWABAN")
                     
                 })
@@ -51,6 +59,9 @@ struct TraditionalLanguageView: View {
         })
         .onAppear {
             timerRunning = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+            }
             traditionalLanguageController.changeLanguage(language: ModelData.shared.currentIslandObject.traditionalLanguage)
         }
         .safeAreaInset(edge: .top) {
@@ -59,21 +70,12 @@ struct TraditionalLanguageView: View {
                 .edgesIgnoringSafeArea(.top)
                 .padding(.bottom, ScreenSize.screenWidth > 600 ? -40 : -70)
         }
-        .alert(isPresented: $traditionalLanguageController.isWrong) {
+        .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("Oops.. jawabanmu masih salah"),
-                message: Text("Tetap semangat dan belajar lagii.."),
-                dismissButton: .default(Text("Kembali ke Pilih Pulau")) {
-                    self.backToIslandMenu = true
-                }
-            )
-        }
-        .alert(isPresented: $traditionalLanguageController.isCorrect) {
-            Alert(
-                title: Text("Congrats! Jawabanmu benarr"),
-                message: Text("Oopss jangan happy dulu, karena masih ada tantangan baru!"),
-                dismissButton: .default(Text("Telusuri tantangan")) {
-                    self.navToAdditionalQuestion = true
+                title: Text(alertTitle),
+                message: Text(alertMessage),
+                dismissButton: .default(Text(buttonText)) {
+                    alertAction?()
                 }
             )
         }
@@ -85,21 +87,36 @@ struct TraditionalLanguageView: View {
         }
     }
     
+    private func checkAnswer() {
+        if traditionalLanguageController.isWrong {
+            alertTitle = "Oops.. jawabanmu masih salah"
+            alertMessage = "Tetap semangat dan belajar lagii.."
+            buttonText = "Kembali ke Pilih Pulau"
+            alertAction = { self.backToIslandMenu = true }
+        } else if traditionalLanguageController.isCorrect {
+            alertTitle = "Congrats! Jawabanmu benarr +\(traditionalLanguageController.point)"
+            alertMessage = "Oopss jangan happy dulu, karena masih ada tantangan baru!"
+            buttonText = "Telusuri tantangan baru"
+            alertAction = { self.navToAdditionalQuestion = true }
+        }
+        showAlert = true
+    }
+    
     private func showClueAndTimer() -> some View {
         VStack(content: {
             ZStack {
                 ClueBox(currentIsland: ModelData.shared.currentIslandObject)
                 TimerComponent(type: "Bahasa")
                     .overlay {
-                        Text("00:00:\(countdownTimer)")
-                            .onReceive(timer, perform: { _ in
-                                if (countdownTimer > 0 && timerRunning) {
+                        Text("00:00:\(String(format: "%02d", countdownTimer))")
+                            .onReceive(timer) { _ in
+                                if countdownTimer > 0 && timerRunning {
                                     countdownTimer -= 1
                                 }
-                                else {
+                                else if countdownTimer == 0 {
                                     timerRunning = false
                                 }
-                            })
+                            }
                             .offset(y: ScreenSize.screenWidth > 600 ? 150 : 100)
                             .fontWeight(.regular)
                             .font(ScreenSize.screenWidth > 600 ? .title : .title2)
