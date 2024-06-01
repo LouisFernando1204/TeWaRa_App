@@ -11,10 +11,19 @@ import UIKit
 
 struct TraditionalDanceView: View {
     
+    @State private var backToIslandMenu: Bool = false
+    @State private var navToAdditionalQuestion: Bool = false
     @State private var selectedIsland: Island
     @State private var avPlayer = AVPlayer()
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
+    @State private var timeIsUp: Bool = false
+    @State private var outOfChance: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @State private var alertAction: (() -> Void)?
+    @State private var buttonText: String = ""
+    @State private var showAlert: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private var fixedColumn: [GridItem] {
@@ -69,7 +78,48 @@ struct TraditionalDanceView: View {
                 .frame(height: ScreenSize.screenWidth > 600 ? 32: 70)
                 .edgesIgnoringSafeArea(.top)
                 .padding(.bottom, ScreenSize.screenWidth > 600 ? -40 : -70)
-            
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(alertTitle),
+                message: Text(alertMessage),
+                dismissButton: .default(Text(buttonText)) {
+                    alertAction?()
+                }
+            )
+        }
+        .fullScreenCover(isPresented: $backToIslandMenu) {
+            IslandView()
+        }
+        .fullScreenCover(isPresented: $navToAdditionalQuestion) {
+            AdditionalQuestionView()
+        }
+    }
+    
+    private func checkAnswer() {
+        if traditionalDanceController.currentGameIsWrong {
+            alertTitle = "Oops.. kesempatan menjawab sudah habis"
+            alertMessage = "Tetap semangat dan belajar lagii.."
+            buttonText = "Kembali ke Pilih Pulau"
+            print("SALAA")
+            timerRunning = false
+            showAlert = true
+            alertAction = { self.backToIslandMenu = true }
+        } 
+        else if traditionalDanceController.currentGameIsCorrect {
+            alertTitle = "Congrats! Jawabanmu benarr +\(traditionalDanceController.point)"
+            alertMessage = "Oopss jangan happy dulu, karena masih ada tantangan baru!"
+            buttonText = "Telusuri tantangan baru"
+            showAlert = true
+            timerRunning = false
+            alertAction = { self.navToAdditionalQuestion = true }
+        }
+        else if countdownTimer == 0 {
+            alertTitle = "Oops.. waktu kamu sudah habis"
+            alertMessage = "Tetap semangat dan belajar lagii.."
+            buttonText = "Kembali ke Pilih Pulau"
+            showAlert = true
+            alertAction = { self.backToIslandMenu = true }
         }
     }
     
@@ -93,6 +143,7 @@ struct TraditionalDanceView: View {
                     AlphabetBox(type: "Option", alphabet: item.alphabet, isClicked: item.isClicked)
                         .onTapGesture {
                             traditionalDanceController.guessWord(word: item, remainingTime: countdownTimer)
+                            self.checkAnswer()
                         }
                 }
             }
@@ -103,15 +154,17 @@ struct TraditionalDanceView: View {
     private func showTimer() -> some View {
         TimerComponent(type: "Tarian")
             .overlay {
-                Text("00:00:\(countdownTimer)")
-                    .onReceive(timer, perform: { _ in
-                        if (countdownTimer > 0 && timerRunning) {
+                Text("00:00:\(String(format: "%02d", countdownTimer))")
+                    .onReceive(timer) { _ in
+                        if countdownTimer > 0 && timerRunning {
                             countdownTimer -= 1
                         }
-                        else {
+                        else if countdownTimer == 0 {
                             timerRunning = false
+                            timeIsUp = true
+                            self.checkAnswer()
                         }
-                    })
+                    }
                     .fontWeight(.regular)
                     .font(ScreenSize.screenWidth > 600 ? .title : .title2)
                     .foregroundColor(Color.white)

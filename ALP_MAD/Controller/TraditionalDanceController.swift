@@ -30,9 +30,10 @@ class TraditionalDanceController : ObservableObject {
         ]
     )
 //    @Published private var user : User
-    @Published private var currentGameIsWrong: Bool = false
+    @Published var currentGameIsWrong: Bool = false
+    @Published var currentGameIsCorrect: Bool = false
     @Published private var isInit: Bool = false
-    
+    @Published var point: Int = 0
     
     func getCurrentGameIsWrong() -> Bool {
         return self.currentGameIsWrong
@@ -97,10 +98,12 @@ class TraditionalDanceController : ObservableObject {
         for index in ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.indices {
             if (ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].isClicked) {
                 trueCounter += 1
+                print("BENER")
             }
         }
         if (trueCounter == ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.count) {
             correctAnswer(remainingTime: remainingTime)
+            print("BENER2")
         }
     }
     
@@ -111,7 +114,54 @@ class TraditionalDanceController : ObservableObject {
     }
     
     private func correctAnswer(remainingTime: Int) {
-        
+        print("BENER3")
+        self.point += (remainingTime * 10)
+        self.currentGameIsCorrect = true
+        ModelData.shared.currentUser.score += (remainingTime * 10)
+        if traditionalDance.answer == ModelData.shared.bali.traditionalDance.answer {
+            for id in ModelData.shared.bali.userList.indices {
+                print(ModelData.shared.bali.userList.count)
+                if ModelData.shared.bali.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.bali.userList[id].image == ModelData.shared.currentUser.image {
+                    ModelData.shared.bali.userList[id].score += (remainingTime * 10)
+                }
+            }
+        }
+        else if traditionalDance.answer == ModelData.shared.kalimantan.traditionalDance.answer {
+            for id in ModelData.shared.kalimantan.userList.indices {
+                if ModelData.shared.kalimantan.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.kalimantan.userList[id].image == ModelData.shared.currentUser.image {
+                    ModelData.shared.kalimantan.userList[id].score += (remainingTime * 10)
+                }
+            }
+        }
+        else if traditionalDance.answer == ModelData.shared.sumatera.traditionalDance.answer {
+            for id in ModelData.shared.sumatera.userList.indices {
+                if ModelData.shared.sumatera.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.sumatera.userList[id].image == ModelData.shared.currentUser.image {
+                    ModelData.shared.sumatera.userList[id].score += (remainingTime * 10)
+                }
+            }
+        }
+        else if traditionalDance.answer == ModelData.shared.sulawesi.traditionalDance.answer {
+            for id in ModelData.shared.sulawesi.userList.indices {
+                if ModelData.shared.sulawesi.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.sulawesi.userList[id].image == ModelData.shared.currentUser.image {
+                    ModelData.shared.sulawesi.userList[id].score += (remainingTime * 10)
+                }
+            }
+        }
+        else if traditionalDance.answer == ModelData.shared.java.traditionalDance.answer {
+            for id in ModelData.shared.java.userList.indices {
+                if ModelData.shared.java.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.java.userList[id].image == ModelData.shared.currentUser.image {
+                    ModelData.shared.java.userList[id].score += (remainingTime * 10)
+                }
+            }
+        }
+        else if traditionalDance.answer == ModelData.shared.papua.traditionalDance.answer {
+            for id in ModelData.shared.papua.userList.indices {
+                if ModelData.shared.papua.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.papua.userList[id].image == ModelData.shared.currentUser.image {
+                    ModelData.shared.papua.userList[id].score += (remainingTime * 10)
+                }
+            }
+        }
+
     }
     
     func accumulatePoint() {
@@ -120,10 +170,6 @@ class TraditionalDanceController : ObservableObject {
     
     func getTraditionalDance() -> TraditionalDance {
         return self.traditionalDance
-    }
-    
-    func navigateToAdditionalQuestionView() {
-        
     }
     
 }

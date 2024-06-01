@@ -16,6 +16,7 @@ struct TraditionalLanguageView: View {
     @State private var textFieldValue: String = ""
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
+    @State private var timeIsUp: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @State private var alertAction: (() -> Void)?
@@ -99,6 +100,12 @@ struct TraditionalLanguageView: View {
             buttonText = "Telusuri tantangan baru"
             alertAction = { self.navToAdditionalQuestion = true }
         }
+        else if timeIsUp {
+            alertTitle = "Oops.. waktu kamu sudah habis"
+            alertMessage = "Tetap semangat dan belajar lagii.."
+            buttonText = "Kembali ke Pilih Pulau"
+            alertAction = { self.backToIslandMenu = true }
+        }
         showAlert = true
     }
     
@@ -115,6 +122,8 @@ struct TraditionalLanguageView: View {
                                 }
                                 else if countdownTimer == 0 {
                                     timerRunning = false
+                                    timeIsUp = true
+                                    self.checkAnswer()
                                 }
                             }
                             .offset(y: ScreenSize.screenWidth > 600 ? 150 : 100)
