@@ -23,7 +23,11 @@ class TraditionalLanguageController : ObservableObject {
     @Published var isCorrect: Bool = false
     @Published private var isThere: Bool = false
     @Published var point: Int = 0
-
+    
+    init() {
+        self.point = 0
+    }
+    
     func wrongAnswer() {
         self.isWrong = true
     }
@@ -34,26 +38,21 @@ class TraditionalLanguageController : ObservableObject {
     
     func guessWord(word : String, remainingTime: Int) {
         if (traditionalLanguage.answer == word.uppercased()) {
-            print("BENERR")
             correctAnswer(remainingTime: remainingTime)
         }
         else {
-            print("HAA")
             wrongAnswer()
         }
         print(word)
         print(traditionalLanguage.answer)
         if word.uppercased() == traditionalLanguage.answer {
-            print("WTF")
         }
     }
     
     func correctAnswer(remainingTime: Int) {
         self.isCorrect = true
-        print(ModelData.shared.currentUser.score)
         ModelData.shared.currentUser.score += (remainingTime * 10)
         self.point += (remainingTime * 10)
-        print(ModelData.shared.currentUser.score)
         if traditionalLanguage.answer == ModelData.shared.bali.traditionalLanguage.answer {
             for id in ModelData.shared.bali.userList.indices {
                 print(ModelData.shared.bali.userList.count)

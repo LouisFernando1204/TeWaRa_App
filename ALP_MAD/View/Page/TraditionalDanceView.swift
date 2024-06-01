@@ -72,6 +72,7 @@ struct TraditionalDanceView: View {
                 MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
             }
             self.traditionalDanceController.changeDance(dance: ModelData.shared.currentIslandObject.traditionalDance)
+            ModelData.shared.currentGame = "TraditionalDance"
         }
         .safeAreaInset(edge: .top) {
             CustomGradient.redOrangeGradient
@@ -92,7 +93,7 @@ struct TraditionalDanceView: View {
             IslandView()
         }
         .fullScreenCover(isPresented: $navToAdditionalQuestion) {
-            AdditionalQuestionView()
+            TouchdownView()
         }
     }
     

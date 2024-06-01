@@ -208,7 +208,7 @@ struct AdditionalQuestionView: View {
                             )
                         }
                     })
-                    .fullScreenCover(isPresented: navToAnswerDescriptionView, content: {
+                    .fullScreenCover(isPresented: $navToAnswerDescriptionView, content: {
                         AnswerDescriptionView()
                     })
                 }

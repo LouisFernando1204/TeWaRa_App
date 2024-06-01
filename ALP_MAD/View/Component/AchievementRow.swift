@@ -10,6 +10,7 @@ import SwiftUI
 struct AchievementRow: View {
     
     let currentIsland: Island
+    let status: String
     
     var body: some View {
         HStack(content: {
@@ -36,25 +37,67 @@ struct AchievementRow: View {
                     Spacer()
                 })
                 HStack(content: {
-                    Text("100 poin")
-                        .font(ScreenSize.screenWidth > 600 ? .title2 : .headline)
-                    Spacer()
+                    if self.status == "Unplayed" {
+                        Text("0 poin")
+                            .font(ScreenSize.screenWidth > 600 ? .title2 : .headline)
+                        Spacer()
+                    }
+                    else if self.status == "Ranked" || self.status == "Progress" {
+                        ForEach(currentIsland.userList.indices, id: \.self) { index in
+                            let user = currentIsland.userList[index]
+                            if user.name == ModelData.shared.currentUser.name {
+                                Text("\(user.score) poin")
+                                    .font(ScreenSize.screenWidth > 600 ? .title2 : .headline)
+                                Spacer()
+                            }
+                        }
+                        
+                    }
+                    
                 })
                 .padding(.bottom, 3)
                 HStack(spacing: 0, content: {
                     HStack(content: {
-                        Text("-20 poin")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.gray)
-                            .italic()
-                            .opacity(0.8)
-                            .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
+                        if self.status == "Unplayed" {
+                            Text("")
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .foregroundColor(.gray)
+                                .italic()
+                                .opacity(0.8)
+                                .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
+                        }
+                        else if self.status == "Ranked" {
+                            Text("⭐️")
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
+                        }
+                        else if self.status == "Progress" {
+                            Text("- \(ModelData.shared.getCurrentUserPointByIsland(name: currentIsland.userList[2].name, island: currentIsland)[0] -  ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0]) poin")
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
+                        }
+                        
                     })
                     HStack(content: {
-                        Text(" untuk masuk peringkat")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
+                        if self.status == "Unplayed" {
+                            Text("Anda belum memainkan game di pulau ini sama sekali")
+                                .foregroundColor(.gray)
+                                .italic()
+                                .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
+                        }
+                        else if self.status == "Ranked" {
+                            Text(" Anda menduduki peringkat \(ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0] + 1)!")
+                                .foregroundColor(.gray)
+                                .italic()
+                                .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
+                        }
+                        else if self.status == "Progress" {
+                            Text(" untuk memasuki peringkat")
+                                .foregroundColor(.gray)
+                                .italic()
+                                .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
+                        }
+                        
                     })
                     
                     Spacer()

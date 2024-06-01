@@ -10,11 +10,12 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var isClicked: Bool = false
+    @StateObject private var homeController: HomeController = HomeController()
     
     var body: some View {
         
         ZStack(content: {
-
+            
             VStack {
                 HStack {
                     Image("gradientWave(TeWaRa)")
@@ -42,6 +43,9 @@ struct HomeView: View {
                 }
             }
             .frame(maxWidth: ScreenSize.screenWidth * 2 , maxHeight: ScreenSize.screenHeight)
+            .onAppear {
+                homeController.rearrangeIsland()
+            }
             
             VStack(content: {
                 ProfileComponent(currentUser: ModelData.shared.currentUser)
@@ -58,7 +62,6 @@ struct HomeView: View {
                 IslandView()
             }
         })
-        
     }
     
     private func showAchievement() -> some View {
@@ -68,43 +71,116 @@ struct HomeView: View {
                     Text("Pencapaian")
                         .bold()
                         .font(ScreenSize.screenWidth > 600 ? .largeTitle : .title3)
-                    
-                    AchievementRow(currentIsland: ModelData.shared.sumatera)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
-                    Divider()
-                        .background(Color.black)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
-                    AchievementRow(currentIsland: ModelData.shared.kalimantan)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
-                    Divider()
-                        .background(Color.black)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
-                    AchievementRow(currentIsland: ModelData.shared.sulawesi)
-                    Divider()
-                        .background(Color.black)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
-                    AchievementRow(currentIsland: ModelData.shared.bali)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
-                    Divider()
-                        .background(Color.black)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
-                    AchievementRow(currentIsland: ModelData.shared.java)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
-                    Divider()
-                        .background(Color.black)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
-                    AchievementRow(currentIsland: ModelData.shared.papua)
-                    Spacer()
-                        .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+                    ForEach(homeController.rankedIslands.indices, id:\.self) { index in
+                        let island = homeController.rankedIslands[index]
+                        AchievementRow(currentIsland: island, status: "Ranked")
+                        Spacer()
+                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+                        Divider()
+                            .background(Color.black)
+                    }
+                    ForEach(homeController.progressToRank.indices, id:\.self) { index in
+                        let island = homeController.progressToRank[index]
+                        AchievementRow(currentIsland: island, status: "Progress")
+                        Spacer()
+                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+                        Divider()
+                            .background(Color.black)
+                    }
+//                    if ModelData.shared.bali.userList.count == 3 {
+//                        AchievementRow(currentIsland: ModelData.shared.bali, status: "Unplayed")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+//                    else if ModelData.shared.bali.userList.count == 4 {
+//                        AchievementRow(currentIsland: ModelData.shared.bali, status: "Ranked")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+//                    if ModelData.shared.papua.userList.count == 3 {
+//                        AchievementRow(currentIsland: ModelData.shared.papua, status: "Unplayed")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+//                    else if ModelData.shared.papua.userList.count == 4 {
+//                        AchievementRow(currentIsland: ModelData.shared.papua, status: "Ranked")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                        
+//                    }
+//                    if ModelData.shared.java.userList.count == 3 {
+//                        AchievementRow(currentIsland: ModelData.shared.java, status: "Unplayed")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+//                    else if ModelData.shared.java.userList.count == 4 {
+//                        AchievementRow(currentIsland: ModelData.shared.java, status: "Ranked")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                        
+//                    }
+//                    if ModelData.shared.kalimantan.userList.count == 3 {
+//                        AchievementRow(currentIsland: ModelData.shared.kalimantan, status: "Unplayed")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+//                    else if ModelData.shared.kalimantan.userList.count == 4 {
+//                        AchievementRow(currentIsland: ModelData.shared.kalimantan, status: "Ranked")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+//                    if ModelData.shared.sulawesi.userList.count == 3 {
+//                        AchievementRow(currentIsland: ModelData.shared.sulawesi, status: "Unplayed")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+//                    else if ModelData.shared.sulawesi.userList.count == 4 {
+//                        AchievementRow(currentIsland: ModelData.shared.sulawesi, status: "Ranked")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+//                    if ModelData.shared.sumatera.userList.count == 3 {
+//                        AchievementRow(currentIsland: ModelData.shared.sumatera, status: "Unplayed")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+//                    else if ModelData.shared.sumatera.userList.count == 4 {
+//                        AchievementRow(currentIsland: ModelData.shared.sumatera, status: "Ranked")
+//                        Spacer()
+//                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+//                        Divider()
+//                            .background(Color.black)
+//                    }
+                    ForEach(homeController.unfilledIslands.indices, id:\.self) { index in
+                        let island = homeController.unfilledIslands[index]
+                        AchievementRow(currentIsland: island, status: "Unplayed")
+                        Spacer()
+                            .frame(height: ScreenSize.screenWidth > 600 ? 30 : 10)
+                        Divider()
+                            .background(Color.black)
+                    }
                 })
                 .padding(.horizontal)
             }

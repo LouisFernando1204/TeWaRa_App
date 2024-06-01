@@ -35,6 +35,10 @@ class TraditionalDanceController : ObservableObject {
     @Published private var isInit: Bool = false
     @Published var point: Int = 0
     
+    init() {
+        self.point = 0
+    }
+    
     func getCurrentGameIsWrong() -> Bool {
         return self.currentGameIsWrong
     }
@@ -56,7 +60,6 @@ class TraditionalDanceController : ObservableObject {
         for index in ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.indices {
             if index >= 0 && index < ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.count {
                 if word.alphabet == ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].alphabet {
-                    print("HOHOHO")
                     checker = true
                     setThrowableAnswerStatus(alphabet: word)
                     setAvailableWordsStatus(alphabet: word)
@@ -67,7 +70,6 @@ class TraditionalDanceController : ObservableObject {
         }
         if !checker {
             wrongAnswer()
-            print("EEAA")
             setAvailableWordsStatus(alphabet: word)
             checkChance()
         }
@@ -78,7 +80,6 @@ class TraditionalDanceController : ObservableObject {
             let whichAlphabet = ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].alphabet
             if (whichAlphabet.isEqual(alphabet.alphabet)) {
                 ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].isClicked = true
-                print("KIW")
             }
         }
     }
@@ -88,7 +89,6 @@ class TraditionalDanceController : ObservableObject {
             let whichAlphabet = ModelData.shared.currentIslandObject.traditionalDance.availableWords[index].alphabet
             if (whichAlphabet.isEqual(alphabet.alphabet)) {
                 ModelData.shared.currentIslandObject.traditionalDance.availableWords[index].isClicked = true
-                print("Ke=EW")
             }
         }
     }
@@ -98,12 +98,10 @@ class TraditionalDanceController : ObservableObject {
         for index in ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.indices {
             if (ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].isClicked) {
                 trueCounter += 1
-                print("BENER")
             }
         }
         if (trueCounter == ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.count) {
             correctAnswer(remainingTime: remainingTime)
-            print("BENER2")
         }
     }
     
@@ -114,15 +112,15 @@ class TraditionalDanceController : ObservableObject {
     }
     
     private func correctAnswer(remainingTime: Int) {
-        print("BENER3")
         self.point += (remainingTime * 10)
         self.currentGameIsCorrect = true
         ModelData.shared.currentUser.score += (remainingTime * 10)
         if traditionalDance.answer == ModelData.shared.bali.traditionalDance.answer {
             for id in ModelData.shared.bali.userList.indices {
-                print(ModelData.shared.bali.userList.count)
                 if ModelData.shared.bali.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.bali.userList[id].image == ModelData.shared.currentUser.image {
                     ModelData.shared.bali.userList[id].score += (remainingTime * 10)
+                    print("Skor user : \(ModelData.shared.currentUser.score)")
+                    print("Skor user di array bali : \(ModelData.shared.bali.userList[id].score)")
                 }
             }
         }
@@ -163,13 +161,4 @@ class TraditionalDanceController : ObservableObject {
         }
 
     }
-    
-    func accumulatePoint() {
-        
-    }
-    
-    func getTraditionalDance() -> TraditionalDance {
-        return self.traditionalDance
-    }
-    
 }

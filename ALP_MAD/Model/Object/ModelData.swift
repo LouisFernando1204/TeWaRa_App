@@ -66,7 +66,81 @@ class ModelData {
             ]
         )
     }
+    
+    func sortBaliRank() {
+        bali.userList.sort { $0.score > $1.score }
+    }
+    
+    func sortJavaRank() {
+        java.userList.sort { $0.score > $1.score }
+    }
+    
+    func sortSumateraRank() {
+        sumatera.userList.sort { $0.score > $1.score }
+    }
+    
+    func sortKalimantanRank() {
+        kalimantan.userList.sort { $0.score > $1.score }
+    }
+    
+    func sortPapuaRank() {
+        papua.userList.sort { $0.score > $1.score }
+    }
+    
+    func sortSulawesiRank() {
+        sulawesi.userList.sort { $0.score > $1.score }
+    }
+    
+//    func getCurrentUserDetailInBali(name: String) -> [Int] {
+//        return ModelData.shared.bali.userList.enumerated().compactMap { index, user in
+//            user.name == name ? index : nil
+//        }
+//    }
+    
+    func getCurrentDetailUserByIsland(name: String, island: Island) -> [Int] {
+        return island.userList.enumerated().compactMap { index, user in
+            user.name == name ? index : nil
+        }
+    }
+    
+    func getCurrentUserPointByIsland(name: String, island: Island) -> [Int] {
+        return island.userList.enumerated().compactMap { index, user in
+            user.name == name ? user.score : nil
+        }
+    }
+    
+//    func getCurrentUserDetailInJava(name: String) -> [Int] {
+//        return ModelData.shared.java.userList.enumerated().compactMap { index, user in
+//            user.name == name ? index : nil
+//        }
+//    }
+    
+//    func getCurrentUserDetailInSumatera(name: String) -> [Int] {
+//        return ModelData.shared.sumatera.userList.enumerated().compactMap { index, user in
+//            user.name == name ? index : nil
+//        }
+//    }
+//    
+//    func getCurrentUserDetailInKalimantan(name: String) -> [Int] {
+//        return ModelData.shared.kalimantan.userList.enumerated().compactMap { index, user in
+//            user.name == name ? index : nil
+//        }
+//    }
+//    
+//    func getCurrentUserDetailInPapua(name: String) -> [Int] {
+//        return ModelData.shared.papua.userList.enumerated().compactMap { index, user in
+//            user.name == name ? index : nil
+//        }
+//    }
+//    
+//    func getCurrentUserDetailInSulawesi(name: String) -> [Int] {
+//        return ModelData.shared.sulawesi.userList.enumerated().compactMap { index, user in
+//            user.name == name ? index : nil
+//        }
+//    }
 }
+
+
 
 // Memuat data dari JSON
 func load<T: Decodable>(_ filename: String) -> T {

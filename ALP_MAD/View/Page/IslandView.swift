@@ -23,7 +23,7 @@ struct IslandView: View {
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     
-//    @State var alreadySelected: Bool = false
+    //    @State var alreadySelected: Bool = false
     @State var selectSumateraAndGetDance: Bool = false
     @State var selectSumateraAndGetLanguage: Bool = false
     @State var selectKalimantanAndGetDance: Bool = false
@@ -36,7 +36,23 @@ struct IslandView: View {
     @State var selectPapuaAndGetLanguage: Bool = false
     @State var selectJavaAndGetDance: Bool = false
     @State var selectJavaAndGetLanguage: Bool = false
-
+    
+    init() {
+        self.selectedIsland = ""
+        self.selectSumateraAndGetDance = false
+        self.selectSumateraAndGetLanguage = false
+        self.selectKalimantanAndGetDance = false
+        self.selectKalimantanAndGetLanguage = false
+        self.selectBaliAndGetDance = false
+        self.selectBaliAndGetLanguage = false
+        self.selectSulawesiAndGetDance = false
+        self.selectSulawesiAndGetLanguage = false
+        self.selectPapuaAndGetDance = false
+        self.selectPapuaAndGetLanguage = false
+        self.selectJavaAndGetDance = false
+        self.selectJavaAndGetLanguage = false
+    }
+    
     var body: some View {
         
         if ScreenSize.screenWidth > 600 {
@@ -77,6 +93,7 @@ struct IslandView: View {
                                         .foregroundColor(.white)
                                         .padding(.bottom, 20)
                                 }
+                                
                             }
                             .padding()
                             .onTapGesture {
@@ -236,7 +253,7 @@ struct IslandView: View {
                                         ModelData.shared.currentIslandObject = ModelData.shared.sumatera
                                         if islandController.getChosenGameByRandom() {
                                             self.selectSumateraAndGetDance = true
-
+                                            
                                         }
                                         else {
                                             self.selectSumateraAndGetLanguage = true

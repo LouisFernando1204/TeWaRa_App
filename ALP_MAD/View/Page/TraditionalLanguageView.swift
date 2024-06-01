@@ -64,6 +64,7 @@ struct TraditionalLanguageView: View {
                 MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
             }
             traditionalLanguageController.changeLanguage(language: ModelData.shared.currentIslandObject.traditionalLanguage)
+            ModelData.shared.currentGame = "TraditionalLanguage"
         }
         .safeAreaInset(edge: .top) {
             CustomGradient.redOrangeGradient
@@ -84,7 +85,7 @@ struct TraditionalLanguageView: View {
             IslandView()
         }
         .fullScreenCover(isPresented: $navToAdditionalQuestion) {
-            AdditionalQuestionView()
+            TouchdownView()
         }
     }
     

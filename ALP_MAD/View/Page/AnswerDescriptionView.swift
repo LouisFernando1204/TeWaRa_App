@@ -149,7 +149,7 @@ struct AnswerDescriptionView: View {
             )
             .cornerRadius(10)
             .padding(.leading, isIpad ? ScreenSize.screenWidth/7.5 : ScreenSize.screenWidth/20)
-            .fullScreenCover(isPresented: navToIslandView, content: {
+            .fullScreenCover(isPresented: $navToIslandView, content: {
                 IslandView()
             })
             Spacer()

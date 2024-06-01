@@ -12,21 +12,158 @@ class HomeController : ObservableObject {
     
     //    @Published private var home : Home
     
+        
+    @Published var progressToRank: [Island] = []
+    @Published var unfilledIslands: [Island] = []
+    @Published var rankedIslands: [Island] = []
+    
     init() {
-        
+        print("HAHAHA \(ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: ModelData.shared.java))")
     }
     
-    func navigateToLeaderboardView() {
-        
+    func sortBaliRank() {
+        ModelData.shared.bali.userList.sort { $0.score > $1.score }
     }
     
-    func navigateToIslandView() {
-        
+    func sortJavaRank() {
+        ModelData.shared.java.userList.sort { $0.score > $1.score }
     }
     
-    //    func getHome() -> Home {
-    //        return self.home
-    //    }
+    func sortSumateraRank() {
+        ModelData.shared.sumatera.userList.sort { $0.score > $1.score }
+    }
+    
+    func sortKalimantanRank() {
+        ModelData.shared.kalimantan.userList.sort { $0.score > $1.score }
+    }
+    
+    func sortPapuaRank() {
+        ModelData.shared.papua.userList.sort { $0.score > $1.score }
+    }
+    
+    func sortSulawesiRank() {
+        ModelData.shared.sulawesi.userList.sort { $0.score > $1.score }
+    }
+    
+    func rearrangeIsland() {
+        sortBaliRank()
+        sortJavaRank()
+        sortSumateraRank()
+        sortPapuaRank()
+        sortKalimantanRank()
+        sortSulawesiRank()
+        
+        print(ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: ModelData.shared.java))
+        
+        let islands: [Island] = [
+            ModelData.shared.bali,
+            ModelData.shared.sumatera,
+            ModelData.shared.kalimantan,
+            ModelData.shared.java,
+            ModelData.shared.papua,
+            ModelData.shared.sulawesi
+        ]
+////
+////        
+        for id in islands.indices {
+            if id >= 0 && id < islands.count {
+                if ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id]).isEmpty {
+                    unfilledIslands.append(islands[id])
+                }
+            }
+            
+        }
+        print(unfilledIslands.count)
+        
+        for id in islands.indices {
+            do {
+                let detail = try ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])
+                
+                if !detail.isEmpty, detail[0] == 0 {
+                    rankedIslands.append(islands[id])
+//                    print("Pulau \(islands[id]) + Poin \(ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: islands[id]))")
+                }
+            } catch {
+                print("Error!")
+            }
+            
+        }
+        
+        for id in islands.indices {
+            do {
+                let detail = try ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])
+                
+                if !detail.isEmpty, detail[0] == 1 {
+                    rankedIslands.append(islands[id])
+//                    print("Pulau \(islands[id]) + Poin \(ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: islands[id]))")
+                }
+            } catch {
+                print("Error!")
+            }
+            
+        }
+        
+        for id in islands.indices {
+            do {
+                let detail = try ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])
+                
+                if !detail.isEmpty, detail[0] == 2 {
+                    rankedIslands.append(islands[id])
+//                    print("Pulau \(islands[id]) + Poin \(ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: islands[id]))")
+                }
+            } catch {
+                print("Error!")
+            }
+            
+        }
+        
+        for id in islands.indices {
+            do {
+                let detail = try ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])
+                
+                if !detail.isEmpty, detail[0] == 3 {
+                    progressToRank.append(islands[id])
+//                    print("Pulau \(islands[id]) + Poin \(ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: islands[id]))")
+                }
+            } catch {
+                print("Error!")
+            }
+            
+        }
+////
+//        for id in islands.indices {
+//            if id >= 0 && id < islands.count {
+//                if ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])[0] == 1 {
+//                    rankedIslands.append(islands[id])
+//                }
+//            }
+//            
+//        }
+//        
+//        for id in islands.indices {
+//            if id >= 0 && id < islands.count {
+//                if ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])[0] == 2 {
+//                    rankedIslands.append(islands[id])
+//                }
+//            }
+//           
+//        }
+////        
+////        print(rankedIslands.count)
+////        
+//        for id in islands.indices {
+//            if id >= 0 && id < islands.count {
+//                if ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])[0] == 3 {
+//                    progressToRank.append(islands[id])
+//                }
+//            }
+//            
+//        }
+////        
+////        print(progressToRank.count)
+//        
+        
+    }
     
     func registerAccount(textInput: String, selectedImage: Data?, showAlert: Binding<Bool>, alertMessage: Binding<String>) {
         let trimmedTextInput = textInput.trimmingCharacters(in: .whitespacesAndNewlines)
