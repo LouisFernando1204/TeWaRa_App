@@ -8,6 +8,17 @@
 import SwiftUI
 
 struct HomeViewMac: View {
+    
+    private func loadImage(named imageName: String) -> NSImage? {
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        return NSImage(contentsOfFile: imagePath.path)
+    }
+
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
     var body: some View {
         ZStack(content: {
             VStack {
@@ -183,12 +194,13 @@ struct HomeViewMac: View {
         VStack(content: {
             HStack(content: {
                 
-                
-                Image("person1")
-                    .resizable()
-                    .frame(width: 60, height: 60)
-                    .clipShape(Circle())
-                    .padding(.trailing, 10)
+                if let image = loadImage(named: ModelData.shared.currentUser.image) {
+                    Image(nsImage: image)
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                        .clipShape(Circle())
+                        .padding(.trailing, 10)
+                }
 
                 
                 VStack(content: {

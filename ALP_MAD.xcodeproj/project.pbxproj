@@ -19,6 +19,12 @@
 		0413EEDE2C0C0EF900C53B1C /* TariKecak.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECC2C0C084300C53B1C /* TariKecak.mp4 */; };
 		0413EEDF2C0C0F0300C53B1C /* TariPajoge.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECD2C0C084600C53B1C /* TariPajoge.mp4 */; };
 		0413EEE02C0C0F0500C53B1C /* TariPajoge.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECD2C0C084600C53B1C /* TariPajoge.mp4 */; };
+		0413EEE92C0C1C5100C53B1C /* AnswerDescriptionViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413EEE12C0C1C5100C53B1C /* AnswerDescriptionViewMac.swift */; };
+		0413EEEA2C0C1C5100C53B1C /* AdditionalQuestionViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413EEE22C0C1C5100C53B1C /* AdditionalQuestionViewMac.swift */; };
+		0413EEEB2C0C1C5100C53B1C /* TouchdownViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413EEE32C0C1C5100C53B1C /* TouchdownViewMac.swift */; };
+		0413EEED2C0C1C5100C53B1C /* SplashScreenViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413EEE52C0C1C5100C53B1C /* SplashScreenViewMac.swift */; };
+		0413EEEE2C0C1C5100C53B1C /* RegisterViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413EEE62C0C1C5100C53B1C /* RegisterViewMac.swift */; };
+		0413EEF02C0C1C5100C53B1C /* PreAlertViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413EEE82C0C1C5100C53B1C /* PreAlertViewMac.swift */; };
 		041B26932BFA08B3000B23BB /* TopNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26922BFA08B3000B23BB /* TopNavigationBar.swift */; };
 		041B26972BFA0907000B23BB /* QuestionAndDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26962BFA0907000B23BB /* QuestionAndDisplay.swift */; };
 		041B26992BFA09E9000B23BB /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26982BFA09E9000B23BB /* ScreenSize.swift */; };
@@ -148,6 +154,12 @@
 		0413EED12C0C0A2700C53B1C /* TariRemo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariRemo.mp4; sourceTree = "<group>"; };
 		0413EED42C0C0B4B00C53B1C /* TariSajojo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariSajojo.mp4; sourceTree = "<group>"; };
 		0413EED72C0C0B5400C53B1C /* TariGong.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariGong.mp4; sourceTree = "<group>"; };
+		0413EEE12C0C1C5100C53B1C /* AnswerDescriptionViewMac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerDescriptionViewMac.swift; sourceTree = "<group>"; };
+		0413EEE22C0C1C5100C53B1C /* AdditionalQuestionViewMac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalQuestionViewMac.swift; sourceTree = "<group>"; };
+		0413EEE32C0C1C5100C53B1C /* TouchdownViewMac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchdownViewMac.swift; sourceTree = "<group>"; };
+		0413EEE52C0C1C5100C53B1C /* SplashScreenViewMac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewMac.swift; sourceTree = "<group>"; };
+		0413EEE62C0C1C5100C53B1C /* RegisterViewMac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewMac.swift; sourceTree = "<group>"; };
+		0413EEE82C0C1C5100C53B1C /* PreAlertViewMac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreAlertViewMac.swift; sourceTree = "<group>"; };
 		041B26922BFA08B3000B23BB /* TopNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationBar.swift; sourceTree = "<group>"; };
 		041B26962BFA0907000B23BB /* QuestionAndDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndDisplay.swift; sourceTree = "<group>"; };
 		041B26982BFA09E9000B23BB /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
@@ -369,6 +381,12 @@
 			children = (
 				0420D5232BF9043400696430 /* TraditionalLanguageViewMac.swift */,
 				0420D5252BF9044100696430 /* TraditionalDanceViewMac.swift */,
+				0413EEE22C0C1C5100C53B1C /* AdditionalQuestionViewMac.swift */,
+				0413EEE12C0C1C5100C53B1C /* AnswerDescriptionViewMac.swift */,
+				0413EEE82C0C1C5100C53B1C /* PreAlertViewMac.swift */,
+				0413EEE62C0C1C5100C53B1C /* RegisterViewMac.swift */,
+				0413EEE52C0C1C5100C53B1C /* SplashScreenViewMac.swift */,
+				0413EEE32C0C1C5100C53B1C /* TouchdownViewMac.swift */,
 				043845A72BFB939C00F94411 /* HomeViewMac.swift */,
 				04C8AEE62BFFA71700A3B7DC /* IslandViewMac.swift */,
 			);
@@ -794,12 +812,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				045D9A292BF4D5D7002C523E /* ContentView.swift in Sources */,
+				0413EEED2C0C1C5100C53B1C /* SplashScreenViewMac.swift in Sources */,
+				0413EEE92C0C1C5100C53B1C /* AnswerDescriptionViewMac.swift in Sources */,
 				048F72622BFBA2ED00698D20 /* ButtonColor.swift in Sources */,
 				045D9A272BF4D5D7002C523E /* MAC_ALP_MADApp.swift in Sources */,
+				0413EEEB2C0C1C5100C53B1C /* TouchdownViewMac.swift in Sources */,
 				045D9A672BF4D62B002C523E /* TraditionalDance.swift in Sources */,
 				041E54442C099FD300A15EAE /* HomeController.swift in Sources */,
 				04C8AEE72BFFA71700A3B7DC /* IslandViewMac.swift in Sources */,
+				0413EEEE2C0C1C5100C53B1C /* RegisterViewMac.swift in Sources */,
 				045D9A682BF4D62B002C523E /* IslandController.swift in Sources */,
+				0413EEF02C0C1C5100C53B1C /* PreAlertViewMac.swift in Sources */,
 				0420D5262BF9044100696430 /* TraditionalDanceViewMac.swift in Sources */,
 				043845A82BFB939C00F94411 /* HomeViewMac.swift in Sources */,
 				045D9A692BF4D62B002C523E /* TraditionalLanguageController.swift in Sources */,
@@ -810,6 +833,7 @@
 				0420D5242BF9043400696430 /* TraditionalLanguageViewMac.swift in Sources */,
 				045D9A6B2BF4D62B002C523E /* Island.swift in Sources */,
 				045D9A6E2BF4D62B002C523E /* TraditionalDanceController.swift in Sources */,
+				0413EEEA2C0C1C5100C53B1C /* AdditionalQuestionViewMac.swift in Sources */,
 				045D9A6F2BF4D62B002C523E /* ModelData.swift in Sources */,
 				045D9A702BF4D62B002C523E /* Leaderboard.swift in Sources */,
 				045D9A712BF4D62B002C523E /* TraditionalLanguage.swift in Sources */,
