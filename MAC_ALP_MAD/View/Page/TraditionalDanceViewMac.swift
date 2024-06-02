@@ -118,12 +118,13 @@ struct TraditionalDanceViewMac: View {
     
     private func imageAndAnswerBox(screenSize: CGSize) -> some View {
         VStack(content: {
-            Image(ModelData.shared.currentIslandObject.traditionalDance.image!)
-                .resizable()
-                .frame(width: screenSize.width/2.4, height: screenSize.width/3.4)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .shadow(radius:5)
-                .padding(.bottom, 10)
+            if let videoURL = Bundle.main.url(forResource: ModelData.shared.currentIslandObject.traditionalDance.image, withExtension: "mp4") {
+                VideoPlayer(player: AVPlayer(url: videoURL))
+                    .frame(width: screenSize.width/2.4, height: screenSize.width/3.4)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .shadow(radius:5)
+                    .padding(.bottom, 10)
+            }
             
             HStack(content: {
                 // buat if kalau ndak null countnya/panjangnya
@@ -200,6 +201,7 @@ struct TraditionalDanceViewMac: View {
                             .cornerRadius(20)
                             .onTapGesture(perform: {
                                 traditionalDanceController.guessWord(word: item, remainingTime: countdownTimer)
+                                self.checkAnswer()
                             })
                     }
                     else {

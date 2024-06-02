@@ -10,122 +10,117 @@ import SwiftUI
 struct TraditionalLanguageViewMac: View {
     
     let selectedIsland: Island
+    
+    @State private var backToIslandMenu: Bool = false
+    @State private var navToAdditionalQuestion: Bool = false
     @State private var textFieldValue: String = ""
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
+    @State private var timeIsUp: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @State private var alertAction: (() -> Void)?
+    @State private var buttonText: String = ""
+    @State private var showAlert: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @StateObject private var traditionalLanguageController = TraditionalLanguageController()
+    @StateObject private var islandController = IslandController(island: ModelData.shared.currentIslandObject)
     
     var body: some View {
         
-        VStack(content: {
-            
-            self.topNavigationBar()
-            
-            VStack(content: {
-                self.showQuestion()
-                
-                HStack(content: {
-                    VStack(content: {
-                        self.imageAndTextfield()
-                    })
+        NavigationStack {
+            GeometryReader { geometry in
+                VStack(content: {
+                    
+                    TopNavigationBar(ScreenSize: geometry.size, name: "Tebak Bahasa", message: "Pulau")
                     
                     VStack(content: {
-                        self.showClueAndTimer()
-                        self.buttonCheckAnswer()
+                        self.showQuestion()
+                        
+                        HStack(content: {
+                            VStack(content: {
+                                self.imageAndTextfield(screenSize: geometry.size)
+                            })
+                            .padding(.horizontal)
+                            
+                            VStack(content: {
+                                self.showClueAndTimer(screenSize: geometry.size)
+                                self.buttonCheckAnswer()
+                            })
+                            .frame(width: geometry.size.width/2)
+                        })
+                        
                     })
+                    .padding()
+                    
+                    
                 })
-                
-            })
-            .padding()
-            
-            
-        })
-        .onAppear {
-            timerRunning = true
-        }
-        .safeAreaInset(edge: .top) {
-            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                           startPoint: .leading,
-                           endPoint: .trailing
-            )
-            .frame(height: 32)
-            .edgesIgnoringSafeArea(.top)
-            .padding(.bottom, -10)
+                .onAppear {
+                    timerRunning = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                    }
+                    traditionalLanguageController.changeLanguage(language: ModelData.shared.currentIslandObject.traditionalLanguage)
+                    ModelData.shared.currentGame = "TraditionalLanguage"
+                }
+                .onDisappear {
+                    MusicPlayer.shared.stopBackgroundMusic()
+                }
+                .onChange(of: self.showAlert) { oldValue, newValue in
+                    if newValue {
+                        MusicPlayer.shared.stopBackgroundMusic()
+                    } else {
+                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                    }
+                }
+                .safeAreaInset(edge: .top) {
+                    CustomGradient.redOrangeGradient
+                        .frame(height: geometry.size.width > 600 ? 32: 70)
+                        .edgesIgnoringSafeArea(.top)
+                        .padding(.bottom, geometry.size.width > 600 ? -40 : -70)
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(alertTitle),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text(buttonText)) {
+                            alertAction?()
+                        }
+                    )
+                }
+                .navigationDestination(isPresented: $backToIslandMenu) {
+                    IslandViewMac()
+                }
+                .navigationDestination(isPresented: $navToAdditionalQuestion) {
+                    TouchdownViewMac()
+                }
+            }
         }
         
-    }
-    
-    private func topNavigationBar() -> some View {
-        HStack(content: {
-            
-            Spacer()
-                .frame(width: 20)
-            
-//            NavigationLink(
-//                destination: TraditionalLanguageViewMac()) {
-//                    HStack(spacing: 4, content: {
-//                        Image("backIconWhite")
-//                        
-//                        Text("Pulau")
-//                            .fontWeight(.regular)
-//                            .foregroundColor(.white)
-//                            .font(.headline)
-//                    })
-//                }
-            
-            Spacer()
-            
-            Text("Tebak Bahasa")
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
-                .font(.title2)
-            
-            Spacer()
-            
-            Text("Tebak Bahasa")
-                .fontWeight(.semibold)
-                .opacity(0)
-                .foregroundColor(.white)
-                .font(.headline)
-            
-            
-//            Rectangle()
-//                .background(.orange)
-//                .opacity(0)
-//                .frame(height: 36)
-//
-//            Spacer()
-        })
-        .padding(.bottom)
-        .background(
-            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                           startPoint: .leading,
-                           endPoint: .trailing
-            )
-        )
+        
+        
     }
     
     private func showQuestion() -> some View {
         HStack(content: {
             Text("'\(ModelData.shared.bali.traditionalLanguage.sentences)' merupakan bahasa daerah...")
-                .font(.title)
+                .font(.largeTitle)
                 .fontWeight(.bold)
         })
     }
     
-    private func imageAndTextfield() -> some View {
+    private func imageAndTextfield(screenSize: CGSize) -> some View {
         VStack(content: {
             Image(ModelData.shared.bali.traditionalLanguage.image!)
                 .resizable()
-                .frame(width: 300, height: 200)
+                .frame(width: screenSize.width/2.4, height: screenSize.width/3.4)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .shadow(radius:5)
                 .padding(.bottom, 10)
             
             TextField("Masukkan jawabanmu...", text: $textFieldValue)
                 .padding()
-                .frame(width: 300, height: 40)
+                .frame(width: screenSize.width/2.4, height: screenSize.width/40)
                 .background(Color.white)
                 .cornerRadius(12)
                 .overlay(
@@ -145,23 +140,23 @@ struct TraditionalLanguageViewMac: View {
         
     }
     
-    private func showClueAndTimer() -> some View {
+    private func showClueAndTimer(screenSize: CGSize) -> some View {
         VStack(content: {
             ZStack {
                 Rectangle()
-                    .clipShape(RoundedRectangle(cornerRadius: 14.0))
-                    .frame(height: 200)
+                    .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                    .frame(height: screenSize.width/3.4)
                     .foregroundColor(.secondary.opacity(0.2))
                     .overlay(
                         VStack(content: {
                             Text("Petunjuk")
                                 .fontWeight(.semibold)
-                                .font(.title3)
+                                .font(.title)
                             
                             Text("'\(ModelData.shared.bali.traditionalLanguage.clue)'")
                                 .multilineTextAlignment(.center)
                                 .fontWeight(.bold)
-                                .font(.title3)
+                                .font(.largeTitle)
                                 .padding(.vertical, 4)
                                 .overlay {
                                     LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 118/255, green: 20/255, blue: 20/255)]),
@@ -173,15 +168,15 @@ struct TraditionalLanguageViewMac: View {
                                     Text("'\(ModelData.shared.bali.traditionalLanguage.clue)'")
                                         .multilineTextAlignment(.center)
                                         .fontWeight(.bold)
-                                        .font(.title3)
+                                        .font(.title)
                                 )
                             
                             
                             Text("Ayo-ayo kamu pasti bisa!!!")
                                 .fontWeight(.regular)
-                                .font(.headline)
+                                .font(.title)
                                 .italic()
-//                                .padding(.bottom)
+                            //                                .padding(.bottom)
                                 .overlay {
                                     LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
                                                    startPoint: .leading,
@@ -190,42 +185,64 @@ struct TraditionalLanguageViewMac: View {
                                     .mask(
                                         Text("Ayo-ayo kamu pasti bisa!!!")
                                             .fontWeight(.regular)
-                                            .font(.headline)
+                                            .font(.title)
                                             .italic()
-//                                            .padding(.bottom)
+                                        //                                            .padding(.bottom)
                                     )
                                 }
                             
                         })
-//                        .frame(height: 100)
-                        .padding(.horizontal, 10)
+                        //                        .frame(height: 100)
+                            .padding(.horizontal, 10)
                     )
                 Rectangle()
                     .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
                                          startPoint: .leading,
                                          endPoint: .trailing))
                     .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                    .frame(width: 100, height: 36)
-                    .offset(y: 94)
+                    .frame(width: screenSize.width/8, height: screenSize.width/26)
                     .overlay {
-                        Text("00:00:\(countdownTimer)")
-                            .onReceive(timer, perform: { _ in
-                                if (countdownTimer > 0 && timerRunning) {
+                        Text("00:00:\(String(format: "%02d", countdownTimer))")
+                            .onReceive(timer) { _ in
+                                if countdownTimer > 0 && timerRunning {
                                     countdownTimer -= 1
                                 }
-                                else {
+                                else if countdownTimer == 0 {
                                     timerRunning = false
+                                    timeIsUp = true
+                                    self.checkAnswer()
                                 }
-                            })
-                            .offset(y: 94)
+                            }
                             .fontWeight(.regular)
-                            .font(.title3)
+                            .font(screenSize.width > 600 ? .largeTitle : .title2)
                             .foregroundColor(Color.white)
                     }
+                    .offset(y: screenSize.height/6)
             }
             
 //            Spacer().frame(height: 40)
         })
+    }
+    
+    private func checkAnswer() {
+        if traditionalLanguageController.isWrong {
+            alertTitle = "Oops.. jawabanmu masih salah"
+            alertMessage = "Tetap semangat dan belajar lagii.."
+            buttonText = "Kembali ke Pilih Pulau"
+            alertAction = { self.backToIslandMenu = true }
+        } else if traditionalLanguageController.isCorrect {
+            alertTitle = "Congrats! Jawabanmu benarr +\(traditionalLanguageController.point)"
+            alertMessage = "Oopss jangan happy dulu, karena masih ada tantangan baru!"
+            buttonText = "Telusuri tantangan baru"
+            alertAction = { self.navToAdditionalQuestion = true }
+        }
+        else if timeIsUp {
+            alertTitle = "Oops.. waktu kamu sudah habis"
+            alertMessage = "Tetap semangat dan belajar lagii.."
+            buttonText = "Kembali ke Pilih Pulau"
+            alertAction = { self.backToIslandMenu = true }
+        }
+        showAlert = true
     }
     
     private func buttonCheckAnswer() -> some View {
@@ -242,6 +259,8 @@ struct TraditionalLanguageViewMac: View {
             .padding(.vertical, 10)
             .onTapGesture {
                 traditionalLanguageController.guessWord(word: textFieldValue, remainingTime: countdownTimer)
+                self.timerRunning = false
+                self.checkAnswer()
             }
         
     }

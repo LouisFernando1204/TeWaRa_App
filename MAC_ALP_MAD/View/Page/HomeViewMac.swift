@@ -67,7 +67,7 @@ struct HomeViewMac: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: screenSize.width/1, height: screenSize.height/1.5)
                         .rotationEffect(.degrees(145.74))
-                        .offset(x: -screenSize.width/3.8)
+                        .offset(x: -screenSize.width/3.8, y: -screenSize.height/2.6)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -82,7 +82,7 @@ struct HomeViewMac: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: screenSize.width/1, height: screenSize.height/1.5)
                         .rotationEffect(.degrees(-39.94))
-                        .offset(x: screenSize.width/3.2)
+                        .offset(x: screenSize.width/3.2, y: screenSize.height/6)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

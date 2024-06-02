@@ -45,6 +45,7 @@
 		041E544E2C09A09300A15EAE /* touchdownMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54472C09A09300A15EAE /* touchdownMusic.mp3 */; };
 		041E54552C09A15A00A15EAE /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E54542C09A15A00A15EAE /* MusicPlayer.swift */; };
 		041E54562C09A15A00A15EAE /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E54542C09A15A00A15EAE /* MusicPlayer.swift */; };
+		041F29522C0CC7D600014A8E /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041F29512C0CC7D600014A8E /* AVKit.framework */; };
 		0420D5242BF9043400696430 /* TraditionalLanguageViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420D5232BF9043400696430 /* TraditionalLanguageViewMac.swift */; };
 		0420D5262BF9044100696430 /* TraditionalDanceViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420D5252BF9044100696430 /* TraditionalDanceViewMac.swift */; };
 		0420D5272BF9051300696430 /* Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044215822BF60BF60064666A /* Alphabet.swift */; };
@@ -175,6 +176,7 @@
 		041E54462C09A09300A15EAE /* quizMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = quizMusic.mp3; sourceTree = "<group>"; };
 		041E54472C09A09300A15EAE /* touchdownMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = touchdownMusic.mp3; sourceTree = "<group>"; };
 		041E54542C09A15A00A15EAE /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		041F29512C0CC7D600014A8E /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		0420D5232BF9043400696430 /* TraditionalLanguageViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageViewMac.swift; sourceTree = "<group>"; };
 		0420D5252BF9044100696430 /* TraditionalDanceViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceViewMac.swift; sourceTree = "<group>"; };
 		0422AD392C09A495003A33BC /* PreAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertView.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041F29522C0CC7D600014A8E /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +370,14 @@
 			path = IslandData;
 			sourceTree = "<group>";
 		};
+		041F29502C0CC7D600014A8E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				041F29512C0CC7D600014A8E /* AVKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0420D5222BF903F700696430 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +484,7 @@
 				045D9A372BF4D5D9002C523E /* MAC_ALP_MADTests */,
 				045D9A412BF4D5D9002C523E /* MAC_ALP_MADUITests */,
 				04A1A2CA2BF062C000C7E982 /* Products */,
+				041F29502C0CC7D600014A8E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
