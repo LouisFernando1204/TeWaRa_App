@@ -11,17 +11,30 @@ struct ProfileComponent: View {
     
     let currentUser: User
     
+    private func loadImage(named imageName: String) -> UIImage? {
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        return UIImage(contentsOfFile: imagePath.path)
+    }
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
     var body: some View {
         VStack(content: {
             HStack(content: {
                 
                 Spacer()
-                
-                Image(currentUser.image)
-                    .resizable()
-                    .frame(width: ScreenSize.screenWidth > 600 ? 120 : 80, height: ScreenSize.screenWidth > 600 ? 120 : 80)
-                    .clipShape(Circle())
-                    .padding(.leading, ScreenSize.screenWidth > 600 ? 20 : 0)
+
+                if let image = loadImage(named: currentUser.image) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: ScreenSize.screenWidth > 600 ? 120 : 80, height: ScreenSize.screenWidth > 600 ? 120 : 80)
+                        .clipShape(Circle())
+                        .padding(.leading, ScreenSize.screenWidth > 600 ? 20 : 0)
+                }
+                    
                 
                 VStack(content: {
                     
@@ -91,5 +104,7 @@ struct ProfileComponent: View {
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
             
         })
+            
     }
+    
 }
