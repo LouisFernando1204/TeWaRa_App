@@ -87,7 +87,7 @@ struct RegisterViewMac: View {
                     MusicPlayer.shared.stopBackgroundMusic()
                 }
                 .navigationDestination(isPresented: $navToHomeView) {
-                    HomeView()
+                    HomeViewMac()
                 }
             }
             .edgesIgnoringSafeArea(.all)
@@ -274,11 +274,11 @@ struct RegisterViewMac: View {
         )
         .shadow(radius: 10, y: 4)
         .sheet(isPresented: $navToHomeView) {
-            HomeView()
+            HomeViewMac()
         }
     }
 }
 
 #Preview {
-    RegisterView()
+    RegisterViewMac()
 }

@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        var chunks: [[Element]] = []
+        for index in stride(from: 0, to: count, by: size) {
+            let chunk = Array(self[index..<Swift.min(index + size, count)])
+            chunks.append(chunk)
+        }
+        return chunks
+    }
+}
+
 struct HomeViewMac: View {
     
     private func loadImage(named imageName: String) -> NSImage? {
@@ -19,19 +30,46 @@ struct HomeViewMac: View {
         return paths[0]
     }
     
+    @State private var navToIslandView: Bool = false
+    @State private var isClicked: Bool = false
+    @StateObject private var homeController: HomeController = HomeController()
+    
     var body: some View {
+        
+        NavigationStack {
+            GeometryReader { geometry in
+                self.setUpHomeView(screenSize: geometry.size)
+            }
+            .navigationDestination(isPresented: $navToIslandView) {
+                IslandViewMac()
+            }
+        }
+        .onAppear {
+            homeController.rearrangeIsland()
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 3)
+            }
+        }
+        .onDisappear {
+            MusicPlayer.shared.stopBackgroundMusic()
+        }
+        
+    }
+    
+    private func setUpHomeView(screenSize: CGSize) -> some View {
         ZStack(content: {
             VStack {
                 HStack {
                     Image("gradientWave(TeWaRa)")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 586.01, height: 380.76)
+                        .frame(width: screenSize.width/1, height: screenSize.height/1.5)
                         .rotationEffect(.degrees(145.74))
-                        .offset(x: -120, y: -140)
-                    Spacer()
+                        .offset(x: -screenSize.width/3.8)
                 }
-                Spacer()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
@@ -42,155 +80,169 @@ struct HomeViewMac: View {
                     Image("gradientWave(TeWaRa)")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 586.01, height:380.76)
-                        .rotationEffect(.degrees(-42.94))
-                        .offset(x: 170, y: 110)
+                        .frame(width: screenSize.width/1, height: screenSize.height/1.5)
+                        .rotationEffect(.degrees(-39.94))
+                        .offset(x: screenSize.width/3.2)
                 }
-
-                
-                
             }
-//            .frame(maxWidth: ScreenSize.screenWidth * 2 , maxHeight: ScreenSize.screenHeight)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             VStack(content: {
-                self.showDetailProfile()
-                self.showDetailIsland()
-                self.showButton()
+                self.showDetailProfile(screenSize: screenSize)
+                self.showDetailIsland(screenSize: screenSize)
+                    .padding(.vertical)
+                self.showButton(screenSize: screenSize)
             })
-            .padding(.horizontal)
-            .padding(.vertical)
+            .padding()
         })
     }
     
-    private func showDetailIsland() -> some View {
-        HStack(content: {
-            VStack(content: {
-                Spacer()
-                    .frame(height: 8)
-                self.islandRowMaker(currentIsland: ModelData.shared.sumatera)
-                Spacer()
-                    .frame(height: 8)
-                Divider()
-                    .background(Color.gray)
-                    .frame(width: 250)
-                    .opacity(0.5)
-                Spacer()
-                    .frame(height: 8)
-                self.islandRowMaker(currentIsland: ModelData.shared.kalimantan)
-                Spacer()
-                    .frame(height: 8)
-                Divider()
-                    .background(Color.gray)
-                    .frame(width: 250)
-                    .opacity(0.5)
-                Spacer()
-                    .frame(height: 8)
-                self.islandRowMaker(currentIsland: ModelData.shared.sulawesi)
-                Spacer()
-                    .frame(height: 8)
+    private func showDetailIsland(screenSize: CGSize) -> some View {
+        
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+                ForEach(homeController.rankedIslands.indices, id: \.self) { index in
+                    let island = homeController.rankedIslands[index]
+                    self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Ranked")
+                }
                 
-            })
-            VStack(content: {
-                Spacer()
-                    .frame(height: 8)
-                self.islandRowMaker(currentIsland: ModelData.shared.bali)
-                Spacer()
-                    .frame(height: 8)
-                Divider()
-                    .background(Color.gray)
-                    .frame(width: 250)
-                    .opacity(0.5)
-                Spacer()
-                    .frame(height: 8)
-                self.islandRowMaker(currentIsland: ModelData.shared.java)
-                Spacer()
-                    .frame(height: 8)
-                Divider()
-                    .background(Color.gray)
-                    .frame(width: 250)
-                    .opacity(0.5)
-                Spacer()
-                    .frame(height: 8)
-                self.islandRowMaker(currentIsland: ModelData.shared.papua)
-                Spacer()
-                    .frame(height: 8)
-            })
-        })
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
-        .padding(.vertical, 8)
+                ForEach(homeController.progressToRank.indices, id:\.self) { index in
+                    let island = homeController.progressToRank[index]
+                    self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Progress")
+                }
+                
+                ForEach(homeController.unfilledIslands.indices, id:\.self) {
+                    index in
+                    let island = homeController.unfilledIslands[index]
+                    self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Unplayed")
+                }
+            }
+        }
     }
     
-    private func islandRowMaker(currentIsland: Island) -> some View {
+    private func islandRowMaker(currentIsland: Island, ScreenSize: CGSize, status: String) -> some View {
         HStack(content: {
             Spacer()
             Image(currentIsland.islandImage)
                 .resizable()
-                .frame(width: 60, height: 60)
+                .frame(width: ScreenSize.width/8, height: ScreenSize.width/8)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding(.trailing, 10)
+                .padding(.trailing, ScreenSize.width/28)
             
             VStack(content: {
                 HStack(content: {
                     Text("Pulau \(currentIsland.islandName)")
-                        .font(.headline)
+                        .font(.largeTitle)
+                        .foregroundStyle(Color.black)
                         .fontWeight(.bold)
                         .overlay {
                             CustomGradient.redOrangeGradient
                             .mask(
                                 Text("Pulau \(currentIsland.islandName)")
-                                    .font(.headline)
+                                    .font(.largeTitle)
+                                    .foregroundStyle(Color.black)
                                     .fontWeight(.bold)
                             )
                         }
                     Spacer()
                 })
                 HStack(content: {
-                    Text("100 poin")
-                        .font(.caption)
-                    Spacer()
+                    if status == "Unplayed" {
+                        Text("0 poin")
+                            .foregroundStyle(Color.black)
+                            .font(.title)
+                        Spacer()
+                    }
+                    else if status == "Ranked" || status == "Progress" {
+                        ForEach(currentIsland.userList.indices, id: \.self) { index in
+                            let user = currentIsland.userList[index]
+                            if user.name == ModelData.shared.currentUser.name {
+                                Text("\(user.score) poin")
+                                    .foregroundStyle(Color.black)
+                                    .font(.title)
+
+                                Spacer()
+                            }
+                        }
+                        
+                    }
+                    
                 })
                 .padding(.bottom, 3)
                 HStack(spacing: 0, content: {
                     HStack(content: {
-                        Text("-20 poin")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.gray)
-                            .italic()
-                            .opacity(0.8)
-                            .font(.caption2)
+                        if status == "Unplayed" {
+                            Text("")
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .foregroundColor(.gray)
+                                .italic()
+                                .opacity(0.8)
+                                .font(.title2)
+
+                        }
+                        else if status == "Ranked" {
+                            Text("⭐️")
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.title2)
+                        }
+                        else if status == "Progress" {
+                            Text("- \(ModelData.shared.getCurrentUserPointByIsland(name: currentIsland.userList[2].name, island: currentIsland)[0] -  ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0]) poin")
+                                .foregroundStyle(Color.black)
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.title2)
+                        }
+                        
                     })
                     HStack(content: {
-                        Text(" untuk masuk peringkat")
-                            .foregroundColor(.gray)
-                            .italic()
-                            .font(.caption2)
+                        if status == "Unplayed" {
+                            Text("Anda belum memainkan game di pulau ini sama sekali")
+                                .foregroundColor(.gray)
+                                .italic()
+                                .font(.title2)
+                        }
+                        else if status == "Ranked" {
+                            Text(" Anda menduduki peringkat \(ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0] + 1)!")
+                                .foregroundColor(.gray)
+                                .italic()
+                                .font(.title2)
+                        }
+                        else if status == "Progress" {
+                            Text(" untuk memasuki peringkat")
+                                .foregroundColor(.gray)
+                                .italic()
+                                .font(.title2)
+                        }
+                        
                     })
                     
                     Spacer()
                 })
             })
-            
+//            Spacer()
+//                .frame(height: ScreenSize.width > 600 ? 30 : 10)
         })
+        
         
     }
     
-    private func showButton() -> some View {
+    private func showButton(screenSize: CGSize) -> some View {
         Rectangle()
             .fill(ButtonColor.redButton)
             .cornerRadius(10)
-            .frame(height: 40)
+            .frame(height: screenSize.width/24)
             .overlay {
                 Text("MULAI GAME")
+                    .font(.largeTitle)
                     .foregroundColor(.white)
                     .fontWeight(.bold)
             }
-            .padding(.vertical, 10)
-//            .onTapGesture {
-//                traditionalLanguageController.guessWord(word: textFieldValue, remainingTime: countdownTimer)
-//            }
+            .padding(.bottom, 10)
+            .onTapGesture {
+                self.navToIslandView = true
+            }
     }
     
-    private func showDetailProfile() -> some View {
+    private func showDetailProfile(screenSize: CGSize) -> some View {
         VStack(content: {
             HStack(content: {
                 
@@ -201,21 +253,26 @@ struct HomeViewMac: View {
                         .clipShape(Circle())
                         .padding(.trailing, 10)
                 }
-
+                
+                Image("person1")
+                    .resizable()
+                    .frame(width: screenSize.width/14, height: screenSize.width/14)
+                    .clipShape(Circle())
+                    .padding(.trailing, screenSize.width/36)
                 
                 VStack(content: {
                     
                     HStack(content: {
-                        Text("Hi, Radhita Lope! ")
+                        Text("\(ModelData.shared.currentUser.name)! ")
                             .fontWeight(.bold)
-                            .font(.title2)
+                            .font(.largeTitle)
                             .overlay {
                                 CustomGradient.redDarkRedGradient
                             }
                             .mask(
-                                Text("Hi, Radhita Lope! ")
+                                Text("\(ModelData.shared.currentUser.name)! ")
                                     .fontWeight(.bold)
-                                    .font(.title2)
+                                    .font(.largeTitle)
                             )
                         
                         Spacer()
@@ -225,23 +282,23 @@ struct HomeViewMac: View {
                         HStack(spacing: 0, content: {
                             Text("Welcome back to ")
                                 .fontWeight(.medium)
-                                .font(.headline)
+                                .font(.title)
                             
                             Text("TeWaRa")
-                                .font(.headline)
+                                .font(.title)
                                 .fontWeight(.medium)
                                 .overlay {
                                     CustomGradient.redOrangeGradient
                                     .mask(
                                         Text("TeWaRa")
-                                            .font(.headline)
+                                            .font(.title)
                                             .fontWeight(.medium)
                                     )
                                 }
                             
                             
                             Text("!")
-                                .font(.headline)
+                                .font(.title)
                         })
                         .padding(.bottom, 2)
                         
@@ -250,8 +307,8 @@ struct HomeViewMac: View {
                     })
                     
                     HStack(content: {
-                        Text("Total poin: 100")
-                            .font(.headline)
+                        Text("Total poin: \(ModelData.shared.currentUser.score)")
+                            .font(.title)
                             .fontWeight(.medium)
                         
                         Spacer()
@@ -259,9 +316,7 @@ struct HomeViewMac: View {
                 })
                 
             })
-            .frame(height:80)
-            
-//            .frame(width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.3 : ScreenSize.screenWidth * 0.8, height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 6 : 130)
+            .frame(height: screenSize.width/10)
             .padding(.horizontal, 10)
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
             

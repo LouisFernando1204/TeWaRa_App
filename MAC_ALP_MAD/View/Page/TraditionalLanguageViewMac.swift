@@ -13,7 +13,7 @@ struct TraditionalLanguageViewMac: View {
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @StateObject private var traditionalLanguageController = TraditionalLanguageController(traditionalLanguage: ModelData.shared.bali.traditionalLanguage)
+    @StateObject private var traditionalLanguageController = TraditionalLanguageController()
     
     var body: some View {
         
@@ -115,7 +115,7 @@ struct TraditionalLanguageViewMac: View {
     
     private func imageAndTextfield() -> some View {
         VStack(content: {
-            Image(ModelData.shared.bali.traditionalLanguage.image)
+            Image(ModelData.shared.bali.traditionalLanguage.image!)
                 .resizable()
                 .frame(width: 300, height: 200)
                 .clipShape(RoundedRectangle(cornerRadius: 12))

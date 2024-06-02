@@ -133,5 +133,5 @@ struct SplashScreenViewMac: View {
 }
 
 #Preview {
-    SplashScreenView()
+    SplashScreenViewMac()
 }

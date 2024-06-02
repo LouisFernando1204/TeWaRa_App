@@ -14,7 +14,7 @@ struct TraditionalDanceViewMac: View {
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @StateObject private var traditionalDanceController = TraditionalDanceController(traditionalDance: ModelData.shared.bali.traditionalDance)
+    @StateObject private var traditionalDanceController = TraditionalDanceController()
     private let fixedColumn = [
         GridItem(.fixed(54)),
         GridItem(.fixed(54)),
@@ -121,7 +121,7 @@ struct TraditionalDanceViewMac: View {
     
     private func imageAndAnswerBox() -> some View {
         VStack(content: {
-            Image(ModelData.shared.bali.traditionalLanguage.image)
+            Image(ModelData.shared.bali.traditionalLanguage.image!)
                 .resizable()
                 .frame(width: 300, height: 200)
                 .clipShape(RoundedRectangle(cornerRadius: 12))

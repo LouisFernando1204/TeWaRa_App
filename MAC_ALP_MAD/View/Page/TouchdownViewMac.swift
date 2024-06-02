@@ -22,7 +22,7 @@ struct TouchdownViewMac: View {
                 self.setUpTouchdownView(isVisible: isVisible, screenSize: geometry.size)
             }
             .navigationDestination(isPresented: $navToAdditionalQuestionView) {
-                AdditionalQuestionView()
+                AdditionalQuestionViewMac()
             }
         }
     }
@@ -130,5 +130,5 @@ struct TouchdownViewMac: View {
 }
 
 #Preview {
-    TouchdownView()
+    TouchdownViewMac()
 }

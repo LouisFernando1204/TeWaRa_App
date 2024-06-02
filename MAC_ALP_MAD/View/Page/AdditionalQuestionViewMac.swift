@@ -63,7 +63,7 @@ struct AdditionalQuestionViewMac: View {
         }
         .background(Color.white)
         .navigationDestination(isPresented: $navToAnswerDescriptionView) {
-            AnswerDescriptionView()
+            AnswerDescriptionViewMac()
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
@@ -317,5 +317,5 @@ struct AdditionalQuestionViewMac: View {
 }
 
 #Preview {
-    AdditionalQuestionView()
+    AdditionalQuestionViewMac()
 }

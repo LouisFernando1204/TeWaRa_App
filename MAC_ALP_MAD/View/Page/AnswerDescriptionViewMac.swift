@@ -46,7 +46,7 @@ struct AnswerDescriptionViewMac: View {
                     }
                 }
                 .navigationDestination(isPresented: $navToIslandView) {
-                    IslandView()
+                    IslandViewMac()
                 }
             }
         }
@@ -194,5 +194,5 @@ private func poinStatus(screenSize: CGSize) -> some View {
 }
 
 #Preview {
-    AnswerDescriptionView()
+    AnswerDescriptionViewMac()
 }

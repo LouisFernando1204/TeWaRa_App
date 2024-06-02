@@ -24,8 +24,6 @@ struct IslandViewMac: View {
         VStack(spacing: 0) {
             TopNavigationBar(destination: AnyView(Text("Destination")), name: "Pulau")
             
-            
-            
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(islands) { islandModel in
                     NavigationLink(destination: IslandDetailView(island: islandModel)) {

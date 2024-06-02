@@ -16,6 +16,7 @@ class HomeController : ObservableObject {
     @Published var progressToRank: [Island] = []
     @Published var unfilledIslands: [Island] = []
     @Published var rankedIslands: [Island] = []
+    @Published var combinedArray: [Island] = []
     
     init() {
         print("HAHAHA \(ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: ModelData.shared.java))")
@@ -130,39 +131,11 @@ class HomeController : ObservableObject {
             }
             
         }
-////
-//        for id in islands.indices {
-//            if id >= 0 && id < islands.count {
-//                if ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])[0] == 1 {
-//                    rankedIslands.append(islands[id])
-//                }
-//            }
-//            
-//        }
-//        
-//        for id in islands.indices {
-//            if id >= 0 && id < islands.count {
-//                if ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])[0] == 2 {
-//                    rankedIslands.append(islands[id])
-//                }
-//            }
-//           
-//        }
-////        
-////        print(rankedIslands.count)
-////        
-//        for id in islands.indices {
-//            if id >= 0 && id < islands.count {
-//                if ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id])[0] == 3 {
-//                    progressToRank.append(islands[id])
-//                }
-//            }
-//            
-//        }
-////        
-////        print(progressToRank.count)
-//        
-        
+    }
+    
+    func getCombinedAllArray() -> [Island] {
+        combinedArray = rankedIslands + progressToRank + unfilledIslands
+        return self.combinedArray
     }
     
     func registerAccount(textInput: String, selectedImage: Data?, showAlert: Binding<Bool>, alertMessage: Binding<String>) {
