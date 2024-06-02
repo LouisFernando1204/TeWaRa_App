@@ -8,139 +8,135 @@
 import SwiftUI
 import AVKit
 
+
 struct TraditionalDanceViewMac: View {
     
-    let selectedIsland: Island
+    @State private var backToIslandMenu: Bool = false
+    @State private var navToAdditionalQuestion: Bool = false
+    @State private var selectedIsland: Island
     @State private var avPlayer = AVPlayer()
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
+    @State private var timeIsUp: Bool = false
+    @State private var outOfChance: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @State private var alertAction: (() -> Void)?
+    @State private var buttonText: String = ""
+    @State private var showAlert: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @StateObject private var traditionalDanceController = TraditionalDanceController()
+    
+    
+    @StateObject private var traditionalDanceController: TraditionalDanceController = TraditionalDanceController()
+    
+    init(selectedIsland: Island) {
+        self.selectedIsland = selectedIsland
+    }
+    
     private let fixedColumn = [
-        GridItem(.fixed(54)),
-        GridItem(.fixed(54)),
-        GridItem(.fixed(54)),
-        GridItem(.fixed(54))
+        GridItem(.fixed(140)),
+        GridItem(.fixed(140)),
+        GridItem(.fixed(140)),
+        GridItem(.fixed(140))
     ]
     
     var body: some View {
         
-        VStack(content: {
-            
-            self.topNavigationBar()
-            
-            VStack(content: {
-                self.showQuestionAndChance()
+        NavigationStack {
+            GeometryReader { geometry in
                 
-                HStack(content: {
-                    self.imageAndAnswerBox()
+                VStack(content: {
+                    
+                    TopNavigationBar(ScreenSize: geometry.size, name: "Tebak Tarian", message: "Pulau")
                     
                     VStack(content: {
-                        self.showWordOptions()
+                        self.showQuestionAndChance()
                         
-                        self.showTimer()
+                        HStack(content: {
+                            self.imageAndAnswerBox(screenSize: geometry.size)
+                            
+                            VStack(content: {
+                                self.showWordOptions(screenSize: geometry.size)
+                                
+                                self.showTimer(screenSize: geometry.size)
+                            })
+                        })
                     })
+                    .padding()
                 })
-                
-            })
-            .padding()
-            
-            
-        })
-        .onAppear {
-            timerRunning = true
+                .onAppear {
+                    timerRunning = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                    }
+                    self.traditionalDanceController.changeDance(dance: ModelData.shared.currentIslandObject.traditionalDance)
+                    ModelData.shared.currentGame = "TraditionalDance"
+                }
+                .onDisappear {
+                    MusicPlayer.shared.stopBackgroundMusic()
+                }
+                .onChange(of: self.showAlert) { oldValue, newValue in
+                    if newValue {
+                        MusicPlayer.shared.stopBackgroundMusic()
+                    } else {
+                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                    }
+                }
+                .safeAreaInset(edge: .top) {
+                    CustomGradient.redOrangeGradient
+                        .frame(height: geometry.size.width > 600 ? 32: 70)
+                        .edgesIgnoringSafeArea(.top)
+                        .padding(.bottom, geometry.size.width > 600 ? -40 : -70)
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(alertTitle),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text(buttonText)) {
+                            alertAction?()
+                        }
+                    )
+                }
+            }
+            .navigationDestination(isPresented: $backToIslandMenu) {
+                IslandViewMac()
+            }
+            .navigationDestination(isPresented: $navToAdditionalQuestion) {
+                TouchdownViewMac()
+            }
         }
-        .safeAreaInset(edge: .top) {
-            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                           startPoint: .leading,
-                           endPoint: .trailing
-            )
-            .frame(height: 32)
-            .edgesIgnoringSafeArea(.top)
-            .padding(.bottom, -10)
-        }
-    }
-    
-    private func topNavigationBar() -> some View {
-        HStack(content: {
-            
-            Spacer()
-                .frame(width: 20)
-            
-//            NavigationLink(
-//                destination: TraditionalLanguageViewMac()) {
-//                    HStack(spacing: 4, content: {
-//                        Image("backIconWhite")
-//                        
-//                        Text("Pulau")
-//                            .fontWeight(.regular)
-//                            .foregroundColor(.white)
-//                            .font(.headline)
-//                    })
-//                }
-            
-            Spacer()
-            
-            Text("Tebak Tarian")
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
-                .font(.title2)
-            
-            Spacer()
-            
-            Text("Tebak Tarian")
-                .fontWeight(.semibold)
-                .opacity(0)
-                .foregroundColor(.white)
-                .font(.headline)
-            
-            
-//            Rectangle()
-//                .background(.orange)
-//                .opacity(0)
-//                .frame(height: 36)
-//
-            Spacer()
-                .frame(width: 20)
-        })
-        .padding(.bottom)
-        .background(
-            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                           startPoint: .leading,
-                           endPoint: .trailing
-            )
-        )
+        
     }
     
     private func showQuestionAndChance() -> some View {
         HStack(content: {
-            Text("Tari tradisional dari Pulau '\(ModelData.shared.bali.islandName)' adalah...")
-                .font(.title)
+            Text("Tari tradisional dari Pulau '\(ModelData.shared.currentIslandObject.islandName)' adalah...")
+                .font(.largeTitle)
                 .fontWeight(.bold)
         })
     }
     
-    private func imageAndAnswerBox() -> some View {
+    private func imageAndAnswerBox(screenSize: CGSize) -> some View {
         VStack(content: {
-            Image(ModelData.shared.bali.traditionalLanguage.image!)
+            Image(ModelData.shared.currentIslandObject.traditionalDance.image!)
                 .resizable()
-                .frame(width: 300, height: 200)
+                .frame(width: screenSize.width/2.4, height: screenSize.width/3.4)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .shadow(radius:5)
                 .padding(.bottom, 10)
             
             HStack(content: {
                 // buat if kalau ndak null countnya/panjangnya
-                ForEach(ModelData.shared.sumatera.traditionalDance.throwableAnswer.indices, id: \.self) { index in
-                    let alphabet = ModelData.shared.sumatera.traditionalDance.throwableAnswer[index].alphabet
-                    if(!ModelData.shared.sumatera.traditionalDance.throwableAnswer[index].isClicked) {
+                ForEach(ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer.indices, id: \.self) { index in
+                    let alphabet = ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].alphabet
+                    if(!ModelData.shared.currentIslandObject.traditionalDance.throwableAnswer[index].isClicked) {
                         Rectangle()
-                            .frame(width: 44, height:44)
+                            .frame(width: screenSize.width/16, height:screenSize.width/16)
                             .foregroundColor(.secondary)
                             .opacity(0.2)
-                            .cornerRadius(10)
+                            .cornerRadius(20)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
+                                RoundedRectangle(cornerRadius: 20)
                                     .stroke(
                                         LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
                                                        startPoint: .leading,
@@ -151,19 +147,26 @@ struct TraditionalDanceViewMac: View {
                     }
                     else {
                         Rectangle()
-                            .frame(width: 44, height: 44)
+                            .frame(width: screenSize.width/16, height:screenSize.width/16)
                             .foregroundColor(.secondary)
                             .opacity(0.2)
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
+                            .cornerRadius(20)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 20)
                                     .stroke(
                                         LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
                                                        startPoint: .leading,
                                                        endPoint: .trailing),
                                         lineWidth: 2
                                     )
-                            )
+                                
+                                Text(alphabet)
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.white)
+                                
+                            }
+                        
                     }
                 }
             })
@@ -171,17 +174,17 @@ struct TraditionalDanceViewMac: View {
             
         })
         .padding(.leading)
-//
+        //
     }
     
-    private func showWordOptions() -> some View {
+    private func showWordOptions(screenSize: CGSize) -> some View {
         VStack(content: {
             LazyVGrid(columns: fixedColumn, spacing: 20) {
-                ForEach(ModelData.shared.bali.traditionalDance.availableWords.indices, id:\.self) { index in
-                    let item = ModelData.shared.bali.traditionalDance.availableWords[index]
-                    if (!ModelData.shared.bali.traditionalDance.availableWords[index].isClicked) {
+                ForEach(ModelData.shared.currentIslandObject.traditionalDance.availableWords.indices, id:\.self) { index in
+                    let item = ModelData.shared.currentIslandObject.traditionalDance.availableWords[index]
+                    if (!ModelData.shared.currentIslandObject.traditionalDance.availableWords[index].isClicked) {
                         Rectangle()
-                            .frame(width: 50, height: 50)
+                            .frame(width: screenSize.width/16, height:screenSize.width/16)
                             .overlay {
                                 LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 118/255, green: 20/255, blue: 20/255)]),
                                                startPoint: .leading,
@@ -190,48 +193,80 @@ struct TraditionalDanceViewMac: View {
                             }
                             .overlay(
                                 Text(item.alphabet)
-                                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                                    .fontWeight(.semibold)
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
                                     .foregroundStyle(.white)
                             )
-                            .cornerRadius(10)
+                            .cornerRadius(20)
                             .onTapGesture(perform: {
                                 traditionalDanceController.guessWord(word: item, remainingTime: countdownTimer)
                             })
                     }
                     else {
                         Rectangle()
-                            .frame(width: 50, height: 50)
+                            .frame(width: screenSize.width/16, height:screenSize.width/16)
                             .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .cornerRadius(20)
                     }
                 }
             }
         })
+        .padding(.bottom, screenSize.width/14)
+        .padding(.top, screenSize.width/10)
     }
     
-    private func showTimer() -> some View {
+    private func showTimer(screenSize: CGSize) -> some View {
         Rectangle()
             .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
                                  startPoint: .leading,
                                  endPoint: .trailing))
             .clipShape(RoundedRectangle(cornerRadius: 10.0))
-            .frame(width: 100, height: 42)
+            .frame(width: screenSize.width/8, height: screenSize.width/26)
             .overlay {
-                Text("00:00:\(countdownTimer)")
-                    .onReceive(timer, perform: { _ in
-                        if (countdownTimer > 0 && timerRunning) {
+                Text("00:00:\(String(format: "%02d", countdownTimer))")
+                    .onReceive(timer) { _ in
+                        if countdownTimer > 0 && timerRunning {
                             countdownTimer -= 1
                         }
-                        else {
+                        else if countdownTimer == 0 {
                             timerRunning = false
+                            timeIsUp = true
+                            self.checkAnswer()
                         }
-                    })
+                    }
                     .fontWeight(.regular)
-                    .font(.title3)
+                    .font(screenSize.width > 600 ? .largeTitle : .title2)
                     .foregroundColor(Color.white)
             }
-            .padding(.vertical)
+            .padding(.bottom, screenSize.width/12)
+//            .padding(.vertical, screenSize.width/36)
+    }
+    
+    private func checkAnswer() {
+        if traditionalDanceController.currentGameIsWrong {
+            alertTitle = "Oops.. kesempatan menjawab sudah habis"
+            alertMessage = "Tetap semangat dan belajar lagii.."
+            buttonText = "Kembali ke Pilih Pulau"
+            print("SALAA")
+            timerRunning = false
+            showAlert = true
+            alertAction = { self.backToIslandMenu = true }
+        }
+        else if traditionalDanceController.currentGameIsCorrect {
+            alertTitle = "Congrats! Jawabanmu benarr +\(traditionalDanceController.point)"
+            alertMessage = "Oopss jangan happy dulu, karena masih ada tantangan baru!"
+            buttonText = "Telusuri tantangan baru"
+            showAlert = true
+            timerRunning = false
+            alertAction = { self.navToAdditionalQuestion = true }
+        }
+        else if countdownTimer == 0 {
+            alertTitle = "Oops.. waktu kamu sudah habis"
+            alertMessage = "Tetap semangat dan belajar lagii.."
+            buttonText = "Kembali ke Pilih Pulau"
+            showAlert = true
+            alertAction = { self.backToIslandMenu = true }
+        }
     }
 }
 
