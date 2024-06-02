@@ -66,6 +66,16 @@ struct TraditionalLanguageView: View {
             traditionalLanguageController.changeLanguage(language: ModelData.shared.currentIslandObject.traditionalLanguage)
             ModelData.shared.currentGame = "TraditionalLanguage"
         }
+        .onDisappear {
+            MusicPlayer.shared.stopBackgroundMusic()
+        }
+        .onChange(of: self.showAlert) { oldValue, newValue in
+            if newValue {
+                MusicPlayer.shared.stopBackgroundMusic()
+            } else {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+            }
+        }
         .safeAreaInset(edge: .top) {
             CustomGradient.redOrangeGradient
                 .frame(height: ScreenSize.screenWidth > 600 ? 32: 70)
