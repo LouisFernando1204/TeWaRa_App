@@ -15,7 +15,7 @@ struct HomeView: View {
     var body: some View {
         
         ZStack(content: {
-            
+    
             VStack {
                 HStack {
                     Image("gradientWave(TeWaRa)")
@@ -60,6 +60,14 @@ struct HomeView: View {
             .padding(.horizontal, 20)
             .fullScreenCover(isPresented: $isClicked) {
                 IslandView()
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                    MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 3)
+                }
+            }
+            .onDisappear {
+                MusicPlayer.shared.stopBackgroundMusic()
             }
         })
     }

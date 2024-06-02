@@ -95,6 +95,14 @@ struct IslandView: View {
                                 }
                                 
                             }
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                                    MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 3)
+                                }
+                            }
+                            .onDisappear {
+                                MusicPlayer.shared.stopBackgroundMusic()
+                            }
                             .padding()
                             .onTapGesture {
                                 islandController.addUserToArray(islandName: islands[index].islandName)
@@ -244,6 +252,14 @@ struct IslandView: View {
                                             .foregroundColor(.white)
                                             .padding(.bottom, 10)
                                     }
+                                }
+                                .onAppear {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 3)
+                                    }
+                                }
+                                .onDisappear {
+                                    MusicPlayer.shared.stopBackgroundMusic()
                                 }
                                 .padding()
                                 .onTapGesture {
