@@ -10,6 +10,7 @@ import AVKit
 
 struct TraditionalDanceViewMac: View {
     
+    let selectedIsland: Island
     @State private var avPlayer = AVPlayer()
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
@@ -66,17 +67,17 @@ struct TraditionalDanceViewMac: View {
             Spacer()
                 .frame(width: 20)
             
-            NavigationLink(
-                destination: TraditionalLanguageViewMac()) {
-                    HStack(spacing: 4, content: {
-                        Image("backIconWhite")
-                        
-                        Text("Pulau")
-                            .fontWeight(.regular)
-                            .foregroundColor(.white)
-                            .font(.headline)
-                    })
-                }
+//            NavigationLink(
+//                destination: TraditionalLanguageViewMac()) {
+//                    HStack(spacing: 4, content: {
+//                        Image("backIconWhite")
+//                        
+//                        Text("Pulau")
+//                            .fontWeight(.regular)
+//                            .foregroundColor(.white)
+//                            .font(.headline)
+//                    })
+//                }
             
             Spacer()
             
@@ -235,5 +236,5 @@ struct TraditionalDanceViewMac: View {
 }
 
 #Preview {
-    TraditionalDanceViewMac()
+    TraditionalDanceViewMac(selectedIsland: ModelData.shared.bali)
 }

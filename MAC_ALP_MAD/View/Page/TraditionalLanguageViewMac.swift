@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TraditionalLanguageViewMac: View {
     
+    let selectedIsland: Island
     @State private var textFieldValue: String = ""
     @State private var countdownTimer: Int = 30
     @State private var timerRunning: Bool = false
@@ -61,17 +62,17 @@ struct TraditionalLanguageViewMac: View {
             Spacer()
                 .frame(width: 20)
             
-            NavigationLink(
-                destination: TraditionalLanguageViewMac()) {
-                    HStack(spacing: 4, content: {
-                        Image("backIconWhite")
-                        
-                        Text("Pulau")
-                            .fontWeight(.regular)
-                            .foregroundColor(.white)
-                            .font(.headline)
-                    })
-                }
+//            NavigationLink(
+//                destination: TraditionalLanguageViewMac()) {
+//                    HStack(spacing: 4, content: {
+//                        Image("backIconWhite")
+//                        
+//                        Text("Pulau")
+//                            .fontWeight(.regular)
+//                            .foregroundColor(.white)
+//                            .font(.headline)
+//                    })
+//                }
             
             Spacer()
             
@@ -249,5 +250,5 @@ struct TraditionalLanguageViewMac: View {
 
 
 #Preview {
-    TraditionalLanguageViewMac()
+    TraditionalLanguageViewMac(selectedIsland: ModelData.shared.bali)
 }
