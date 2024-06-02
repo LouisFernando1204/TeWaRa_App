@@ -27,6 +27,7 @@ struct ProfileComponent: View {
                     
                     HStack(content: {
                         Text("Hi, \(currentUser.name)! ")
+                            .foregroundStyle(Color.black)
                             .fontWeight(.bold)
                             .font(ScreenSize.screenWidth > 600 ? .largeTitle : .title3)
                             .overlay {
@@ -34,6 +35,7 @@ struct ProfileComponent: View {
                             }
                             .mask(
                                 Text("Hi, \(currentUser.name)! ")
+                                    .foregroundStyle(Color.black)
                                     .fontWeight(.bold)
                                     .font(ScreenSize.screenWidth > 600 ? .largeTitle : .title3)
                             )
@@ -44,6 +46,7 @@ struct ProfileComponent: View {
                     HStack(content: {
                         HStack(spacing: 0, content: {
                             Text("Welcome back to ")
+                                .foregroundStyle(Color.black)
                                 .fontWeight(.medium)
                                 .font(ScreenSize.screenWidth > 600 ? .title : .headline)
                             
@@ -61,6 +64,7 @@ struct ProfileComponent: View {
                             
                             
                             Text("!")
+                                .foregroundStyle(Color.black)
                                 .font(ScreenSize.screenWidth > 600 ? .title : .headline)
                         })
                         .padding(.bottom, 2)
@@ -71,6 +75,7 @@ struct ProfileComponent: View {
                     
                     HStack(content: {
                         Text("Total poin: \(currentUser.score)")
+                            .foregroundStyle(Color.black)
                             .font(ScreenSize.screenWidth > 600 ? .title : .headline)
                             .fontWeight(.medium)
                         

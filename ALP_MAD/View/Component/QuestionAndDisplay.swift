@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct QuestionAndDisplay: View {
     
@@ -29,12 +30,15 @@ struct QuestionAndDisplay: View {
             HStack(content: {
                 Text("Tari tradisional dari Pulau \(currentIsland.islandName) yaitu...")
                     .font(ScreenSize.screenWidth > 600 ? .system(size: 38) : .title2)
+                    .foregroundStyle(Color.black)
                     .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
+
                 Spacer()
             })
-            if let image = currentIsland.traditionalDance.image {
-                Image(image)
-                    .resizable()
+            .multilineTextAlignment(.leading)
+            if let videoURL = Bundle.main.url(forResource: currentIsland.traditionalDance.image, withExtension: "mp4") {
+                VideoPlayer(player: AVPlayer(url: videoURL))
                     .frame(
                         width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.3 : ScreenSize.screenWidth / 1.1,
                         height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 3 : ScreenSize.screenHeight / 4
@@ -43,8 +47,6 @@ struct QuestionAndDisplay: View {
                     .shadow(radius:5)
                     .padding(.bottom, ScreenSize.screenWidth > 600 ? 8 : 12)
             }
-            
-            
         })
         .padding(.top, ScreenSize.screenWidth > 600 ? 0 : 10)
     }
@@ -54,9 +56,15 @@ struct QuestionAndDisplay: View {
             HStack(content: {
                 Text("\(currentIsland.traditionalLanguage.sentences) merupakan bahasa daerah...")
                     .font(ScreenSize.screenWidth > 600 ? .system(size: 38) : .title2)
+                    .foregroundStyle(Color.black)
                     .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
+
+
                 Spacer()
             })
+            .multilineTextAlignment(.leading)
+
             if let image = currentIsland.traditionalLanguage.image {
                 Image(image)
                     .resizable()

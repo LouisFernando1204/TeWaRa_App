@@ -66,51 +66,15 @@ struct IslandView: View {
                     LazyVGrid(columns: columns, spacing: 20) {
                         
                         ForEach(0..<islands.count, id:\.self) { index in
-                            ZStack(alignment: .bottom) {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                Color(red: 220/255, green: 38/255, blue: 38/255), // #DC2626
-                                                Color(red: 118/255, green: 20/255, blue: 20/255)  // #761414
-                                            ]),
-                                            startPoint: .top,
-                                            endPoint: .bottom
-                                        )
-                                    )
-                                    .frame(height: 250)
-                                
-                                VStack {
-                                    Image(islands[index].islandImage)
-                                        .resizable()
-                                        .frame(width: 240, height: 150)
-                                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                                        .padding([.leading, .trailing], 10)
-                                        .padding(.bottom, 20)
-                                    Text(islands[index].islandName)
-                                        .font(.title)
-                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                        .foregroundColor(.white)
-                                        .padding(.bottom, 20)
-                                }
-                                
-                            }
-                            .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                                    MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 3)
-                                }
-                            }
-                            .onDisappear {
-                                MusicPlayer.shared.stopBackgroundMusic()
-                            }
-                            .padding()
-                            .onTapGesture {
+                            
+                            Button(action: {
                                 islandController.addUserToArray(islandName: islands[index].islandName)
                                 self.selectedIsland = islands[index].islandName
                                 if self.selectedIsland == "Sumatera" {
                                     ModelData.shared.currentIslandObject = ModelData.shared.sumatera
                                     if islandController.getChosenGameByRandom() {
                                         self.selectSumateraAndGetDance = true
+                                        
                                     }
                                     else {
                                         self.selectSumateraAndGetLanguage = true
@@ -161,70 +125,8 @@ struct IslandView: View {
                                         self.selectJavaAndGetLanguage = true
                                     }
                                 }
-                                
-                            }
-                            .fullScreenCover(isPresented: $selectSumateraAndGetDance) {
-                                TraditionalDanceView(selectedIsland: ModelData.shared.sumatera)
-                            }
-                            .fullScreenCover(isPresented: $selectSumateraAndGetLanguage) {
-                                TraditionalLanguageView(selectedIsland: ModelData.shared.sumatera)
-                            }
-                            
-                            .fullScreenCover(isPresented: $selectKalimantanAndGetDance) {
-                                TraditionalDanceView(selectedIsland: ModelData.shared.kalimantan)
-                            }
-                            .fullScreenCover(isPresented: $selectKalimantanAndGetLanguage) {
-                                TraditionalLanguageView(selectedIsland: ModelData.shared.kalimantan)
-                            }
-                            
-                            .fullScreenCover(isPresented: $selectPapuaAndGetDance) {
-                                TraditionalDanceView(selectedIsland: ModelData.shared.papua)
-                            }
-                            .fullScreenCover(isPresented: $selectPapuaAndGetLanguage) {
-                                TraditionalLanguageView(selectedIsland: ModelData.shared.papua)
-                            }
-                            
-                            .fullScreenCover(isPresented: $selectBaliAndGetDance) {
-                                TraditionalDanceView(selectedIsland: ModelData.shared.bali)
-                            }
-                            .fullScreenCover(isPresented: $selectBaliAndGetLanguage) {
-                                TraditionalLanguageView(selectedIsland: ModelData.shared.bali)
-                            }
-                            
-                            .fullScreenCover(isPresented: $selectJavaAndGetDance) {
-                                TraditionalDanceView(selectedIsland: ModelData.shared.java)
-                            }
-                            .fullScreenCover(isPresented: $selectJavaAndGetLanguage) {
-                                TraditionalLanguageView(selectedIsland: ModelData.shared.java)
-                            }
-                            
-                            .fullScreenCover(isPresented: $selectSulawesiAndGetDance) {
-                                TraditionalDanceView(selectedIsland: ModelData.shared.sulawesi)
-                            }
-                            .fullScreenCover(isPresented: $selectSulawesiAndGetLanguage) {
-                                TraditionalLanguageView(selectedIsland: ModelData.shared.sulawesi)
-                            }
-                            
-                            
-                        }
-                        
-                    }
-                    .padding()
-                }
-                
-                BottomBar()
-            }
-        } else {
-            NavigationView {
-                VStack(spacing: 0) {
-                    TopNavigationBar(name: "Pulau", message: "Home")
-                    
-                    ScrollView {
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            
-                            ForEach(0..<islands.count, id:\.self) { index in
-                                ZStack(alignment: .center) {
-                                    
+                            }) {
+                                ZStack(alignment: .bottom) {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(
                                             LinearGradient(
@@ -236,22 +138,22 @@ struct IslandView: View {
                                                 endPoint: .bottom
                                             )
                                         )
-                                        .frame(height: 180)
+                                        .frame(height: 250)
                                     
                                     VStack {
                                         Image(islands[index].islandImage)
                                             .resizable()
-                                            .frame(width: 120, height: 100)
+                                            .frame(width: 240, height: 150)
                                             .clipShape(RoundedRectangle(cornerRadius: 10))
                                             .padding([.leading, .trailing], 10)
-                                        Spacer()
-                                            .frame(height: 16)
+                                            .padding(.bottom, 20)
                                         Text(islands[index].islandName)
-                                            .font(.title3)
+                                            .font(.title)
                                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                             .foregroundColor(.white)
-                                            .padding(.bottom, 10)
+                                            .padding(.bottom, 20)
                                     }
+                                    
                                 }
                                 .onAppear {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
@@ -269,7 +171,6 @@ struct IslandView: View {
                                         ModelData.shared.currentIslandObject = ModelData.shared.sumatera
                                         if islandController.getChosenGameByRandom() {
                                             self.selectSumateraAndGetDance = true
-                                            
                                         }
                                         else {
                                             self.selectSumateraAndGetLanguage = true
@@ -362,6 +263,167 @@ struct IslandView: View {
                                 }
                                 .fullScreenCover(isPresented: $selectSulawesiAndGetLanguage) {
                                     TraditionalLanguageView(selectedIsland: ModelData.shared.sulawesi)
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                    .padding()
+                }
+                
+                BottomBar()
+            }
+        } else {
+            NavigationView {
+                VStack(spacing: 0) {
+                    TopNavigationBar(name: "Pulau", message: "Home")
+                    
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            
+                            ForEach(0..<islands.count, id:\.self) { index in
+                                
+                                Button(action: {
+                                    islandController.addUserToArray(islandName: islands[index].islandName)
+                                    self.selectedIsland = islands[index].islandName
+                                    if self.selectedIsland == "Sumatera" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.sumatera
+                                        if islandController.getChosenGameByRandom() {
+                                            self.selectSumateraAndGetDance = true
+                                            
+                                        }
+                                        else {
+                                            self.selectSumateraAndGetLanguage = true
+                                        }
+                                    }
+                                    else if self.selectedIsland == "Sulawesi" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.sulawesi
+                                        if islandController.getChosenGameByRandom() {
+                                            self.selectSulawesiAndGetDance = true
+                                        }
+                                        else {
+                                            self.selectSulawesiAndGetLanguage = true
+                                        }
+                                    }
+                                    else if self.selectedIsland == "Kalimantan" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.kalimantan
+                                        if islandController.getChosenGameByRandom() {
+                                            self.selectKalimantanAndGetDance = true
+                                        }
+                                        else {
+                                            self.selectKalimantanAndGetLanguage = true
+                                        }
+                                    }
+                                    else if self.selectedIsland == "Papua" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.papua
+                                        if islandController.getChosenGameByRandom() {
+                                            self.selectPapuaAndGetDance = true
+                                        }
+                                        else {
+                                            self.selectPapuaAndGetLanguage = true
+                                        }
+                                    }
+                                    else if self.selectedIsland == "Bali" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.bali
+                                        if islandController.getChosenGameByRandom() {
+                                            self.selectBaliAndGetDance = true
+                                        }
+                                        else {
+                                            self.selectBaliAndGetLanguage = true
+                                        }
+                                    }
+                                    else if self.selectedIsland == "Jawa" {
+                                        ModelData.shared.currentIslandObject = ModelData.shared.java
+                                        if islandController.getChosenGameByRandom() {
+                                            self.selectJavaAndGetDance = true
+                                        }
+                                        else {
+                                            self.selectJavaAndGetLanguage = true
+                                        }
+                                    }
+                                }) {
+                                    ZStack(alignment: .center) {
+                                        
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(
+                                                LinearGradient(
+                                                    gradient: Gradient(colors: [
+                                                        Color(red: 220/255, green: 38/255, blue: 38/255), // #DC2626
+                                                        Color(red: 118/255, green: 20/255, blue: 20/255)  // #761414
+                                                    ]),
+                                                    startPoint: .top,
+                                                    endPoint: .bottom
+                                                )
+                                            )
+                                            .frame(height: 180)
+                                        
+                                        VStack {
+                                            Image(islands[index].islandImage)
+                                                .resizable()
+                                                .frame(width: 120, height: 100)
+                                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                                .padding([.leading, .trailing], 10)
+                                            Spacer()
+                                                .frame(height: 16)
+                                            Text(islands[index].islandName)
+                                                .font(.title3)
+                                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                                .foregroundColor(.white)
+                                                .padding(.bottom, 10)
+                                        }
+                                    }
+                                    .onAppear {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                                            MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 3)
+                                        }
+                                    }
+                                    .onDisappear {
+                                        MusicPlayer.shared.stopBackgroundMusic()
+                                    }
+                                    .padding()
+                                   
+                                    .fullScreenCover(isPresented: $selectSumateraAndGetDance) {
+                                        TraditionalDanceView(selectedIsland: ModelData.shared.sumatera)
+                                    }
+                                    .fullScreenCover(isPresented: $selectSumateraAndGetLanguage) {
+                                        TraditionalLanguageView(selectedIsland: ModelData.shared.sumatera)
+                                    }
+                                    
+                                    .fullScreenCover(isPresented: $selectKalimantanAndGetDance) {
+                                        TraditionalDanceView(selectedIsland: ModelData.shared.kalimantan)
+                                    }
+                                    .fullScreenCover(isPresented: $selectKalimantanAndGetLanguage) {
+                                        TraditionalLanguageView(selectedIsland: ModelData.shared.kalimantan)
+                                    }
+                                    
+                                    .fullScreenCover(isPresented: $selectPapuaAndGetDance) {
+                                        TraditionalDanceView(selectedIsland: ModelData.shared.papua)
+                                    }
+                                    .fullScreenCover(isPresented: $selectPapuaAndGetLanguage) {
+                                        TraditionalLanguageView(selectedIsland: ModelData.shared.papua)
+                                    }
+                                    
+                                    .fullScreenCover(isPresented: $selectBaliAndGetDance) {
+                                        TraditionalDanceView(selectedIsland: ModelData.shared.bali)
+                                    }
+                                    .fullScreenCover(isPresented: $selectBaliAndGetLanguage) {
+                                        TraditionalLanguageView(selectedIsland: ModelData.shared.bali)
+                                    }
+                                    
+                                    .fullScreenCover(isPresented: $selectJavaAndGetDance) {
+                                        TraditionalDanceView(selectedIsland: ModelData.shared.java)
+                                    }
+                                    .fullScreenCover(isPresented: $selectJavaAndGetLanguage) {
+                                        TraditionalLanguageView(selectedIsland: ModelData.shared.java)
+                                    }
+                                    
+                                    .fullScreenCover(isPresented: $selectSulawesiAndGetDance) {
+                                        TraditionalDanceView(selectedIsland: ModelData.shared.sulawesi)
+                                    }
+                                    .fullScreenCover(isPresented: $selectSulawesiAndGetLanguage) {
+                                        TraditionalLanguageView(selectedIsland: ModelData.shared.sulawesi)
+                                    }
                                 }
                             }
                         }

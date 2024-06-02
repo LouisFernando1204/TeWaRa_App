@@ -25,12 +25,14 @@ struct AchievementRow: View {
                 HStack(content: {
                     Text("Pulau \(currentIsland.islandName)")
                         .font(ScreenSize.screenWidth > 600 ? .title : .headline)
+                        .foregroundStyle(Color.black)
                         .fontWeight(.bold)
                         .overlay {
                             CustomGradient.redOrangeGradient
                             .mask(
                                 Text("Pulau \(currentIsland.islandName)")
                                     .font(ScreenSize.screenWidth > 600 ? .title : .headline)
+                                    .foregroundStyle(Color.black)
                                     .fontWeight(.bold)
                             )
                         }
@@ -39,6 +41,7 @@ struct AchievementRow: View {
                 HStack(content: {
                     if self.status == "Unplayed" {
                         Text("0 poin")
+                            .foregroundStyle(Color.black)
                             .font(ScreenSize.screenWidth > 600 ? .title2 : .headline)
                         Spacer()
                     }
@@ -47,6 +50,7 @@ struct AchievementRow: View {
                             let user = currentIsland.userList[index]
                             if user.name == ModelData.shared.currentUser.name {
                                 Text("\(user.score) poin")
+                                    .foregroundStyle(Color.black)
                                     .font(ScreenSize.screenWidth > 600 ? .title2 : .headline)
                                 Spacer()
                             }
@@ -73,6 +77,7 @@ struct AchievementRow: View {
                         }
                         else if self.status == "Progress" {
                             Text("- \(ModelData.shared.getCurrentUserPointByIsland(name: currentIsland.userList[2].name, island: currentIsland)[0] -  ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0]) poin")
+                                .foregroundStyle(Color.black)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(ScreenSize.screenWidth > 600 ? .title2 : .caption2)
                         }
@@ -95,7 +100,7 @@ struct AchievementRow: View {
                             Text(" untuk memasuki peringkat")
                                 .foregroundColor(.gray)
                                 .italic()
-                                .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
+                                .font(ScreenSize.screenWidth > 600 ? .title2 : .system(size: 10))
                         }
                         
                     })

@@ -3,9 +3,9 @@
     "islandImage": "sumatera",
     "traditionalDance": {
         "answer": "PAYUNG",
-        "image": "payung",
-        "description": "Tari Payung adalah tarian tradisional Indonesia yang berasal dari Sumatera Utara, khususnya dari budaya Minangkabau. Tarian ini biasanya dibawakan oleh pasangan pria dan wanita yang menggunakan payung sebagai properti utama, melambangkan perlindungan dan kasih sayang. ",
-        "provinceOrigin": "Sumatera Utara",
+        "image": "TariPayung",
+        "description": "Tari Payung adalah tarian tradisional Indonesia yang berasal dari Sumatera Barat, khususnya dari budaya Minangkabau. Tarian ini biasanya dibawakan oleh pasangan pria dan wanita yang menggunakan payung sebagai properti utama, melambangkan perlindungan dan kasih sayang. ",
+        "provinceOrigin": "Sumatera Barat",
         "provinceOptions": [
             "Sumatera Utara", "Sumatera Selatan",
             "Sumatera Barat", "Sumatera Tengah"

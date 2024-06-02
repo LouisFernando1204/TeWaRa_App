@@ -72,6 +72,7 @@ struct HomeView: View {
         })
     }
     
+    
     private func showAchievement() -> some View {
         VStack(content: {
             ScrollView {

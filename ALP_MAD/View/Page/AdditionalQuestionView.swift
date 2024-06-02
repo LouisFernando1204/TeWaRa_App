@@ -134,6 +134,7 @@ struct AdditionalQuestionView: View {
                     }
                 }
                 .font(.system(size: isIpad ? 60 : 44))
+                .foregroundStyle(Color.black)
                 .fontWeight(.black)
         })
         .padding(.bottom, isIpad ? ScreenSize.screenHeight/80 : ScreenSize.screenHeight/55)
@@ -143,6 +144,7 @@ struct AdditionalQuestionView: View {
         HStack(alignment: .center){
             Text("Budaya tersebut berasal dari provinsi...")
                 .font(.system(size: isIpad ? 35 : 18))
+                .foregroundStyle(Color.black)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
         }

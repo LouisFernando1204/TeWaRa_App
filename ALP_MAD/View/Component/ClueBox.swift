@@ -22,6 +22,7 @@ struct ClueBox: View {
                 VStack(content: {
                     Text("Petunjuk")
                         .fontWeight(.semibold)
+                        .foregroundStyle(Color.black)
                         .font(
                             ScreenSize.screenWidth > 600 ? .title : .headline
                         )

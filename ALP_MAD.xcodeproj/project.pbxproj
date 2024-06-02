@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0413EECF2C0C09A400C53B1C /* TariPayung.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECE2C0C09A400C53B1C /* TariPayung.mp4 */; };
+		0413EED02C0C09A400C53B1C /* TariPayung.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECE2C0C09A400C53B1C /* TariPayung.mp4 */; };
+		0413EED22C0C0A2700C53B1C /* TariRemo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EED12C0C0A2700C53B1C /* TariRemo.mp4 */; };
+		0413EED32C0C0A2700C53B1C /* TariRemo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EED12C0C0A2700C53B1C /* TariRemo.mp4 */; };
+		0413EED52C0C0B4B00C53B1C /* TariSajojo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EED42C0C0B4B00C53B1C /* TariSajojo.mp4 */; };
+		0413EED62C0C0B4B00C53B1C /* TariSajojo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EED42C0C0B4B00C53B1C /* TariSajojo.mp4 */; };
+		0413EED82C0C0B5400C53B1C /* TariGong.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EED72C0C0B5400C53B1C /* TariGong.mp4 */; };
+		0413EED92C0C0B5400C53B1C /* TariGong.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EED72C0C0B5400C53B1C /* TariGong.mp4 */; };
+		0413EEDD2C0C0EF800C53B1C /* TariKecak.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECC2C0C084300C53B1C /* TariKecak.mp4 */; };
+		0413EEDE2C0C0EF900C53B1C /* TariKecak.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECC2C0C084300C53B1C /* TariKecak.mp4 */; };
+		0413EEDF2C0C0F0300C53B1C /* TariPajoge.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECD2C0C084600C53B1C /* TariPajoge.mp4 */; };
+		0413EEE02C0C0F0500C53B1C /* TariPajoge.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECD2C0C084600C53B1C /* TariPajoge.mp4 */; };
 		041B26932BFA08B3000B23BB /* TopNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26922BFA08B3000B23BB /* TopNavigationBar.swift */; };
 		041B26972BFA0907000B23BB /* QuestionAndDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26962BFA0907000B23BB /* QuestionAndDisplay.swift */; };
 		041B26992BFA09E9000B23BB /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B26982BFA09E9000B23BB /* ScreenSize.swift */; };
@@ -25,8 +37,6 @@
 		041E544C2C09A09300A15EAE /* quizMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54462C09A09300A15EAE /* quizMusic.mp3 */; };
 		041E544D2C09A09300A15EAE /* touchdownMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54472C09A09300A15EAE /* touchdownMusic.mp3 */; };
 		041E544E2C09A09300A15EAE /* touchdownMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041E54472C09A09300A15EAE /* touchdownMusic.mp3 */; };
-		041E54512C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 041E544F2C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 */; };
-		041E54522C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 041E544F2C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 */; };
 		041E54552C09A15A00A15EAE /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E54542C09A15A00A15EAE /* MusicPlayer.swift */; };
 		041E54562C09A15A00A15EAE /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E54542C09A15A00A15EAE /* MusicPlayer.swift */; };
 		0420D5242BF9043400696430 /* TraditionalLanguageViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420D5232BF9043400696430 /* TraditionalLanguageViewMac.swift */; };
@@ -132,6 +142,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0413EECC2C0C084300C53B1C /* TariKecak.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariKecak.mp4; sourceTree = "<group>"; };
+		0413EECD2C0C084600C53B1C /* TariPajoge.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariPajoge.mp4; sourceTree = "<group>"; };
+		0413EECE2C0C09A400C53B1C /* TariPayung.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariPayung.mp4; sourceTree = "<group>"; };
+		0413EED12C0C0A2700C53B1C /* TariRemo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariRemo.mp4; sourceTree = "<group>"; };
+		0413EED42C0C0B4B00C53B1C /* TariSajojo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariSajojo.mp4; sourceTree = "<group>"; };
+		0413EED72C0C0B5400C53B1C /* TariGong.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariGong.mp4; sourceTree = "<group>"; };
 		041B26922BFA08B3000B23BB /* TopNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationBar.swift; sourceTree = "<group>"; };
 		041B26962BFA0907000B23BB /* QuestionAndDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndDisplay.swift; sourceTree = "<group>"; };
 		041B26982BFA09E9000B23BB /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
@@ -146,7 +162,6 @@
 		041E54452C09A09300A15EAE /* mainMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mainMusic.mp3; sourceTree = "<group>"; };
 		041E54462C09A09300A15EAE /* quizMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = quizMusic.mp3; sourceTree = "<group>"; };
 		041E54472C09A09300A15EAE /* touchdownMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = touchdownMusic.mp3; sourceTree = "<group>"; };
-		041E544F2C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TariPajoge-SulawesiSelatan.mp4"; sourceTree = "<group>"; };
 		041E54542C09A15A00A15EAE /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		0420D5232BF9043400696430 /* TraditionalLanguageViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageViewMac.swift; sourceTree = "<group>"; };
 		0420D5252BF9044100696430 /* TraditionalDanceViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceViewMac.swift; sourceTree = "<group>"; };
@@ -252,6 +267,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0413EECB2C0C083800C53B1C /* Vid */ = {
+			isa = PBXGroup;
+			children = (
+				0413EECD2C0C084600C53B1C /* TariPajoge.mp4 */,
+				0413EECC2C0C084300C53B1C /* TariKecak.mp4 */,
+				0413EECE2C0C09A400C53B1C /* TariPayung.mp4 */,
+				0413EED12C0C0A2700C53B1C /* TariRemo.mp4 */,
+				0413EED42C0C0B4B00C53B1C /* TariSajojo.mp4 */,
+				0413EED72C0C0B5400C53B1C /* TariGong.mp4 */,
+			);
+			path = Vid;
+			sourceTree = "<group>";
+		};
 		041B26902BFA088F000B23BB /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,15 +340,6 @@
 				041E54472C09A09300A15EAE /* touchdownMusic.mp3 */,
 			);
 			path = BackgroundMusic;
-			sourceTree = "<group>";
-		};
-		041E54502C09A0A200A15EAE /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				041E544F2C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 */,
-			);
-			name = Video;
-			path = "../../../../../../Downloads/TeWaRa-Louis/ALP_MAD/Model/Data/Video";
 			sourceTree = "<group>";
 		};
 		041E54532C09A0B500A15EAE /* IslandData */ = {
@@ -419,7 +438,7 @@
 		048DD7E72BF4CC7C0041FDE9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				041E54502C09A0A200A15EAE /* Video */,
+				0413EECB2C0C083800C53B1C /* Vid */,
 				041E54482C09A09300A15EAE /* BackgroundMusic */,
 				041E54532C09A0B500A15EAE /* IslandData */,
 			);
@@ -697,16 +716,21 @@
 				045D9A612BF4D62B002C523E /* SulawesiData.json in Resources */,
 				045D9A622BF4D62B002C523E /* KalimantanData.json in Resources */,
 				041E544C2C09A09300A15EAE /* quizMusic.mp3 in Resources */,
+				0413EED02C0C09A400C53B1C /* TariPayung.mp4 in Resources */,
 				045D9A632BF4D62B002C523E /* JavaData.json in Resources */,
+				0413EED32C0C0A2700C53B1C /* TariRemo.mp4 in Resources */,
 				041E544E2C09A09300A15EAE /* touchdownMusic.mp3 in Resources */,
-				041E54522C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 in Resources */,
+				0413EED92C0C0B5400C53B1C /* TariGong.mp4 in Resources */,
 				045D9A642BF4D62B002C523E /* BaliData.json in Resources */,
 				045D9A652BF4D62B002C523E /* PapuaData.json in Resources */,
 				045D9A662BF4D62B002C523E /* SumateraData.json in Resources */,
 				045D9A2E2BF4D5D9002C523E /* Preview Assets.xcassets in Resources */,
 				0420D5282BF9069100696430 /* Assets.xcassets in Resources */,
+				0413EED62C0C0B4B00C53B1C /* TariSajojo.mp4 in Resources */,
 				045D9A2B2BF4D5D9002C523E /* Assets.xcassets in Resources */,
+				0413EEDE2C0C0EF900C53B1C /* TariKecak.mp4 in Resources */,
 				041E544A2C09A09300A15EAE /* mainMusic.mp3 in Resources */,
+				0413EEE02C0C0F0500C53B1C /* TariPajoge.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,16 +753,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				048DD7C22BF4C6FA0041FDE9 /* SulawesiData.json in Resources */,
-				041E54512C09A0A200A15EAE /* TariPajoge-SulawesiSelatan.mp4 in Resources */,
 				048DD7B82BF4C51C0041FDE9 /* BaliData.json in Resources */,
 				04A1A2D42BF062C100C7E982 /* Preview Assets.xcassets in Resources */,
 				048DD7B42BF4C3FB0041FDE9 /* SumateraData.json in Resources */,
+				0413EEDF2C0C0F0300C53B1C /* TariPajoge.mp4 in Resources */,
+				0413EED82C0C0B5400C53B1C /* TariGong.mp4 in Resources */,
 				041E544D2C09A09300A15EAE /* touchdownMusic.mp3 in Resources */,
 				04A1A2D12BF062C100C7E982 /* Assets.xcassets in Resources */,
+				0413EECF2C0C09A400C53B1C /* TariPayung.mp4 in Resources */,
+				0413EED22C0C0A2700C53B1C /* TariRemo.mp4 in Resources */,
 				048DD7BE2BF4C6AA0041FDE9 /* KalimantanData.json in Resources */,
 				048DD7C02BF4C6C50041FDE9 /* PapuaData.json in Resources */,
+				0413EEDD2C0C0EF800C53B1C /* TariKecak.mp4 in Resources */,
 				048DD7BA2BF4C5870041FDE9 /* JavaData.json in Resources */,
 				041E54492C09A09300A15EAE /* mainMusic.mp3 in Resources */,
+				0413EED52C0C0B4B00C53B1C /* TariSajojo.mp4 in Resources */,
 				041E544B2C09A09300A15EAE /* quizMusic.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

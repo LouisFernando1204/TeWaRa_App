@@ -43,6 +43,7 @@ struct TraditionalLanguageView: View {
                                     lineWidth: 2
                                 )
                         )
+                        .multilineTextAlignment(.leading)
                     Spacer()
                         .frame(height: 20)
                     self.showClueAndTimer()
