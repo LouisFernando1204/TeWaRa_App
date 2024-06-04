@@ -21,9 +21,7 @@ class IslandController : ObservableObject {
         self.island = island
         self.newScore = 0
         self.chooseGameByRandom = Bool.random()
-        
-        print("heheh \(ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: ModelData.shared.java))")
-        
+            
         for id in ModelData.shared.sumatera.traditionalDance.throwableAnswer.indices {
             ModelData.shared.sumatera.traditionalDance.throwableAnswer[id].isClicked = false
         }
@@ -141,7 +139,7 @@ class IslandController : ObservableObject {
                 
             }
         }
-        else if islandName == ModelData.shared.papua.traditionalLanguage.answer {
+        else if islandName == ModelData.shared.papua.islandName {
             for id in ModelData.shared.papua.userList.indices {
                 if ModelData.shared.papua.userList[id].name == ModelData.shared.currentUser.name {
                     self.isThere = true

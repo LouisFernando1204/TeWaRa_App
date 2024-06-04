@@ -29,7 +29,7 @@ struct TopNavigationBar : View {
             }
             .fullScreenCover(isPresented: $navigate) {
                 if message == "Home" {
-                    HomeView()
+                    TabViewRouter()
                 }
                 else if message == "Pulau" {
                     IslandView()

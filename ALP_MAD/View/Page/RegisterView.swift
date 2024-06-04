@@ -75,15 +75,6 @@ struct RegisterView: View {
                 dismissButton: .default(Text("OK"))
             )
         }
-        // pindah ke home background music nya
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 3)
-            }
-        }
-        .onDisappear {
-            MusicPlayer.shared.stopBackgroundMusic()
-        }
     }
     
     private func setUpRegisterView(isIpad: Bool) -> some View {
@@ -267,7 +258,7 @@ struct RegisterView: View {
         .cornerRadius(isIpad ? 30 : 25)
         .shadow(radius: 10, y: 4)
         .fullScreenCover(isPresented: $navToHomeView, content: {
-            HomeView()
+            TabViewRouter()
         })
     }
 }

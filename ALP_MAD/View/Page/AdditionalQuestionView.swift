@@ -9,8 +9,6 @@ import SwiftUI
 
 struct AdditionalQuestionView: View {
     
-    
-    
     @StateObject private var islandController = IslandController(island: ModelData.shared.currentIslandObject)
     @State private var answer : String = ""
     @State private var showAlert = false
@@ -124,6 +122,7 @@ struct AdditionalQuestionView: View {
                 .frame(width: isIpad ? ScreenSize.screenWidth/1.125 : ScreenSize.screenWidth/1.175, height: isIpad ? ScreenSize.screenHeight/3.12 : ScreenSize.screenHeight/5.1)
                 .cornerRadius(isIpad ? 0 : 6)
             Text("00:00:\(String(format: "%02d", countDownTimer.wrappedValue))")
+                .foregroundStyle(Color.black)
                 .onReceive(timer) { _ in
                     if countDownTimer.wrappedValue > 0 && timerRunning.wrappedValue {
                         countDownTimer.wrappedValue -= 1
@@ -134,7 +133,6 @@ struct AdditionalQuestionView: View {
                     }
                 }
                 .font(.system(size: isIpad ? 60 : 44))
-                .foregroundStyle(Color.black)
                 .fontWeight(.black)
         })
         .padding(.bottom, isIpad ? ScreenSize.screenHeight/80 : ScreenSize.screenHeight/55)
@@ -143,8 +141,8 @@ struct AdditionalQuestionView: View {
     private func question(isIpad: Bool) -> some View {
         HStack(alignment: .center){
             Text("Budaya tersebut berasal dari provinsi...")
-                .font(.system(size: isIpad ? 35 : 18))
                 .foregroundStyle(Color.black)
+                .font(.system(size: isIpad ? 35 : 18))
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
         }
@@ -210,7 +208,7 @@ struct AdditionalQuestionView: View {
                             )
                         }
                     })
-                    .fullScreenCover(isPresented: $navToAnswerDescriptionView, content: {
+                    .fullScreenCover(isPresented: navToAnswerDescriptionView, content: {
                         AnswerDescriptionView()
                     })
                 }

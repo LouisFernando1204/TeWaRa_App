@@ -17,19 +17,6 @@ struct AnswerDescriptionView: View {
     
     private var screenSize = ScreenSize()
     
-    struct RoundedCorner: Shape {
-        var cornerRadius: CGFloat
-        var corners: UIRectCorner
-        
-        func path(in rect: CGRect) -> Path {
-            let path = UIBezierPath(
-                roundedRect: rect,
-                byRoundingCorners: corners,
-                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
-            )
-            return Path(path.cgPath)
-        }
-    }
     
     var body: some View {
         
@@ -81,14 +68,7 @@ struct AnswerDescriptionView: View {
             self.navigationBar(navToIslandView: navToIslandView, isIpad: isIpad)
             if ModelData.shared.currentGame == "TraditionalDance" {
                 if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "mp4") {
-                    VideoPlayer(player: AVPlayer(url: videoURL))
-                        .frame(height: isIpad ? ScreenSize.screenHeight/2.555 : ScreenSize.screenHeight/3.85)
-                        .clipShape(
-                            RoundedCorner(cornerRadius: 40, corners: [.bottomLeft, .bottomRight])
-                        )
-                        .shadow(radius: 10, y: 4)
-                        .padding(.top, -8)
-                        .padding(.bottom, isIpad ? ScreenSize.screenHeight/40 : ScreenSize.screenHeight/80)
+                    VideoPlayerView(videoURL: videoURL, type: "Desc")
                 }
                 self.description(description: traditionalDanceDescription.description, answer: traditionalDanceDescription.answer, provinceOrigin: traditionalDanceDescription.provinceOrigin, title: "TARI", isIpad: isIpad)
             } else {
@@ -96,7 +76,7 @@ struct AnswerDescriptionView: View {
                     Image(image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: isIpad ? ScreenSize.screenHeight/2.2 : ScreenSize.screenHeight/4.5)
+                        .frame(height: isIpad ? 450 : ScreenSize.screenHeight/4.5)
                         .clipShape(
                             RoundedCorner(cornerRadius: 40, corners: [.bottomLeft, .bottomRight])
                         )
@@ -232,6 +212,21 @@ struct AnswerDescriptionView: View {
             )
     }
 }
+
+struct RoundedCorner: Shape {
+    var cornerRadius: CGFloat
+    var corners: UIRectCorner
+    
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(
+            roundedRect: rect,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+        )
+        return Path(path.cgPath)
+    }
+}
+
 
 #Preview {
     AnswerDescriptionView()

@@ -66,9 +66,9 @@ struct TraditionalDanceViewMac: View {
                 })
                 .onAppear {
                     timerRunning = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
-                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+//                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+//                    }
                     self.traditionalDanceController.changeDance(dance: ModelData.shared.currentIslandObject.traditionalDance)
                     ModelData.shared.currentGame = "TraditionalDance"
                 }

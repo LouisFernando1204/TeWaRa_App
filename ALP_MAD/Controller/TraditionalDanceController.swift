@@ -117,7 +117,7 @@ class TraditionalDanceController : ObservableObject {
         ModelData.shared.currentUser.score += (remainingTime * 10)
         if traditionalDance.answer == ModelData.shared.bali.traditionalDance.answer {
             for id in ModelData.shared.bali.userList.indices {
-                if ModelData.shared.bali.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.bali.userList[id].image == ModelData.shared.currentUser.image {
+                if ModelData.shared.bali.userList[id].name == ModelData.shared.currentUser.name {
                     ModelData.shared.bali.userList[id].score += (remainingTime * 10)
                     print("Skor user : \(ModelData.shared.currentUser.score)")
                     print("Skor user di array bali : \(ModelData.shared.bali.userList[id].score)")
@@ -126,35 +126,35 @@ class TraditionalDanceController : ObservableObject {
         }
         else if traditionalDance.answer == ModelData.shared.kalimantan.traditionalDance.answer {
             for id in ModelData.shared.kalimantan.userList.indices {
-                if ModelData.shared.kalimantan.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.kalimantan.userList[id].image == ModelData.shared.currentUser.image {
+                if ModelData.shared.kalimantan.userList[id].name == ModelData.shared.currentUser.name {
                     ModelData.shared.kalimantan.userList[id].score += (remainingTime * 10)
                 }
             }
         }
         else if traditionalDance.answer == ModelData.shared.sumatera.traditionalDance.answer {
             for id in ModelData.shared.sumatera.userList.indices {
-                if ModelData.shared.sumatera.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.sumatera.userList[id].image == ModelData.shared.currentUser.image {
+                if ModelData.shared.sumatera.userList[id].name == ModelData.shared.currentUser.name {
                     ModelData.shared.sumatera.userList[id].score += (remainingTime * 10)
                 }
             }
         }
         else if traditionalDance.answer == ModelData.shared.sulawesi.traditionalDance.answer {
             for id in ModelData.shared.sulawesi.userList.indices {
-                if ModelData.shared.sulawesi.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.sulawesi.userList[id].image == ModelData.shared.currentUser.image {
+                if ModelData.shared.sulawesi.userList[id].name == ModelData.shared.currentUser.name {
                     ModelData.shared.sulawesi.userList[id].score += (remainingTime * 10)
                 }
             }
         }
         else if traditionalDance.answer == ModelData.shared.java.traditionalDance.answer {
             for id in ModelData.shared.java.userList.indices {
-                if ModelData.shared.java.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.java.userList[id].image == ModelData.shared.currentUser.image {
+                if ModelData.shared.java.userList[id].name == ModelData.shared.currentUser.name {
                     ModelData.shared.java.userList[id].score += (remainingTime * 10)
                 }
             }
         }
         else if traditionalDance.answer == ModelData.shared.papua.traditionalDance.answer {
             for id in ModelData.shared.papua.userList.indices {
-                if ModelData.shared.papua.userList[id].name == ModelData.shared.currentUser.name && ModelData.shared.papua.userList[id].image == ModelData.shared.currentUser.image {
+                if ModelData.shared.papua.userList[id].name == ModelData.shared.currentUser.name {
                     ModelData.shared.papua.userList[id].score += (remainingTime * 10)
                 }
             }

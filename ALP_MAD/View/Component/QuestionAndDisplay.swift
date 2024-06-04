@@ -38,14 +38,8 @@ struct QuestionAndDisplay: View {
             })
             .multilineTextAlignment(.leading)
             if let videoURL = Bundle.main.url(forResource: currentIsland.traditionalDance.image, withExtension: "mp4") {
-                VideoPlayer(player: AVPlayer(url: videoURL))
-                    .frame(
-                        width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.3 : ScreenSize.screenWidth / 1.1,
-                        height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 3 : ScreenSize.screenHeight / 4
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .shadow(radius:5)
-                    .padding(.bottom, ScreenSize.screenWidth > 600 ? 8 : 12)
+                
+                VideoPlayerView(videoURL: videoURL, type: "Game")
             }
         })
         .padding(.top, ScreenSize.screenWidth > 600 ? 0 : 10)

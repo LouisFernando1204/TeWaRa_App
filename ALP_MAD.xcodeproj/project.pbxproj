@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040100A32C0ECB4D0084A8A8 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040100A22C0ECB4D0084A8A8 /* VideoPlayerView.swift */; };
 		0413EECF2C0C09A400C53B1C /* TariPayung.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECE2C0C09A400C53B1C /* TariPayung.mp4 */; };
 		0413EED02C0C09A400C53B1C /* TariPayung.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EECE2C0C09A400C53B1C /* TariPayung.mp4 */; };
 		0413EED22C0C0A2700C53B1C /* TariRemo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0413EED12C0C0A2700C53B1C /* TariRemo.mp4 */; };
@@ -53,7 +54,6 @@
 		0422AD3A2C09A495003A33BC /* PreAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422AD392C09A495003A33BC /* PreAlertView.swift */; };
 		0422AD3C2C09A52F003A33BC /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422AD3B2C09A52F003A33BC /* RegisterView.swift */; };
 		0422AD3E2C09A553003A33BC /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422AD3D2C09A553003A33BC /* SplashScreenView.swift */; };
-		0422AD402C09A56A003A33BC /* TouchdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422AD3F2C09A569003A33BC /* TouchdownView.swift */; };
 		043845A82BFB939C00F94411 /* HomeViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043845A72BFB939C00F94411 /* HomeViewMac.swift */; };
 		043AC9762BFB5B6A0065EB0B /* ProfileComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043AC9752BFB5B6A0065EB0B /* ProfileComponent.swift */; };
 		043AC9782BFB5C5B0065EB0B /* ButtonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043AC9772BFB5C5B0065EB0B /* ButtonColor.swift */; };
@@ -112,6 +112,8 @@
 		04A1A3222BF0663E00C7E982 /* IslandController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3212BF0663E00C7E982 /* IslandController.swift */; };
 		04A1A3242BF0664E00C7E982 /* TraditionalDanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */; };
 		04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */; };
+		04B9ACFD2C0EEFDB00B21FE0 /* TouchdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9ACFC2C0EEFDB00B21FE0 /* TouchdownView.swift */; };
+		04B9ACFF2C0F1E4A00B21FE0 /* TabViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9ACFE2C0F1E4A00B21FE0 /* TabViewRouter.swift */; };
 		04C658362BF4922100ECECD2 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C658352BF4922100ECECD2 /* ModelData.swift */; };
 		04C8AEE52BFFA5A500A3B7DC /* IslandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3132BF0657600C7E982 /* IslandView.swift */; };
 		04C8AEE72BFFA71700A3B7DC /* IslandViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8AEE62BFFA71700A3B7DC /* IslandViewMac.swift */; };
@@ -149,6 +151,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040100A22C0ECB4D0084A8A8 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		0413EECC2C0C084300C53B1C /* TariKecak.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariKecak.mp4; sourceTree = "<group>"; };
 		0413EECD2C0C084600C53B1C /* TariPajoge.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariPajoge.mp4; sourceTree = "<group>"; };
 		0413EECE2C0C09A400C53B1C /* TariPayung.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TariPayung.mp4; sourceTree = "<group>"; };
@@ -182,7 +185,6 @@
 		0422AD392C09A495003A33BC /* PreAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertView.swift; sourceTree = "<group>"; };
 		0422AD3B2C09A52F003A33BC /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		0422AD3D2C09A553003A33BC /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
-		0422AD3F2C09A569003A33BC /* TouchdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchdownView.swift; sourceTree = "<group>"; };
 		043845A72BFB939C00F94411 /* HomeViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMac.swift; sourceTree = "<group>"; };
 		043AC9752BFB5B6A0065EB0B /* ProfileComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComponent.swift; sourceTree = "<group>"; };
 		043AC9772BFB5C5B0065EB0B /* ButtonColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonColor.swift; sourceTree = "<group>"; };
@@ -231,6 +233,8 @@
 		04A1A3212BF0663E00C7E982 /* IslandController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandController.swift; sourceTree = "<group>"; };
 		04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceController.swift; sourceTree = "<group>"; };
 		04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageController.swift; sourceTree = "<group>"; };
+		04B9ACFC2C0EEFDB00B21FE0 /* TouchdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchdownView.swift; sourceTree = "<group>"; };
+		04B9ACFE2C0F1E4A00B21FE0 /* TabViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewRouter.swift; sourceTree = "<group>"; };
 		04C658352BF4922100ECECD2 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		04C8AEE62BFFA71700A3B7DC /* IslandViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandViewMac.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -308,6 +312,7 @@
 				041B26B32BFA368E000B23BB /* ButtonCheck.swift */,
 				047BE78B2BFA4EF200947484 /* ChanceBox.swift */,
 				043AC9752BFB5B6A0065EB0B /* ProfileComponent.swift */,
+				040100A22C0ECB4D0084A8A8 /* VideoPlayerView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -325,7 +330,7 @@
 				0422AD392C09A495003A33BC /* PreAlertView.swift */,
 				0422AD3B2C09A52F003A33BC /* RegisterView.swift */,
 				0422AD3D2C09A553003A33BC /* SplashScreenView.swift */,
-				0422AD3F2C09A569003A33BC /* TouchdownView.swift */,
+				04B9ACFC2C0EEFDB00B21FE0 /* TouchdownView.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -507,6 +512,7 @@
 				04A1A2F82BF0632100C7E982 /* Model */,
 				04A1A30B2BF064BA00C7E982 /* View */,
 				04A1A30C2BF064DF00C7E982 /* Controller */,
+				04B9ACFE2C0F1E4A00B21FE0 /* TabViewRouter.swift */,
 				04A1A2CE2BF062C000C7E982 /* ContentView.swift */,
 				04A1A2CC2BF062C000C7E982 /* ALP_MADApp.swift */,
 				04A1A2D02BF062C100C7E982 /* Assets.xcassets */,
@@ -883,6 +889,7 @@
 				041B26B42BFA368E000B23BB /* ButtonCheck.swift in Sources */,
 				041B26A92BFA206A000B23BB /* TextFieldComponent.swift in Sources */,
 				041E54432C099FC800A15EAE /* HomeController.swift in Sources */,
+				04B9ACFF2C0F1E4A00B21FE0 /* TabViewRouter.swift in Sources */,
 				041B26992BFA09E9000B23BB /* ScreenSize.swift in Sources */,
 				041B26AC2BFA2263000B23BB /* TimerComponent.swift in Sources */,
 				0422AD3E2C09A553003A33BC /* SplashScreenView.swift in Sources */,
@@ -890,6 +897,7 @@
 				044215832BF60BF60064666A /* Alphabet.swift in Sources */,
 				0422AD3C2C09A52F003A33BC /* RegisterView.swift in Sources */,
 				04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */,
+				040100A32C0ECB4D0084A8A8 /* VideoPlayerView.swift in Sources */,
 				041B269B2BFA0A8F000B23BB /* AchievementRow.swift in Sources */,
 				04A1A3122BF0654F00C7E982 /* LeaderboardView.swift in Sources */,
 				04A1A31C2BF065CF00C7E982 /* AnswerDescriptionView.swift in Sources */,
@@ -905,7 +913,7 @@
 				04A1A2CD2BF062C000C7E982 /* ALP_MADApp.swift in Sources */,
 				0422AD3A2C09A495003A33BC /* PreAlertView.swift in Sources */,
 				04A1A2F72BF062F100C7E982 /* User.swift in Sources */,
-				0422AD402C09A56A003A33BC /* TouchdownView.swift in Sources */,
+				04B9ACFD2C0EEFDB00B21FE0 /* TouchdownView.swift in Sources */,
 				04A1A3202BF0662400C7E982 /* LeaderboardController.swift in Sources */,
 				04C8AEE52BFFA5A500A3B7DC /* IslandView.swift in Sources */,
 				04A1A3222BF0663E00C7E982 /* IslandController.swift in Sources */,

@@ -76,9 +76,9 @@ struct AchievementRow: View {
                                 .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
                         }
                         else if self.status == "Progress" {
-                            Text("- \(ModelData.shared.getCurrentUserPointByIsland(name: currentIsland.userList[2].name, island: currentIsland)[0] -  ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0]) poin")
-                                .foregroundStyle(Color.black)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            Text("-\(ModelData.shared.getCurrentUserPointByIsland(name: currentIsland.userList[2].name, island: currentIsland)[0] -  ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0]) poin")
+                                .foregroundStyle(Color.gray)
+                                .fontWeight(.medium)
                                 .font(ScreenSize.screenWidth > 600 ? .title2 : .caption2)
                         }
                         

@@ -69,6 +69,13 @@ struct HomeView: View {
             .onDisappear {
                 MusicPlayer.shared.stopBackgroundMusic()
             }
+            .onChange(of: self.isClicked) { oldValue, newValue in
+                if newValue {
+                    MusicPlayer.shared.stopBackgroundMusic()
+                } else {
+                    MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 1)
+                }
+            }
         })
     }
     
@@ -79,6 +86,7 @@ struct HomeView: View {
                 VStack(content: {
                     Text("Pencapaian")
                         .bold()
+                        .foregroundStyle(Color.black)
                         .font(ScreenSize.screenWidth > 600 ? .largeTitle : .title3)
                     ForEach(homeController.rankedIslands.indices, id:\.self) { index in
                         let island = homeController.rankedIslands[index]

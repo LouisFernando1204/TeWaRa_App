@@ -19,6 +19,8 @@ struct IslandView: View {
     
     @State private var selectedIsland: String = ""
     
+    @State private var showAlert: Bool = false
+    
     @StateObject private var islandController = IslandController(island: ModelData.shared.sumatera)
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
@@ -70,6 +72,7 @@ struct IslandView: View {
                             Button(action: {
                                 islandController.addUserToArray(islandName: islands[index].islandName)
                                 self.selectedIsland = islands[index].islandName
+                                self.showAlert = true
                                 if self.selectedIsland == "Sumatera" {
                                     ModelData.shared.currentIslandObject = ModelData.shared.sumatera
                                     if islandController.getChosenGameByRandom() {
@@ -163,66 +166,14 @@ struct IslandView: View {
                                 .onDisappear {
                                     MusicPlayer.shared.stopBackgroundMusic()
                                 }
-                                .padding()
-                                .onTapGesture {
-                                    islandController.addUserToArray(islandName: islands[index].islandName)
-                                    self.selectedIsland = islands[index].islandName
-                                    if self.selectedIsland == "Sumatera" {
-                                        ModelData.shared.currentIslandObject = ModelData.shared.sumatera
-                                        if islandController.getChosenGameByRandom() {
-                                            self.selectSumateraAndGetDance = true
-                                        }
-                                        else {
-                                            self.selectSumateraAndGetLanguage = true
-                                        }
+                                .onChange(of: self.showAlert) { oldValue, newValue in
+                                    if newValue {
+                                        MusicPlayer.shared.stopBackgroundMusic()
+                                    } else {
+                                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
                                     }
-                                    else if self.selectedIsland == "Sulawesi" {
-                                        ModelData.shared.currentIslandObject = ModelData.shared.sulawesi
-                                        if islandController.getChosenGameByRandom() {
-                                            self.selectSulawesiAndGetDance = true
-                                        }
-                                        else {
-                                            self.selectSulawesiAndGetLanguage = true
-                                        }
-                                    }
-                                    else if self.selectedIsland == "Kalimantan" {
-                                        ModelData.shared.currentIslandObject = ModelData.shared.kalimantan
-                                        if islandController.getChosenGameByRandom() {
-                                            self.selectKalimantanAndGetDance = true
-                                        }
-                                        else {
-                                            self.selectKalimantanAndGetLanguage = true
-                                        }
-                                    }
-                                    else if self.selectedIsland == "Papua" {
-                                        ModelData.shared.currentIslandObject = ModelData.shared.papua
-                                        if islandController.getChosenGameByRandom() {
-                                            self.selectPapuaAndGetDance = true
-                                        }
-                                        else {
-                                            self.selectPapuaAndGetLanguage = true
-                                        }
-                                    }
-                                    else if self.selectedIsland == "Bali" {
-                                        ModelData.shared.currentIslandObject = ModelData.shared.bali
-                                        if islandController.getChosenGameByRandom() {
-                                            self.selectBaliAndGetDance = true
-                                        }
-                                        else {
-                                            self.selectBaliAndGetLanguage = true
-                                        }
-                                    }
-                                    else if self.selectedIsland == "Jawa" {
-                                        ModelData.shared.currentIslandObject = ModelData.shared.java
-                                        if islandController.getChosenGameByRandom() {
-                                            self.selectJavaAndGetDance = true
-                                        }
-                                        else {
-                                            self.selectJavaAndGetLanguage = true
-                                        }
-                                    }
-                                    
                                 }
+                                .padding()
                                 .fullScreenCover(isPresented: $selectSumateraAndGetDance) {
                                     TraditionalDanceView(selectedIsland: ModelData.shared.sumatera)
                                 }
@@ -287,6 +238,7 @@ struct IslandView: View {
                                 Button(action: {
                                     islandController.addUserToArray(islandName: islands[index].islandName)
                                     self.selectedIsland = islands[index].islandName
+                                    self.showAlert = true
                                     if self.selectedIsland == "Sumatera" {
                                         ModelData.shared.currentIslandObject = ModelData.shared.sumatera
                                         if islandController.getChosenGameByRandom() {
@@ -380,6 +332,13 @@ struct IslandView: View {
                                     }
                                     .onDisappear {
                                         MusicPlayer.shared.stopBackgroundMusic()
+                                    }
+                                    .onChange(of: self.showAlert) { oldValue, newValue in
+                                        if newValue {
+                                            MusicPlayer.shared.stopBackgroundMusic()
+                                        } else {
+                                            MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                                        }
                                     }
                                     .padding()
                                    
