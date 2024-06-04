@@ -96,7 +96,7 @@ struct AnswerDescriptionView: View {
                     Image(image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: isIpad ? self.screenSize.screenHeight/2.2 : self.screenSize.screenHeight/4.5)
+                        .frame(height: isIpad ? 450 : self.screenSize.screenHeight/4.5)
                         .clipShape(
                             RoundedCorner(cornerRadius: 40, corners: [.bottomLeft, .bottomRight])
                         )

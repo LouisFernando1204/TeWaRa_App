@@ -78,7 +78,7 @@ class ModelData {
             image: "person10",
             score: 270
         )
-        self.currentGame = "TraditionalDance"
+        self.currentGame = "TraditionalLanguage"
     }
 }
 

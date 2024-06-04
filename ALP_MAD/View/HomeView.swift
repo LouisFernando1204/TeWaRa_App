@@ -9,106 +9,31 @@ import SwiftUI
 
 struct HomeView: View {
     
-    //Testing image
     var body: some View {
-        ScrollView {
-            VStack {
-                if let userImage = loadImage(named: ModelData.shared.currentUser.image) {
-                    Image(uiImage: userImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 120, height: 120)
-                        .clipShape(Circle())
-                        .overlay(
-                            Circle().strokeBorder(
-                                LinearGradient(
-                                    gradient: Gradient(stops: [
-                                        .init(color: Color("redColor(TeWaRa)"), location: 0.5),
-                                        .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
-                                    ]),
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 4
-                            )
-                        )
-                        .padding(.top, 4)
-                        .padding(.bottom, 25)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    Text(ModelData.shared.currentUser.name)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding()
-                    Text(ModelData.shared.currentUser.image)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding()
-                    
-                    
-                    ForEach(ModelData.shared.currentIslandObject.userList,  id: \.self) { user in
-                        if let userImage = loadImage(named: user.image){
-                            Image(uiImage: userImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 120, height: 120)
-                                .clipShape(Circle())
-                                .overlay(
-                                    Circle().strokeBorder(
-                                        LinearGradient(
-                                            gradient: Gradient(stops: [
-                                                .init(color: Color("redColor(TeWaRa)"), location: 0.5),
-                                                .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        ),
-                                        lineWidth: 4
-                                    )
-                                )
-                                .padding(.top, 4)
-                                .padding(.bottom, 25)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            Text(user.name)
-                        }
-                        else{
-                            Image(user.image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 120, height: 120)
-                                .clipShape(Circle())
-                                .overlay(
-                                    Circle().strokeBorder(
-                                        LinearGradient(
-                                            gradient: Gradient(stops: [
-                                                .init(color: Color("redColor(TeWaRa)"), location: 0.5),
-                                                .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        ),
-                                        lineWidth: 4
-                                    )
-                                )
-                                .padding(.top, 4)
-                                .padding(.bottom, 25)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            Text(user.name)
-                        }
-                    }
+        TabView {
+            AnswerDescriptionView()
+                .font(.title2)
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Beranda")
                 }
-            }
+            AdditionalQuestionView()
+                .tabItem {
+                    Image(systemName: "chart.bar.fill")
+                    Text("Perangkat")
+                }
         }
+        .accentColor(Color("redColor(TeWaRa)"))
+        .onAppear {
+            let appearance = UITabBarAppearance()
+            appearance.backgroundColor = UIColor(Color.white.opacity(0.05))
+            // Use this appearance when scrolling behind the TabView:
+            UITabBar.appearance().standardAppearance = appearance
+            // Use this appearance when scrolled all the way up:
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+        
     }
-}
-
-private func loadImage(named imageName: String) -> UIImage? {
-    let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
-    return UIImage(contentsOfFile: imagePath.path)
-}
-
-private func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
 }
 
 #Preview {
