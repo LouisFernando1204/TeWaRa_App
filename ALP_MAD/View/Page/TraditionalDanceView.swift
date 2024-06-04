@@ -112,6 +112,72 @@ struct TraditionalDanceView: View {
         }
     }
     
+    private func ChanceBox(message: String) -> some View {
+        Rectangle()
+            .fill(CustomGradient.redOrangeGradient)
+            .clipShape(
+                ScreenSize.screenWidth > 600 ? RoundedRectangle(cornerRadius: 35) : RoundedRectangle(cornerRadius: 25.0)
+            )
+            .frame(
+                width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.8 : ScreenSize.screenWidth / 1.4,
+                height: ScreenSize.screenHeight / 18
+            )
+            .overlay {
+                Text(message)
+                    .fontWeight(.medium)
+                    .font(ScreenSize.screenWidth > 600 ? .title : .headline)
+                    .foregroundColor(Color.white)
+            }
+    }
+    
+    private func AlphabetBox(type: String, alphabet: String, isClicked: Bool) -> some View {
+        let boxWidth = ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 10 : ScreenSize.screenWidth / 8
+        let boxHeight = boxWidth
+
+        return Group {
+            if type == "Answer" {
+                Rectangle()
+                    .frame(width: boxWidth, height: boxHeight)
+                    .foregroundColor(.secondary)
+                    .opacity(0.2)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(CustomGradient.redOrangeGradient, lineWidth: 2)
+                            .overlay {
+                                if isClicked {
+                                    Text(alphabet)
+                                        .font(.largeTitle)
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.black)
+                                }
+                            }
+                    )
+                    .padding(.horizontal, ScreenSize.screenWidth > 600 ? 10 : 1)
+                    .padding(.vertical)
+            } else if type == "Option" {
+                Rectangle()
+                    .frame(width: boxWidth, height: boxHeight)
+                    .overlay {
+                        if !isClicked {
+                            CustomGradient.redDarkRedGradient
+                        } else {
+                            Color.white
+                        }
+                    }
+                    .overlay {
+                        if !isClicked {
+                            Text(alphabet)
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.white)
+                        }
+                    }
+                    .cornerRadius(10)
+                    .padding(.horizontal, 3)
+            }
+        }
+    }
+    
     private func checkAnswer() {
         if traditionalDanceController.currentGameIsWrong {
             alertTitle = "Oops.. kesempatan menjawab sudah habis"
