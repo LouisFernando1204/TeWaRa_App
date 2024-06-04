@@ -55,6 +55,13 @@ struct HomeViewMac: View {
         .onDisappear {
             MusicPlayer.shared.stopBackgroundMusic()
         }
+        .onChange(of: self.isClicked) { oldValue, newValue in
+            if newValue {
+                MusicPlayer.shared.stopBackgroundMusic()
+            } else {
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 1)
+            }
+        }
         
     }
     
@@ -99,17 +106,54 @@ struct HomeViewMac: View {
     
     private func showDetailIsland(screenSize: CGSize) -> some View {
         
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
-                ForEach(homeController.rankedIslands.indices, id: \.self) { index in
-                    let island = homeController.rankedIslands[index]
-                    self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Ranked")
+        HStack {
+            ScrollView {
+                if homeController.rankedIslands.isEmpty {
+                    Text("Pulau yang Sudah Anda Taklukkan")
+                        .font(.title)
+                        .fontWeight(.bold)
                 }
-                
-                ForEach(homeController.progressToRank.indices, id:\.self) { index in
-                    let island = homeController.progressToRank[index]
-                    self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Progress")
+                else {
+                    Text("Pulau yang Sudah Anda Taklukkan")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding(.bottom, 30)
+
+                    
+                    ForEach(homeController.rankedIslands.indices, id: \.self) { index in
+                        let island = homeController.rankedIslands[index]
+                        self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Ranked")
+                    }
                 }
+            }
+            .frame(width: screenSize.width/3)
+            
+            ScrollView {
+                if homeController.progressToRank.isEmpty {
+                    Text("Pulau yang Sedang Anda Coba Taklukkan...")
+                        .font(.title)
+                        .fontWeight(.bold)
+                }
+                else {
+                    Text("Pulau yang Sedang Anda Coba Taklukkan...")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding(.bottom, 30)
+
+                    
+                    ForEach(homeController.progressToRank.indices, id:\.self) { index in
+                        let island = homeController.progressToRank[index]
+                        self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Progress")
+                    }
+                }
+            }
+            .frame(width: screenSize.width/3)
+            
+            ScrollView {
+                Text("Pulau yang  Belum Anda Coba Taklukkan...")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.bottom, 30)
                 
                 ForEach(homeController.unfilledIslands.indices, id:\.self) {
                     index in
@@ -117,6 +161,7 @@ struct HomeViewMac: View {
                     self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Unplayed")
                 }
             }
+            .frame(width: screenSize.width/3)
         }
     }
     
@@ -125,21 +170,22 @@ struct HomeViewMac: View {
             Spacer()
             Image(currentIsland.islandImage)
                 .resizable()
-                .frame(width: ScreenSize.width/8, height: ScreenSize.width/8)
+                .frame(width: ScreenSize.width/12, height: ScreenSize.width/12
+                )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding(.trailing, ScreenSize.width/28)
+                .padding(.trailing, ScreenSize.width/48)
             
             VStack(content: {
                 HStack(content: {
                     Text("Pulau \(currentIsland.islandName)")
-                        .font(.largeTitle)
+                        .font(.title)
                         .foregroundStyle(Color.black)
                         .fontWeight(.bold)
                         .overlay {
                             CustomGradient.redOrangeGradient
                             .mask(
                                 Text("Pulau \(currentIsland.islandName)")
-                                    .font(.largeTitle)
+                                    .font(.title)
                                     .foregroundStyle(Color.black)
                                     .fontWeight(.bold)
                             )
@@ -150,7 +196,7 @@ struct HomeViewMac: View {
                     if status == "Unplayed" {
                         Text("0 poin")
                             .foregroundStyle(Color.black)
-                            .font(.title)
+                            .font(.title2)
                         Spacer()
                     }
                     else if status == "Ranked" || status == "Progress" {
@@ -159,7 +205,7 @@ struct HomeViewMac: View {
                             if user.name == ModelData.shared.currentUser.name {
                                 Text("\(user.score) poin")
                                     .foregroundStyle(Color.black)
-                                    .font(.title)
+                                    .font(.title2)
 
                                 Spacer()
                             }
@@ -186,7 +232,7 @@ struct HomeViewMac: View {
                                 .font(.title2)
                         }
                         else if status == "Progress" {
-                            Text("- \(ModelData.shared.getCurrentUserPointByIsland(name: currentIsland.userList[2].name, island: currentIsland)[0] -  ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0]) poin")
+                            Text("-\(ModelData.shared.getCurrentUserPointByIsland(name: currentIsland.userList[2].name, island: currentIsland)[0] -  ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0]) poin")
                                 .foregroundStyle(Color.black)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(.title2)
@@ -205,6 +251,7 @@ struct HomeViewMac: View {
                                 .foregroundColor(.gray)
                                 .italic()
                                 .font(.title2)
+                                .multilineTextAlignment(.leading)
                         }
                         else if status == "Progress" {
                             Text(" untuk memasuki peringkat")
@@ -249,28 +296,22 @@ struct HomeViewMac: View {
                 if let image = loadImage(named: ModelData.shared.currentUser.image) {
                     Image(nsImage: image)
                         .resizable()
-                        .frame(width: 60, height: 60)
+                        .frame(width: 120, height: 120)
                         .clipShape(Circle())
                         .padding(.trailing, 10)
                 }
                 
-                Image("person1")
-                    .resizable()
-                    .frame(width: screenSize.width/14, height: screenSize.width/14)
-                    .clipShape(Circle())
-                    .padding(.trailing, screenSize.width/36)
-                
                 VStack(content: {
                     
                     HStack(content: {
-                        Text("\(ModelData.shared.currentUser.name)! ")
+                        Text("Hi \(ModelData.shared.currentUser.name)! ")
                             .fontWeight(.bold)
                             .font(.largeTitle)
                             .overlay {
                                 CustomGradient.redDarkRedGradient
                             }
                             .mask(
-                                Text("\(ModelData.shared.currentUser.name)! ")
+                                Text("Hi \(ModelData.shared.currentUser.name)! ")
                                     .fontWeight(.bold)
                                     .font(.largeTitle)
                             )

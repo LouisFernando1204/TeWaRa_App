@@ -308,7 +308,7 @@ struct TopNavigationBar : View {
             }
             .navigationDestination(isPresented: $navigate) {
                 if message == "Home" {
-                    HomeViewMac()
+                    HomeView()
                 }
                 else if message == "Pulau" {
                     IslandViewMac()

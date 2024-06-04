@@ -45,7 +45,7 @@ struct TraditionalLanguageViewMac: View {
                             
                             VStack(content: {
                                 self.showClueAndTimer(screenSize: geometry.size)
-                                self.buttonCheckAnswer()
+                                self.buttonCheckAnswer(screenSize: geometry.size)
                             })
                             .frame(width: geometry.size.width/2)
                         })
@@ -113,30 +113,38 @@ struct TraditionalLanguageViewMac: View {
         VStack(content: {
             Image(ModelData.shared.bali.traditionalLanguage.image!)
                 .resizable()
-                .frame(width: screenSize.width/2.4, height: screenSize.width/3.4)
+                .frame(width: screenSize.width/2.2, height: screenSize.width/3.4)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .shadow(radius:5)
                 .padding(.bottom, 10)
             
             TextField("Masukkan jawabanmu...", text: $textFieldValue)
-                .padding()
-                .frame(width: screenSize.width/2.4, height: screenSize.width/40)
-                .background(Color.white)
-                .cornerRadius(12)
+                .font(.title2)
+                .multilineTextAlignment(.leading)
+                .padding(.leading, screenSize.width / 60)
+                .padding(.vertical, screenSize.height / 50)
+                .frame(maxWidth: .infinity)
+                .textFieldStyle(PlainTextFieldStyle())
                 .overlay(
-                    RoundedRectangle(cornerRadius: 12)
+                    RoundedRectangle(cornerRadius: 10)
                         .stroke(
-                            LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),
-                                           startPoint: .leading,
-                                           endPoint: .trailing),
+                            LinearGradient(
+                                gradient: Gradient(stops: [
+                                    .init(color: Color("redColor(TeWaRa)"), location: 0.5),
+                                    .init(color: Color("orangeColor(TeWaRa)"), location: 1.0),
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
                             lineWidth: 2
                         )
                 )
+                .foregroundColor(.black)
                 
             
             Spacer().frame(height: 20)
         })
-        .padding(.top, 10)
+        .padding(.top, 14)
         
     }
     
@@ -145,7 +153,7 @@ struct TraditionalLanguageViewMac: View {
             ZStack {
                 Rectangle()
                     .clipShape(RoundedRectangle(cornerRadius: 20.0))
-                    .frame(height: screenSize.width/3.4)
+                    .frame(width: screenSize.width/2.2, height: screenSize.width/3.4)
                     .foregroundColor(.secondary.opacity(0.2))
                     .overlay(
                         VStack(content: {
@@ -220,8 +228,10 @@ struct TraditionalLanguageViewMac: View {
                     .offset(y: screenSize.height/6)
             }
             
-//            Spacer().frame(height: 40)
+//            Spacer().frame(height: 20)
+
         })
+        .padding(.bottom, 10)
     }
     
     private func checkAnswer() {
@@ -245,18 +255,19 @@ struct TraditionalLanguageViewMac: View {
         showAlert = true
     }
     
-    private func buttonCheckAnswer() -> some View {
+    private func buttonCheckAnswer(screenSize: CGSize) -> some View {
         
         Rectangle()
             .fill(.red)
-            .cornerRadius(10)
-            .frame(height: 40)
+            .frame(height: screenSize.height/16)
+            .cornerRadius(12)
             .overlay {
                 Text("CEK JAWABAN")
+                    .font(.title)
                     .foregroundColor(.white)
                     .fontWeight(.bold)
             }
-            .padding(.vertical, 10)
+            .padding(.horizontal)
             .onTapGesture {
                 traditionalLanguageController.guessWord(word: textFieldValue, remainingTime: countdownTimer)
                 self.timerRunning = false

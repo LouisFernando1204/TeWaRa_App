@@ -78,14 +78,14 @@ struct RegisterViewMac: View {
                         dismissButton: .default(Text("OK"))
                     )
                 }
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 3)
-                    }
-                }
-                .onDisappear {
-                    MusicPlayer.shared.stopBackgroundMusic()
-                }
+//                .onAppear {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+//                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 3)
+//                    }
+//                }
+//                .onDisappear {
+//                    MusicPlayer.shared.stopBackgroundMusic()
+//                }
                 .navigationDestination(isPresented: $navToHomeView) {
                     HomeViewMac()
                 }
