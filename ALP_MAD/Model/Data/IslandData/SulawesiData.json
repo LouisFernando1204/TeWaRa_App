@@ -101,17 +101,17 @@
     },
     "userList": [
         {
-            "name": "Hiroshi",
+            "name": "Hiroshi Santoso",
             "image": "person10",
-            "score": 270
+            "score": 370
         },
         {
-            "name": "Nicho",
+            "name": "Nicho Steven",
             "image": "person11",
             "score": 210
         },
         {
-            "name": "Patrick",
+            "name": "Patrick Star",
             "image": "person12",
             "score": 200
         }
