@@ -20,6 +20,9 @@ class HomeController : ObservableObject {
     
     init() {
         print("HAHAHA \(ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: ModelData.shared.java))")
+        self.progressToRank = []
+        self.unfilledIslands = []
+        self.rankedIslands = []
     }
     
     func sortBaliRank() {
@@ -66,6 +69,11 @@ class HomeController : ObservableObject {
         ]
 ////
 ////        
+        ///
+        self.progressToRank = []
+        self.unfilledIslands = []
+        self.rankedIslands = []
+        
         for id in islands.indices {
             if id >= 0 && id < islands.count {
                 if ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: islands[id]).isEmpty {
@@ -74,7 +82,7 @@ class HomeController : ObservableObject {
             }
             
         }
-        print(unfilledIslands.count)
+        print("hehehe \(unfilledIslands.count)")
         
         for id in islands.indices {
             do {

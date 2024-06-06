@@ -67,30 +67,6 @@ class ModelData {
         )
     }
     
-    func sortBaliRank() {
-        bali.userList.sort { $0.score > $1.score }
-    }
-    
-    func sortJavaRank() {
-        java.userList.sort { $0.score > $1.score }
-    }
-    
-    func sortSumateraRank() {
-        sumatera.userList.sort { $0.score > $1.score }
-    }
-    
-    func sortKalimantanRank() {
-        kalimantan.userList.sort { $0.score > $1.score }
-    }
-    
-    func sortPapuaRank() {
-        papua.userList.sort { $0.score > $1.score }
-    }
-    
-    func sortSulawesiRank() {
-        sulawesi.userList.sort { $0.score > $1.score }
-    }
-    
 //    func getCurrentUserDetailInBali(name: String) -> [Int] {
 //        return ModelData.shared.bali.userList.enumerated().compactMap { index, user in
 //            user.name == name ? index : nil
