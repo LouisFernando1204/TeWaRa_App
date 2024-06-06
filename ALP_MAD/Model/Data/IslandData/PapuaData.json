@@ -101,17 +101,17 @@
     },
     "userList": [
         {
-            "name": "Kimi",
+            "name": "Kimi Bima",
             "image": "person13",
-            "score": 250
+            "score": 450
         },
         {
-            "name": "Michael",
+            "name": "Michael Yap",
             "image": "person14",
-            "score": 240
+            "score": 340
         },
         {
-            "name": "Steven",
+            "name": "Steven Granger",
             "image": "person15",
             "score": 230
         }

@@ -93,19 +93,19 @@
     },
     "userList": [
         {
-            "name": "Rafi",
+            "name": "Rafi Mario",
             "image": "person7",
-            "score": 210
+            "score": 410
         },
         {
-            "name": "Hayya",
+            "name": "Hayya Abhista",
             "image": "person8",
-            "score": 180
+            "score": 380
         },
         {
-            "name": "Derend",
+            "name": "Derend Sebas",
             "image": "person9",
-            "score": 170
+            "score": 270
         }
     ]
 }

@@ -101,19 +101,19 @@
     },
     "userList": [
         {
-            "name": "Samuel",
+            "name": "Samuel Abner",
             "image": "person1",
-            "score": 200
+            "score": 500
         },
         {
-            "name": "Louis",
+            "name": "Louis Lie",
             "image": "person2",
-            "score": 180
+            "score": 380
         },
         {
-            "name": "Jason",
+            "name": "Jason Statham",
             "image": "person3",
-            "score": 170
+            "score": 370
         }
     ]
 }

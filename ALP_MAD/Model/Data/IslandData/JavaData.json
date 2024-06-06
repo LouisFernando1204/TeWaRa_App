@@ -93,19 +93,19 @@
     },
     "userList": [
         {
-            "name": "Jerry",
+            "name": "Jerry Tan",
             "image": "person4",
-            "score": 190
+            "score": 490
         },
         {
-            "name": "Yobel",
+            "name": "Yobel Filnath",
             "image": "person5",
-            "score": 160
+            "score": 360
         },
         {
-            "name": "Joren",
+            "name": "Joren Fahrenheit",
             "image": "person6",
-            "score": 150
+            "score": 250
         }
     ]
 }
