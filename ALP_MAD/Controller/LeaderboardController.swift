@@ -22,11 +22,11 @@ class LeaderboardController: ObservableObject {
         if let leaderboard = self.loadLeaderboardData() {
             self.leaderboard = leaderboard
             self.userList = leaderboard.sumatera.userList +
-                            leaderboard.kalimantan.userList +
-                            leaderboard.papua.userList +
-                            leaderboard.java.userList +
-                            leaderboard.bali.userList +
-                            leaderboard.sulawesi.userList
+                        leaderboard.kalimantan.userList +
+                        leaderboard.papua.userList +
+                        leaderboard.java.userList +
+                        leaderboard.bali.userList +
+                        leaderboard.sulawesi.userList
         } else {
             fatalError("Failed to load leaderboard data")
         }
@@ -69,29 +69,97 @@ class LeaderboardController: ObservableObject {
         return self.leaderboard
     }
     
-    func accumulateJavaRanking() {
-        // Implement ranking logic for Java
+    func getSortedUserList(for island: Island) -> [User] {
+        return island.userList.sorted(by: { $0.score > $1.score })
     }
     
-    func accumulateKalimantanRanking() {
-        // Implement ranking logic for Kalimantan
+    func getTopThreeUsers(for islandName: String) -> [User] {
+        guard let island = getIsland(islandName) else { return [] }
+        return getSortedUserList(for: island).prefix(3).map { $0 }
     }
     
-    func accumulateSulawesiRanking() {
-        // Implement ranking logic for Sulawesi
+    func getUserRank(in islandName: String, userName: String) -> Int? {
+        guard let island = getIsland(islandName) else { return nil }
+        let sortedUsers = getSortedUserList(for: island)
+        return sortedUsers.firstIndex { $0.name == userName }?.advanced(by: 1)
     }
     
-    func accumulatePapuaRanking() {
-        // Implement ranking logic for Papua
+    func getTopIsland() -> Island? {
+        guard let leaderboard = self.leaderboard else { return nil }
+        let islands = [leaderboard.sumatera, leaderboard.kalimantan, leaderboard.papua, leaderboard.java, leaderboard.bali, leaderboard.sulawesi]
+        return islands.max { $0.userList.map { $0.score }.reduce(0, +) < $1.userList.map { $0.score }.reduce(0, +) }
     }
     
-    func accumulateSumateraRanking() {
-        // Implement ranking logic for Sumatera
+    func getIsland(_ islandName: String) -> Island? {
+        guard let leaderboard = self.leaderboard else { return nil }
+        switch islandName {
+        case "Sumatera": return leaderboard.sumatera
+        case "Kalimantan": return leaderboard.kalimantan
+        case "Papua": return leaderboard.papua
+        case "Java": return leaderboard.java
+        case "Bali": return leaderboard.bali
+        case "Sulawesi": return leaderboard.sulawesi
+        default: return nil
+        }
     }
     
-    func accumulateBaliRanking() {
-        // Implement ranking logic for Bali
+    func updateUserScore(in islandName: String, userName: String, newScore: Int) {
+        guard var leaderboard = self.leaderboard,
+              var island = getIsland(islandName),
+              let index = island.userList.firstIndex(where: { $0.name == userName }) else { return }
+        
+        island.userList[index].score = newScore
+        
+        switch islandName {
+        case "Sumatera": leaderboard.sumatera = island
+        case "Kalimantan": leaderboard.kalimantan = island
+        case "Papua": leaderboard.papua = island
+        case "Java": leaderboard.java = island
+        case "Bali": leaderboard.bali = island
+        case "Sulawesi": leaderboard.sulawesi = island
+        default: break
+        }
     }
+    
+    func addUser(_ user: User, to islandName: String) {
+        guard var leaderboard = self.leaderboard,
+              var island = getIsland(islandName) else { return }
+        
+        island.userList.append(user)
+        
+        switch islandName {
+        case "Sumatera": leaderboard.sumatera = island
+        case "Kalimantan": leaderboard.kalimantan = island
+        case "Papua": leaderboard.papua = island
+        case "Java": leaderboard.java = island
+        case "Bali": leaderboard.bali = island
+        case "Sulawesi": leaderboard.sulawesi = island
+        default: break
+        }
+    }
+    
+    func getTraditionalDance(for islandName: String) -> TraditionalDance? {
+        return getIsland(islandName)?.traditionalDance
+    }
+    
+    func getTraditionalLanguage(for islandName: String) -> TraditionalLanguage? {
+        return getIsland(islandName)?.traditionalLanguage
+    }
+    
+    func accumulateRanking(for islandName: String) {
+        guard let island = getIsland(islandName) else { return }
+        let totalScore = island.userList.map { $0.score }.reduce(0, +)
+        // Here you would update some global ranking or property based on the total score
+        // For now, let's just print it
+        print("\(islandName) total score: \(totalScore)")
+    }
+    
+    func accumulateJavaRanking() { accumulateRanking(for: "Java") }
+    func accumulateKalimantanRanking() { accumulateRanking(for: "Kalimantan") }
+    func accumulateSulawesiRanking() { accumulateRanking(for: "Sulawesi") }
+    func accumulatePapuaRanking() { accumulateRanking(for: "Papua") }
+    func accumulateSumateraRanking() { accumulateRanking(for: "Sumatera") }
+    func accumulateBaliRanking() { accumulateRanking(for: "Bali") }
 }
 
 

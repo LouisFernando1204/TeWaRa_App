@@ -9,96 +9,59 @@ import SwiftUI
 
 struct LeaderboardView: View {
     @StateObject private var controller = LeaderboardController()
-    @State private var leaderboard: Leaderboard?
+    @State private var selectedIslandIndex = 0
+    let islands = ["Sumatera", "Kalimantan", "Papua", "Java", "Bali", "Sulawesi"]
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(spacing: 20) {
-                    Text("Selamat!!!")
-                        .font(.title)
-                        .padding(.top, 16)
-                    
-                    if let topIsland = topIsland {
-                        Text("Kamu menguasai \(topIsland.islandName)")
-                            .font(.headline)
-                            .padding(.bottom, 16)
-                    }
-                    
-                    ForEach(islands, id: \.islandName) { island in
-                        LeaderboardCard(island: island)
-                            .frame(maxWidth: .infinity)
-                    }
+        ScrollView(content: {
+            VStack {
+                TopNavigationBar(destination: AnyView(IslandView()), name: "Leaderboard")
+                
+                // Leaderboard view
+                ForEach(islands, id: \.self) { island in
+                    showLeaderboard(for: island)
                 }
-                .padding()
+                
+                Spacer()
+                    .frame(height: 30)
             }
-            .navigationTitle("Peringkat")
-        }
-        .onAppear {
-            leaderboard = controller.getLeaderboard()
-        }
+            .frame(width: ScreenSize.screenWidth * 0.9)
+            .padding(.horizontal, 20)
+        })
     }
     
-    private var islands: [Island] {
-        guard let leaderboard = leaderboard else { return [] }
-        return [
-            leaderboard.sumatera,
-            leaderboard.kalimantan,
-            leaderboard.papua,
-            leaderboard.java,
-            leaderboard.bali,
-            leaderboard.sulawesi
-        ]
-    }
-    
-    private var topIsland: Island? {
-        // Implement logic to determine the top island
-        return nil
-    }
-}
-
-struct LeaderboardCard: View {
-    let island: Island
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(island.islandName)
-                .font(.headline)
-                .padding(.bottom, 8)
+    private func showLeaderboard(for islandName: String) -> some View {
+        let island = controller.getIsland(islandName)
+        let topUsers = controller.getTopThreeUsers(for: islandName)
+        let userRank = controller.getUserRank(in: islandName, userName: controller.user.name)
+        
+        return VStack(content: {
+            HStack {
+                Text(island!.islandName)
+                    .bold()
+                    .font(ScreenSize.screenWidth > 600 ? .largeTitle : .title3)
+            }
             
-            ForEach(island.userList, id: \.name) { user in
-                LeaderboardRow(user: user)
+            ScrollView {
+                VStack(content: {
+                    ForEach(topUsers.enumerated().map { $0 }, id: \.element.name) { index, user in
+                        LeaderboardRow(rank: index + 1, user: user)
+                        if index != 9 {
+                            Divider()
+                                .background(Color.black)
+                            Spacer()
+                                .frame(height: ScreenSize.screenWidth > 600 ? 20 : 10)
+                        }
+                    }
+                })
+                .padding(.horizontal)
             }
-        }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
-    }
-}
-
-struct LeaderboardRow: View {
-    let user: User
-    
-    var body: some View {
-        HStack {
-            Image(user.image)
-                .resizable()
-                .frame(width: 40, height: 40)
-                .clipShape(Circle())
-                .padding(.trailing, 16)
+            .frame(maxHeight: ScreenSize.screenWidth > 600 ? 500 : 300)
+            .padding(.vertical)
             
-            VStack(alignment: .leading, spacing: 4) {
-                Text(user.name)
-                    .font(.headline)
-                Text("\(user.score) poin")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            Spacer()
-        }
-        .padding(.vertical, 8)
+        })
+        .frame(width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth / 1.3 : ScreenSize.screenWidth * 0.86)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
 }
 

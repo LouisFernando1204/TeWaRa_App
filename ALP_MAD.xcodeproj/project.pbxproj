@@ -81,6 +81,8 @@
 		04A1A3242BF0664E00C7E982 /* TraditionalDanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */; };
 		04A1A3262BF0665D00C7E982 /* TraditionalLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */; };
 		04C658362BF4922100ECECD2 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C658352BF4922100ECECD2 /* ModelData.swift */; };
+		3E44F5392C0ADFF6004AF9A8 /* LeaderboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E44F5382C0ADFF6004AF9A8 /* LeaderboardRow.swift */; };
+		3E44F53B2C0B674A004AF9A8 /* LeaderboardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E44F53A2C0B674A004AF9A8 /* LeaderboardSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +178,8 @@
 		04A1A3232BF0664E00C7E982 /* TraditionalDanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalDanceController.swift; sourceTree = "<group>"; };
 		04A1A3252BF0665D00C7E982 /* TraditionalLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalLanguageController.swift; sourceTree = "<group>"; };
 		04C658352BF4922100ECECD2 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		3E44F5382C0ADFF6004AF9A8 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
+		3E44F53A2C0B674A004AF9A8 /* LeaderboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +241,8 @@
 				041B26B32BFA368E000B23BB /* ButtonCheck.swift */,
 				047BE78B2BFA4EF200947484 /* ChanceBox.swift */,
 				043AC9752BFB5B6A0065EB0B /* ProfileComponent.swift */,
+				3E44F5382C0ADFF6004AF9A8 /* LeaderboardRow.swift */,
+				3E44F53A2C0B674A004AF9A8 /* LeaderboardSection.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -737,6 +743,7 @@
 				04A1A3242BF0664E00C7E982 /* TraditionalDanceController.swift in Sources */,
 				04A1A2FC2BF0635F00C7E982 /* TraditionalDance.swift in Sources */,
 				04A1A2CF2BF062C000C7E982 /* ContentView.swift in Sources */,
+				3E44F53B2C0B674A004AF9A8 /* LeaderboardSection.swift in Sources */,
 				041B26B02BFA2A11000B23BB /* AlphabetBox.swift in Sources */,
 				04A1A3042BF0642700C7E982 /* Island.swift in Sources */,
 				04A1A3162BF0658700C7E982 /* TraditionalDanceView.swift in Sources */,
@@ -762,6 +769,7 @@
 				04A1A2F72BF062F100C7E982 /* User.swift in Sources */,
 				04A1A3202BF0662400C7E982 /* LeaderboardController.swift in Sources */,
 				04A1A3222BF0663E00C7E982 /* IslandController.swift in Sources */,
+				3E44F5392C0ADFF6004AF9A8 /* LeaderboardRow.swift in Sources */,
 				041B26A62BFA1D94000B23BB /* CustomGradient.swift in Sources */,
 				043E39792BF38D4C00FB74A6 /* AdditionalQuestionView.swift in Sources */,
 				047BE78C2BFA4EF200947484 /* ChanceBox.swift in Sources */,
