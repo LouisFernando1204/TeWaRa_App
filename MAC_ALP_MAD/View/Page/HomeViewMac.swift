@@ -24,7 +24,7 @@ struct HomeViewMac: View {
         let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
         return NSImage(contentsOfFile: imagePath.path)
     }
-
+    
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
@@ -44,6 +44,7 @@ struct HomeViewMac: View {
                 IslandViewMac()
             }
         }
+        .background(Color.white)
         .onAppear {
             homeController.rearrangeIsland()
         }
@@ -118,7 +119,7 @@ struct HomeViewMac: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.bottom, 30)
-
+                    
                     
                     ForEach(homeController.rankedIslands.indices, id: \.self) { index in
                         let island = homeController.rankedIslands[index]
@@ -139,7 +140,7 @@ struct HomeViewMac: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.bottom, 30)
-
+                    
                     
                     ForEach(homeController.progressToRank.indices, id:\.self) { index in
                         let island = homeController.progressToRank[index]
@@ -183,12 +184,12 @@ struct HomeViewMac: View {
                         .fontWeight(.bold)
                         .overlay {
                             CustomGradient.redOrangeGradient
-                            .mask(
-                                Text("Pulau \(currentIsland.islandName)")
-                                    .font(.title)
-                                    .foregroundStyle(Color.black)
-                                    .fontWeight(.bold)
-                            )
+                                .mask(
+                                    Text("Pulau \(currentIsland.islandName)")
+                                        .font(.title)
+                                        .foregroundStyle(Color.black)
+                                        .fontWeight(.bold)
+                                )
                         }
                     Spacer()
                 })
@@ -206,7 +207,7 @@ struct HomeViewMac: View {
                                 Text("\(user.score) poin")
                                     .foregroundStyle(Color.black)
                                     .font(.title2)
-
+                                
                                 Spacer()
                             }
                         }
@@ -224,7 +225,7 @@ struct HomeViewMac: View {
                                 .italic()
                                 .opacity(0.8)
                                 .font(.title2)
-
+                            
                         }
                         else if status == "Ranked" {
                             Text("⭐️")
@@ -265,8 +266,8 @@ struct HomeViewMac: View {
                     Spacer()
                 })
             })
-//            Spacer()
-//                .frame(height: ScreenSize.width > 600 ? 30 : 10)
+            //            Spacer()
+            //                .frame(height: ScreenSize.width > 600 ? 30 : 10)
         })
         
         
@@ -330,11 +331,11 @@ struct HomeViewMac: View {
                                 .fontWeight(.medium)
                                 .overlay {
                                     CustomGradient.redOrangeGradient
-                                    .mask(
-                                        Text("TeWaRa")
-                                            .font(.title)
-                                            .fontWeight(.medium)
-                                    )
+                                        .mask(
+                                            Text("TeWaRa")
+                                                .font(.title)
+                                                .fontWeight(.medium)
+                                        )
                                 }
                             
                             

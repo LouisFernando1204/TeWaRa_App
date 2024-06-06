@@ -12,7 +12,8 @@ struct QuestionAndDisplay: View {
     
     let type: String
     let currentIsland: Island
-    
+    @Binding var stopVideo: Bool
+
     var body: some View {
         switch type {
         case "Bahasa" :
@@ -39,7 +40,7 @@ struct QuestionAndDisplay: View {
             .multilineTextAlignment(.leading)
             if let videoURL = Bundle.main.url(forResource: currentIsland.traditionalDance.image, withExtension: "mp4") {
                 
-                VideoPlayerView(videoURL: videoURL, type: "Game")
+                VideoPlayerView(videoURL: videoURL, type: "Game", stopVideo: $stopVideo)
             }
         })
         .padding(.top, ScreenSize.screenWidth > 600 ? 0 : 10)
@@ -73,7 +74,6 @@ struct QuestionAndDisplay: View {
             
         })
         .padding(.top, ScreenSize.screenWidth > 600 ? 0 : 10)
-        
     }
     
     private func showErrorDetail() -> some View {

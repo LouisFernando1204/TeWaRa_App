@@ -1,10 +1,3 @@
-//
-//  TraditionalDanceView.swift
-//  ALP_MAD
-//
-//  Created by MacBook Pro on 12/05/24.
-//
-
 import SwiftUI
 import AVKit
 import UIKit
@@ -24,6 +17,7 @@ struct TraditionalDanceView: View {
     @State private var alertAction: (() -> Void)?
     @State private var buttonText: String = ""
     @State private var showAlert: Bool = false
+    @State private var stopVideo: Bool = false 
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private var fixedColumn: [GridItem] {
@@ -54,12 +48,7 @@ struct TraditionalDanceView: View {
             TopNavigationBar(name: "Tebak Tarian", message: "Pulau")
             ScrollView {
                 VStack(content: {
-                    QuestionAndDisplay(type: "Tarian", currentIsland: self.selectedIsland)
-                        .onChange(of: self.showAlert) { oldValue, newValue in
-                            if newValue {
-                                
-                            }
-                        }
+                    QuestionAndDisplay(type: "Tarian", currentIsland: self.selectedIsland, stopVideo: $stopVideo)
                     ChanceBox(message: "Kesempatan kamu kurang \(traditionalDanceController.getChance())x")
                     self.showAnswerBox()
                     self.showWordOptions()
@@ -109,6 +98,16 @@ struct TraditionalDanceView: View {
         }
         .fullScreenCover(isPresented: $navToAdditionalQuestion) {
             TouchdownView()
+        }
+        .onChange(of: backToIslandMenu) { oldValue, newValue in
+            if newValue {
+                stopVideo = true
+            }
+        }
+        .onChange(of: navToAdditionalQuestion) { oldValue, newValue in
+            if newValue {
+                stopVideo = true
+            }
         }
     }
     
@@ -186,22 +185,31 @@ struct TraditionalDanceView: View {
             print("SALAA")
             timerRunning = false
             showAlert = true
-            alertAction = { self.backToIslandMenu = true }
-        } 
+            alertAction = {
+                self.backToIslandMenu = true
+                self.stopVideo = true // Set stopVideo to true
+            }
+        }
         else if traditionalDanceController.currentGameIsCorrect {
             alertTitle = "Congrats! Jawabanmu benarr +\(traditionalDanceController.point)"
             alertMessage = "Oopss jangan happy dulu, karena masih ada tantangan baru!"
             buttonText = "Telusuri tantangan baru"
             showAlert = true
             timerRunning = false
-            alertAction = { self.navToAdditionalQuestion = true }
+            alertAction = {
+                self.navToAdditionalQuestion = true
+                self.stopVideo = true // Set stopVideo to true
+            }
         }
         else if countdownTimer == 0 {
             alertTitle = "Oops.. waktu kamu sudah habis"
             alertMessage = "Tetap semangat dan belajar lagii.."
             buttonText = "Kembali ke Pilih Pulau"
             showAlert = true
-            alertAction = { self.backToIslandMenu = true }
+            alertAction = {
+                self.backToIslandMenu = true
+                self.stopVideo = true // Set stopVideo to true
+            }
         }
     }
     

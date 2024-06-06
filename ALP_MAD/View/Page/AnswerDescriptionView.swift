@@ -14,9 +14,8 @@ struct AnswerDescriptionView: View {
     @State private var navToIslandView = false
     @State private var traditionalDanceDescription: TraditionalDance? = nil
     @State private var traditionalLanguageDescription: TraditionalLanguage? = nil
-    
+
     private var screenSize = ScreenSize()
-    
     
     var body: some View {
         
@@ -68,7 +67,7 @@ struct AnswerDescriptionView: View {
             self.navigationBar(navToIslandView: navToIslandView, isIpad: isIpad)
             if ModelData.shared.currentGame == "TraditionalDance" {
                 if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "mp4") {
-                    VideoPlayerView(videoURL: videoURL, type: "Desc")
+                    VideoPlayerView(videoURL: videoURL, type: "Desc", stopVideo: $navToIslandView)
                 }
                 self.description(description: traditionalDanceDescription.description, answer: traditionalDanceDescription.answer, provinceOrigin: traditionalDanceDescription.provinceOrigin, title: "TARI", isIpad: isIpad)
             } else {

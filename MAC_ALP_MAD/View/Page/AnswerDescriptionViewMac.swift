@@ -59,8 +59,8 @@ struct AnswerDescriptionViewMac: View {
                 HStack (spacing: screenSize.width/40){
                     if ModelData.shared.currentGame == "TraditionalDance" {
                         if let videoURL = Bundle.main.url(forResource: traditionalDanceDescription.image, withExtension: "mp4") {
-                            VideoPlayerMac(videoURL: videoURL, type: "Desc", ScreenSize: screenSize)
-                                
+                            VideoPlayerMac(videoURL: videoURL, type: "Desc", ScreenSize: screenSize, stopVideo: $navToIslandView)
+                            
                         } else {
                             Text("Video tidak ditemukan.")
                                 .foregroundColor(.red)

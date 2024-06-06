@@ -84,6 +84,7 @@ struct HomeView: View {
                 )
             ]
         )
+        .background(Color.white)
     }
 }
 

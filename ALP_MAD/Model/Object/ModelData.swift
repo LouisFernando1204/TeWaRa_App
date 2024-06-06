@@ -23,7 +23,7 @@ class ModelData {
     var currentGame: String
     
     private init() {
-        self.currentGame = ""
+        self.currentGame = "TraditionalDance"
         self.currentIsland = ""
         self.currentUser = User(name: "Radhita Lope", image: "person1", score: 0)
         self.currentIslandObject = Island(
@@ -31,7 +31,7 @@ class ModelData {
             islandImage: "",
             traditionalDance: TraditionalDance(
                 answer: "",
-                image: "",
+                image: "TariSajojo",
                 description: "",
                 provinceOrigin: "",
                 provinceOptions: [""],

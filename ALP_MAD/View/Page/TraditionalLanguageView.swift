@@ -22,6 +22,7 @@ struct TraditionalLanguageView: View {
     @State private var alertAction: (() -> Void)?
     @State private var buttonText: String = ""
     @State private var showAlert: Bool = false
+    @State private var forPass : Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @StateObject private var traditionalLanguageController = TraditionalLanguageController()
     @StateObject private var islandController = IslandController(island: ModelData.shared.currentIslandObject)
@@ -33,7 +34,7 @@ struct TraditionalLanguageView: View {
             
             ScrollView {
                 VStack(content: {
-                    QuestionAndDisplay(type: "Bahasa", currentIsland: ModelData.shared.currentIslandObject)
+                    QuestionAndDisplay(type: "Bahasa", currentIsland: ModelData.shared.currentIslandObject, stopVideo: $forPass)
                     TextField("Masukkan jawabanmu...", text: $textFieldValue)
                         .padding()
                         .overlay(

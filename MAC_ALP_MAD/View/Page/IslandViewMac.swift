@@ -235,8 +235,9 @@ struct IslandViewMac: View {
                     BottomBar(ScreenSize: geometry.size)
                 }
                 .navigationTitle("Pulau")
-
+                
             }
+            .background(Color.white)
             .navigationDestination(isPresented: $selectSumateraAndGetDance) {
                 TraditionalDanceViewMac(selectedIsland: ModelData.shared.sumatera)
             }
@@ -340,7 +341,7 @@ struct TopNavigationBar : View {
                 .opacity(0)
         }
         .padding(.horizontal)
-//        .padding(.bottom, ScreenSize.width > 600 ? 20 : 10)
+        //        .padding(.bottom, ScreenSize.width > 600 ? 20 : 10)
         .frame(height: ScreenSize.width/24)
         .background(
             LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 38/255, blue: 38/255), Color(red: 251/255, green: 146/255, blue: 60/255)]),

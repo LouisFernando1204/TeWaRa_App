@@ -55,6 +55,7 @@ struct TraditionalLanguageViewMac: View {
                     
                     
                 })
+                .background(Color.white)
                 .onAppear {
                     timerRunning = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
@@ -140,7 +141,7 @@ struct TraditionalLanguageViewMac: View {
                         )
                 )
                 .foregroundColor(.black)
-                
+            
             
             Spacer().frame(height: 20)
         })
@@ -228,8 +229,8 @@ struct TraditionalLanguageViewMac: View {
                     .offset(y: screenSize.height/6)
             }
             
-//            Spacer().frame(height: 20)
-
+            //            Spacer().frame(height: 20)
+            
         })
         .padding(.bottom, 10)
     }

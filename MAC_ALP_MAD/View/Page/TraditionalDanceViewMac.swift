@@ -24,6 +24,7 @@ struct TraditionalDanceViewMac: View {
     @State private var alertAction: (() -> Void)?
     @State private var buttonText: String = ""
     @State private var showAlert: Bool = false
+    @State private var stopVideo: Bool = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     
@@ -64,11 +65,12 @@ struct TraditionalDanceViewMac: View {
                     })
                     .padding()
                 })
+                .background(Color.white)
                 .onAppear {
                     timerRunning = true
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-//                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
-//                    }
+                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                    //                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+                    //                    }
                     self.traditionalDanceController.changeDance(dance: ModelData.shared.currentIslandObject.traditionalDance)
                     ModelData.shared.currentGame = "TraditionalDance"
                 }
@@ -104,6 +106,16 @@ struct TraditionalDanceViewMac: View {
             .navigationDestination(isPresented: $navToAdditionalQuestion) {
                 TouchdownViewMac()
             }
+            .onChange(of: backToIslandMenu) { oldValue, newValue in
+                if newValue {
+                    stopVideo = true
+                }
+            }
+            .onChange(of: navToAdditionalQuestion) { oldValue, newValue in
+                if newValue {
+                    stopVideo = true
+                }
+            }
         }
         
     }
@@ -119,9 +131,7 @@ struct TraditionalDanceViewMac: View {
     private func imageAndAnswerBox(screenSize: CGSize) -> some View {
         VStack(content: {
             if let videoURL = Bundle.main.url(forResource: ModelData.shared.currentIslandObject.traditionalDance.image, withExtension: "mp4") {
-                VideoPlayerMac(videoURL: videoURL, type: "Game", ScreenSize: screenSize)
-                
-                
+                VideoPlayerMac(videoURL: videoURL, type: "Game", ScreenSize: screenSize, stopVideo: $stopVideo)
             }
             
             HStack(content: {
@@ -239,7 +249,7 @@ struct TraditionalDanceViewMac: View {
                     .foregroundColor(Color.white)
             }
             .padding(.bottom, screenSize.width/12)
-//            .padding(.vertical, screenSize.width/36)
+        //            .padding(.vertical, screenSize.width/36)
     }
     
     private func checkAnswer() {
