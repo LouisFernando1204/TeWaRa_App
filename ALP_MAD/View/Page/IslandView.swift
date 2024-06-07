@@ -60,12 +60,9 @@ struct IslandView: View {
         if ScreenSize.screenWidth > 600 {
             
             VStack(spacing: 0) {
-                TopNavigationBar(name: "Pulau", message: "Home")
-                
-                Spacer().frame(height: 70)
-                
+                TopNavigationBar(name: "Pulau", message: "Beranda")
                 ScrollView {
-                    LazyVGrid(columns: columns, spacing: 20) {
+                    LazyVGrid(columns: columns, spacing: 5) {
                         
                         ForEach(0..<islands.count, id:\.self) { index in
                             
@@ -133,28 +130,24 @@ struct IslandView: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(
                                             LinearGradient(
-                                                gradient: Gradient(colors: [
-                                                    Color(red: 220/255, green: 38/255, blue: 38/255), // #DC2626
-                                                    Color(red: 118/255, green: 20/255, blue: 20/255)  // #761414
-                                                ]),
-                                                startPoint: .top,
-                                                endPoint: .bottom
+                                                gradient: Gradient(colors: [Color("redColor(TeWaRa)"), Color("darkredColor(TeWaRa)")]),
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
                                             )
                                         )
-                                        .frame(height: 250)
+                                        .frame(width: 370, height: 303)
                                     
                                     VStack {
                                         Image(islands[index].islandImage)
                                             .resizable()
-                                            .frame(width: 240, height: 150)
+                                            .frame(width: 370, height: 210)
                                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                                            .padding([.leading, .trailing], 10)
                                             .padding(.bottom, 20)
                                         Text(islands[index].islandName)
                                             .font(.title)
                                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                             .foregroundColor(.white)
-                                            .padding(.bottom, 20)
+                                            .padding(.bottom, 30)
                                     }
                                     
                                 }
@@ -218,18 +211,14 @@ struct IslandView: View {
                             }
                             
                         }
-                        
                     }
-                    .padding()
                 }
-                
-                BottomBar()
+                .padding()
             }
         } else {
             NavigationView {
                 VStack(spacing: 0) {
-                    TopNavigationBar(name: "Pulau", message: "Home")
-                    
+                    TopNavigationBar(name: "Pulau", message: "Beranda")
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 20) {
                             
@@ -296,33 +285,27 @@ struct IslandView: View {
                                     }
                                 }) {
                                     ZStack(alignment: .center) {
-                                        
                                         RoundedRectangle(cornerRadius: 10)
                                             .fill(
                                                 LinearGradient(
-                                                    gradient: Gradient(colors: [
-                                                        Color(red: 220/255, green: 38/255, blue: 38/255), // #DC2626
-                                                        Color(red: 118/255, green: 20/255, blue: 20/255)  // #761414
-                                                    ]),
-                                                    startPoint: .top,
-                                                    endPoint: .bottom
+                                                    gradient: Gradient(colors: [Color("redColor(TeWaRa)"), Color("darkredColor(TeWaRa)")]),
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
                                                 )
                                             )
-                                            .frame(height: 180)
-                                        
+                                            .frame(width: 160, height: 180)
                                         VStack {
                                             Image(islands[index].islandImage)
                                                 .resizable()
-                                                .frame(width: 120, height: 100)
+                                                .frame(width: 160, height: 130)
                                                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                                                .padding([.leading, .trailing], 10)
                                             Spacer()
                                                 .frame(height: 16)
                                             Text(islands[index].islandName)
                                                 .font(.title3)
                                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                                 .foregroundColor(.white)
-                                                .padding(.bottom, 10)
+                                                .padding(.bottom, 20)
                                         }
                                     }
                                     .onAppear {
@@ -340,8 +323,6 @@ struct IslandView: View {
                                             MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
                                         }
                                     }
-                                    .padding()
-                                   
                                     .fullScreenCover(isPresented: $selectSumateraAndGetDance) {
                                         TraditionalDanceView(selectedIsland: ModelData.shared.sumatera)
                                     }
@@ -386,33 +367,13 @@ struct IslandView: View {
                                 }
                             }
                         }
-                        .padding()
                     }
-                    
-                    BottomBar()
+                    .padding(20)
+                    .padding(.top, ScreenSize.screenHeight/50)
                 }
                 .navigationBarHidden(true)
             }
         }
-    }
-}
-
-struct BottomBar: View {
-    var body: some View {
-        Rectangle()
-            .fill(
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color(red: 220/255, green: 38/255, blue: 38/255), // #DC2626
-                        Color(red: 251/255, green: 146/255, blue: 60/255) // #FB923C
-                    ]),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-            )
-            .frame(height: 50)
-            .padding(.horizontal, -20)
-            .padding(.bottom, -35)
     }
 }
 

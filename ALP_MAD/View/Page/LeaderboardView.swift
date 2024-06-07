@@ -7,24 +7,21 @@ struct LeaderboardView: View {
     
     var body: some View {
         ZStack {
-//            VStack {
-//                Spacer()
-//                HStack {
-//                    Spacer()
-//                    Image("gradientWave(TeWaRa)")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth * 3 : 786.01,
-//                               height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 2 : 380.76)
-//                        .rotationEffect(.degrees(-42.94))
-//                        .offset(x: ScreenSize.screenWidth > 600 ? 140 : 10,
-//                                y: ScreenSize.screenWidth > 600 ? 160 : 90)
-//                }
-//            }
-//            .frame(maxWidth: ScreenSize.screenWidth * 2, maxHeight: ScreenSize.screenHeight)
-            
             VStack {
-                TopNavigationBar(name: "Peringkat", message: "Home")
+                Spacer()
+                HStack {
+                    Spacer()
+                    Image("gradientWave(TeWaRa)")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth*2 : 700, height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 2 : 350)
+                        .rotationEffect(.degrees(-42.94))
+                        .offset(x: ScreenSize.screenWidth > 600 ? 150 : 40, y: ScreenSize.screenWidth > 600 ? 140 :  90)
+                }
+            }
+            .frame(maxWidth: ScreenSize.screenWidth , maxHeight: ScreenSize.screenHeight)
+            VStack {
+//                TopNavigationBar(name: "Peringkat", message: "Beranda")
                 ScrollView {
                     VStack {
                         VStack {
@@ -65,13 +62,13 @@ struct LeaderboardView: View {
                                     .foregroundColor(.white)
                             }
                             else {
-                                Text("Oopss..")
+                                Text("Oops..")
                                     .font(ScreenSize.screenWidth > 600 ? .title : .headline)
                                     .fontWeight(.light)
                                     .foregroundColor(.white)
                                 Text("Tetap semangat! Anda masih belum menguasai pulau apapun")
                                     .font(ScreenSize.screenWidth > 600 ? .title : .headline)
-                                    .fontWeight(.light)
+                                    .fontWeight(.bold)
                                     .foregroundColor(.white)
                             }
                             
@@ -98,7 +95,8 @@ struct LeaderboardView: View {
                                 }
                             }
                         }
-                        .padding(.horizontal, ScreenSize.screenWidth > 600 ? 30 : 20)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, ScreenSize.screenWidth > 600 ? 70 : 45)
                         .padding(.vertical, ScreenSize.screenWidth > 600 ? 16 : 10)
                         .background(ButtonColor.redButton)
                         .clipShape(RoundedRectangle(cornerRadius: 10.0))
@@ -160,9 +158,10 @@ struct LeaderboardView: View {
                 }
                 .padding(.horizontal, ScreenSize.screenWidth > 600 ? 20 : 0)
             }
-            .frame(height: ScreenSize.screenWidth > 600 ? 460 : 210)
+            .frame(height: ScreenSize.screenWidth > 600 ? 460 : 220)
         }
         .padding()
+        .padding(.top, ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight/120 : ScreenSize.screenHeight/200)
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
 }

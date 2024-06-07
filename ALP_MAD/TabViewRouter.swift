@@ -19,7 +19,7 @@ struct TabViewRouter: View {
             LeaderboardView()
                 .tabItem {
                     Image(systemName: "chart.bar.fill")
-                    Text("Perangkat")
+                    Text("Peringkat")
                 }
         }
         .accentColor(Color("redColor(TeWaRa)"))

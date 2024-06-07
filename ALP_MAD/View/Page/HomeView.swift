@@ -294,18 +294,21 @@ struct HomeView: View {
                             Text("Anda belum memainkan game di pulau ini sama sekali")
                                 .foregroundColor(.gray)
                                 .italic()
+                                .multilineTextAlignment(.leading)
                                 .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
                         }
                         else if status == "Ranked" {
                             Text(" Anda menduduki peringkat \(ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0] + 1)!")
                                 .foregroundColor(.gray)
                                 .italic()
+                                .multilineTextAlignment(.leading)
                                 .font(ScreenSize.screenWidth > 600 ? .title2 : .caption)
                         }
                         else if status == "Progress" {
                             Text(" untuk memasuki peringkat")
                                 .foregroundColor(.gray)
                                 .italic()
+                                .multilineTextAlignment(.leading)
                                 .font(ScreenSize.screenWidth > 600 ? .title2 : .system(size: 10))
                         }
                         

@@ -26,9 +26,7 @@ struct ContentViewMac: View {
                 }
             }
         }
-        //
-        //        kalau dari AdditionalQuestionView() trs di run, mau ke halaman AnswerDescriptionView()
-        // gatau knapa...
+//        HomeViewMac()
     }
 }
 

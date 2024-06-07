@@ -28,7 +28,7 @@ struct TopNavigationBar : View {
                 self.navigate = true
             }
             .fullScreenCover(isPresented: $navigate) {
-                if message == "Home" {
+                if message == "Beranda" {
                     TabViewRouter()
                 }
                 else if message == "Pulau" {
@@ -51,7 +51,7 @@ struct TopNavigationBar : View {
                     Image("backIconWhite")
                         .opacity(0)
                     
-                    Text("Pulau")
+                    Text(message)
                         .fontWeight(.regular)
                         .foregroundColor(.white)
                         .font(ScreenSize.screenWidth > 600 ? .title : .headline)

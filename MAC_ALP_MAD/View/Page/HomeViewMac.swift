@@ -44,7 +44,6 @@ struct HomeViewMac: View {
                 IslandViewMac()
             }
         }
-        .background(Color.white)
         .onAppear {
             homeController.rearrangeIsland()
         }
@@ -63,7 +62,6 @@ struct HomeViewMac: View {
                 MusicPlayer.shared.startBackgroundMusic(musicTitle: "mainMusic", volume: 1)
             }
         }
-        
     }
     
     private func setUpHomeView(screenSize: CGSize) -> some View {
@@ -92,6 +90,7 @@ struct HomeViewMac: View {
                         .rotationEffect(.degrees(-39.94))
                         .offset(x: screenSize.width/3.2, y: screenSize.height/6)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
@@ -103,6 +102,7 @@ struct HomeViewMac: View {
             })
             .padding()
         })
+        .padding()
     }
     
     private func showDetailIsland(screenSize: CGSize) -> some View {
@@ -164,6 +164,7 @@ struct HomeViewMac: View {
             }
             .frame(width: screenSize.width/3)
         }
+        .padding()
     }
     
     private func islandRowMaker(currentIsland: Island, ScreenSize: CGSize, status: String) -> some View {
