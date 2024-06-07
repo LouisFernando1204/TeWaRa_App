@@ -40,6 +40,7 @@ struct TraditionalLanguageViewMac: View {
                         HStack(content: {
                             VStack(content: {
                                 self.imageAndTextfield(screenSize: geometry.size)
+                                    .padding(.top, geometry.size.width/10)
                             })
                             .padding(.horizontal)
                             
@@ -47,10 +48,15 @@ struct TraditionalLanguageViewMac: View {
                                 self.showClueAndTimer(screenSize: geometry.size)
                                 self.buttonCheckAnswer(screenSize: geometry.size)
                             })
+                            .padding(.top, geometry.size.width/10)
                             .frame(width: geometry.size.width/2)
                         })
                         
+                       Spacer()
+                            .frame(height: geometry.size.height)
+                        
                     })
+                    .background(Color.white)
                     .padding()
                     
                     
@@ -104,7 +110,7 @@ struct TraditionalLanguageViewMac: View {
     
     private func showQuestion() -> some View {
         HStack(content: {
-            Text("'\(ModelData.shared.bali.traditionalLanguage.sentences)' merupakan bahasa daerah...")
+            Text("'\(ModelData.shared.currentIslandObject.traditionalLanguage.sentences)' merupakan bahasa daerah...")
                 .font(.largeTitle)
                 .fontWeight(.bold)
         })
@@ -112,9 +118,8 @@ struct TraditionalLanguageViewMac: View {
     
     private func imageAndTextfield(screenSize: CGSize) -> some View {
         VStack(content: {
-            Image(ModelData.shared.bali.traditionalLanguage.image!)
-                .resizable()
-                .frame(width: screenSize.width/2.2, height: screenSize.width/3.4)
+            Image(ModelData.shared.currentIslandObject.traditionalLanguage.image!)
+                .frame(width: screenSize.width/2.4, height: screenSize.width/3.4)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .shadow(radius:5)
                 .padding(.bottom, 10)
@@ -162,7 +167,7 @@ struct TraditionalLanguageViewMac: View {
                                 .fontWeight(.semibold)
                                 .font(.title)
                             
-                            Text("'\(ModelData.shared.bali.traditionalLanguage.clue)'")
+                            Text("'\(ModelData.shared.currentIslandObject.traditionalLanguage.clue)'")
                                 .multilineTextAlignment(.center)
                                 .fontWeight(.bold)
                                 .font(.largeTitle)
@@ -174,7 +179,7 @@ struct TraditionalLanguageViewMac: View {
                                     )
                                 }
                                 .mask(
-                                    Text("'\(ModelData.shared.bali.traditionalLanguage.clue)'")
+                                    Text("'\(ModelData.shared.currentIslandObject.traditionalLanguage.clue)'")
                                         .multilineTextAlignment(.center)
                                         .fontWeight(.bold)
                                         .font(.title)

@@ -29,22 +29,6 @@ struct AnswerDescriptionViewMac: View {
                     }
                 }
                 .background(Color.white)
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
-                    }
-                }
-                .onDisappear {
-                    MusicPlayer.shared.stopBackgroundMusic()
-                }
-                .onChange(of: navToIslandView) { oldValue, newValue in
-                    if newValue {
-                        MusicPlayer.shared.stopBackgroundMusic()
-                    } else {
-                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
-                        MusicPlayer.shared.stopBackgroundMusic()
-                    }
-                }
                 .navigationDestination(isPresented: $navToIslandView) {
                     IslandViewMac()
                 }

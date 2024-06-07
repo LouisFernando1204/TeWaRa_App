@@ -70,6 +70,7 @@ struct IslandViewMac: View {
                                 Button(action: {
                                     islandController.addUserToArray(islandName: islands[index].islandName)
                                     self.selectedIsland = islands[index].islandName
+                                    
                                     if self.selectedIsland == "Sumatera" {
                                         ModelData.shared.currentIslandObject = ModelData.shared.sumatera
                                         if islandController.getChosenGameByRandom() {
@@ -82,6 +83,7 @@ struct IslandViewMac: View {
                                     }
                                     else if self.selectedIsland == "Sulawesi" {
                                         ModelData.shared.currentIslandObject = ModelData.shared.sulawesi
+                                        print(ModelData.shared.currentIslandObject.islandName)
                                         if islandController.getChosenGameByRandom() {
                                             self.selectSulawesiAndGetDance = true
                                         }

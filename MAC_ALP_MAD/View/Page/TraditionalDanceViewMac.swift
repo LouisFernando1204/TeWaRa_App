@@ -74,16 +74,16 @@ struct TraditionalDanceViewMac: View {
                     self.traditionalDanceController.changeDance(dance: ModelData.shared.currentIslandObject.traditionalDance)
                     ModelData.shared.currentGame = "TraditionalDance"
                 }
-                .onDisappear {
-                    MusicPlayer.shared.stopBackgroundMusic()
-                }
-                .onChange(of: self.showAlert) { oldValue, newValue in
-                    if newValue {
-                        MusicPlayer.shared.stopBackgroundMusic()
-                    } else {
-                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
-                    }
-                }
+//                .onDisappear {
+//                    MusicPlayer.shared.stopBackgroundMusic()
+//                }
+//                .onChange(of: self.showAlert) { oldValue, newValue in
+//                    if newValue {
+//                        MusicPlayer.shared.stopBackgroundMusic()
+//                    } else {
+//                        MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
+//                    }
+//                }
                 .safeAreaInset(edge: .top) {
                     CustomGradient.redOrangeGradient
                         .frame(height: geometry.size.width > 600 ? 32: 70)
