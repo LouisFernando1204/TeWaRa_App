@@ -140,6 +140,7 @@ struct LeaderboardView: View {
             HStack {
                 Text("Pulau \(island.islandName)")
                     .bold()
+                    .foregroundColor(.black)
                     .font(ScreenSize.screenWidth > 600 ? .largeTitle : .title2)
                     .padding(.horizontal, ScreenSize.screenWidth > 600 ? 20 : 0)
                 Spacer()

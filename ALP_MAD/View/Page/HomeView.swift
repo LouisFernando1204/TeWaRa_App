@@ -9,6 +9,16 @@ import SwiftUI
 
 struct HomeView: View {
     
+    private func loadImage(named imageName: String) -> UIImage? {
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        return UIImage(contentsOfFile: imagePath.path)
+    }
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
     @State private var isClicked: Bool = false
     @StateObject private var homeController: HomeController = HomeController()
     
