@@ -58,7 +58,7 @@ struct IslandViewMac: View {
         NavigationStack {
             GeometryReader { geometry in
                 VStack(spacing: 0) {
-                    TopNavigationBar(ScreenSize: geometry.size, name: "Pulau", message: "Home")
+                    TopNavigationBar(ScreenSize: geometry.size, name: "Pulau", message: "Beranda")
                     
                     Spacer().frame(height: 44)
                     
@@ -227,14 +227,12 @@ struct IslandViewMac: View {
                                     }
                                     
                                 }
-                                
+                                .buttonStyle(PlainButtonStyle())
                             }
                             
                         }
                         .padding()
                     }
-                    
-                    BottomBar(ScreenSize: geometry.size)
                 }
                 .navigationTitle("Pulau")
                 
@@ -244,42 +242,42 @@ struct IslandViewMac: View {
                 TraditionalDanceViewMac(selectedIsland: ModelData.shared.sumatera)
             }
             .navigationDestination(isPresented: $selectSumateraAndGetLanguage) {
-                TraditionalLanguageViewMac(selectedIsland: ModelData.shared.sumatera)
+                TraditionalDanceViewMac(selectedIsland: ModelData.shared.sumatera)
             }
             
             .navigationDestination(isPresented: $selectKalimantanAndGetDance) {
                 TraditionalDanceViewMac(selectedIsland: ModelData.shared.kalimantan)
             }
             .navigationDestination(isPresented: $selectKalimantanAndGetLanguage) {
-                TraditionalLanguageViewMac(selectedIsland: ModelData.shared.kalimantan)
+                TraditionalDanceViewMac(selectedIsland: ModelData.shared.kalimantan)
             }
             
             .navigationDestination(isPresented: $selectPapuaAndGetDance) {
                 TraditionalDanceViewMac(selectedIsland: ModelData.shared.papua)
             }
             .navigationDestination(isPresented: $selectPapuaAndGetLanguage) {
-                TraditionalLanguageViewMac(selectedIsland: ModelData.shared.papua)
+                TraditionalDanceViewMac(selectedIsland: ModelData.shared.papua)
             }
             
             .navigationDestination(isPresented: $selectBaliAndGetDance) {
                 TraditionalDanceViewMac(selectedIsland: ModelData.shared.bali)
             }
             .navigationDestination(isPresented: $selectBaliAndGetLanguage) {
-                TraditionalLanguageViewMac(selectedIsland: ModelData.shared.bali)
+                TraditionalDanceViewMac(selectedIsland: ModelData.shared.bali)
             }
             
             .navigationDestination(isPresented: $selectJavaAndGetDance) {
                 TraditionalDanceViewMac(selectedIsland: ModelData.shared.java)
             }
             .navigationDestination(isPresented: $selectJavaAndGetLanguage) {
-                TraditionalLanguageViewMac(selectedIsland: ModelData.shared.java)
+                TraditionalDanceViewMac(selectedIsland: ModelData.shared.java)
             }
             
             .navigationDestination(isPresented: $selectSulawesiAndGetDance) {
                 TraditionalDanceViewMac(selectedIsland: ModelData.shared.sulawesi)
             }
             .navigationDestination(isPresented: $selectSulawesiAndGetLanguage) {
-                TraditionalLanguageViewMac(selectedIsland: ModelData.shared.sulawesi)
+                TraditionalDanceViewMac(selectedIsland: ModelData.shared.sulawesi)
             }
         }
     }
@@ -310,8 +308,8 @@ struct TopNavigationBar : View {
                 self.navigate = true
             }
             .navigationDestination(isPresented: $navigate) {
-                if message == "Home" {
-                    HomeView()
+                if message == "Beranda" {
+                    TabViewMac()
                 }
                 else if message == "Pulau" {
                     IslandViewMac()
@@ -351,28 +349,6 @@ struct TopNavigationBar : View {
                            endPoint: .trailing)
             .edgesIgnoringSafeArea(.top)
         )
-    }
-}
-
-struct BottomBar: View {
-    
-    let ScreenSize: CGSize
-    
-    var body: some View {
-        Rectangle()
-            .fill(
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color(red: 220/255, green: 38/255, blue: 38/255), // #DC2626
-                        Color(red: 251/255, green: 146/255, blue: 60/255) // #FB923C
-                    ]),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-            )
-            .frame(height: ScreenSize.width/14)
-            .padding(.horizontal, -20)
-            .padding(.bottom, -35)
     }
 }
 

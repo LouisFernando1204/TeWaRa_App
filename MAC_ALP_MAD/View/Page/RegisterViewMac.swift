@@ -87,7 +87,7 @@ struct RegisterViewMac: View {
                 //                    MusicPlayer.shared.stopBackgroundMusic()
                 //                }
                 .navigationDestination(isPresented: $navToHomeView) {
-                    HomeViewMac()
+                    TabViewMac()
                 }
             }
             .edgesIgnoringSafeArea(.all)

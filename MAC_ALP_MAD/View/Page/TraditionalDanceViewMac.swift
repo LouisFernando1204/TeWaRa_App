@@ -172,7 +172,7 @@ struct TraditionalDanceViewMac: View {
                                 Text(alphabet)
                                     .font(.largeTitle)
                                     .fontWeight(.bold)
-                                    .foregroundStyle(.white)
+                                    .foregroundColor(Color("redColor(TeWaRa)"))
                                 
                             }
                         
@@ -202,9 +202,9 @@ struct TraditionalDanceViewMac: View {
                             }
                             .overlay(
                                 Text(item.alphabet)
+                                    .foregroundStyle(Color.white)
                                     .font(.largeTitle)
                                     .fontWeight(.bold)
-                                    .foregroundStyle(.white)
                             )
                             .cornerRadius(20)
                             .onTapGesture(perform: {

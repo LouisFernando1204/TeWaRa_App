@@ -37,7 +37,7 @@ public struct TabViewRouterMac: View {
                     Text(self.tabText[index])
                 }
                 .padding()
-                .foregroundColor(self.selection == index ? Color("redColor(TeWaRa)") : Color.secondary)
+                .foregroundColor(self.selection == index ? Color("redColor(TeWaRa)") : Color.black)
                 .background(Color.clear)
                 .onTapGesture {
                     self.selection = index
@@ -46,7 +46,7 @@ public struct TabViewRouterMac: View {
             Spacer()
         }
         .background(
-            Color.white.opacity(0.05)
+            Color.white.opacity(1)
         )
     }
     
@@ -67,7 +67,7 @@ public struct TabViewRouterMac: View {
     }
 }
 
-struct HomeView: View {
+struct TabViewMac: View {
     var body: some View {
         TabViewRouterMac(
             tabBarPosition: .bottom,
@@ -84,10 +84,9 @@ struct HomeView: View {
                 )
             ]
         )
-        .background(Color.white)
     }
 }
 
 #Preview {
-    HomeView()
+    TabViewMac()
 }

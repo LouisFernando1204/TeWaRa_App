@@ -68,7 +68,7 @@ struct TouchdownViewMac: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: screenSize.width/1, height: screenSize.height/1.5)
                     .rotationEffect(.degrees(145.74))
-                    .offset(x: -screenSize.width/3.8, y: isVisible ? -screenSize.height/2.6 : -screenSize.height/2)
+                    .offset(x: -screenSize.width/3.8, y: isVisible ? -screenSize.height/2.25 : -screenSize.height/2)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

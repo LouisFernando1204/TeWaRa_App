@@ -73,12 +73,11 @@ struct HomeViewMac: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: screenSize.width/1, height: screenSize.height/1.5)
                         .rotationEffect(.degrees(145.74))
-                        .offset(x: -screenSize.width/3.8, y: -screenSize.height/2.6)
+                        .offset(x: -screenSize.width/4, y: -screenSize.height/2.6)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
             VStack {
                 Spacer()
                 HStack {
@@ -88,73 +87,80 @@ struct HomeViewMac: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: screenSize.width/1, height: screenSize.height/1.5)
                         .rotationEffect(.degrees(-39.94))
-                        .offset(x: screenSize.width/3.2, y: screenSize.height/6)
+                        .offset(x: screenSize.width/3.2, y: screenSize.height/3.3)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
-            VStack(content: {
+            VStack(spacing: 50, content: {
                 self.showDetailProfile(screenSize: screenSize)
                 self.showDetailIsland(screenSize: screenSize)
-                    .padding(.vertical)
                 self.showButton(screenSize: screenSize)
             })
-            .padding()
+            .padding(.horizontal, screenSize.width/50)
+            .padding(.vertical, screenSize.height/70)
         })
-        .padding()
+        .background(Color.white)
     }
     
     private func showDetailIsland(screenSize: CGSize) -> some View {
         
-        HStack {
+        HStack(spacing: 20){
             ScrollView {
                 if homeController.rankedIslands.isEmpty {
                     Text("Pulau yang Sudah Anda Taklukkan")
                         .font(.title)
+                        .foregroundColor(.white)
                         .fontWeight(.bold)
                 }
                 else {
                     Text("Pulau yang Sudah Anda Taklukkan")
                         .font(.title)
                         .fontWeight(.bold)
-                        .padding(.bottom, 30)
-                    
-                    
+                        .foregroundColor(.white)
+                        .padding(.bottom, 15)
+
                     ForEach(homeController.rankedIslands.indices, id: \.self) { index in
                         let island = homeController.rankedIslands[index]
                         self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Ranked")
                     }
                 }
             }
-            .frame(width: screenSize.width/3)
+            .padding()
+            .frame(width: screenSize.width/3.5)
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
             
             ScrollView {
                 if homeController.progressToRank.isEmpty {
                     Text("Pulau yang Sedang Anda Coba Taklukkan...")
                         .font(.title)
+                        .foregroundColor(.white)
                         .fontWeight(.bold)
                 }
                 else {
                     Text("Pulau yang Sedang Anda Coba Taklukkan...")
                         .font(.title)
                         .fontWeight(.bold)
-                        .padding(.bottom, 30)
-                    
-                    
+                        .foregroundColor(.white)
+                        .padding(.bottom, 15)
+
                     ForEach(homeController.progressToRank.indices, id:\.self) { index in
                         let island = homeController.progressToRank[index]
                         self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Progress")
                     }
                 }
             }
-            .frame(width: screenSize.width/3)
+            .padding()
+            .frame(width: screenSize.width/3.5)
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
             
             ScrollView {
                 Text("Pulau yang  Belum Anda Coba Taklukkan...")
                     .font(.title)
                     .fontWeight(.bold)
-                    .padding(.bottom, 30)
+                    .foregroundColor(.white)
+                    .padding(.bottom, 15)
                 
                 ForEach(homeController.unfilledIslands.indices, id:\.self) {
                     index in
@@ -162,9 +168,11 @@ struct HomeViewMac: View {
                     self.islandRowMaker(currentIsland: island, ScreenSize: screenSize, status: "Unplayed")
                 }
             }
-            .frame(width: screenSize.width/3)
+            .padding()
+            .frame(width: screenSize.width/3.5)
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
         }
-        .padding()
+        .frame(height: screenSize.height/1.6)
     }
     
     private func islandRowMaker(currentIsland: Island, ScreenSize: CGSize, status: String) -> some View {
@@ -175,7 +183,7 @@ struct HomeViewMac: View {
                 .frame(width: ScreenSize.width/12, height: ScreenSize.width/12
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding(.trailing, ScreenSize.width/48)
+                .padding(.trailing, ScreenSize.width/180)
             
             VStack(content: {
                 HStack(content: {
@@ -197,7 +205,7 @@ struct HomeViewMac: View {
                 HStack(content: {
                     if status == "Unplayed" {
                         Text("0 poin")
-                            .foregroundStyle(Color.black)
+                            .foregroundColor(Color("redColor(TeWaRa)"))
                             .font(.title2)
                         Spacer()
                     }
@@ -206,7 +214,7 @@ struct HomeViewMac: View {
                             let user = currentIsland.userList[index]
                             if user.name == ModelData.shared.currentUser.name {
                                 Text("\(user.score) poin")
-                                    .foregroundStyle(Color.black)
+                                    .foregroundColor(Color("redColor(TeWaRa)"))
                                     .font(.title2)
                                 
                                 Spacer()
@@ -214,7 +222,6 @@ struct HomeViewMac: View {
                         }
                         
                     }
-                    
                 })
                 .padding(.bottom, 3)
                 HStack(spacing: 0, content: {
@@ -222,7 +229,7 @@ struct HomeViewMac: View {
                         if status == "Unplayed" {
                             Text("")
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .foregroundColor(.gray)
+                                .foregroundColor(.white)
                                 .italic()
                                 .opacity(0.8)
                                 .font(.title2)
@@ -235,43 +242,37 @@ struct HomeViewMac: View {
                         }
                         else if status == "Progress" {
                             Text("-\(ModelData.shared.getCurrentUserPointByIsland(name: currentIsland.userList[2].name, island: currentIsland)[0] -  ModelData.shared.getCurrentUserPointByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0]) poin")
-                                .foregroundStyle(Color.black)
+                                .foregroundStyle(Color.white)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(.title2)
                         }
-                        
                     })
                     HStack(content: {
                         if status == "Unplayed" {
                             Text("Anda belum memainkan game di pulau ini sama sekali")
-                                .foregroundColor(.gray)
+                                .foregroundColor(.white)
                                 .italic()
                                 .font(.title2)
                         }
                         else if status == "Ranked" {
                             Text(" Anda menduduki peringkat \(ModelData.shared.getCurrentDetailUserByIsland(name: ModelData.shared.currentUser.name, island: currentIsland)[0] + 1)!")
-                                .foregroundColor(.gray)
+                                .foregroundColor(.white)
                                 .italic()
                                 .font(.title2)
                                 .multilineTextAlignment(.leading)
                         }
                         else if status == "Progress" {
                             Text(" untuk memasuki peringkat")
-                                .foregroundColor(.gray)
+                                .foregroundColor(.white)
                                 .italic()
                                 .font(.title2)
                         }
                         
                     })
-                    
                     Spacer()
                 })
             })
-            //            Spacer()
-            //                .frame(height: ScreenSize.width > 600 ? 30 : 10)
         })
-        
-        
     }
     
     private func showButton(screenSize: CGSize) -> some View {
@@ -309,13 +310,12 @@ struct HomeViewMac: View {
                         Text("Hi \(ModelData.shared.currentUser.name)! ")
                             .fontWeight(.bold)
                             .font(.largeTitle)
-                            .overlay {
-                                CustomGradient.redDarkRedGradient
-                            }
+                            .foregroundColor(.white)
                             .mask(
                                 Text("Hi \(ModelData.shared.currentUser.name)! ")
                                     .fontWeight(.bold)
                                     .font(.largeTitle)
+                                    .foregroundColor(.white)
                             )
                         
                         Spacer()
@@ -360,9 +360,8 @@ struct HomeViewMac: View {
                 
             })
             .frame(height: screenSize.width/10)
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 30)
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
-            
         })
     }
 }

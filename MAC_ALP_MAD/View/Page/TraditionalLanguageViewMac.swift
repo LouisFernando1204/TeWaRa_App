@@ -40,7 +40,6 @@ struct TraditionalLanguageViewMac: View {
                         HStack(content: {
                             VStack(content: {
                                 self.imageAndTextfield(screenSize: geometry.size)
-                                    .padding(.top, geometry.size.width/10)
                             })
                             .padding(.horizontal)
                             
@@ -48,9 +47,9 @@ struct TraditionalLanguageViewMac: View {
                                 self.showClueAndTimer(screenSize: geometry.size)
                                 self.buttonCheckAnswer(screenSize: geometry.size)
                             })
-                            .padding(.top, geometry.size.width/10)
                             .frame(width: geometry.size.width/2)
                         })
+                        .padding(.top, geometry.size.width/14)
                         
                        Spacer()
                             .frame(height: geometry.size.height)
@@ -160,11 +159,12 @@ struct TraditionalLanguageViewMac: View {
                 Rectangle()
                     .clipShape(RoundedRectangle(cornerRadius: 20.0))
                     .frame(width: screenSize.width/2.2, height: screenSize.width/3.4)
-                    .foregroundColor(.secondary.opacity(0.2))
+                    .foregroundStyle(Color.gray.opacity(0.2))
                     .overlay(
                         VStack(content: {
                             Text("Petunjuk")
                                 .fontWeight(.semibold)
+                                .foregroundStyle(Color.black)
                                 .font(.title)
                             
                             Text("'\(ModelData.shared.currentIslandObject.traditionalLanguage.clue)'")

@@ -11,8 +11,9 @@ import SwiftUI
 struct MAC_ALP_MADApp: App {
     var body: some Scene {
         WindowGroup {
-//            ContentViewMac()
-            TraditionalLanguageViewMac(selectedIsland: ModelData.shared.bali)
+//            AdditionalQuestionViewMac()
+            ContentViewMac()
+//            TraditionalLanguageViewMac(selectedIsland: ModelData.shared.bali)
 //            TraditionalDanceViewMac(selectedIsland: ModelData.shared.bali)
 //            ContentViewMac()
         }

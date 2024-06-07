@@ -67,7 +67,7 @@ struct AdditionalQuestionViewMac: View {
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 0.3)
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
             }
         }
         .onDisappear {
@@ -77,7 +77,7 @@ struct AdditionalQuestionViewMac: View {
             if newValue {
                 MusicPlayer.shared.stopBackgroundMusic()
             } else {
-                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 0.3)
+                MusicPlayer.shared.startBackgroundMusic(musicTitle: "quizMusic", volume: 1)
             }
         }
     }
@@ -124,7 +124,7 @@ struct AdditionalQuestionViewMac: View {
                 .cornerRadius(10)
             Rectangle()
                 .fill(Color.white.opacity(0.5))
-                .frame(width: screenSize.width/2.08, height: screenSize.height/2.7)
+                .frame(width: screenSize.width/2.03, height: screenSize.height/2.55)
                 .cornerRadius(6)
             Text("00:00:\(String(format: "%02d", countDownTimer.wrappedValue))")
                 .onReceive(timer) { _ in
