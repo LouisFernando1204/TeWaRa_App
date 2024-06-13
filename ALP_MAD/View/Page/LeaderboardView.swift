@@ -13,21 +13,38 @@ struct LeaderboardView: View {
     let islands = ["Sumatera", "Kalimantan", "Papua", "Java", "Bali", "Sulawesi"]
     
     var body: some View {
-        ScrollView(content: {
+        ZStack {
             VStack {
-                TopNavigationBar(destination: AnyView(IslandView()), name: "Leaderboard")
-                
-                // Leaderboard view
-                ForEach(islands, id: \.self) { island in
-                    showLeaderboard(for: island)
-                }
-                
                 Spacer()
-                    .frame(height: 30)
+                HStack {
+                    Spacer()
+                    Image("gradientWave(TeWaRa)")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: ScreenSize.screenWidth > 600 ? ScreenSize.screenWidth * 3: 786.01, height: ScreenSize.screenWidth > 600 ? ScreenSize.screenHeight / 2 : 380.76)
+                        .rotationEffect(.degrees(-42.94))
+                        .offset(x: ScreenSize.screenWidth > 600 ? 140 : 10, y: ScreenSize.screenWidth > 600 ? 160 :  90)
+                }
             }
-            .frame(width: ScreenSize.screenWidth * 0.9)
-            .padding(.horizontal, 20)
-        })
+            .frame(maxWidth: ScreenSize.screenWidth * 2 , maxHeight: ScreenSize.screenHeight)
+            
+            ScrollView(content: {
+                VStack(content: {
+                    TopNavigationBar(destination: AnyView(IslandView()), name: "Leaderboard")
+                    VStack(content: {
+                        // Leaderboard view
+                        ForEach(islands, id: \.self) { island in
+                            showLeaderboard(for: island)
+                        }
+                        
+                        Spacer()
+                            .frame(height: 30)
+                    })
+                    .frame(width: ScreenSize.screenWidth * 0.9)
+                .padding(.horizontal, 20)
+                })
+            })
+        }
     }
     
     private func showLeaderboard(for islandName: String) -> some View {
@@ -37,9 +54,10 @@ struct LeaderboardView: View {
         
         return VStack(content: {
             HStack {
-                Text(island!.islandName)
+                Text("Pulau \(island!.islandName)")
                     .bold()
                     .font(ScreenSize.screenWidth > 600 ? .largeTitle : .title3)
+                    .padding(.vertical)
             }
             
             ScrollView {

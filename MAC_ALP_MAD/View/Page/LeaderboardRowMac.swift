@@ -1,29 +1,29 @@
 //
-//  LeaderboardRow.swift
-//  ALP_MAD
+//  LeaderboardRowMac.swift
+//  MAC_ALP_MAD
 //
-//  Created by Radhita Keniten on 01/06/24.
+//  Created by Radhita Keniten on 07/06/24.
 //
 
 import SwiftUI
 
-struct LeaderboardRow: View {
+struct LeaderboardRowMac: View {
     let rank: Int
     let user: User
     
     var body: some View {
         HStack {
             // User Image
-        ZStack(alignment: .topLeading) {
-            Image(user.image)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-                .overlay(
-                Circle().stroke(rank == 1 ? Color.yellow : rank == 2 ? Color.gray : rank == 3 ? Color.orange : Color.clear, lineWidth: 2)
-                )
-
+            ZStack(alignment: .topLeading) {
+                Image(user.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle().stroke(rank == 1 ? Color.yellow : rank == 2 ? Color.gray : rank == 3 ? Color.orange : Color.clear, lineWidth: 2)
+                    )
+                
                 if rank == 1 {
                     Image("gold_medal")
                         .resizable()
@@ -39,10 +39,11 @@ struct LeaderboardRow: View {
                 }
             }
             .padding(.trailing, 10)
-
+            
             // User Name
             Text(user.name)
                 .font(.headline)
+                .foregroundColor(.primary) // Use system primary color
                 .overlay {
                     CustomGradient.redDarkRedGradient
                 }
@@ -51,12 +52,13 @@ struct LeaderboardRow: View {
                         .fontWeight(.bold)
                         .frame(width: 200)
                 )
-
+            
             Spacer()
             
             // User Score
             Text("\(user.score) poin")
                 .font(.headline)
+                .foregroundColor(.primary) // Use system primary color
                 .overlay {
                     CustomGradient.redDarkRedGradient
                 }
@@ -68,7 +70,3 @@ struct LeaderboardRow: View {
     }
 }
 
-
-#Preview {
-    LeaderboardRow(rank: 3, user: User(name: "Contoh", image: "Contoh", score: 19))
-}

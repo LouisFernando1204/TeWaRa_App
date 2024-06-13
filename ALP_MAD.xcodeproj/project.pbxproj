@@ -83,6 +83,8 @@
 		04C658362BF4922100ECECD2 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C658352BF4922100ECECD2 /* ModelData.swift */; };
 		3E44F5392C0ADFF6004AF9A8 /* LeaderboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E44F5382C0ADFF6004AF9A8 /* LeaderboardRow.swift */; };
 		3E44F53B2C0B674A004AF9A8 /* LeaderboardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E44F53A2C0B674A004AF9A8 /* LeaderboardSection.swift */; };
+		3E61CC122C12A4B100E603C1 /* LeaderboardViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E61CC112C12A4B100E603C1 /* LeaderboardViewMac.swift */; };
+		3E61CC142C12B58400E603C1 /* LeaderboardRowMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E61CC132C12B58400E603C1 /* LeaderboardRowMac.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +182,8 @@
 		04C658352BF4922100ECECD2 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		3E44F5382C0ADFF6004AF9A8 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
 		3E44F53A2C0B674A004AF9A8 /* LeaderboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardSection.swift; sourceTree = "<group>"; };
+		3E61CC112C12A4B100E603C1 /* LeaderboardViewMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewMac.swift; sourceTree = "<group>"; };
+		3E61CC132C12B58400E603C1 /* LeaderboardRowMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LeaderboardRowMac.swift; path = MAC_ALP_MAD/View/Page/LeaderboardRowMac.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +297,7 @@
 				0420D5232BF9043400696430 /* TraditionalLanguageViewMac.swift */,
 				0420D5252BF9044100696430 /* TraditionalDanceViewMac.swift */,
 				043845A72BFB939C00F94411 /* HomeViewMac.swift */,
+				3E61CC112C12A4B100E603C1 /* LeaderboardViewMac.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 		043845AA2BFB997400F94411 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				3E61CC132C12B58400E603C1 /* LeaderboardRowMac.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -706,9 +712,11 @@
 				0420D5262BF9044100696430 /* TraditionalDanceViewMac.swift in Sources */,
 				043845A82BFB939C00F94411 /* HomeViewMac.swift in Sources */,
 				045D9A692BF4D62B002C523E /* TraditionalLanguageController.swift in Sources */,
+				3E61CC122C12A4B100E603C1 /* LeaderboardViewMac.swift in Sources */,
 				0420D5272BF9051300696430 /* Alphabet.swift in Sources */,
 				045D9A6A2BF4D62B002C523E /* LeaderboardController.swift in Sources */,
 				047BE7902BFA500B00947484 /* CustomGradient.swift in Sources */,
+				3E61CC142C12B58400E603C1 /* LeaderboardRowMac.swift in Sources */,
 				0420D5242BF9043400696430 /* TraditionalLanguageViewMac.swift in Sources */,
 				045D9A6B2BF4D62B002C523E /* Island.swift in Sources */,
 				045D9A6E2BF4D62B002C523E /* TraditionalDanceController.swift in Sources */,
